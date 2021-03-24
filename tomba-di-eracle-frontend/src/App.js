@@ -4,6 +4,7 @@ import Footer from './componenti/layout/Footer';
 import Login from './componenti/utente/Login';
 import Registrazione from './componenti/utente/Registrazione';
 import Utente from './componenti/utente/Utente';
+import CreazionePersonaggio from './componenti/personaggio/CreazionePersonaggio';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" exact component={""}></Route>
           <Route path="/registrazione" component={Registrazione}/>
           <Route path="/paginaUtente" component={Utente}/>
+          <Route path="/creazionePersonaggio" component={CreazionePersonaggio}/>
         </Switch>
       </Router>
       <Footer/>
