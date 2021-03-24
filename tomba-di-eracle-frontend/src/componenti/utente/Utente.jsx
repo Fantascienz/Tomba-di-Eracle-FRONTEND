@@ -12,16 +12,21 @@ class Utente extends Component {
         }
     }
 
+    toCreazionePersonaggio = () => {
+        this.props.history.push('/creazionePersonaggio');
+        // this.props.history.go();
+    }
+
     render() {
         return (
             <React.Fragment>
                 <Header />
                 <div className="corpoComponente">
-                    <h1>Salute {this.props.utente.nominativo}</h1>
+                    <h1>Salute {JSON.parse(sessionStorage.getItem('utente')).nominativo}</h1>
                     <div className="row">
                         <div className="col-md-4">
                             <img src="https://cdn.discordapp.com/attachments/823502374106038273/823573400621678592/Simbolo_TombaDiEracle.jpg" className="tombaJPG rounded-circle" alt="" /> <br /><br />
-                            <button className="btn btn-dark" style={{ color: "#eeaa44" }}>Crea Personaggio</button> <br /><br />
+                            <button className="btn btn-dark" style={{ color: "#eeaa44" }} onClick={() => this.toCreazionePersonaggio()}>Crea Personaggio</button> <br /><br />
                             <button className="btn btn-dark" style={{ color: "#eeaa44" }} onClick={() => this.props.toModificaUtente()}>Modifica Account</button>
                         </div>
                         <div className="col-md-8">

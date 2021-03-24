@@ -1,7 +1,8 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import PersonaggioService from "../../servizi/PersonaggioService";
 import { creaPersonaggio } from "../../store/azioni/personaggioActions";
+import Header from "../layout/Header";
 
 class CreazionePersonaggio extends Component {
 
@@ -21,7 +22,7 @@ class CreazionePersonaggio extends Component {
     }
 
     componentDidUpdate() {
-        if(this.props.redirect !== '' && this.props.redirect !== '/creazionePersonaggio') {
+        if (this.props.redirect !== '' && this.props.redirect !== '/creazionePersonaggio') {
             this.props.history.push(this.props.redirect)
         }
     }
@@ -38,45 +39,48 @@ class CreazionePersonaggio extends Component {
 
     render() {
         return (
-            <div className="corpoComponente">
-                <div className="container">
-                    <form onSubmit={this.handleSubmit}>
-                        <div className="input-group">
-                            <span className="input-group-text">Nominativo</span>
-                            <input className="form-control" type="text" id="nominativo" onChange={this.handleChange} value={this.state.nominativo} />
-                        </div>
-                        <div className="input-group">
-                            <span className="input-group-text">Sesso</span>
-                            <select className="form-select" id="sesso" value={this.state.sesso} onChange={this.handleChange}>
-                                <option defaultValue="">Sesso:</option>
-                                <option value="M">Uomo</option>
-                                <option value="F">Donna</option>
-                            </select>
-                        </div>
-                        <div className="input-group">
-                            <span className="input-group-text">Razza</span>
-                            <select className="form-select" id="razza" value={this.state.razza} onChange={this.handleChange}>
-                                <option defaultValue="" >Razza</option>
-                                <option value="Umano">Umano</option>
-                            </select>
-                        </div>
-                        <div className="input-group">
-                            <span className="input-group-text">Rango</span>
-                            <select className="form-select" id="rango" value={this.state.rango} onChange={this.handleChange}>
-                                <option defaultValue="" >Rango</option>
-                                <option value="0">0</option>
-                            </select>
-                        </div>
+            <React.Fragment>
+                <Header/>
+                <div className="corpoComponente">
+                    <div className="container">
+                        <form onSubmit={this.handleSubmit}>
+                            <div className="input-group">
+                                <span className="input-group-text">Nominativo</span>
+                                <input className="form-control" type="text" id="nominativo" onChange={this.handleChange} value={this.state.nominativo} />
+                            </div>
+                            <div className="input-group">
+                                <span className="input-group-text">Sesso</span>
+                                <select className="form-select" id="sesso" value={this.state.sesso} onChange={this.handleChange}>
+                                    <option defaultValue="">Sesso:</option>
+                                    <option value="M">Uomo</option>
+                                    <option value="F">Donna</option>
+                                </select>
+                            </div>
+                            <div className="input-group">
+                                <span className="input-group-text">Razza</span>
+                                <select className="form-select" id="razza" value={this.state.razza} onChange={this.handleChange}>
+                                    <option defaultValue="" >Razza</option>
+                                    <option value="Umano">Umano</option>
+                                </select>
+                            </div>
+                            <div className="input-group">
+                                <span className="input-group-text">Rango</span>
+                                <select className="form-select" id="rango" value={this.state.rango} onChange={this.handleChange}>
+                                    <option defaultValue="" >Rango</option>
+                                    <option value="0">0</option>
+                                </select>
+                            </div>
 
-                        <div className="input-group">
-                            <span className="input-group-text">Url Immagine</span>
-                            <input className="form-control" id="urlImmagine" type="text" value={this.state.urlImmagine} onChange={this.handleChange} />
-                        </div>
+                            <div className="input-group">
+                                <span className="input-group-text">Url Immagine</span>
+                                <input className="form-control" id="urlImmagine" type="text" value={this.state.urlImmagine} onChange={this.handleChange} />
+                            </div>
 
-                        <button className="btn btn-primary">Crea</button>
-                    </form>
+                            <button className="btn btn-primary">Crea</button>
+                        </form>
+                    </div>
                 </div>
-            </div>
+            </React.Fragment>
         );
     }
 }
