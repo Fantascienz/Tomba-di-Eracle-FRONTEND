@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import UtenteService from "../../servizi/UtenteService";
 import { login } from "../../store/azioni/utenteActions";
-import Header from '../layout/Header';
 
 class Login extends Component {
 
@@ -26,41 +25,36 @@ class Login extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        if (UtenteService.validaLogin(this.state)) {
+         if(UtenteService.validaLogin(this.state)) {
             this.props.login(this.state)
-        } else {
-            alert('Campi obbligatori!')
-        }
+         } else {
+             alert('Campi obbligatori!')
+         }
 
-        this.setState({
-            email: '',
-            psw: ''
-        })
-
-
+         this.setState({
+             email: '',
+             psw: ''
+         })
+        
+        
     }
 
     render() {
         return (
             <div>
+                <div className="row">
+                    <form onSubmit={this.handleSubmit}>
+                        <div className="input-group mb-3">
+                            <span className="input-group-text">Email</span>
+                            <input className="form-control" type="email" id="email" value={this.state.email} onChange={this.handleChange} />
+                        </div>
 
-                <Header/>
-
-                <div className="corpoComponente">
-                    <div className="row">
-                        <form onSubmit={this.handleSubmit}>
-                            <div className="input-group mb-3">
-                                <span className="input-group-text">Email</span>
-                                <input className="form-control" type="email" id="email" value={this.state.email} onChange={this.handleChange} />
-                            </div>
-
-                            <div className="input-group mb-3">
-                                <span className="input-group-text">Password</span>
-                                <input className="form-control" type="password" id="psw" value={this.state.psw} onChange={this.handleChange} />
-                            </div>
-                            <button className="btn btn-primary">Entra</button>
-                        </form>
-                    </div>
+                        <div className="input-group mb-3">
+                            <span className="input-group-text">Password</span>
+                            <input className="form-control" type="password" id="psw" value={this.state.psw} onChange={this.handleChange} />
+                        </div>
+                        <button className="btn btn-primary">Entra</button>
+                    </form>
                 </div>
             </div>
         );
@@ -79,4 +73,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps) (Login);

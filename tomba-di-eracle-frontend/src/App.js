@@ -9,13 +9,9 @@ import CreazionePersonaggio from './componenti/personaggio/CreazionePersonaggio'
 function App() {
   return (
     <div className="App">
-      
-      
-
       <Router>
         <Switch>
           <Route path="/" exact component={Login}></Route>
-          <Route path="/" exact component={""}></Route>
           <Route path="/registrazione" component={Registrazione}/>
           <Route path="/paginaUtente" component={Utente}/>
           <Route path="/creazionePersonaggio" component={CreazionePersonaggio}/>
