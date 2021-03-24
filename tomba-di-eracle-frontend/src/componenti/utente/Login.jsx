@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { login } from "../../store/azioni/utenteActions";
 
 class Login extends Component {
 
@@ -12,6 +14,10 @@ class Login extends Component {
             [e.target.id]: e.target.value
         })
 
+    }
+
+    handleSubmit = (e) => {
+        this.props.login(this.state)
     }
 
     render() {
@@ -36,4 +42,10 @@ class Login extends Component {
     }
 }
 
-export default Login;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        login: (utente) => dispatch(login(utente))
+    }
+}
+
+export default connect(null, mapDispatchToProps) (Login);
