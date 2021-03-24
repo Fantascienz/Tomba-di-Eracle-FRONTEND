@@ -11,7 +11,7 @@ class Login extends Component {
     }
 
     componentDidUpdate() {
-        if(this.props.redirect !== '' && this.props.redirect !== '/') {
+        if (this.props.redirect !== '' && this.props.redirect !== '/') {
             this.props.history.push(this.props.redirect)
         }
     }
@@ -42,19 +42,28 @@ class Login extends Component {
     render() {
         return (
             <div>
-                <div className="row">
-                    <form onSubmit={this.handleSubmit}>
-                        <div className="input-group mb-3">
-                            <span className="input-group-text">Email</span>
-                            <input className="form-control" type="email" id="email" value={this.state.email} onChange={this.handleChange} />
-                        </div>
 
-                        <div className="input-group mb-3">
-                            <span className="input-group-text">Password</span>
-                            <input className="form-control" type="password" id="psw" value={this.state.psw} onChange={this.handleChange} />
-                        </div>
-                        <button className="btn btn-primary">Entra</button>
-                    </form>
+                <Header />
+
+                <div className="corpoComponente">
+                    <div style={{ height: "100%", display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
+
+                        <form onSubmit={this.handleSubmit}>
+                            <div className="row">
+                                <div className="input-group mb-3">
+                                    <span className="input-group-text" style={{width:"20%"}}>Email</span>
+                                    <input className="form-control" type="email" id="email" value={this.state.email} onChange={this.handleChange} />
+                                </div>
+
+                                <div className="input-group mb-3">
+                                    <span className="input-group-text" style={{width:"20%"}}>Password</span>
+                                    <input className="form-control" type="password" id="psw" value={this.state.psw} onChange={this.handleChange} />
+                                </div>
+                            </div>
+                            <button className="btn btn-dark">Entra</button>
+                        </form>
+
+                    </div>
                 </div>
             </div>
         );
