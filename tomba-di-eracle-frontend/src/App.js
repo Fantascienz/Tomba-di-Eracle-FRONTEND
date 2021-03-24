@@ -1,21 +1,22 @@
-import logo from './logo.svg';
 import './App.css';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import Footer from './componenti/layout/Footer';
+import Header from './componenti/layout/Header';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>LA TOMBA DE ERACLE PORCODDIAZ</h1>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      
+      <Header/>
+
+      <Router>
+        <Switch>
+          <Route path="/" exact component={""}></Route>
+        </Switch>
+      </Router>
+
+      <Footer/>
+
     </div>
   );
 }
