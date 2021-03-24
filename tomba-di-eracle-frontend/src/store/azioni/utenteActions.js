@@ -13,3 +13,15 @@ export const login = (utente) => {
         })
     }
 }
+
+export const registrazione = (utente) => {
+    return (dispatch) => {
+        UtenteService.registrazione(utente).then(
+            dispatch({
+                type: 'REGISTRAZIONE_UTENTE'
+            })
+        ).catch(err => {
+            alert('Email già registrata')
+        })
+    }
+}

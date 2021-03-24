@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import UtenteService from '../../servizi/UtenteService';
+import { registrazione } from '../../store/azioni/utenteActions';
+import { connect } from "react-redux";
 
 class Registrazione extends Component {
 
@@ -16,6 +19,35 @@ class Registrazione extends Component {
         })
     }
 
+    handleSubmit = (event) => {
+        event.preventDefault();
+        if (UtenteService.validaRegistrazione(this.state)) {
+            if (this.validaPassword()) {
+                let utente = {
+                    nominativo: this.state.nome + " " + this.state.cognome,
+                    email: this.state.email,
+                    psw: this.state.psw
+                }
+                this.props.registrazione(utente)
+            } else {
+                alert('pass diverse')
+            }
+
+        } else {
+            alert('campi obb')
+        }
+    }
+
+    componentDidUpdate() {
+        if(this.props.redirect !== '') {
+            this.props.history.push(this.props.redirect)
+        }
+    }
+
+    validaPassword = () => {
+        return this.state.psw === this.state.psw2
+    }
+
     render() {
         return (
             <div style={{ position: "fixed", top: "10%", width: "100%", height: "85%" }}>
@@ -23,7 +55,7 @@ class Registrazione extends Component {
                     <h1>Registrazione</h1>
                     <br />
                     <div style={{ align: "center" }}>
-                        <form>
+                        <form onSubmit={this.handleSubmit}>
                             <div className="row">
                                 <h3>Nominativo</h3>
                                 <div className="col-md-3"></div>
@@ -31,14 +63,14 @@ class Registrazione extends Component {
                                     <input type="text" id="nome" placeholder="Nome" className="form-control" onChange={this.handleChange} /> <br />
                                 </div>
                                 <div className="form-group col-md-3">
-                                    <input type="text" id="cognome" placeholder="Cognome" className="form-control" onChange={this.handleChange}/> <br />
+                                    <input type="text" id="cognome" placeholder="Cognome" className="form-control" onChange={this.handleChange} /> <br />
                                 </div>
                             </div>
                             <div className="row">
                                 <h3>Email</h3>
                                 <div className="col-md-3"></div>
                                 <div className="form-group col-md-6">
-                                    <input type="email" id="email" placeholder="Email" className="form-control" onChange={this.handleChange}/> <br />
+                                    <input type="email" id="email" placeholder="Email" className="form-control" onChange={this.handleChange} /> <br />
                                 </div>
                             </div>
                             <div className="row">
@@ -51,7 +83,7 @@ class Registrazione extends Component {
                                     <input type="password" id="psw2" placeholder="Conferma Password" className="form-control" onChange={this.handleChange} /> <br />
                                 </div>
                             </div>
-                            <button className="btn btn-primary"type="submit">Registrati</button>
+                            <button className="btn btn-primary" type="submit">Registrati</button>
                         </form>
                     </div >
                 </div>
@@ -60,4 +92,16 @@ class Registrazione extends Component {
     }
 }
 
-export default Registrazione;
+const mapStateToProps = (state) => {
+    return {
+        redirect: state.utente.redirect
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        registrazione: (utente) => dispatch(registrazione(utente))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Registrazione);
