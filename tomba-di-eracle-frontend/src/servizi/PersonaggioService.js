@@ -8,6 +8,10 @@ class PersonaggioService {
         return axios.post(URL, personaggio);
     }
 
+    getPersonaggiUtente(utente) {
+        return axios.post(URL + 'user', utente);
+    }
+
     validazioneFormPersonaggio(personaggio) {
         if(personaggio.nominativo === '' || personaggio.sesso === '') {
             return false;

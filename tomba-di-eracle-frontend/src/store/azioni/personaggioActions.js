@@ -12,3 +12,16 @@ export const creaPersonaggio = (personaggio) => {
         })
     }
 }
+
+
+export const getPersonaggiUtente = (utente) => {
+    return (dispatch) => {
+        PersonaggioService.getPersonaggiUtente(utente).then(res => {
+            sessionStorage.setItem('personaggi', JSON.stringify(res.data));
+            dispatch({
+                type: 'LISTA_PERSONAGGI_UTENTE',
+                personaggiUtente: res.data
+            })
+        });
+    }
+}

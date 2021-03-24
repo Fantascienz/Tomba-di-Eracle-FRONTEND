@@ -1,5 +1,6 @@
 const initState = {
     personaggio: {},
+    personaggiUtente: [],
     redirect: ''
 }
 
@@ -9,6 +10,11 @@ const personaggioReducer = (state = initState, action) => {
         case 'CREA_PERSONAGGIO':
             state = {
                 redirect: '/paginaUtente'
+            }
+            break;
+        case 'LISTA_PERSONAGGI_UTENTE':
+            state =  {
+                personaggiUtente: action.personaggiUtente 
             }
             break;
         default:
