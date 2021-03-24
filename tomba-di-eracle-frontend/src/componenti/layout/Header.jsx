@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 
 class Header extends Component {
 
-    visualizzaLinkHeader = () => {
-        if(JSON.parse(sessionStorage.getItem('utente')) != null){
+    visualizzaLinkHeader() {
+        if(sessionStorage.getItem('utente') != null){
             return(
                 <div className="row">
                     <div className="col-sm-4">
