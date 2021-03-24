@@ -8,11 +8,21 @@ class UtenteService {
         return axios.post(URL + 'login', utente);
     }
 
+    registrazione(utente) {
+        return axios.post(URL,utente);
+    }
+
     validaLogin(utente) {
         if(utente.email === ''  || utente.psw === '') {
             return false
         }
+        return true;
+    }
 
+    validaRegistrazione(utente) {
+        if(utente.email === '' || utente.psw === '' || utente.nome === '' || utente.cognome === '') {
+            return false
+        }
         return true;
     }
 }

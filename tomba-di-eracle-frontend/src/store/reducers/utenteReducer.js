@@ -4,7 +4,6 @@ const initState = {
 }
 
 const utenteReducer = (state = initState, action) => {
-    
     switch (action.type) {
         case 'LOGIN_UTENTE':
             state = {
@@ -12,11 +11,16 @@ const utenteReducer = (state = initState, action) => {
                 redirect: '/paginaUtente'
             }
             break;
-        default: 
+        case 'REGISTRAZIONE_UTENTE':
+            state = {
+                redirect: '/'
+            }
+            break;
+        default:
             break;
     }
-    
-    
+
+
     return state;
 }
 

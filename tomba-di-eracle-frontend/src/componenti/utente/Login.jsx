@@ -11,7 +11,7 @@ class Login extends Component {
     }
 
     componentDidUpdate() {
-        if(this.props.redirect !== '') {
+        if(this.props.redirect !== '' && this.props.redirect !== '/') {
             this.props.history.push(this.props.redirect)
         }
     }
