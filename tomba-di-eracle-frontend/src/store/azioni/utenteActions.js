@@ -26,10 +26,11 @@ export const registrazione = (utente) => {
     }
 }
 
-export const modificaUtente = (utente,pswVecchia) => {
+export const modificaUtente = (mod) => {
     return (dispatch) => {
         //query per confrontare la vecchia password con quella scritta sul db (chiamata axios)
         //se a buon fine,invio l'utente per l'update,altrimenti torno al modulo
+        UtenteService.modifica(mod)
     }
 }
 

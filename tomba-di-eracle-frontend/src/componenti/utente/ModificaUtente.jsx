@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import UtenteService from '../../servizi/UtenteService';
+import { modificaUtente } from '../../store/azioni/utenteActions';
 import Header from '../layout/Header';
 
 class ModificaUtente extends Component {
@@ -20,20 +21,26 @@ class ModificaUtente extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        if(UtenteService.validaModifica(this.state)) {
+        if (UtenteService.validaModifica(this.state)) {
             let nuovaPsw;
             if (this.state.psw === '') {
                 //nuovaPsw uguale a quella già esistente (criptata)
-                nuovaPsw = this.props.utente.psw;              
+                nuovaPsw = this.props.utente.psw;
             } else {
                 //nuovaPsw uguale a quella digitata in modifica
-                nuovaPsw = this.state.psw; 
+                nuovaPsw = this.state.psw;
             }
-            let utente = this.props.utente;
-            utente.nominativo = this.state.nominativo;
-            utente.email = this.state.email;
-            utente.psw = nuovaPsw;
-            alert(JSON.stringify(utente))
+            let mod = {
+                utente: {
+                    id: this.props.utente.id,
+                    nominativo: this.state.nominativo,
+                    email: this.state.email,
+                    psw: nuovaPsw,
+                    tipo: this.props.utente.tipo
+                },
+                vecchiaPsw: this.state.pswVecchia
+            }
+            this.props.modifica(mod);
         } else {
             alert('campi obb')
         }
@@ -42,10 +49,10 @@ class ModificaUtente extends Component {
     render() {
         return (
             <React.Fragment>
-                <Header/>
+                <Header />
                 <div className="corpoComponente">
                     <h1>Modifica Account</h1>
-                    <br/>
+                    <br />
                     <div style={{ align: "center" }}>
                         <form onSubmit={this.handleSubmit}>
                             <div className="row">
@@ -66,7 +73,7 @@ class ModificaUtente extends Component {
                                 <h3>Nuova Password</h3>
                                 <div className="col-md-3"></div>
                                 <div className="form-group col-md-6">
-                                    <input type="password" id="psw" placeholder="Password (Lascia vuoto per mantenere la vecchia password)"  className="form-control" onChange={this.handleChange} /> <br />
+                                    <input type="password" id="psw" placeholder="Password (Lascia vuoto per mantenere la vecchia password)" className="form-control" onChange={this.handleChange} /> <br />
                                 </div>
                             </div>
                             <div className="row">
@@ -91,4 +98,10 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(ModificaUtente);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        modifica: (mod) => dispatch(modificaUtente(mod))
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(ModificaUtente);

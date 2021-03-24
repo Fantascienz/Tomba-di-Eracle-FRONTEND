@@ -12,6 +12,10 @@ class UtenteService {
         return axios.post(URL, utente);
     }
 
+    modifica(mod) {
+        return axios.post(URL + 'modifica',mod)
+    }
+
     validaLogin(utente) {
         if (utente.email === '' || utente.psw === '') {
             return false
