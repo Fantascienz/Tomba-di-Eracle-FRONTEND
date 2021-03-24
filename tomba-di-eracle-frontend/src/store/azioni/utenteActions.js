@@ -25,3 +25,19 @@ export const registrazione = (utente) => {
         })
     }
 }
+
+export const modificaUtente = (utente,pswVecchia) => {
+    return (dispatch) => {
+        //query per confrontare la vecchia password con quella scritta sul db (chiamata axios)
+        //se a buon fine,invio l'utente per l'update,altrimenti torno al modulo
+    }
+}
+
+export const toModificaUtente = () => {
+    return (dispatch) => {
+        dispatch({
+            type: 'TO_MODIFICA_UTENTE',
+            utente: JSON.parse(sessionStorage.getItem('utente'))
+        })
+    }
+}

@@ -1,10 +1,11 @@
 import './App.css';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Footer from './componenti/layout/Footer';
 import Login from './componenti/utente/Login';
 import Registrazione from './componenti/utente/Registrazione';
 import Utente from './componenti/utente/Utente';
 import CreazionePersonaggio from './componenti/personaggio/CreazionePersonaggio';
+import ModificaUtente from './componenti/utente/ModificaUtente';
 
 function App() {
   return (
@@ -15,9 +16,12 @@ function App() {
           <Route path="/registrazione" component={Registrazione}/>
           <Route path="/paginaUtente" component={Utente}/>
           <Route path="/creazionePersonaggio" component={CreazionePersonaggio}/>
+          <Route path="/registrazione" component={Registrazione} />
+          <Route path="/paginaUtente" component={Utente} />
+          <Route path="/modificaUtente" component={ModificaUtente} />
         </Switch>
       </Router>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

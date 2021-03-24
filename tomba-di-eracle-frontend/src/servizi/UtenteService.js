@@ -9,19 +9,26 @@ class UtenteService {
     }
 
     registrazione(utente) {
-        return axios.post(URL,utente);
+        return axios.post(URL, utente);
     }
 
     validaLogin(utente) {
-        if(utente.email === ''  || utente.psw === '') {
+        if (utente.email === '' || utente.psw === '') {
             return false
         }
         return true;
     }
 
     validaRegistrazione(utente) {
-        if(utente.email === '' || utente.psw === '' || utente.nome === '' || utente.cognome === '') {
+        if (utente.email === '' || utente.psw === '' || utente.nome === '' || utente.cognome === '') {
             return false
+        }
+        return true;
+    }
+
+    validaModifica(utente) {
+        if (utente.email === '' || utente.nominativo === '' || utente.pswVecchia === '') {
+            return false;
         }
         return true;
     }
