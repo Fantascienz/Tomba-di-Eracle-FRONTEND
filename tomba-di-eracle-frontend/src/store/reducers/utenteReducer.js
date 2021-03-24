@@ -15,7 +15,7 @@ const utenteReducer = (state = initState, action) => {
             state = {
                 redirect: '/'
             }
-            break;
+            break;      
         case 'TO_MODIFICA_UTENTE':
             state = {
                 utente: action.utente,

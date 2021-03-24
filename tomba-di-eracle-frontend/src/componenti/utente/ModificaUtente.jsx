@@ -13,6 +13,13 @@ class ModificaUtente extends Component {
         pswVecchia: ''
     }
 
+    componentDidUpdate() {
+        console.log(this.props.redirect)
+        if(this.props.redirect !== '' && this.props.redirect !== '/modificaUtente') {
+            this.props.history.push(this.props.redirect)
+        }
+    }
+
     handleChange = (event) => {
         this.setState({
             [event.target.id]: event.target.value
@@ -83,7 +90,7 @@ class ModificaUtente extends Component {
                                     <input type="password" id="pswVecchia" placeholder="Password per confermare" className="form-control" onChange={this.handleChange} /> <br />
                                 </div>
                             </div>
-                            <button className="btn btn-primary" type="submit">Registrati</button>
+                            <button className="btn btn-primary" type="submit">Modifica</button>
                         </form>
                     </div >
                 </div>
@@ -94,7 +101,8 @@ class ModificaUtente extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        utente: state.utente.utente
+        utente: state.utente.utente,
+        redirect: state.utente.redirect
     }
 }
 

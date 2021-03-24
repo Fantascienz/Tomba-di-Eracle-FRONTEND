@@ -28,9 +28,17 @@ export const registrazione = (utente) => {
 
 export const modificaUtente = (mod) => {
     return (dispatch) => {
-        //query per confrontare la vecchia password con quella scritta sul db (chiamata axios)
-        //se a buon fine,invio l'utente per l'update,altrimenti torno al modulo
-        UtenteService.modifica(mod)
+        UtenteService.modifica(mod).then( res => {
+            alert(JSON.stringify(res.data))
+            sessionStorage.setItem('utente',JSON.stringify(res.data))
+            dispatch({
+                type: 'LOGIN_UTENTE',
+                utente: res.data
+            })
+
+        }).catch (error => {
+            alert('Errore ' + error.response.status + ': Qualcosa è andato storto!')
+        })
     }
 }
 
