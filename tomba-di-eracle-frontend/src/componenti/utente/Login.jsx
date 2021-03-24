@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import UtenteService from "../../servizi/UtenteService";
 import { login } from "../../store/azioni/utenteActions";
 
 class Login extends Component {
@@ -7,6 +8,12 @@ class Login extends Component {
     state = {
         email: '',
         psw: ''
+    }
+
+    componentDidUpdate() {
+        if(this.props.redirect !== '') {
+            this.props.history.push(this.props.redirect)
+        }
     }
 
     handleChange = (e) => {
@@ -17,7 +24,19 @@ class Login extends Component {
     }
 
     handleSubmit = (e) => {
-        this.props.login(this.state)
+        e.preventDefault();
+         if(UtenteService.validaLogin(this.state)) {
+            this.props.login(this.state)
+         } else {
+             alert('Campi obbligatori!')
+         }
+
+         this.setState({
+             email: '',
+             psw: ''
+         })
+        
+        
     }
 
     render() {
@@ -48,4 +67,10 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(null, mapDispatchToProps) (Login);
+const mapStateToProps = (state) => {
+    return {
+        redirect: state.utente.redirect
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps) (Login);
