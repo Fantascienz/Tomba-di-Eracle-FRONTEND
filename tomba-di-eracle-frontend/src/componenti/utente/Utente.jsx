@@ -8,7 +8,7 @@ class Utente extends Component {
             <React.Fragment>
                 <Header />
                 <div>
-
+                    <h1>{this.props.utente.nominativo}</h1>
                 </div>
             </React.Fragment>
         );
