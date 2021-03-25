@@ -3,12 +3,18 @@ import UtenteService from "../../servizi/UtenteService"
 export const login = (utente) => {
     return (dispatch) => {
         UtenteService.login(utente).then(res => {
-            sessionStorage.setItem('utente', JSON.stringify(res.data))            
-            dispatch({
-                type: 'LOGIN_UTENTE',
-                utente: res.data,
-                admin: res.data.tipo === 'admin' ? true : false
-            })
+            if (res.data.tipo === 'bannato') {
+                alert('sei stato bannato!')
+            } else {
+
+
+                sessionStorage.setItem('utente', JSON.stringify(res.data))
+                dispatch({
+                    type: 'LOGIN_UTENTE',
+                    utente: res.data,
+                    admin: res.data.tipo === 'admin' ? true : false
+                })
+            }
         }).catch(err => {
             alert('Credenziali errate')
         })
@@ -29,14 +35,14 @@ export const registrazione = (utente) => {
 
 export const modificaUtente = (mod) => {
     return (dispatch) => {
-        UtenteService.modifica(mod).then( res => {
-            sessionStorage.setItem('utente',JSON.stringify(res.data))
+        UtenteService.modifica(mod).then(res => {
+            sessionStorage.setItem('utente', JSON.stringify(res.data))
             dispatch({
                 type: 'LOGIN_UTENTE',
                 utente: res.data
             })
 
-        }).catch (error => {
+        }).catch(error => {
             alert('Errore ' + error.response.status + ': Qualcosa è andato storto!')
         })
     }
