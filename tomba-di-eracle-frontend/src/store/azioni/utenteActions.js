@@ -3,10 +3,11 @@ import UtenteService from "../../servizi/UtenteService"
 export const login = (utente) => {
     return (dispatch) => {
         UtenteService.login(utente).then(res => {
-            sessionStorage.setItem('utente', JSON.stringify(res.data))
+            sessionStorage.setItem('utente', JSON.stringify(res.data))            
             dispatch({
                 type: 'LOGIN_UTENTE',
-                utente: res.data
+                utente: res.data,
+                admin: res.data.tipo === 'admin' ? true : false
             })
         }).catch(err => {
             alert('Credenziali errate')
@@ -29,7 +30,6 @@ export const registrazione = (utente) => {
 export const modificaUtente = (mod) => {
     return (dispatch) => {
         UtenteService.modifica(mod).then( res => {
-            alert(JSON.stringify(res.data))
             sessionStorage.setItem('utente',JSON.stringify(res.data))
             dispatch({
                 type: 'LOGIN_UTENTE',

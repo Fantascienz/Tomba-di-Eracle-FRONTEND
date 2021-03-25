@@ -1,6 +1,7 @@
 const initState = {
     utente: {},
-    redirect: ''
+    redirect: '',
+    admin: false
 }
 
 const utenteReducer = (state = initState, action) => {
@@ -8,6 +9,7 @@ const utenteReducer = (state = initState, action) => {
         case 'LOGIN_UTENTE':
             state = {
                 utente: action.utente,
+                admin: action.admin,
                 redirect: '/paginaUtente'
             }
             break;

@@ -5,7 +5,7 @@ class DettagliPersonaggio extends Component {
         const { personaggio } = this.props
         return (
             <div className="card">
-                <img src={personaggio.urlImmagine} className="card-img-top" alt="Immagine Personaggio" />
+                <img src={personaggio.urlImmagine} style={{height: "100px", width: "100px"}} className="card-img-top" alt="Immagine Personaggio" />
                 <div className="card-body">
                     <h5 className="card-title">{personaggio.nominativo}</h5>
                     <p className="card-text">Sesso: {personaggio.sesso}</p>
