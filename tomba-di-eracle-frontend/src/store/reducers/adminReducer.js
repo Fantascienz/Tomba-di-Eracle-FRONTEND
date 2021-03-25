@@ -8,7 +8,6 @@ const adminReducer = (state = initState,action) => {
         case "LISTA_UTENTI":
             state = {
                 listaUtenti: action.listaUtenti,
-                // redirect: "/listaUtenti"
             }
             break;
     }
