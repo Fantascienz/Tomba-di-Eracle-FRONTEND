@@ -6,8 +6,6 @@ export const login = (utente) => {
             if (res.data.tipo === 'bannato') {
                 alert('sei stato bannato!')
             } else {
-
-
                 sessionStorage.setItem('utente', JSON.stringify(res.data))
                 dispatch({
                     type: 'LOGIN_UTENTE',
