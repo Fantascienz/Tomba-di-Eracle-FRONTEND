@@ -14,7 +14,7 @@ class ListaPersonaggio extends Component {
     
     render() {
         return (
-            <div>
+            <div style={{backgroundColor:"red"}}>
               {this.props.personaggiUtente && this.props.personaggiUtente.map(personaggio =>{
                   return (
                       <DettagliPersonaggio personaggio={personaggio} key={personaggio.id} />

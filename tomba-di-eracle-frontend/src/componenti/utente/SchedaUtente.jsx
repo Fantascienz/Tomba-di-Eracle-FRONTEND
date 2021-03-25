@@ -64,8 +64,10 @@ class SchedaUtente extends Component {
                             </div>
                     </div>
 
-                    <div>
-                        {this.renderListe()}
+                    <div style={{zIndex:"999", position:"absolute", right:"10%", height:"80%", width:"60%"}} align="center">
+                        <div style={{ height: "100%", display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
+                            {this.renderListe()}
+                        </div>
                     </div>
                 </div>
             
