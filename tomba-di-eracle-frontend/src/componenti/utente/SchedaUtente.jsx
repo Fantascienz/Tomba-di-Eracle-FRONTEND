@@ -40,14 +40,6 @@ class SchedaUtente extends Component {
         this.forceUpdate()
     }
 
-    componentDidUpdate() {
-        // alert('up')
-        // if (this.props.redirect !== '' && this.props.redirect !== '/paginaUtente') {
-        //     this.props.history.push(this.props.redirect)
-        //     this.props.history.go()
-        // }
-    }
-
     render() {
         return (
                 <div className="corpoComponente">

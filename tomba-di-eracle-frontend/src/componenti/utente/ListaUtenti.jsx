@@ -23,14 +23,6 @@ class ListaUtenti extends Component {
     }
 
     tastoBan = (utente) => {
-        // if(utente.tipo === 'bannato') {
-        //     return (
-        //         <button onClick={() => this.ban(utente)}>Banna</button>
-        //     )
-        // }
-        // return (
-        //     <button onClick={() => this.ban(utente)}>Sbanna</button>
-        // )
         return (
             <button onClick={() => this.ban(utente)}>{utente.tipo === 'bannato' ? 'Sbanna':'Banna'}</button>
         )
@@ -57,7 +49,7 @@ class ListaUtenti extends Component {
         return (
             <React.Fragment>
                 <div style={{ width: "800px", backgroundColor: "white" }}>
-                    <table className="table">
+                    <table className="table" style={{textAlign: "center"}}>
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -76,7 +68,7 @@ class ListaUtenti extends Component {
                                     <td>{utente.nominativo}</td>
                                     <td>{utente.email}</td>
                                     <td>{utente.tipo}</td>
-                                    <td>implementa</td>
+                                    <td>{utente.numeroPersonaggi}</td>
                                     <td>{this.formModificaTipo(utente)}</td>
                                     <td>{this.tastoBan(utente)}</td>
                                 </tr>
