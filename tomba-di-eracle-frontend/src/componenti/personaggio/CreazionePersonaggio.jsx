@@ -42,42 +42,44 @@ class CreazionePersonaggio extends Component {
             <React.Fragment>
                 <Header/>
                 <div className="corpoComponente">
-                    <div className="container">
+                <div style={{ height: "100%", display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
+                    <div className="container" style={{width:"50%"}}>
                         <form onSubmit={this.handleSubmit}>
                             <div className="input-group">
-                                <span className="input-group-text">Nominativo</span>
-                                <input className="form-control" type="text" id="nominativo" onChange={this.handleChange} value={this.state.nominativo} />
+                                <span className="input-group-text" style={{width:"20%"}}>Nome completo</span>
+                                <input className="form-control" type="text" id="nominativo" onChange={this.handleChange} value={this.state.nominativo}/>
                             </div>
                             <div className="input-group">
-                                <span className="input-group-text">Sesso</span>
-                                <select className="form-select" id="sesso" value={this.state.sesso} onChange={this.handleChange}>
+                                <span className="input-group-text" style={{width:"20%"}}>Sesso</span>
+                                <select className="form-select" id="sesso" value={this.state.sesso} onChange={this.handleChange} style={{border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)"}}>
                                     <option defaultValue="">Sesso:</option>
                                     <option value="M">Uomo</option>
                                     <option value="F">Donna</option>
                                 </select>
                             </div>
                             <div className="input-group">
-                                <span className="input-group-text">Razza</span>
-                                <select className="form-select" id="razza" value={this.state.razza} onChange={this.handleChange}>
+                                <span className="input-group-text" style={{width:"20%"}}>Razza</span>
+                                <select className="form-select" id="razza" value={this.state.razza} onChange={this.handleChange} style={{border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)"}}>
                                     <option defaultValue="" >Razza</option>
                                     <option value="Umano">Umano</option>
                                 </select>
                             </div>
                             <div className="input-group">
-                                <span className="input-group-text">Rango</span>
-                                <select className="form-select" id="rango" value={this.state.rango} onChange={this.handleChange}>
+                                <span className="input-group-text" style={{width:"20%"}}>Rango</span>
+                                <select className="form-select" id="rango" value={this.state.rango} onChange={this.handleChange} style={{border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)"}}>
                                     <option defaultValue="" >Rango</option>
                                     <option value="0">0</option>
                                 </select>
                             </div>
 
                             <div className="input-group">
-                                <span className="input-group-text">Url Immagine</span>
+                                <span className="input-group-text" style={{width:"20%"}}>Url Immagine</span>
                                 <input className="form-control" id="urlImmagine" type="text" value={this.state.urlImmagine} onChange={this.handleChange} />
                             </div>
 
-                            <button className="btn btn-primary">Crea</button>
+                            <button className="btn btn-dark" style={{marginTop:"10px"}}>Crea</button>
                         </form>
+                    </div>
                     </div>
                 </div>
             </React.Fragment>

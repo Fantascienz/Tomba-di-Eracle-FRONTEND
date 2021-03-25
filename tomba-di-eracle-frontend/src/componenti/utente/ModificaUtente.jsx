@@ -90,7 +90,7 @@ class ModificaUtente extends Component {
                                     <input type="password" id="pswVecchia" placeholder="Password per confermare" className="form-control" onChange={this.handleChange} /> <br />
                                 </div>
                             </div>
-                            <button className="btn btn-primary" type="submit">Modifica</button>
+                            <button className="btn btn-dark" type="submit">Modifica</button>
                         </form>
                     </div >
                 </div>
