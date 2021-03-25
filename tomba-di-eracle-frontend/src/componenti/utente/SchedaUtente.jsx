@@ -26,7 +26,7 @@ class SchedaUtente extends Component {
 
     renderListe = () => {
         if (JSON.parse(sessionStorage.getItem('listaUtenti')) !== null) {
-            return <ListaUtenti />
+            return <ListaUtenti lista={JSON.parse(sessionStorage.getItem('listaUtenti'))} />
         }
         return <ListaPersonaggio />
     }

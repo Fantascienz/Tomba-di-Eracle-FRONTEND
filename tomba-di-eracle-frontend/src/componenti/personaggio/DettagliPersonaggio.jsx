@@ -4,7 +4,7 @@ class DettagliPersonaggio extends Component {
     render() {
         const { personaggio } = this.props
         return (
-            <div className="card">
+            <div className="card" style={{width: "800px", top:"10%"}}>
                 <img src={personaggio.urlImmagine} style={{height: "100px", width: "100px"}} className="card-img-top" alt="Immagine Personaggio" />
                 <div className="card-body">
                     <h5 className="card-title">{personaggio.nominativo}</h5>
