@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getPersonaggiUtente } from '../../store/azioni/personaggioActions';
 import DettagliPersonaggio from './DettagliPersonaggio';
-import './Personaggio.css'
 import Carousel from 'react-bootstrap/Carousel'
+import frecciaSX from '../../img/freccia_sx.png';
+import frecciaDX from '../../img/freccia_dx.png';
+
 
 class ListaPersonaggio extends Component {
 
@@ -17,23 +19,19 @@ class ListaPersonaggio extends Component {
 
     render() {
         return (
-            <div style={{ backgroundColor: "red" }}>
-                {/* {this.props.personaggiUtente && this.props.personaggiUtente.map(personaggio => {
-                    return (
-                        <DettagliPersonaggio personaggio={personaggio} key={personaggio.id} />
-                    )
-                })} */}
-
-                <Carousel fade>
-                    {this.props.personaggiUtente && this.props.personaggiUtente.map(personaggio => {
-                        return (
-                            <Carousel.Item>
-                                <DettagliPersonaggio personaggio={personaggio} key={personaggio.id} />
-                            </Carousel.Item>
-                        )
-                    })}
-                </Carousel>
-
+            <div>
+                <div style={{ width: "350px" }}>
+                    <Carousel interval={null} prevIcon={<img src={frecciaSX} style={{ opacity: "none", marginRight: "100px" }} height="50px" />} prevLabel={null}
+                        nextIcon={<img src={frecciaDX} style={{ opacity: "none", marginLeft: "100px" }} height="50px" />} nextLabel={null}>
+                        {this.props.personaggiUtente && this.props.personaggiUtente.map(personaggio => {
+                            return (
+                                <Carousel.Item>
+                                    <DettagliPersonaggio personaggio={personaggio} key={personaggio.id} />
+                                </Carousel.Item>
+                            )
+                        })}
+                    </Carousel>
+                </div>
             </div>
         );
     }

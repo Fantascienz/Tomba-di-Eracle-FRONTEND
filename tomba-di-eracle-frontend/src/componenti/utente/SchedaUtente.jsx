@@ -10,15 +10,15 @@ class SchedaUtente extends Component {
         if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin') {
             if (JSON.parse(sessionStorage.getItem('listaUtenti')) !== null) {
                 return (
-                    <div>
-                        <button className="btn btn-dark" style={{ color: "#eeaa44", width: "200px" }} onClick={() => this.visualizzaListaPg()}>Lista Personaggi</button> <br /><br />
-                    </div>
+                    <React.Fragment>
+                        <button className="btn btn-dark" style={{ color: "#eeaa44", width: "80%" }} onClick={() => this.visualizzaListaPg()}>Lista Personaggi</button> <br/>
+                    </React.Fragment>
                 )
             } else {
                 return (
-                    <div>
-                        <button className="btn btn-dark" style={{ color: "#eeaa44", width: "200px" }} onClick={() => this.visualizzaListaUtenti()}>Visualizza Utenti</button> <br /><br />
-                    </div>
+                    <React.Fragment>
+                        <button className="btn btn-dark" style={{ color: "#eeaa44", width: "80%" }} onClick={() => this.visualizzaListaUtenti()}>Visualizza Utenti</button> <br/>
+                        </React.Fragment>
                 )
             }
         }
@@ -43,7 +43,7 @@ class SchedaUtente extends Component {
     render() {
         return (
                 <div className="corpoComponente">
-                    <div style={{paddingTop:"2%", zIndex:"998"}}>
+                    <div style={{paddingTop:"2%", zIndex:"998", color: "#eeaa44", textShadow: "2px 2px black"}}>
                         <h1>Salute {JSON.parse(sessionStorage.getItem('utente')).nominativo}</h1>
                     </div>
                     
@@ -51,7 +51,7 @@ class SchedaUtente extends Component {
                             <div style={{ height: "100%", display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
                                 <img src="https://cdn.discordapp.com/attachments/823502374106038273/823573400621678592/Simbolo_TombaDiEracle.jpg" className="tombaJPG rounded-circle" alt="" style={{ boxShadow: "0 24px 32px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19)", width:"80%", height:"auto" }} /> <br /><br />
                                 {this.isAdmin()}
-                                <button className="btn btn-dark" style={{ color: "#eeaa44", width: "80%" }} onClick={() => this.props.creazionePG()}>Crea Personaggio</button> <br /><br />
+                                <button className="btn btn-dark" style={{ color: "#eeaa44", width: "80%" }} onClick={() => this.props.creazionePG()}>Crea Personaggio</button> <br/>
                                 <button className="btn btn-dark" style={{ color: "#eeaa44", width: "80%" }} onClick={() => this.props.modificaUtente()}>Modifica Account</button>
                             </div>
                     </div>

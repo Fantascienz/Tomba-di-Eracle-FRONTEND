@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { modificaTipoUtente,getListaUtenti } from '../../store/azioni/adminActions';
+import { modificaTipoUtente, getListaUtenti } from '../../store/azioni/adminActions';
 
 class ListaUtenti extends Component {
 
@@ -10,31 +10,35 @@ class ListaUtenti extends Component {
 
     formModificaTipo = (utente) => {
         return (
-            <div>
-                <select name="nuovoTipo" id="nuovoTipo" onChange={this.handleChange}>
-                    <option selected="selected" value="standard">Standard</option>
-                    <option value="vip">VIP</option>
-                    <option value="master">Master</option>
-                    <option value="admin">Admin</option>
-                </select>
-                <button onClick={() => this.modificaTipo(utente)}>Modifica</button>
+            <div className="row">
+                <div className="col-sm-6" >
+                    <select name="nuovoTipo" id="nuovoTipo" onChange={this.handleChange}>
+                        <option selected="selected" value="standard">Standard</option>
+                        <option value="vip">VIP</option>
+                        <option value="master">Master</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <div className="col-sm-6" >
+                    <button className="btn btn-secondary" onClick={() => this.modificaTipo(utente)} >Modifica</button>
+                </div>
             </div>
         )
     }
 
     tastoBan = (utente) => {
         return (
-            <button onClick={() => this.ban(utente)}>{utente.tipo === 'bannato' ? 'Sbanna':'Banna'}</button>
+            <button className="btn btn-danger" onClick={() => this.ban(utente)}>{utente.tipo === 'bannato' ? 'Sbanna' : 'Banna'}</button>
         )
     }
 
     modificaTipo = (utente) => {
-        this.props.modificaTipo(utente,this.state.nuovoTipo)
+        this.props.modificaTipo(utente, this.state.nuovoTipo)
         this.props.getListaUtenti()
     }
 
     ban = (utente) => {
-        this.props.modificaTipo(utente,utente.tipo === 'bannato' ? 'standard':'bannato')
+        this.props.modificaTipo(utente, utente.tipo === 'bannato' ? 'standard' : 'bannato')
         this.props.getListaUtenti()
     }
 
@@ -48,9 +52,9 @@ class ListaUtenti extends Component {
     render() {
         return (
             <React.Fragment>
-                <div style={{ width: "800px", backgroundColor: "white" }}>
-                    <table className="table" style={{textAlign: "center"}}>
-                        <thead>
+                <div style={{ width: "100%", backgroundColor: "white", overflowY: "scroll" }}>
+                    <table className="table">
+                        <thead align="center">
                             <tr>
                                 <th>ID</th>
                                 <th>Nominativo</th>
@@ -89,9 +93,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        modificaTipo: (utente,nuovoTipo) => dispatch(modificaTipoUtente(utente,nuovoTipo)),
+        modificaTipo: (utente, nuovoTipo) => dispatch(modificaTipoUtente(utente, nuovoTipo)),
         getListaUtenti: () => dispatch(getListaUtenti())
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps) (ListaUtenti);
+export default connect(mapStateToProps, mapDispatchToProps)(ListaUtenti);
