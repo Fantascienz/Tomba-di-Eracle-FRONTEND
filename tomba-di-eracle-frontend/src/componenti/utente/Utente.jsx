@@ -31,11 +31,11 @@ class Utente extends Component {
                             <button className="btn btn-dark" style={{ color: "#eeaa44", width:"200px" }} onClick={() => this.props.toModificaUtente()}>Modifica Account</button>
                         </div>
                         <div className="col-md-8">
-
+                        <ListaPersonaggio />
                         </div>
                     </div>
                     <div>
-                        <ListaPersonaggio />
+                        
                     </div>
                 </div>
             </React.Fragment>
