@@ -22,8 +22,27 @@ class ListaUtenti extends Component {
         )
     }
 
+    tastoBan = (utente) => {
+        // if(utente.tipo === 'bannato') {
+        //     return (
+        //         <button onClick={() => this.ban(utente)}>Banna</button>
+        //     )
+        // }
+        // return (
+        //     <button onClick={() => this.ban(utente)}>Sbanna</button>
+        // )
+        return (
+            <button onClick={() => this.ban(utente)}>{utente.tipo === 'bannato' ? 'Sbanna':'Banna'}</button>
+        )
+    }
+
     modificaTipo = (utente) => {
         this.props.modificaTipo(utente,this.state.nuovoTipo)
+        this.props.getListaUtenti()
+    }
+
+    ban = (utente) => {
+        this.props.modificaTipo(utente,utente.tipo === 'bannato' ? 'standard':'bannato')
         this.props.getListaUtenti()
     }
 
@@ -59,7 +78,7 @@ class ListaUtenti extends Component {
                                     <td>{utente.tipo}</td>
                                     <td>implementa</td>
                                     <td>{this.formModificaTipo(utente)}</td>
-                                    <td><button >Implementa</button></td>
+                                    <td>{this.tastoBan(utente)}</td>
                                 </tr>
                             )}
                         </tbody>
