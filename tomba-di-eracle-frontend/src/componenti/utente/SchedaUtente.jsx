@@ -1,16 +1,51 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getListaUtenti } from '../../store/azioni/adminActions';
 import ListaPersonaggio from '../personaggio/ListaPersonaggio';
+import ListaUtenti from './ListaUtenti';
 
 class SchedaUtente extends Component {
 
     isAdmin = () => {
-        if (this.props.admin === true) {
-            return (
-                <div>
-                    <button className="btn btn-dark" style={{ color: "#eeaa44", width: "200px" }} onClick={() => this.props.creazionePG()}>Lista Utenti</button> <br /><br />
-                </div>
-            )
+        if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin') {
+            if (JSON.parse(sessionStorage.getItem('listaUtenti')) !== null) {
+                return (
+                    <div>
+                        <button className="btn btn-dark" style={{ color: "#eeaa44", width: "200px" }} onClick={() => this.visualizzaListaPg()}>Lista Personaggi</button> <br /><br />
+                    </div>
+                )
+            } else {
+                return (
+                    <div>
+                        <button className="btn btn-dark" style={{ color: "#eeaa44", width: "200px" }} onClick={() => this.visualizzaListaUtenti()}>Visualizza Utenti</button> <br /><br />
+                    </div>
+                )
+            }
         }
+    }
+
+    renderListe = () => {
+        if (JSON.parse(sessionStorage.getItem('listaUtenti')) !== null) {
+            return <ListaUtenti />
+        }
+        return <ListaPersonaggio />
+    }
+
+    visualizzaListaUtenti = () => {
+        this.props.getListaUtenti();
+    }
+
+    visualizzaListaPg = () => {
+        sessionStorage.setItem('listaUtenti',null)
+        this.forceUpdate()
+    }
+
+    componentDidUpdate() {
+        // alert('up')
+        // if (this.props.redirect !== '' && this.props.redirect !== '/paginaUtente') {
+        //     this.props.history.push(this.props.redirect)
+        //     this.props.history.go()
+        // }
     }
 
     render() {
@@ -24,11 +59,24 @@ class SchedaUtente extends Component {
                         <button className="btn btn-dark" style={{ color: "#eeaa44", width: "200px" }} onClick={() => this.props.creazionePG()}>Crea Personaggio</button> <br /><br />
                         <button className="btn btn-dark" style={{ color: "#eeaa44", width: "200px" }} onClick={() => this.props.modificaUtente()}>Modifica Account</button>
                     </div>
-                    <div className="col-md-8"><ListaPersonaggio/></div>
+                    <div className="col-md-8">{this.renderListe()}</div>
                 </div>
             </div>
         );
     }
 }
 
-export default SchedaUtente;
+const mapStateToProps = (state) => {
+    return {
+        listaUtenti: state.admin.listaUtenti,
+        // redirect: state.admin.redirect
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getListaUtenti: () => dispatch(getListaUtenti())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SchedaUtente);
