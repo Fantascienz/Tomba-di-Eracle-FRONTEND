@@ -36,7 +36,7 @@ class DettagliPersonaggio extends Component {
     render() {
         const { personaggio } = this.props
         return (
-            <div style={{margin:"10px"}}>
+            <div>
             {this.viewCard(personaggio)}
         </div>
         );

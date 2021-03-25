@@ -2,24 +2,38 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getPersonaggiUtente } from '../../store/azioni/personaggioActions';
 import DettagliPersonaggio from './DettagliPersonaggio';
+import './Personaggio.css'
+import Carousel from 'react-bootstrap/Carousel'
 
 class ListaPersonaggio extends Component {
-    
+
     state = {
         utente: JSON.parse(sessionStorage.getItem('utente'))
     }
     componentDidMount() {
         this.props.getPersonaggiUtente(this.state.utente)
     }
-    
+
+
     render() {
         return (
-            <div style={{backgroundColor:"red"}}>
-              {this.props.personaggiUtente && this.props.personaggiUtente.map(personaggio =>{
-                  return (
-                      <DettagliPersonaggio personaggio={personaggio} key={personaggio.id} />
-                  )
-              })}  
+            <div style={{ backgroundColor: "red" }}>
+                {/* {this.props.personaggiUtente && this.props.personaggiUtente.map(personaggio => {
+                    return (
+                        <DettagliPersonaggio personaggio={personaggio} key={personaggio.id} />
+                    )
+                })} */}
+
+                <Carousel fade>
+                    {this.props.personaggiUtente && this.props.personaggiUtente.map(personaggio => {
+                        return (
+                            <Carousel.Item>
+                                <DettagliPersonaggio personaggio={personaggio} key={personaggio.id} />
+                            </Carousel.Item>
+                        )
+                    })}
+                </Carousel>
+
             </div>
         );
     }
@@ -37,4 +51,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps) (ListaPersonaggio);
+export default connect(mapStateToProps, mapDispatchToProps)(ListaPersonaggio);
