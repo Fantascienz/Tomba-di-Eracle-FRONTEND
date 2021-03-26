@@ -40,7 +40,7 @@ class ListaPersonaggio extends Component {
                 <div style={{ height: "100%", display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
                     <img src={cardFrame} alt="..." style={{ height: "100%", width: "105%" }} />
                     <div className={"card-body"} style={{ position: "absolute", bottom: "5%", width: "100%" }}>
-                        <button className="btn-gold-disabled" style={{ width: "100%" }} bisabled>Nessun Personaggio Creato</button>
+                        <button className="btn-gold-disabled" style={{ width: "100%" }} disabled>Nessun Personaggio Creato</button>
                     </div>
                 </div>
             </div>

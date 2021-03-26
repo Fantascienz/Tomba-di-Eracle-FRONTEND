@@ -5,6 +5,8 @@ import { login } from "../../store/azioni/utenteActions";
 import Header from "../layout/Header";
 import withReactContent from "sweetalert2-react-content"
 import Swal from "sweetalert2"
+import bashImpact from "../../suoni/bash_impact.mp3"
+import brokenShield from "../../img/broken_shield.png"
 
 class Login extends Component {
 
@@ -32,10 +34,20 @@ class Login extends Component {
             this.props.login(this.state)
          } else {
             withReactContent(Swal).fire({
-                title: <div>
-                    
-                    <p>Tutti i campi sono obbligatori!</p>
-                </div>
+                // title:  <div style={{backgroundColor:"green"}}>
+                            
+                //         </div>,
+
+                html:   <div style={{height:"500px"}}>
+                            <b style={{color:"#b30000", backgroundColor:"green"}}>Tutti i campi sono obbligatori!</b>
+                            <audio src={bashImpact} autoPlay/>
+                        </div>,
+
+                background: `rgba(0, 0, 0, 0.5) url('${brokenShield}') no-repeat fixed center center `,
+
+                confirmButtonColor: "#212529",
+
+                confirmButtonText: <b style={{color:"#b30000"}}>Ok</b>
             })
          }
 
@@ -43,8 +55,6 @@ class Login extends Component {
              email: '',
              psw: ''
          })
-        
-        
     }
 
     render() {
