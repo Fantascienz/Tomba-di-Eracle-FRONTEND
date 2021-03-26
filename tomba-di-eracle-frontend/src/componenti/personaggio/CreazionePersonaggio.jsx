@@ -95,7 +95,7 @@ class CreazionePersonaggio extends Component {
             return (
                 <React.Fragment>
                     <div className="input-group">
-                        <span className="input-group-text" style={{ width: "20%" }}>Auspicio</span>
+                        <span className="input-group-text" style={{ width: "30%" }}>Auspicio</span>
                         <select className="form-select" id="auspicio" value={this.state.auspicio} onChange={this.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)" }}>
                             <option defaultValue="">Auspicio:</option>
                             <option value="Ahroun">Ahroun</option>
@@ -115,7 +115,7 @@ class CreazionePersonaggio extends Component {
             return (
                 <React.Fragment>
                     <div className="input-group">
-                        <span className="input-group-text" style={{ width: "20%" }}>Auspicio</span>
+                        <span className="input-group-text" style={{ width: "30%" }}>Auspicio</span>
                         <select className="form-select" id="tribu" value={this.state.tribu} onChange={this.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)" }}>
                             <option defaultValue="">Tribù:</option>
                             <option value="Senza tribu">Senza tribù</option>
@@ -143,7 +143,7 @@ class CreazionePersonaggio extends Component {
             return (
                 <React.Fragment>
                     <div className="input-group">
-                        <span className="input-group-text" style={{ width: "20%" }}>Branco</span>
+                        <span className="input-group-text" style={{ width: "30%" }}>Branco</span>
                         <input className="form-control" type="text" id="brancoInput" onChange={this.handleChange} value={this.state.brancoInput} />
                     </div>
                 </React.Fragment>
@@ -156,7 +156,7 @@ class CreazionePersonaggio extends Component {
             return (
                 <React.Fragment>
                     <div className="input-group">
-                        <span className="input-group-text" style={{ width: "20%" }}>Ruolo</span>
+                        <span className="input-group-text" style={{ width: "30%" }}>Ruolo nel Branco</span>
                         <input className="form-control" type="text" id="ruolo" onChange={this.handleChange} value={this.state.ruolo} />
                     </div>
                 </React.Fragment>
@@ -169,7 +169,7 @@ class CreazionePersonaggio extends Component {
             return (
                 <React.Fragment>
                     <div className="input-group">
-                        <span className="input-group-text" style={{ width: "20%" }}>Sept</span>
+                        <span className="input-group-text" style={{ width: "30%" }}>Sept</span>
                         <input className="form-control" type="text" id="septInput" onChange={this.handleChange} value={this.state.septInput} />
                     </div>
                 </React.Fragment>
@@ -182,7 +182,7 @@ class CreazionePersonaggio extends Component {
             return (
                 <React.Fragment>
                     <div className="input-group">
-                        <span className="input-group-text" style={{ width: "20%" }}>Ruolo sept</span>
+                        <span className="input-group-text" style={{ width: "30%" }}>Ruolo nella Sept</span>
                         <input className="form-control" type="text" id="ruoloSept" onChange={this.handleChange} value={this.state.ruoloSept} />
                     </div>
                 </React.Fragment>
@@ -197,7 +197,7 @@ class CreazionePersonaggio extends Component {
             return (
                 <React.Fragment>
                     <div className="input-group">
-                        <span className="input-group-text" style={{ width: "20%" }}>Url Immagine Lupo</span>
+                        <span className="input-group-text" style={{ width: "30%" }}>Url Immagine Lupo</span>
                         <input className="form-control" type="text" id="urlLupo" onChange={this.handleChange} value={this.state.urlLupo} />
                     </div>
                 </React.Fragment>
@@ -213,7 +213,7 @@ class CreazionePersonaggio extends Component {
             return (
                 <React.Fragment>
                     <div className="input-group">
-                        <span className="input-group-text" style={{ width: "20%" }}>Url Immagine Crinos</span>
+                        <span className="input-group-text" style={{ width: "30%" }}>Url Immagine Crinos</span>
                         <input className="form-control" type="text" id="urlCrinos" onChange={this.handleChange} value={this.state.urlCrinos} />
                     </div>
                 </React.Fragment>
@@ -231,11 +231,11 @@ class CreazionePersonaggio extends Component {
                         <div className="container" style={{ width: "50%" }}>
                             <form onSubmit={this.handleSubmit}>
                                 <div className="input-group">
-                                    <span className="input-group-text" style={{ width: "20%" }}>Nome completo</span>
+                                    <span className="input-group-text" style={{ width: "30%" }}>Nome completo</span>
                                     <input className="form-control" type="text" id="nominativo" onChange={this.handleChange} value={this.state.nominativo} />
                                 </div>
                                 <div className="input-group">
-                                    <span className="input-group-text" style={{ width: "20%" }}>Sesso</span>
+                                    <span className="input-group-text" style={{ width: "30%" }}>Sesso</span>
                                     <select className="form-select" id="sesso" value={this.state.sesso} onChange={this.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)" }}>
                                         <option defaultValue="">Sesso:</option>
                                         <option value="M">Uomo</option>
@@ -243,7 +243,7 @@ class CreazionePersonaggio extends Component {
                                     </select>
                                 </div>
                                 <div className="input-group">
-                                    <span className="input-group-text" style={{ width: "20%" }}>Razza</span>
+                                    <span className="input-group-text" style={{ width: "30%" }}>Razza</span>
                                     <select className="form-select" id="razza" value={this.state.razza} onChange={this.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)" }}>
                                         <option defaultValue="" >Razza</option>
                                         <option value="Umano">Umano</option>
@@ -257,7 +257,7 @@ class CreazionePersonaggio extends Component {
 
 
                                 <div className="input-group">
-                                    <span className="input-group-text" style={{ width: "20%" }}>Rango</span>
+                                    <span className="input-group-text" style={{ width: "30%" }}>Rango</span>
                                     <select className="form-select" id="rango" value={this.state.rango} onChange={this.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)" }}>
                                         <option defaultValue="" >Rango</option>
 
@@ -274,13 +274,15 @@ class CreazionePersonaggio extends Component {
                                 {this.isGarouRuolo()}
                                 {this.isGarouSept()}
                                 {this.isGarouRuoloSept()}
-                                {this.isGarouUrlLupo()}
-                                {this.isGarouUrlCrinos()}
 
                                 <div className="input-group">
-                                    <span className="input-group-text" style={{ width: "20%" }}>Url Immagine</span>
+                                    <span className="input-group-text" style={{ width: "30%" }}>Url Immagine</span>
                                     <input className="form-control" id="urlImmagine" type="text" value={this.state.urlImmagine} onChange={this.handleChange} />
                                 </div>
+
+                                {this.isGarouUrlCrinos()}
+                                {this.isGarouUrlLupo()}
+                                
                                 <button className="btn btn-dark" style={{ marginTop: "10px" }}>Crea</button>
                             </form>
                         </div>

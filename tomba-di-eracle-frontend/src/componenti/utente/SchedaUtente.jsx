@@ -19,9 +19,9 @@ class SchedaUtente extends Component {
     isVip = () => {
         if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'vip') {
             return (
-                <div className="btn-group" role="group" aria-label="Basic example">
-                    <button className="btn btn-dark" style={{ color: "#eeaa44", width: "80%" }} onClick={() => this.props.creazionePG()}>Crea Personaggio</button> <br /><br />
-                    <button class="btn btn-dark" style={{ color: "#eeaa44", width: "80%" }} onClick={() => this.props.creazioneGarou()} >Crea Garou</button> <br /><br />
+                <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
+                    <button className="btn btn-dark" style={{ color: "#eeaa44", width: "50%" }} onClick={() => this.props.creazionePG()}>Crea Personaggio</button> <br /><br />
+                    <button className="btn btn-dark" style={{ color: "#eeaa44", width: "50%", borderRadius: "0 5px 5px 0" }} onClick={() => this.props.creazioneGarou()} >Crea Garou</button> <br /><br />
                 </div>
             )
         }

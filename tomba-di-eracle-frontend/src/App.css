@@ -79,13 +79,16 @@ a:hover{
   
 }
 
-/* .btn{
-  
+.btn-group > .btn-dark-end{
+  color:#b30000;
+  width: 100px;
+  height: 40px;
+  font-size: 15px;
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+  border-radius: 0 5px 5px 0;
 }
-
-.btn:hover{
   
-} */
+
 
 .input-group-text{
   color:#b30000;
