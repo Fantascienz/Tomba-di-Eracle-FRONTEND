@@ -108,7 +108,7 @@ class SchedaUtente extends Component {
         }
         sessionStorage.setItem('listaUtenti', null)
         this.forceUpdate()
-        visualizzaPgAdmin()
+        // visualizzaPgAdmin()
     }
 
     visualizzaPgAdmin = () => {
