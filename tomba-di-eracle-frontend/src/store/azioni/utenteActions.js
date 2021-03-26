@@ -13,19 +13,28 @@ export const login = (utente) => {
                         <p>Sei stato bannato!</p>
                     </div>
                 })
-            } 
+            }
             else {
-                if (res.data.tipo === 'admin' || res.data.tipo === 'master') {
-                    //PROVA FUNZIONAMENTO SENZA USO DI THEN()
-                    PersonaggioService.getAllPersonaggi().then(res => {
-                        sessionStorage.setItem('listaPersonaggi',JSON.stringify(res.data))
-                    })
-                }
                 sessionStorage.setItem('utente', JSON.stringify(res.data))
+            }
+        }).then(res => {
+            let utente = JSON.parse(sessionStorage.getItem('utente'));
+            //se l'utente è admin o master,recupero la lista dei personaggi totali e poi eseguo la dispatch,altrimenti eseguo solo la dispatch
+            if (utente.tipo === 'admin' || utente.tipo === 'master') {
+                PersonaggioService.getAllPersonaggi().then(res => {
+                    sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+                }).then(
+                    dispatch({
+                        type: 'LOGIN_UTENTE',
+                        utente: utente,
+                        admin: utente.tipo === 'admin' ? true : false
+                    })
+                )
+            } else {
                 dispatch({
                     type: 'LOGIN_UTENTE',
-                    utente: res.data,
-                    admin: res.data.tipo === 'admin' ? true : false
+                    utente: utente,
+                    admin: utente.tipo === 'admin' ? true : false
                 })
             }
         }).catch(err => {

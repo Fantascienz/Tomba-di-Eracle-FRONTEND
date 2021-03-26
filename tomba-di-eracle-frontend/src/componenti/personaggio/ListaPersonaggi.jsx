@@ -20,6 +20,11 @@ class ListaPersonaggi extends Component {
                                 <th>Branco</th>
                                 <th>Sept</th>
                                 <th>Proprietario</th>
+                                <th>Auspicio</th>
+                                <th>Tribù</th>
+                                <th>Branco</th>
+                                <th>Sept</th>
+                                <th>Proprietario</th>
                             </tr>
                         </thead>
                         <tbody>

@@ -77,14 +77,21 @@ class SchedaUtente extends Component {
     }
 
     renderListe = () => {
-        if (this.props.visualizzaPgAdmin) {
-            return <CarouselPersonaggi />
-        } else {
-            if (JSON.parse(sessionStorage.getItem('listaUtenti')) !== null) {
-                return <ListaUtenti lista={JSON.parse(sessionStorage.getItem('listaUtenti'))} />
+        if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin') {
+            if (this.props.visualizzaPgAdmin) {
+                return <CarouselPersonaggi />
+            } else {
+                if (JSON.parse(sessionStorage.getItem('listaUtenti')) !== null) {
+                    return <ListaUtenti lista={JSON.parse(sessionStorage.getItem('listaUtenti'))} />
+                }
+                if (JSON.parse(sessionStorage.getItem('listaPersonaggi')) !== null) {
+                    return <ListaPersonaggi />
+                } else {
+                    return <CarouselPersonaggi />
+                }
             }
-            return <ListaPersonaggi />
         }
+        return <CarouselPersonaggi />
     }
 
     visualizzaListaUtenti = () => {
