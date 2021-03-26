@@ -33,6 +33,7 @@ class Login extends Component {
          } else {
             withReactContent(Swal).fire({
                 title: <div>
+                    
                     <p>Tutti i campi sono obbligatori!</p>
                 </div>
             })
