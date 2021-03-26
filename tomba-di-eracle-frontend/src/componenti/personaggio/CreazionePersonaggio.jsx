@@ -52,44 +52,99 @@ class CreazionePersonaggio extends Component {
             if (PersonaggioService.validazioneFormPersonaggio(this.state)) {
                 this.props.creaPersonaggio(this.state)
             } else {
-                alert('Campi obbligatori')
-            }
-        } else {
-<<<<<<< HEAD
-            withReactContent(Swal).fire({
-                title: <p>Tutti i campi sono obbligatori!</p>
-            })
-=======
-            let garou = {
-                nominativo: this.state.nominativo,
-                sesso: this.state.sesso,
-                rango: this.state.rango,
-                razza: this.state.razza,
-                branco: this.state.brancoInput + " " + this.state.ruolo,
-                sept: this.state.septInput + " " + this.state.ruoloSept,
-                urlImmagine: this.state.urlImmagine,
-                urlCrinos: this.state.urlCrinos,
-                urlLupo: this.state.urlLupo,
-                utente: this.state.utente,
-                crinos: true,
-                umbra: true
-
+                withReactContent(Swal).fire({
+                    title: <p>Tutti i campi sono obbligatori!</p>
+                })
             }
 
-            this.props.creaPersonaggio(garou)
+        } else if (this.state.tipo === 'garou') {
+            
+            if (PersonaggioService.validazioneFormGarou(this.state)) {
+                let garou = {
+                    nominativo: this.state.nominativo,
+                    sesso: this.state.sesso,
+                    rango: this.state.rango,
+                    razza: this.state.razza,
+                    branco: this.state.brancoInput + " " + this.state.ruolo,
+                    sept: this.state.septInput + " " + this.state.ruoloSept,
+                    urlImmagine: this.state.urlImmagine,
+                    urlCrinos: this.state.urlCrinos,
+                    urlLupo: this.state.urlLupo,
+                    utente: this.state.utente,
+                    crinos: true,
+                    umbra: true
+    
+                }
+    
+                this.props.creaPersonaggio(garou)
+            } else {
+                withReactContent(Swal).fire({
+                    title: <p>Tutti i campi sono obbligatori!</p>
+                })
+            }       
+        } else if (this.state.tipo === 'png') {
+            if (PersonaggioService.validazioneFormPersonaggio(this.state)) {
+                this.props.creaPersonaggio(this.state)
+            } else {
+                withReactContent(Swal).fire({
+                    title: <p>Tutti i campi sono obbligatori!</p>
+                })
+            }
+            
         }
     }
 
+
+    isNormaleRazza = () => {
+        if (this.state.tipo === 'normale') {
+
+
+            return (
+                <React.Fragment>
+                    <div className="input-group">
+                        <span className="input-group-text" style={{ width: "20%" }}>Razza</span>
+                        <select className="form-select" id="razza" value={this.state.razza} onChange={this.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)" }}>
+                            <option defaultValue="" >Razza</option>
+                            <option value="Umano">Umano</option>
+                        </select>
+                    </div>
+                </React.Fragment>
+            )
+        }
+    }
 
     isGarouRazza = () => {
         if (this.state.tipo === 'garou') {
             return (
                 <React.Fragment>
-                    <option value="Lupo">Lupo</option>
-                    <option value="Meticcio">Meticcio</option>
+                    <div className="input-group">
+                        <span className="input-group-text" style={{ width: "20%" }}>Razza</span>
+                        <select className="form-select" id="razza" value={this.state.razza} onChange={this.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)" }}>
+                            <option defaultValue="" >Razza</option>
+                            <option value="Umano">Umano</option>
+                            <option value="Lupo">Lupo</option>
+                            <option value="Meticcio">Meticcio</option>
+                        </select>
+                    </div>
+
                 </React.Fragment>
             )
         }
+    }
+
+    isPngRazza = () => {
+        if (this.state.tipo === 'png') {
+            return (
+                <React.Fragment>
+                    <div className="input-group">
+                        <span className="input-group-text" style={{ width: "20%" }}>Razza</span>
+                        <input className="form-control" id="razza" value={this.state.razza} onChange={this.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)" }} />
+                    </div>
+                </React.Fragment>
+            )
+        }
+
+
     }
 
     isGarouAuspicio = () => {
@@ -130,11 +185,28 @@ class CreazionePersonaggio extends Component {
 
     isGarouRango = () => {
         if (this.state.tipo === 'garou') {
-
-
             return (
                 <React.Fragment>
                     <option value="Cucciolo">0</option>
+                </React.Fragment>
+            )
+        }
+    }
+
+    isPngRango = () => {
+        if (this.state.tipo === 'png') {
+            return (
+                <React.Fragment>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
                 </React.Fragment>
             )
         }
@@ -150,7 +222,6 @@ class CreazionePersonaggio extends Component {
                     </div>
                 </React.Fragment>
             )
->>>>>>> 0c434f4 (rebase)
         }
     }
 
@@ -245,16 +316,9 @@ class CreazionePersonaggio extends Component {
                                         <option value="F">Donna</option>
                                     </select>
                                 </div>
-                                <div className="input-group">
-                                    <span className="input-group-text" style={{ width: "20%" }}>Razza</span>
-                                    <select className="form-select" id="razza" value={this.state.razza} onChange={this.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)" }}>
-                                        <option defaultValue="" >Razza</option>
-                                        <option value="Umano">Umano</option>
-                                        {this.isGarouRazza()}
-
-                                    </select>
-                                </div>
-
+                                {this.isNormaleRazza()}
+                                {this.isGarouRazza()}
+                                {this.isPngRazza()}
                                 {this.isGarouAuspicio()}
                                 {this.isGarouTribu()}
 
@@ -269,6 +333,7 @@ class CreazionePersonaggio extends Component {
                                             :
                                             <option value="0">0</option>
                                         }
+                                        {this.isPngRango()}
 
                                     </select>
                                 </div>
