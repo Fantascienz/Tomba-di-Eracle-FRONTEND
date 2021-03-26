@@ -6,23 +6,11 @@ import UtenteService from "../../servizi/UtenteService"
 export const login = (utente) => {
     return (dispatch) => {
         UtenteService.login(utente).then(res => {
-            if (res.data.tipo === 'bannato') {
-                withReactContent(Swal).fire({
-                    title: <div>
-                        <p>Impossibile accedere!</p>
-                        <p>Sei stato bannato!</p>
-                    </div>
-                })
-            }
-            else {
-                sessionStorage.setItem('utente', JSON.stringify(res.data))
-            }
-        }).then(res => {
-            let utente = JSON.parse(sessionStorage.getItem('utente'));
+            sessionStorage.setItem('utente', JSON.stringify(res.data))
             //se l'utente è admin o master,recupero la lista dei personaggi totali e poi eseguo la dispatch,altrimenti eseguo solo la dispatch
-            if (utente.tipo === 'admin' || utente.tipo === 'master') {
-                PersonaggioService.getAllPersonaggi().then(res => {
-                    sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            if (res.data.tipo === 'admin' || res.data.tipo === 'master') {
+                PersonaggioService.getAllPersonaggi().then(resp => {
+                    sessionStorage.setItem('listaPersonaggi', JSON.stringify(resp.data))
                 }).then(
                     dispatch({
                         type: 'LOGIN_UTENTE',
@@ -30,6 +18,14 @@ export const login = (utente) => {
                         admin: utente.tipo === 'admin' ? true : false
                     })
                 )
+            } else if (res.data.tipo === 'bannato') {
+                sessionStorage.removeItem('utente')
+                withReactContent(Swal).fire({
+                    title: <div>
+                        <p>Impossibile accedere!</p>
+                        <p>Sei stato bannato!</p>
+                    </div>
+                })
             } else {
                 dispatch({
                     type: 'LOGIN_UTENTE',
