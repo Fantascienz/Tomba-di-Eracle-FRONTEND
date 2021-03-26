@@ -1,5 +1,6 @@
 const initState = {
     listaUtenti: [],
+    listaPg: [],
     redirect: '',
     visualizzaPgAdmin: false
 }
@@ -11,11 +12,16 @@ const adminReducer = (state = initState, action) => {
                 listaUtenti: action.listaUtenti,
             }
             break;
-            case "VISUALIZZA_PG":
-                state = {
-                    visualizzaPgAdmin: !state.visualizzaPgAdmin,
-                }
-                break;
+        case "LISTA_UTENTI":
+            state = {
+                listaPg: action.listaPg,
+            }
+            break;
+        case "VISUALIZZA_PG":
+            state = {
+                visualizzaPgAdmin: !state.visualizzaPgAdmin,
+            }
+            break;
     }
     return state;
 }

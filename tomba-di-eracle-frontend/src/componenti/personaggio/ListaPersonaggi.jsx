@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getListaPersonaggi } from '../../store/azioni/adminActions';
 
 class ListaPersonaggi extends Component {
 
@@ -7,16 +9,11 @@ class ListaPersonaggi extends Component {
     }
 
     formModificaRango = (pg) => {
-        return (<React.Fragment>
-            {/* <select name="nuovoRango" id="nuovoRango" onChange={this.handleChange}>
-                            <option selected="selected" value="standard">Standard</option>
-                            <option value="vip">VIP</option>
-                            <option value="master">Master</option>
-                            <option value="admin">Admin</option>
-                        </select> */}
-            <input type="number" placeholder="Rango" min="0" max={this.maxRango(pg)} id="nuovoRango" onChange={this.handleChange} />
-            <button className="btn btn-secondary" onClick={() => this.modificaRango(pg)} >Modifica</button>
-        </React.Fragment>
+        return (
+            <React.Fragment>
+                <input type="number" placeholder="Rango" min="0" max={this.maxRango(pg)} id="nuovoRango" onChange={this.handleChange} />
+                <button className="btn btn-secondary" onClick={() => this.modificaRango(pg)} >Modifica</button>
+            </React.Fragment>
         )
     }
 
@@ -44,10 +41,20 @@ class ListaPersonaggi extends Component {
         })
     }
 
+    aggiorna = () => {
+        this.props.aggiornaLista()
+        this.forceUpdate()
+    }
+
+    componentDidMount() {
+        this.props.aggiornaLista()
+    }
+
     render() {
         return (
             <React.Fragment>
                 <div style={{ width: "100%", backgroundColor: "white", overflowY: "scroll" }}>
+                    <button className="btn btn-secondary" onClick={() => this.aggiorna()} >Aggiorna Lista</button>
                     <table className="table align-middle">
                         <thead align="center">
                             <tr>
@@ -100,4 +107,16 @@ class ListaPersonaggi extends Component {
     }
 }
 
-export default ListaPersonaggi;
+const mapStateToProps = (state) => {
+    return {
+        listaPg: state.admin.listaPg
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        aggiornaLista: () => dispatch(getListaPersonaggi())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListaPersonaggi);
