@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { getListaUtenti } from '../../store/azioni/adminActions';
 import ListaPersonaggio from '../personaggio/ListaPersonaggio';
 import ListaUtenti from './ListaUtenti';
+import avatarEracle from '../../img/eracleCapovolto.png';
 
 class SchedaUtente extends Component {
 
@@ -20,15 +21,15 @@ class SchedaUtente extends Component {
         if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'vip') {
             return (
                 <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
-                    <button className="btn btn-dark" style={{ color: "#eeaa44", width: "50%" }} onClick={() => this.props.creazionePG()}>Crea Personaggio</button> <br /><br />
-                    <button className="btn btn-dark" style={{ color: "#eeaa44", width: "50%", borderRadius: "0 5px 5px 0" }} onClick={() => this.props.creazioneGarou()} >Crea Garou</button> <br /><br />
+                    <button className="btn btn-dark" style={{ color: "#eeaa44", width: "50%", fontSize: "80%" }} onClick={() => this.props.creazionePG()}>Crea Umano</button> <br /><br />
+                    <button className="btn btn-dark" style={{ color: "#eeaa44", width: "50%", fontSize: "80%", borderRadius: "0 5px 5px 0" }} onClick={() => this.props.creazioneGarou()} >Crea Garou</button> <br /><br />
                 </div>
             )
         }
     }
 
     isMaster = () => {
-        if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'master')  {
+        if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'master') {
             return (
                 <div className="btn-group" role="group" aria-label="Basic example">
                     <button className="btn btn-dark" style={{ color: "#eeaa44", width: "80%" }} onClick={() => this.props.creazionePG()}>Crea Personaggio</button> <br /><br />
@@ -39,8 +40,8 @@ class SchedaUtente extends Component {
         }
     }
 
-    isAdminCreazionePg = () =>{
-        if(JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin') {
+    isAdminCreazionePg = () => {
+        if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin') {
             return (
                 <div className="btn-group" role="group" aria-label="Basic example">
                     <button className="btn btn-dark" style={{ color: "#eeaa44", width: "80%" }} onClick={() => this.props.creazionePG()}>Crea Personaggio</button> <br /><br />
@@ -69,7 +70,7 @@ class SchedaUtente extends Component {
 
         }
 
-       
+
     }
 
     renderListe = () => {
@@ -97,13 +98,13 @@ class SchedaUtente extends Component {
 
                 <div style={{ zIndex: "999", position: "absolute", left: "10%", height: "80%", width: "20%" }}>
                     <div style={{ height: "100%", display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
-                        <img src="https://cdn.discordapp.com/attachments/823502374106038273/823573400621678592/Simbolo_TombaDiEracle.jpg" className="tombaJPG rounded-circle" alt="" style={{ boxShadow: "0 24px 32px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19)", width: "80%", height: "auto" }} /> <br /><br />
+                        <img src={avatarEracle} className="tombaJPG rounded-circle" alt="" style={{ boxShadow: "0 24px 32px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19)", width: "80%", height: "auto" }} /> <br /><br />
                         {this.isAdminCreazionePg()}
                         {this.isAdmin()}
                         {this.isStandard()}
                         {this.isVip()}
                         {this.isMaster()}
-                        
+
                         <button className="btn btn-dark" style={{ color: "#eeaa44", width: "80%" }} onClick={() => this.props.modificaUtente()}>Modifica Account</button>
                     </div>
                 </div>

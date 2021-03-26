@@ -21,8 +21,9 @@ class ListaPersonaggio extends Component {
         return (
             <div>
                 <div style={{ width: "350px" }}>
-                    <Carousel interval={null} prevIcon={<img src={frecciaSX} style={{ opacity: "none", marginRight: "100px" }} height="50px" />} prevLabel={null}
-                        nextIcon={<img src={frecciaDX} style={{ opacity: "none", marginLeft: "100px" }} height="50px" />} nextLabel={null}>
+                    <Carousel interval={null} 
+                        prevIcon={<img src={frecciaDX} style={{ opacity: "none", marginLeft: "700px" }} height="50px" />} prevLabel={null}
+                        nextIcon={<img src={frecciaSX} style={{ opacity: "none", marginRight: "700px" }} height="50px" />} nextLabel={null}>
                         {this.props.personaggiUtente && this.props.personaggiUtente.map(personaggio => {
                             return (
                                 <Carousel.Item>
