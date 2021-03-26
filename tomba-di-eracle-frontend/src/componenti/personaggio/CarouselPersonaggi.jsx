@@ -9,7 +9,7 @@ import noPg from '../../img/no-pg.jpg'
 import cardFrame from '../../img/cardFrame.png'
 
 
-class ListaPersonaggio extends Component {
+class CarouselPersonaggi extends Component {
 
     state = {
         utente: JSON.parse(sessionStorage.getItem('utente'))
@@ -73,4 +73,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ListaPersonaggio);
+export default connect(mapStateToProps, mapDispatchToProps)(CarouselPersonaggi);

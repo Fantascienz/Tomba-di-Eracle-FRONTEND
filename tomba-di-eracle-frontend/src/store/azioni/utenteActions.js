@@ -1,5 +1,6 @@
 import Swal from "sweetalert2"
 import withReactContent from "sweetalert2-react-content"
+import PersonaggioService from "../../servizi/PersonaggioService"
 import UtenteService from "../../servizi/UtenteService"
 
 export const login = (utente) => {
@@ -12,7 +13,14 @@ export const login = (utente) => {
                         <p>Sei stato bannato!</p>
                     </div>
                 })
-            } else {
+            } 
+            else {
+                if (res.data.tipo === 'admin' || res.data.tipo === 'master') {
+                    //PROVA FUNZIONAMENTO SENZA USO DI THEN()
+                    PersonaggioService.getAllPersonaggi().then(res => {
+                        sessionStorage.setItem('listaPersonaggi',JSON.stringify(res.data))
+                    })
+                }
                 sessionStorage.setItem('utente', JSON.stringify(res.data))
                 dispatch({
                     type: 'LOGIN_UTENTE',

@@ -57,7 +57,7 @@ class ListaUtenti extends Component {
         return (
             <React.Fragment>
                 <div style={{ width: "100%", backgroundColor: "white", overflowY: "scroll" }}>
-                    <table className="table">
+                    <table className="table align-middle">
                         <thead align="center">
                             <tr>
                                 <th>ID</th>

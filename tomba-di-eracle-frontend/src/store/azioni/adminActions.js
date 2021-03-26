@@ -27,3 +27,11 @@ export const modificaTipoUtente = (utente, nuovoTipo) => {
         )
     }
 }
+
+export const visualizzaPgAdmin = () => {
+    return (dispatch) => {
+        dispatch({
+            type: 'VISUALIZZA_PG',
+        })
+    }
+}

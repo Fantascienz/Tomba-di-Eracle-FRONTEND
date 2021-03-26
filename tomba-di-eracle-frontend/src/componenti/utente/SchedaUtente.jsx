@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getListaUtenti } from '../../store/azioni/adminActions';
-import ListaPersonaggio from '../personaggio/ListaPersonaggio';
+import { getListaUtenti, visualizzaPgAdmin } from '../../store/azioni/adminActions';
+import CarouselPersonaggi from '../personaggio/CarouselPersonaggi';
+import ListaPersonaggi from '../personaggio/ListaPersonaggi';
 import ListaUtenti from './ListaUtenti';
 import avatarEracle from '../../img/eracleCapovolto.png';
 
@@ -58,12 +59,14 @@ class SchedaUtente extends Component {
                 return (
                     <React.Fragment>
                         <button className="btn btn-dark" style={{ color: "#eeaa44", width: "80%" }} onClick={() => this.visualizzaListaPg()}>Lista Personaggi</button> <br />
+                        <button className="btn btn-dark" style={{ color: "#eeaa44", width: "80%" }} onClick={() => this.visualizzaPgAdmin()}>I Tuoi Personaggi</button> <br />
                     </React.Fragment>
                 )
             } else {
                 return (
                     <React.Fragment>
-                        <button className="btn btn-dark" style={{ color: "#eeaa44", width: "80%" }} onClick={() => this.visualizzaListaUtenti()}>Visualizza Utenti</button> <br />
+                        <button className="btn btn-dark" style={{ color: "#eeaa44", width: "80%" }} onClick={() => this.visualizzaListaUtenti()}>Lista Utenti</button> <br />
+                        <button className="btn btn-dark" style={{ color: "#eeaa44", width: "80%" }} onClick={() => this.visualizzaPgAdmin()}>I Tuoi Personaggi</button> <br />
                     </React.Fragment>
                 )
             }
@@ -74,19 +77,36 @@ class SchedaUtente extends Component {
     }
 
     renderListe = () => {
-        if (JSON.parse(sessionStorage.getItem('listaUtenti')) !== null) {
-            return <ListaUtenti lista={JSON.parse(sessionStorage.getItem('listaUtenti'))} />
+        if (this.props.visualizzaPgAdmin) {
+            return <CarouselPersonaggi />
+        } else {
+            if (JSON.parse(sessionStorage.getItem('listaUtenti')) !== null) {
+                return <ListaUtenti lista={JSON.parse(sessionStorage.getItem('listaUtenti'))} />
+            }
+            return <ListaPersonaggi />
         }
-        return <ListaPersonaggio />
     }
 
     visualizzaListaUtenti = () => {
+        if (this.props.visualizzaPgAdmin) {
+            visualizzaPgAdmin()
+        }
         this.props.getListaUtenti();
     }
 
     visualizzaListaPg = () => {
+        // alert(this.props.visualizzaPgAdmin)
+        if (this.props.visualizzaPgAdmin || this.props.visualizzaPgAdmin === undefined) {
+            visualizzaPgAdmin()
+        }
         sessionStorage.setItem('listaUtenti', null)
         this.forceUpdate()
+        visualizzaPgAdmin()
+    }
+
+    visualizzaPgAdmin = () => {
+        sessionStorage.setItem('listaUtenti', null)
+        this.props.visulizzaPgAdmin()
     }
 
     render() {
@@ -123,12 +143,14 @@ class SchedaUtente extends Component {
 const mapStateToProps = (state) => {
     return {
         listaUtenti: state.admin.listaUtenti,
+        visualizzaPgAdmin: state.admin.visualizzaPgAdmin
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getListaUtenti: () => dispatch(getListaUtenti())
+        getListaUtenti: () => dispatch(getListaUtenti()),
+        visulizzaPgAdmin: () => dispatch(visualizzaPgAdmin())
     }
 }
 

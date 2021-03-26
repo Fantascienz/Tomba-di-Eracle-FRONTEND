@@ -16,6 +16,10 @@ class PersonaggioService {
         return axios.post(URL + 'user', utente);
     }
 
+    getAllPersonaggi () {
+        return axios.get(URL);
+    }
+
     validazioneFormPersonaggio(personaggio) {
         if (personaggio.nominativo === ''
             || personaggio.sesso === ''
@@ -40,8 +44,7 @@ class PersonaggioService {
             || personaggio.urlCrinos === ''
             || personaggio.urlLupo === '') {
             return false;
-        }
-
+        } 
         return true
     }
 
