@@ -34,8 +34,8 @@ class SchedaUtente extends Component {
             return (
                 <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
                     <button className="btn btn-dark" style={{ color: "#eeaa44", width: "33.33%", fontSize: "65%" }} onClick={() => this.props.creazionePG()}>Crea Umano</button> <br /><br />
-                    <button class="btn btn-dark" style={{ color: "#eeaa44", width: "33.33%", fontSize: "65%" }} onClick={() => this.props.creazioneGarou()} >Crea Garou</button> <br /><br />
-                    <button class="btn btn-dark" style={{ color: "#eeaa44", width: "33.33%", fontSize: "70%", borderRadius: "0 5px 5px 0" }} onClick={() => this.props.creazionePng()} >Crea Png</button> <br /><br />
+                    <button className="btn btn-dark" style={{ color: "#eeaa44", width: "33.33%", fontSize: "65%" }} onClick={() => this.props.creazioneGarou()} >Crea Garou</button> <br /><br />
+                    <button className="btn btn-dark" style={{ color: "#eeaa44", width: "33.33%", fontSize: "70%", borderRadius: "0 5px 5px 0" }} onClick={() => this.props.creazionePng()} >Crea Png</button> <br /><br />
                 </div>
             )
         }
@@ -46,8 +46,8 @@ class SchedaUtente extends Component {
             return (
                 <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
                     <button className="btn btn-dark" style={{ color: "#eeaa44", width: "33.33%", fontSize: "65%" }} onClick={() => this.props.creazionePG()}>Crea Umano</button> <br /><br />
-                    <button class="btn btn-dark" style={{ color: "#eeaa44", width: "33.33%", fontSize: "65%" }} onClick={() => this.props.creazioneGarou()} >Crea Garou</button> <br /><br />
-                    <button class="btn btn-dark" style={{ color: "#eeaa44", width: "33.33%", fontSize: "70%", borderRadius: "0 5px 5px 0" }} onClick={() => this.props.creazionePng()} >Crea Png</button> <br /><br />
+                    <button className="btn btn-dark" style={{ color: "#eeaa44", width: "33.33%", fontSize: "65%" }} onClick={() => this.props.creazioneGarou()} >Crea Garou</button> <br /><br />
+                    <button className="btn btn-dark" style={{ color: "#eeaa44", width: "33.33%", fontSize: "70%", borderRadius: "0 5px 5px 0" }} onClick={() => this.props.creazionePng()} >Crea Png</button> <br /><br />
                 </div>
             )
         }
