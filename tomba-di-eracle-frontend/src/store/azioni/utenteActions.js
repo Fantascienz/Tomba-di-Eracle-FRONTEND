@@ -9,8 +9,8 @@ export const login = (utente) => {
             sessionStorage.setItem('utente', JSON.stringify(res.data))
             //se l'utente è admin o master,recupero la lista dei personaggi totali e poi eseguo la dispatch,altrimenti eseguo solo la dispatch
             if (res.data.tipo === 'admin' || res.data.tipo === 'master') {
-                PersonaggioService.getAllPersonaggi().then(resp => {
-                    sessionStorage.setItem('listaPersonaggi', JSON.stringify(resp.data))
+                PersonaggioService.getAllPersonaggi().then(res => {
+                    sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
                 }).then(
                     dispatch({
                         type: 'LOGIN_UTENTE',
