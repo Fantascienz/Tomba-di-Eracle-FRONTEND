@@ -66,7 +66,7 @@ class Registrazione extends Component {
                 <Header />
 
                 <div className="corpoComponente">
-                    <div className="container" style={{ marginTop: "5%" }}>
+                    <div className="container" style={{ marginTop: "5%", zIndex: "998", color: "#eeaa44", textShadow: "2px 2px black" }}>
                         <h1>Registrazione</h1>
                         <br />
                         <div style={{ align: "center" }}>
