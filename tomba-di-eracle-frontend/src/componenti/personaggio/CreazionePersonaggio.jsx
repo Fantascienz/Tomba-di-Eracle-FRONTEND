@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 import PersonaggioService from "../../servizi/PersonaggioService";
 import { creaPersonaggio } from "../../store/azioni/personaggioActions";
 import Header from "../layout/Header";
+
 
 class CreazionePersonaggio extends Component {
 
@@ -33,7 +36,9 @@ class CreazionePersonaggio extends Component {
         if (PersonaggioService.validazioneFormPersonaggio(this.state)) {
             this.props.creaPersonaggio(this.state)
         } else {
-            alert('Campi obbligatori')
+            withReactContent(Swal).fire({
+                title: <p>Tutti i campi sono obbligatori!</p>
+            })
         }
     }
 

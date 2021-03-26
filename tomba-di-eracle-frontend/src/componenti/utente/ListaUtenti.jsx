@@ -9,27 +9,31 @@ class ListaUtenti extends Component {
     }
 
     formModificaTipo = (utente) => {
-        return (
-            <div className="row">
-                <div className="col-sm-6" >
-                    <select name="nuovoTipo" id="nuovoTipo" onChange={this.handleChange}>
-                        <option selected="selected" value="standard">Standard</option>
-                        <option value="vip">VIP</option>
-                        <option value="master">Master</option>
-                        <option value="admin">Admin</option>
-                    </select>
+        if (utente.id !== JSON.parse(sessionStorage.getItem('utente')).id) {
+            return (
+                <div className="row">
+                    <div className="col-sm-6" >
+                        <select name="nuovoTipo" id="nuovoTipo" onChange={this.handleChange}>
+                            <option selected="selected" value="standard">Standard</option>
+                            <option value="vip">VIP</option>
+                            <option value="master">Master</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </div>
+                    <div className="col-sm-6" >
+                        <button className="btn btn-secondary" onClick={() => this.modificaTipo(utente)} >Modifica</button>
+                    </div>
                 </div>
-                <div className="col-sm-6" >
-                    <button className="btn btn-secondary" onClick={() => this.modificaTipo(utente)} >Modifica</button>
-                </div>
-            </div>
-        )
+            )
+        }
     }
 
     tastoBan = (utente) => {
-        return (
-            <button className="btn btn-danger" onClick={() => this.ban(utente)}>{utente.tipo === 'bannato' ? 'Sbanna' : 'Banna'}</button>
-        )
+        if (utente.id !== JSON.parse(sessionStorage.getItem('utente')).id) {
+            return (
+                <button className="btn btn-danger" onClick={() => this.ban(utente)}>{utente.tipo === 'bannato' ? 'Sbanna' : 'Banna'}</button>
+            )
+        }
     }
 
     modificaTipo = (utente) => {
@@ -61,6 +65,7 @@ class ListaUtenti extends Component {
                                 <th>Email</th>
                                 <th>Tipo</th>
                                 <th>Personaggi</th>
+                                <th>Data di Registrazione</th>
                                 <th>Modifica Tipo</th>
                                 <th>Ban</th>
                             </tr>
@@ -73,6 +78,7 @@ class ListaUtenti extends Component {
                                     <td>{utente.email}</td>
                                     <td>{utente.tipo}</td>
                                     <td>{utente.numeroPersonaggi}</td>
+                                    <td>{utente.dataRegistrazione}</td>
                                     <td>{this.formModificaTipo(utente)}</td>
                                     <td>{this.tastoBan(utente)}</td>
                                 </tr>
