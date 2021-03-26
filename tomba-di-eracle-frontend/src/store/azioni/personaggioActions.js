@@ -29,3 +29,12 @@ export const getPersonaggiUtente = (utente) => {
         });
     }
 }
+
+export const toCreazionePersonaggio = (tipo) => {
+    return (dispatch) => {
+        dispatch({
+            type: 'TO_CREAZIONE_PERSONAGGIO',
+            tipo: tipo
+        })
+    }
+}

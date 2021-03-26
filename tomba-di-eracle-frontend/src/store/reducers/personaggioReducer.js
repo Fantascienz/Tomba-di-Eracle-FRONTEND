@@ -17,6 +17,7 @@ const personaggioReducer = (state = initState, action) => {
                 personaggiUtente: action.personaggiUtente 
             }
             break;
+        
         default:
             break;
     }

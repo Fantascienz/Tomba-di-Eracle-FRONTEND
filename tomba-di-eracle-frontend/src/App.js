@@ -15,7 +15,7 @@ function App() {
           <Route path="/" exact component={Login}></Route>
           <Route path="/registrazione" component={Registrazione}/>
           <Route path="/paginaUtente" component={Utente}/>
-          <Route path="/creazionePersonaggio" component={CreazionePersonaggio}/>
+          <Route path="/creazionePersonaggio/:tipo" component={CreazionePersonaggio}/>
           <Route path="/registrazione" component={Registrazione} />
           <Route path="/paginaUtente" component={Utente} />
           <Route path="/modificaUtente" component={ModificaUtente} />

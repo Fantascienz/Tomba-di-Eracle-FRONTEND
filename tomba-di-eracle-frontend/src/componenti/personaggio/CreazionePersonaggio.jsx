@@ -10,81 +10,261 @@ import Header from "../layout/Header";
 class CreazionePersonaggio extends Component {
 
     state = {
+        tipo: this.props.match.params.tipo,
         nominativo: '',
         sesso: '',
         razza: '',
+        auspicio: '',
+        tribu: '',
+        branco: '',
+        ruolo: '',
         rango: '',
+        sept: '',
+        ruoloSept: '',
         urlImmagine: '',
+        urlLupo: '',
+        urlCrinos: '',
         utente: JSON.parse(sessionStorage.getItem('utente'))
     }
+
+    componentDidUpdate() {
+        console.log(this.props.redirect)
+        if (this.props.redirect !== '' && this.props.redirect !== '/creazionePersonaggio/:tipo' && this.props.redirect !== undefined) {
+            this.props.history.push(this.props.redirect)
+        }
+    }
+
 
     handleChange = (e) => {
         this.setState({
             [e.target.id]: e.target.value
         })
+
     }
 
-    componentDidUpdate() {
-        if (this.props.redirect !== '' && this.props.redirect !== '/creazionePersonaggio') {
-            this.props.history.push(this.props.redirect)
-        }
-    }
+
 
     handleSubmit = (e) => {
         e.preventDefault();
-        alert(this.state.rango)
-        if (PersonaggioService.validazioneFormPersonaggio(this.state)) {
-            this.props.creaPersonaggio(this.state)
+
+        if (this.state.tipo === 'normale') {
+            if (PersonaggioService.validazioneFormPersonaggio(this.state)) {
+                this.props.creaPersonaggio(this.state)
+            } else {
+                alert('Campi obbligatori')
+            }
         } else {
+<<<<<<< HEAD
             withReactContent(Swal).fire({
                 title: <p>Tutti i campi sono obbligatori!</p>
             })
+=======
+            let garou = {
+
+            }
         }
+    }
+
+
+
+    isGarouRazza = () => {
+        if (this.state.tipo === 'garou') {
+            return (
+                <React.Fragment>
+                    <option value="Lupo">Lupo</option>
+                    <option value="Meticcio">Meticcio</option>
+                </React.Fragment>
+            )
+        }
+    }
+
+    isGarouAuspicio = () => {
+        if (this.state.tipo === 'garou') {
+            return (
+                <React.Fragment>
+                    <div className="input-group">
+                        <span className="input-group-text" style={{ width: "20%" }}>Auspicio</span>
+                        <select className="form-select" id="auspicio" value={this.state.auspicio} onChange={this.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)" }}>
+                            <option defaultValue="">Auspicio:</option>
+                            <option value="Ahroun">Ahroun</option>
+                            <option value="Galliard">Galliard</option>
+                            <option value="Philodox">Philodox</option>
+                            <option value="Teurgo">Teurgo</option>
+                            <option value="Ragabash">Ragabash</option>
+                        </select>
+                    </div>
+                </React.Fragment>
+            )
+        }
+    }
+
+    isGarouTribu = () => {
+        if (this.state.tipo === 'garou') {
+            return (
+                <React.Fragment>
+                    <div className="input-group">
+                        <span className="input-group-text" style={{ width: "20%" }}>Auspicio</span>
+                        <select className="form-select" id="tribu" value={this.state.tribu} onChange={this.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)" }}>
+                            <option defaultValue="">Tribù:</option>
+                            <option value="Senza tribu">Senza tribù</option>
+                        </select>
+                    </div>
+                </React.Fragment>
+            )
+        }
+    }
+
+    isGarouRango = () => {
+        if (this.state.tipo === 'garou') {
+
+
+            return (
+                <React.Fragment>
+                    <option value="Cucciolo">0</option>
+                </React.Fragment>
+            )
+        }
+    }
+
+    isGarouBranco = () => {
+        if (this.state.tipo === 'garou') {
+            return (
+                <React.Fragment>
+                    <div className="input-group">
+                        <span className="input-group-text" style={{ width: "20%" }}>Branco</span>
+                        <input className="form-control" type="text" id="branco" onChange={this.handleChange} value={this.state.branco} />
+                    </div>
+                </React.Fragment>
+            )
+>>>>>>> 0c434f4 (rebase)
+        }
+    }
+
+    isGarouRuolo = () => {
+        if (this.state.tipo === 'garou') {
+            return (
+                <React.Fragment>
+                    <div className="input-group">
+                        <span className="input-group-text" style={{ width: "20%" }}>Ruolo</span>
+                        <input className="form-control" type="text" id="ruolo" onChange={this.handleChange} value={this.state.ruolo} />
+                    </div>
+                </React.Fragment>
+            )
+        }
+    }
+
+    isGarouSept = () => {
+        if (this.state.tipo === 'garou') {
+            return (
+                <React.Fragment>
+                    <div className="input-group">
+                        <span className="input-group-text" style={{ width: "20%" }}>Sept</span>
+                        <input className="form-control" type="text" id="sept" onChange={this.handleChange} value={this.state.sept} />
+                    </div>
+                </React.Fragment>
+            )
+        }
+    }
+
+    isGarouRuoloSept = () => {
+        if (this.state.tipo === 'garou') {
+            return (
+                <React.Fragment>
+                    <div className="input-group">
+                        <span className="input-group-text" style={{ width: "20%" }}>Ruolo sept</span>
+                        <input className="form-control" type="text" id="ruoloSept" onChange={this.handleChange} value={this.state.ruoloSept} />
+                    </div>
+                </React.Fragment>
+            )
+        }
+    }
+
+    isGarouUrlLupo = () => {
+        return (
+            <React.Fragment>
+                <div className="input-group">
+                    <span className="input-group-text" style={{ width: "20%" }}>Url Immagine Lupo</span>
+                    <input className="form-control" type="text" id="urlLupo" onChange={this.handleChange} value={this.state.urlLupo} />
+                </div>
+            </React.Fragment>
+        )
+    }
+
+
+    isGarouUrlCrinos = () => {
+        return (
+            <React.Fragment>
+                <div className="input-group">
+                    <span className="input-group-text" style={{ width: "20%" }}>Url Immagine Crinos</span>
+                    <input className="form-control" type="text" id="urlCrinos" onChange={this.handleChange} value={this.state.urlCrinos} />
+                </div>
+            </React.Fragment>
+        )
     }
 
     render() {
         return (
             <React.Fragment>
-                <Header/>
+                <Header />
                 <div className="corpoComponente">
-                <div style={{ height: "100%", display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
-                    <div className="container" style={{width:"50%"}}>
-                        <form onSubmit={this.handleSubmit}>
-                            <div className="input-group">
-                                <span className="input-group-text" style={{width:"20%"}}>Nome completo</span>
-                                <input className="form-control" type="text" id="nominativo" onChange={this.handleChange} value={this.state.nominativo}/>
-                            </div>
-                            <div className="input-group">
-                                <span className="input-group-text" style={{width:"20%"}}>Sesso</span>
-                                <select className="form-select" id="sesso" value={this.state.sesso} onChange={this.handleChange} style={{border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)"}}>
-                                    <option defaultValue="">Sesso:</option>
-                                    <option value="M">Uomo</option>
-                                    <option value="F">Donna</option>
-                                </select>
-                            </div>
-                            <div className="input-group">
-                                <span className="input-group-text" style={{width:"20%"}}>Razza</span>
-                                <select className="form-select" id="razza" value={this.state.razza} onChange={this.handleChange} style={{border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)"}}>
-                                    <option defaultValue="" >Razza</option>
-                                    <option value="Umano">Umano</option>
-                                </select>
-                            </div>
-                            <div className="input-group">
-                                <span className="input-group-text" style={{width:"20%"}}>Rango</span>
-                                <select className="form-select" id="rango" value={this.state.rango} onChange={this.handleChange} style={{border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)"}}>
-                                    <option defaultValue="" >Rango</option>
-                                    <option value="0">0</option>
-                                </select>
-                            </div>
+                    <div style={{ height: "100%", display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
 
-                            <div className="input-group">
-                                <span className="input-group-text" style={{width:"20%"}}>Url Immagine</span>
-                                <input className="form-control" id="urlImmagine" type="text" value={this.state.urlImmagine} onChange={this.handleChange} />
-                            </div>
+                        <div className="container" style={{ width: "50%" }}>
+                            <form onSubmit={this.handleSubmit}>
+                                <div className="input-group">
+                                    <span className="input-group-text" style={{ width: "20%" }}>Nome completo</span>
+                                    <input className="form-control" type="text" id="nominativo" onChange={this.handleChange} value={this.state.nominativo} />
+                                </div>
+                                <div className="input-group">
+                                    <span className="input-group-text" style={{ width: "20%" }}>Sesso</span>
+                                    <select className="form-select" id="sesso" value={this.state.sesso} onChange={this.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)" }}>
+                                        <option defaultValue="">Sesso:</option>
+                                        <option value="M">Uomo</option>
+                                        <option value="F">Donna</option>
+                                    </select>
+                                </div>
+                                <div className="input-group">
+                                    <span className="input-group-text" style={{ width: "20%" }}>Razza</span>
+                                    <select className="form-select" id="razza" value={this.state.razza} onChange={this.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)" }}>
+                                        <option defaultValue="" >Razza</option>
+                                        <option value="Umano">Umano</option>
+                                        {this.isGarouRazza()}
 
-                            <button className="btn btn-dark" style={{marginTop:"10px"}}>Crea</button>
-                        </form>
-                    </div>
+                                    </select>
+                                </div>
+
+                                {this.isGarouAuspicio()}
+                                {this.isGarouTribu()}
+
+
+                                <div className="input-group">
+                                    <span className="input-group-text" style={{ width: "20%" }}>Rango</span>
+                                    <select className="form-select" id="rango" value={this.state.rango} onChange={this.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)" }}>
+                                        <option defaultValue="" >Rango</option>
+
+                                        {this.state.tipo === 'garou' ?
+                                            <option value="0">Cucciolo</option>
+                                            :
+                                            <option value="0">0</option>
+                                        }
+
+                                    </select>
+                                </div>
+
+                                {this.isGarouBranco()}
+                                {this.isGarouRuolo()}
+                                {this.isGarouSept()}
+                                {this.isGarouRuoloSept()}
+                                {this.isGarouUrlLupo()}
+                                {this.isGarouUrlCrinos()}
+
+                                <div className="input-group">
+                                    <span className="input-group-text" style={{ width: "20%" }}>Url Immagine</span>
+                                    <input className="form-control" id="urlImmagine" type="text" value={this.state.urlImmagine} onChange={this.handleChange} />
+                                </div>
+                                <button className="btn btn-dark" style={{ marginTop: "10px" }}>Crea</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </React.Fragment>
