@@ -1,4 +1,5 @@
 import AdminService from "../../servizi/AdminService"
+import PersonaggioService from "../../servizi/PersonaggioService"
 
 
 export const getListaUtenti = () => {
@@ -8,6 +9,18 @@ export const getListaUtenti = () => {
             dispatch({
                 type: "LISTA_UTENTI",
                 listaUtenti: res.data
+            })
+        })
+    }
+}
+
+export const getListaPersonaggi = () => {
+    return (dispatch) => {
+        PersonaggioService.getAllPersonaggi().then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: "LISTA_PG",
+                listaPg: res.data
             })
         })
     }
