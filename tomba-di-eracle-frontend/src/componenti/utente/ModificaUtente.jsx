@@ -63,12 +63,10 @@ class ModificaUtente extends Component {
         return (
             <React.Fragment>
                 <Header />
-                <div className="corpoComponente">
-                    <div style={{ paddingTop: "2%", zIndex: "998", color: "#eeaa44", textShadow: "2px 2px black" }}>
-                        <h1>Modifica Account</h1>
-                    </div>
+                <div className="corpoComponente" style={{ paddingTop: "5%",zIndex: "998", color: "#eeaa44", textShadow: "2px 2px black" }}>
+                    <h1>Modifica Account</h1>
                     <br />
-                    <div style={{ align: "center", zIndex: "998", color: "#eeaa44", textShadow: "2px 2px black" }}>
+                    <div style={{ align: "center" }}>
                         <form onSubmit={this.handleSubmit}>
                             <div className="row">
                                 <h3>Nuovo Nominativo</h3>
