@@ -6,6 +6,7 @@ import Registrazione from './componenti/utente/Registrazione';
 import Utente from './componenti/utente/Utente';
 import CreazionePersonaggio from './componenti/personaggio/CreazionePersonaggio';
 import ModificaUtente from './componenti/utente/ModificaUtente';
+import ModificaPersonaggio from './componenti/personaggio/ModificaPersonaggio';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/registrazione" component={Registrazione}/>
           <Route path="/paginaUtente" component={Utente}/>
           <Route path="/creazionePersonaggio/:tipo" component={CreazionePersonaggio}/>
+          <Route path="/modificaPersonaggio" component={ModificaPersonaggio} />
           <Route path="/registrazione" component={Registrazione} />
           <Route path="/paginaUtente" component={Utente} />
           <Route path="/modificaUtente" component={ModificaUtente} />

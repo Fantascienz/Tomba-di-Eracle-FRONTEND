@@ -10,13 +10,29 @@ export const creaPersonaggio = (personaggio) => {
                 type: 'CREA_PERSONAGGIO',
                 personaggio: res.data
             })
-        }).then( () => {
+        }).then(() => {
             browserHistory.push('/paginaUtente');
             browserHistory.go();
         }).catch(() => {
             withReactContent(Swal).fire({
                 title: <p>Nominativo già esistente!</p>
             })
+        })
+    }
+}
+
+
+export const modificaPersonaggio = (personaggio) => {
+    return (dispatch) => {
+        PersonaggioService.modificaPersonaggio(personaggio).then(res => {
+            sessionStorage.removeItem('personaggio')
+            dispatch({
+                type: 'MODIFICA_PERSONAGGIO',
+                modificato: personaggio
+            })
+        }).then(() =>{
+            browserHistory.push('/paginaUtente');
+            browserHistory.go();
         })
     }
 }
@@ -40,5 +56,20 @@ export const toCreazionePersonaggio = (tipo) => {
             type: 'TO_CREAZIONE_PERSONAGGIO',
             tipo: tipo
         })
+
+    }
+}
+
+export const toModificaPersonaggio = (personaggio) => {
+    return (dispatch) => {
+       sessionStorage.setItem('personaggio', JSON.stringify(personaggio) )
+        dispatch({
+            type: 'TO_MODIFICA_PERSONAGGIO',
+            modifica: personaggio
+        })
+
+        browserHistory.push('/modificaPersonaggio');
+        browserHistory.go();
+        
     }
 }

@@ -1,3 +1,5 @@
+import { browserHistory } from "../..";
+
 const initState = {
     personaggio: {},
     personaggiUtente: [],
@@ -12,12 +14,21 @@ const personaggioReducer = (state = initState, action) => {
                 personaggio: action.personaggio
             }
             break;
-        case 'LISTA_PERSONAGGI_UTENTE':
-            state =  {
-                personaggiUtente: action.personaggiUtente 
+        case 'MODIFICA_PERSONAGGIO':
+            state = {
+                personaggio: action.modificato
             }
             break;
-        
+        case 'LISTA_PERSONAGGI_UTENTE':
+            state = {
+                personaggiUtente: action.personaggiUtente
+            }
+            break;
+        case 'TO_MODIFICA_PERSONAGGIO':
+            state = {
+                personaggio: action.modifica,
+            }
+            break;
         default:
             break;
     }

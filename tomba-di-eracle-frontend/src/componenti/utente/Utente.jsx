@@ -8,9 +8,12 @@ import SchedaUtente from './SchedaUtente';
 class Utente extends Component {
 
     componentDidUpdate() {
+        
         if (this.props.redirect !== '' && this.props.redirect !== '/paginaUtente') {
             this.props.history.push(this.props.redirect)
         }
+
+        
     }
 
     

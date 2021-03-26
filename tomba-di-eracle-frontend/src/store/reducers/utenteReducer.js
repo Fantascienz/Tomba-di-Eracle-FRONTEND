@@ -2,7 +2,7 @@ const initState = {
     utente: {},
     redirect: '',
     admin: false,
-    
+    personaggio: {}
 }
 
 const utenteReducer = (state = initState, action) => {
@@ -30,6 +30,8 @@ const utenteReducer = (state = initState, action) => {
                 redirect: '/creazionePersonaggio/' + action.tipo
             }
             break;
+
+            
         
         default:
             break;
