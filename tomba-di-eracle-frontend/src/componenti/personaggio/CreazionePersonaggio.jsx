@@ -16,19 +16,20 @@ class CreazionePersonaggio extends Component {
         razza: '',
         auspicio: '',
         tribu: '',
-        branco: '',
+        brancoInput: '',
         ruolo: '',
         rango: '',
-        sept: '',
+        septInput: '',
         ruoloSept: '',
         urlImmagine: '',
         urlLupo: '',
         urlCrinos: '',
-        utente: JSON.parse(sessionStorage.getItem('utente'))
+        utente: JSON.parse(sessionStorage.getItem('utente')),
+        crinos: false,
+        umbra: false
     }
 
     componentDidUpdate() {
-        console.log(this.props.redirect)
         if (this.props.redirect !== '' && this.props.redirect !== '/creazionePersonaggio/:tipo' && this.props.redirect !== undefined) {
             this.props.history.push(this.props.redirect)
         }
@@ -60,11 +61,24 @@ class CreazionePersonaggio extends Component {
             })
 =======
             let garou = {
+                nominativo: this.state.nominativo,
+                sesso: this.state.sesso,
+                rango: this.state.rango,
+                razza: this.state.razza,
+                branco: this.state.brancoInput + " " + this.state.ruolo,
+                sept: this.state.septInput + " " + this.state.ruoloSept,
+                urlImmagine: this.state.urlImmagine,
+                urlCrinos: this.state.urlCrinos,
+                urlLupo: this.state.urlLupo,
+                utente: this.state.utente,
+                crinos: true,
+                umbra: true
 
             }
+
+            this.props.creaPersonaggio(garou)
         }
     }
-
 
 
     isGarouRazza = () => {
@@ -132,7 +146,7 @@ class CreazionePersonaggio extends Component {
                 <React.Fragment>
                     <div className="input-group">
                         <span className="input-group-text" style={{ width: "20%" }}>Branco</span>
-                        <input className="form-control" type="text" id="branco" onChange={this.handleChange} value={this.state.branco} />
+                        <input className="form-control" type="text" id="brancoInput" onChange={this.handleChange} value={this.state.brancoInput} />
                     </div>
                 </React.Fragment>
             )
@@ -159,7 +173,7 @@ class CreazionePersonaggio extends Component {
                 <React.Fragment>
                     <div className="input-group">
                         <span className="input-group-text" style={{ width: "20%" }}>Sept</span>
-                        <input className="form-control" type="text" id="sept" onChange={this.handleChange} value={this.state.sept} />
+                        <input className="form-control" type="text" id="septInput" onChange={this.handleChange} value={this.state.septInput} />
                     </div>
                 </React.Fragment>
             )
@@ -180,26 +194,34 @@ class CreazionePersonaggio extends Component {
     }
 
     isGarouUrlLupo = () => {
-        return (
-            <React.Fragment>
-                <div className="input-group">
-                    <span className="input-group-text" style={{ width: "20%" }}>Url Immagine Lupo</span>
-                    <input className="form-control" type="text" id="urlLupo" onChange={this.handleChange} value={this.state.urlLupo} />
-                </div>
-            </React.Fragment>
-        )
+        if (this.state.tipo === 'garou') {
+
+
+            return (
+                <React.Fragment>
+                    <div className="input-group">
+                        <span className="input-group-text" style={{ width: "20%" }}>Url Immagine Lupo</span>
+                        <input className="form-control" type="text" id="urlLupo" onChange={this.handleChange} value={this.state.urlLupo} />
+                    </div>
+                </React.Fragment>
+            )
+        }
     }
 
 
     isGarouUrlCrinos = () => {
-        return (
-            <React.Fragment>
-                <div className="input-group">
-                    <span className="input-group-text" style={{ width: "20%" }}>Url Immagine Crinos</span>
-                    <input className="form-control" type="text" id="urlCrinos" onChange={this.handleChange} value={this.state.urlCrinos} />
-                </div>
-            </React.Fragment>
-        )
+        if (this.state.tipo === 'garou') {
+
+
+            return (
+                <React.Fragment>
+                    <div className="input-group">
+                        <span className="input-group-text" style={{ width: "20%" }}>Url Immagine Crinos</span>
+                        <input className="form-control" type="text" id="urlCrinos" onChange={this.handleChange} value={this.state.urlCrinos} />
+                    </div>
+                </React.Fragment>
+            )
+        }
     }
 
     render() {

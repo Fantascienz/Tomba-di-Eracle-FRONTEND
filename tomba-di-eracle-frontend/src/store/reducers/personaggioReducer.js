@@ -9,7 +9,7 @@ const personaggioReducer = (state = initState, action) => {
     switch (action.type) {
         case 'CREA_PERSONAGGIO':
             state = {
-                redirect: '/paginaUtente'
+                personaggio: action.personaggio
             }
             break;
         case 'LISTA_PERSONAGGI_UTENTE':
