@@ -13,9 +13,30 @@ class PersonaggioService {
     }
 
     validazioneFormPersonaggio(personaggio) {
-        if(personaggio.nominativo === '' || personaggio.sesso === '') {
+        if (personaggio.nominativo === ''
+            || personaggio.sesso === ''
+            || personaggio.rango === ''
+            || personaggio.urlImmagine === '') {
             return false;
-        } 
+        }
+
+        return true
+    }
+
+    validazioneFormGarou(personaggio) {
+        if (personaggio.nominativo === ''
+            || personaggio.sesso === ''
+            || personaggio.rango === ''
+            || personaggio.razza === ''
+            || personaggio.brancoInput === ''
+            || personaggio.ruolo === ''
+            || personaggio.septInput === ''
+            || personaggio.ruoloSept === ''
+            || personaggio.urlImmagine === ''
+            || personaggio.urlCrinos === ''
+            || personaggio.urlLupo === '') {
+            return false;
+        }
 
         return true
     }

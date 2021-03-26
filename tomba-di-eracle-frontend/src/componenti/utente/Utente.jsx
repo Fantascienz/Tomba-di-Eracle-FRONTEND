@@ -19,7 +19,7 @@ class Utente extends Component {
         return (
             <React.Fragment>
                 <Header />
-                <SchedaUtente admin={this.props.admin} creazioneGarou={() => this.props.toCreazionePersonaggio('garou')}  creazionePG={() => this.props.toCreazionePersonaggio('normale')} modificaUtente={() => this.props.toModificaUtente()} />
+                <SchedaUtente admin={this.props.admin} creazionePng={() => this.props.toCreazionePersonaggio('png') } creazioneGarou={() => this.props.toCreazionePersonaggio('garou')}  creazionePG={() => this.props.toCreazionePersonaggio('normale')} modificaUtente={() => this.props.toModificaUtente()} />
             </React.Fragment>
         );
     }
