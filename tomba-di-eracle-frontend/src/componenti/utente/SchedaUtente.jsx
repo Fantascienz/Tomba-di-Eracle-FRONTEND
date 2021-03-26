@@ -10,7 +10,7 @@ class SchedaUtente extends Component {
     isStandard = () => {
         if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'standard') {
             return (
-                <div className="btn-group" role="group" aria-label="Basic example">
+                <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%"}}>
                     <button className="btn btn-dark" style={{ color: "#eeaa44", width: "80%" }} onClick={() => this.props.creazionePG()}>Crea Personaggio</button> <br /><br />
                 </div>
             )
@@ -31,10 +31,10 @@ class SchedaUtente extends Component {
     isMaster = () => {
         if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'master') {
             return (
-                <div className="btn-group" role="group" aria-label="Basic example">
-                    <button className="btn btn-dark" style={{ color: "#eeaa44", width: "80%" }} onClick={() => this.props.creazionePG()}>Crea Personaggio</button> <br /><br />
-                    <button class="btn btn-dark" style={{ color: "#eeaa44", width: "80%" }} onClick={() => this.props.creazioneGarou()} >Crea Garou</button> <br /><br />
-                    <button class="btn btn-dark" style={{ color: "#eeaa44", width: "80%" }} onClick={() => this.props.creazionePng()} >Crea Png</button> <br /><br />
+                <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
+                    <button className="btn btn-dark" style={{ color: "#eeaa44", width: "33.33%", fontSize: "65%" }} onClick={() => this.props.creazionePG()}>Crea Umano</button> <br /><br />
+                    <button class="btn btn-dark" style={{ color: "#eeaa44", width: "33.33%", fontSize: "65%" }} onClick={() => this.props.creazioneGarou()} >Crea Garou</button> <br /><br />
+                    <button class="btn btn-dark" style={{ color: "#eeaa44", width: "33.33%", fontSize: "70%", borderRadius: "0 5px 5px 0" }} onClick={() => this.props.creazionePng()} >Crea Png</button> <br /><br />
                 </div>
             )
         }
@@ -43,10 +43,10 @@ class SchedaUtente extends Component {
     isAdminCreazionePg = () => {
         if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin') {
             return (
-                <div className="btn-group" role="group" aria-label="Basic example">
-                    <button className="btn btn-dark" style={{ color: "#eeaa44", width: "80%" }} onClick={() => this.props.creazionePG()}>Crea Personaggio</button> <br /><br />
-                    <button class="btn btn-dark" style={{ color: "#eeaa44", width: "80%" }} onClick={() => this.props.creazioneGarou()} >Crea Garou</button> <br /><br />
-                    <button class="btn btn-dark" style={{ color: "#eeaa44", width: "80%" }} onClick={() => this.props.creazionePng()} >Crea Png</button> <br /><br />
+                <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
+                    <button className="btn btn-dark" style={{ color: "#eeaa44", width: "33.33%", fontSize: "65%" }} onClick={() => this.props.creazionePG()}>Crea Umano</button> <br /><br />
+                    <button class="btn btn-dark" style={{ color: "#eeaa44", width: "33.33%", fontSize: "65%" }} onClick={() => this.props.creazioneGarou()} >Crea Garou</button> <br /><br />
+                    <button class="btn btn-dark" style={{ color: "#eeaa44", width: "33.33%", fontSize: "70%", borderRadius: "0 5px 5px 0" }} onClick={() => this.props.creazionePng()} >Crea Png</button> <br /><br />
                 </div>
             )
         }

@@ -172,7 +172,7 @@ class CreazionePersonaggio extends Component {
             return (
                 <React.Fragment>
                     <div className="input-group">
-                        <span className="input-group-text" style={{ width: "30%" }}>Auspicio</span>
+                        <span className="input-group-text" style={{ width: "30%" }}>Tribù</span>
                         <select className="form-select" id="tribu" value={this.state.tribu} onChange={this.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)" }}>
                             <option defaultValue="">Tribù:</option>
                             <option value="Senza tribu">Senza tribù</option>
