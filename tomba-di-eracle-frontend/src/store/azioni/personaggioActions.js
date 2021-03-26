@@ -1,9 +1,6 @@
-<<<<<<< HEAD
 import Swal from "sweetalert2"
 import withReactContent from "sweetalert2-react-content"
-=======
 import { browserHistory } from "../.."
->>>>>>> d4b2129 (Implementazione creazione garou senza controlli campi obbligatori e render pagina utente standard)
 import PersonaggioService from "../../servizi/PersonaggioService"
 
 export const creaPersonaggio = (personaggio) => {

@@ -55,11 +55,9 @@ class CreazionePersonaggio extends Component {
                 alert('Campi obbligatori')
             }
         } else {
-<<<<<<< HEAD
             withReactContent(Swal).fire({
                 title: <p>Tutti i campi sono obbligatori!</p>
             })
-=======
             let garou = {
                 nominativo: this.state.nominativo,
                 sesso: this.state.sesso,
@@ -150,7 +148,6 @@ class CreazionePersonaggio extends Component {
                     </div>
                 </React.Fragment>
             )
->>>>>>> 0c434f4 (rebase)
         }
     }
 
