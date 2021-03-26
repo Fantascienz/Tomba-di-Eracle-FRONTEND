@@ -70,7 +70,6 @@ class SchedaUtente extends Component {
 const mapStateToProps = (state) => {
     return {
         listaUtenti: state.admin.listaUtenti,
-        // redirect: state.admin.redirect
     }
 }
 

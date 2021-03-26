@@ -1,10 +1,17 @@
+import Swal from "sweetalert2"
+import withReactContent from "sweetalert2-react-content"
 import UtenteService from "../../servizi/UtenteService"
 
 export const login = (utente) => {
     return (dispatch) => {
         UtenteService.login(utente).then(res => {
             if (res.data.tipo === 'bannato') {
-                alert('sei stato bannato!')
+                withReactContent(Swal).fire({
+                    title: <div>
+                        <p>Impossibile accedere!</p>
+                        <p>Sei stato bannato!</p>
+                    </div>
+                })
             } else {
                 sessionStorage.setItem('utente', JSON.stringify(res.data))
                 dispatch({
@@ -14,7 +21,12 @@ export const login = (utente) => {
                 })
             }
         }).catch(err => {
-            alert('Credenziali errate')
+            withReactContent(Swal).fire({
+                title: <div>
+                    <p>Errore {err.response.status}</p>
+                    <p>Credenziali errate!</p>
+                </div>
+            })
         })
     }
 }
@@ -26,7 +38,12 @@ export const registrazione = (utente) => {
                 type: 'REGISTRAZIONE_UTENTE'
             })
         ).catch(err => {
-            alert('Email già registrata')
+            withReactContent(Swal).fire({
+                title: <div>
+                    <p>Errore {err.response.status}</p>
+                    <p>Email già registrata!</p>
+                </div>
+            })
         })
     }
 }
@@ -41,7 +58,22 @@ export const modificaUtente = (mod) => {
             })
 
         }).catch(error => {
-            alert('Errore ' + error.response.status + ': Qualcosa è andato storto!')
+
+            if (error.response.status === 400) {
+                withReactContent(Swal).fire({
+                    title: <div>
+                        <p>Errore {error.response.status}</p>
+                        <p>La password fornita è errata!</p>
+                    </div>
+                })
+            } else {
+                withReactContent(Swal).fire({
+                    title: <div>
+                        <p>Errore {error.response.status}</p>
+                        <p>La mail che hai fornito è gia registrata!</p>
+                    </div>
+                })
+            }
         })
     }
 }

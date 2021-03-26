@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import UtenteService from "../../servizi/UtenteService";
 import { login } from "../../store/azioni/utenteActions";
-import Header from "../layout/Header"
+import Header from "../layout/Header";
+import withReactContent from "sweetalert2-react-content"
+import Swal from "sweetalert2"
 
 class Login extends Component {
 
@@ -29,7 +31,11 @@ class Login extends Component {
          if(UtenteService.validaLogin(this.state)) {
             this.props.login(this.state)
          } else {
-             alert('Campi obbligatori!')
+            withReactContent(Swal).fire({
+                title: <div>
+                    <p>Tutti i campi sono obbligatori!</p>
+                </div>
+            })
          }
 
          this.setState({

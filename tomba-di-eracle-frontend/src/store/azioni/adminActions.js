@@ -19,7 +19,6 @@ export const modificaTipoUtente = (utente, nuovoTipo) => {
     return (dispatch) => {
         AdminService.modificaTipo(utente).then(
             AdminService.getListaUtenti().then(res => {
-                // sessionStorage.setItem('listaUtenti', JSON.stringify(res.data))
                 dispatch({
                     type: "LISTA_UTENTI",
                     listaUtenti: res.data,

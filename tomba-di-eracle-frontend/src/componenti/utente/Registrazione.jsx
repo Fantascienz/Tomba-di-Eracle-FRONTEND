@@ -3,6 +3,8 @@ import UtenteService from '../../servizi/UtenteService';
 import { registrazione } from '../../store/azioni/utenteActions';
 import { connect } from "react-redux";
 import Header from '../layout/Header';
+import Swal from "sweetalert2"
+import withReactContent from "sweetalert2-react-content"
 
 class Registrazione extends Component {
 
@@ -31,11 +33,19 @@ class Registrazione extends Component {
                 }
                 this.props.registrazione(utente)
             } else {
-                alert('pass diverse')
+                withReactContent(Swal).fire({
+                    title: <div>
+                        <p>Le password fornite non combaciano!</p>
+                    </div>
+                })
             }
 
         } else {
-            alert('campi obb')
+            withReactContent(Swal).fire({
+                title: <div>
+                    <p>Tutti i campi sono obbligatori!</p>
+                </div>
+            })
         }
     }
 

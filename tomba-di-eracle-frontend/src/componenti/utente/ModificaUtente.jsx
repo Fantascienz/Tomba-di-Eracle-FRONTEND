@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import UtenteService from '../../servizi/UtenteService';
 import { modificaUtente } from '../../store/azioni/utenteActions';
 import Header from '../layout/Header';
+import Swal from "sweetalert2"
+import withReactContent from "sweetalert2-react-content"
 
 class ModificaUtente extends Component {
 
@@ -15,7 +17,7 @@ class ModificaUtente extends Component {
 
     componentDidUpdate() {
         console.log(this.props.redirect)
-        if(this.props.redirect !== '' && this.props.redirect !== '/modificaUtente') {
+        if (this.props.redirect !== '' && this.props.redirect !== '/modificaUtente') {
             this.props.history.push(this.props.redirect)
         }
     }
@@ -49,7 +51,11 @@ class ModificaUtente extends Component {
             }
             this.props.modifica(mod);
         } else {
-            alert('campi obb')
+            withReactContent(Swal).fire({
+                title: <div>
+                    <p>Tutti i campi sono obbligatori!</p>
+                </div>
+            })
         }
     }
 
@@ -112,4 +118,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(ModificaUtente);
+export default connect(mapStateToProps, mapDispatchToProps)(ModificaUtente);
