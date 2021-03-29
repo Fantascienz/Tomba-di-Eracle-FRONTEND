@@ -21,7 +21,7 @@ class Gamepage extends Component {
 
                         <div className="navigazione-immagine" style={{ backgroundImage: "url('https://i.pinimg.com/564x/f9/80/b6/f980b6f06e927d8ccc12fcb4f31295ed.jpg')" }}></div>
 
-                        <img src={cardGame} style={{ position:"relative", zIndex: "9999", width: "100%", }} />
+                        <img src={cardGame} style={{ position:"relative", zIndex: "9999", width: "auto", height:"100%"}} />
 
                         {/* ------------PULSANTI AZIONI------------ */}
                         {/* pulsante: mappa */}
@@ -58,7 +58,7 @@ class Gamepage extends Component {
                         
                         {/* SUD */}
                         <div className="navigazione-link" title="Vai a Sud" style={{ left: "44%", top: "85.89%", width: "11.25%", height: "8.09%", zIndex: "9999"}}>
-                        <img className="icona-freccia-alta" src={frecciaGIU}/>
+                            <img className="icona-freccia-alta" src={frecciaGIU}/>
                         </div>
                         
                         {/* OVEST */}
@@ -81,7 +81,7 @@ class Gamepage extends Component {
                 </div>
 
 
-                <div style={{ position: "relative", top: "5%", right: "5%", height: "85%", width: "55%", backgroundColor: "green", float: "right" }}>
+                <div className="chat-sezione">
                 </div>
             </div>
         )

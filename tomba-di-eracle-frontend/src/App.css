@@ -149,10 +149,10 @@ a:hover{
   z-index: 9999;
   position: relative; 
   top: 5%;
-  left: 5%; 
+  left: 1%; 
   height: 85%; 
   width: 35%; 
-  /* background-color: red;  */
+  /* background-color: pink;  */
   float: left; 
   display: flex; 
   justify-content: center; 
@@ -161,7 +161,9 @@ a:hover{
 }
 
 .navigazione-area{
-  position: absolute
+  position: relative;
+  /* background-color: red;  */
+  height: 100%;
 }
 
 .navigazione-immagine{
@@ -219,4 +221,18 @@ a:hover{
 .icona-freccia-alta:hover{
   cursor: pointer;
   height: 135%;
+}
+
+.chat-sezione{
+  position: relative;
+  top: 5%;
+  right: 1%;
+  height: 85%;
+  width: 62%;
+  background-color: green;
+  float: right;
+  display: flex; 
+  justify-content: center; 
+  flex-direction: column; 
+  align-items: center
 }
