@@ -8,6 +8,10 @@ class PersonaggioService {
         return axios.post(URL, personaggio);
     }
 
+    modificaPersonaggio(personaggio) {
+        return axios.post(URL + 'modifica', personaggio)
+    }
+
     getPersonaggiUtente(utente) {
         return axios.post(URL + 'user', utente);
     }
