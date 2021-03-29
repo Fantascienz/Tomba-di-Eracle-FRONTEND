@@ -18,8 +18,6 @@ class ListaPersonaggi extends Component {
     }
 
     modificaRango = (pg) => {
-        // this.props.modificaTipo(utente, this.state.nuovoTipo)
-        // this.props.getListaUtenti()
         alert(this.state.nuovoRango)
         alert(pg.rango)
     }
