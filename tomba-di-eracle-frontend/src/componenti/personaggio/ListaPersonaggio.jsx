@@ -21,11 +21,11 @@ class ListaPersonaggio extends Component {
     caroselloPersonaggi() {
         return (
             <Carousel interval={null}
-                prevIcon={<img src={frecciaDX} style={{ opacity: "none", marginLeft: "700px" }} height="50px" />} prevLabel={null}
-                nextIcon={<img src={frecciaSX} style={{ opacity: "none", marginRight: "700px" }} height="50px" />} nextLabel={null}>
+                prevIcon={<img src={frecciaDX} style={{ opacity: "none", marginLeft: "700px" }} height="80px" />} prevLabel={null}
+                nextIcon={<img src={frecciaSX} style={{ opacity: "none", marginRight: "700px" }} height="80px" />} nextLabel={null}>
                 {this.props.personaggiUtente && this.props.personaggiUtente.map(personaggio => {
                     return (
-                        <Carousel.Item>
+                        <Carousel.Item >
                             <DettagliPersonaggio personaggio={personaggio} key={personaggio.id} />
                         </Carousel.Item>
                     )
@@ -38,7 +38,7 @@ class ListaPersonaggio extends Component {
         return (
             <div className="card" style={{ backgroundImage: `url(${noPg})`, backgroundSize: "auto 100%", backgroundRepeat: "no-repeat", backgroundPosition: "center center", backgroundColor: "transparent", width: "85%", height: "450px" }}>
                 <div style={{ height: "100%", display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
-                    <img src={cardFrame} alt="..." style={{ height: "100%", width: "105%" }} />
+                    <img src={cardFrame} alt="..." style={{ height: "100%", width: "105%", boxShadow: "0 16px 16px 0 rgba(0,0,0,2), 0 16px 16px 0 rgba(0,0,0,2)" }} />
                     <div className={"card-body"} style={{ position: "absolute", bottom: "5%", width: "100%" }}>
                         <button className="btn-gold-disabled" style={{ width: "100%" }} disabled>Nessun Personaggio Creato</button>
                     </div>
