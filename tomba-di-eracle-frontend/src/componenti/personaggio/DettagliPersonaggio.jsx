@@ -6,33 +6,40 @@ import { toModificaPersonaggio } from '../../store/azioni/personaggioActions';
 
 
 class DettagliPersonaggio extends Component {
-    
+
     modificaPersonaggio = (singleCharacter) => {
         this.props.toModificaPersonaggio(singleCharacter)
     }
 
     viewCard(singleCharacter) {
-            return (
-                <div className="card" style={{ backgroundImage: `url(${singleCharacter.urlImmagine})`, backgroundSize: "auto 100%", backgroundRepeat: "no-repeat", backgroundPosition: "center center", backgroundColor: "transparent", width: "85%", height: "450px" }}>
-                    <div style={{ height: "100%", display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
-                        <img src={cardFrame} alt="..." style={{ height: "100%", width: "105%", boxShadow: "0 16px 16px 0 rgba(0,0,0,2), 0 16px 16px 0 rgba(0,0,0,2)" }} />
-                        <div className={"card-body"} style={{ position: "absolute", bottom: "3%", width:"100%" }}>
-                            <button className="btn-gold" style={{width:"95%"}} >{singleCharacter.nominativo}</button>
-                            <button className="btn-gold" style={{width:"95%"}} onClick={() =>this.modificaPersonaggio(singleCharacter)}>Modifica</button>
-                        </div>
+        return (
+            <div className="card" style={{
+                backgroundImage: `url(${singleCharacter.urlImmagine})`, backgroundSize: "auto 100%", backgroundRepeat: "no-repeat", backgroundPosition: "center center",
+                backgroundColor: "transparent", width: "250px", height: "350px"
+            }}>
+
+                <div style={{
+                    position: "relative", width: "100%", height: "100%",
+                    backgroundImage: `url(${cardFrame})`, backgroundSize: "100% 100%", backgroundRepeat: "no-repeat", backgroundPosition: "center center",
+                }}>
+                    <div style={{ position: "absolute", bottom: "7%", width: "100%" }}>
+                        <button className="btn-gold" style={{ width: "80%", height: "10%" }} >{singleCharacter.nominativo}</button>
+                        <button className="btn-gold" style={{ width: "80%", height: "10%" }} onClick={() => this.modificaPersonaggio(singleCharacter)}>Modifica</button>
                     </div>
                 </div>
-            )
+
+            </div>
+        )
     }
-    
-    
-    
+
+
+
     render() {
         const { personaggio } = this.props
         return (
             <div>
-            {this.viewCard(personaggio)}
-        </div>
+                {this.viewCard(personaggio)}
+            </div>
         );
     }
 }
@@ -44,4 +51,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-export default connect(null,mapDispatchToProps) (DettagliPersonaggio);
+export default connect(null, mapDispatchToProps)(DettagliPersonaggio);
