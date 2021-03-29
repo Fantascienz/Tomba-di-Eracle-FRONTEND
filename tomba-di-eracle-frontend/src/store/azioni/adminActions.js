@@ -55,6 +55,14 @@ export const modificaPersonaggio = (personaggio) => {
     }
 }
 
+export const toCreazioneLocation = () => {
+    return (dispatch) => {
+        dispatch({
+            type: 'TO_CREAZIONE_LOCATION',
+        })
+    }
+}
+
 export const visualizzaPgAdmin = () => {
     return (dispatch) => {
         dispatch({

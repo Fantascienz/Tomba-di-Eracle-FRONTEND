@@ -5,6 +5,7 @@ import CarouselPersonaggi from '../personaggio/CarouselPersonaggi';
 import ListaPersonaggi from '../personaggio/ListaPersonaggi';
 import ListaUtenti from './ListaUtenti';
 import avatarEracle from '../../img/eracleCapovolto.png';
+import { browserHistory } from "../.."
 
 class SchedaUtente extends Component {
 
@@ -91,12 +92,17 @@ class SchedaUtente extends Component {
         if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' || JSON.parse(sessionStorage.getItem('utente')).tipo === 'master') {
             return (
                 <React.Fragment>
-                    <button className="btn btn-dark" style={{ color: "#eeaa44", width: "80%" }} onClick={() => alert('loc')}>Creazione Location</button>
+                    <button className="btn btn-dark" style={{ color: "#eeaa44", width: "80%" }} onClick={() => this.creaLocation()}>Creazione Location</button>
                     <br />
                 </React.Fragment>
             )
         }
 
+    }
+
+    creaLocation = () => {
+        browserHistory.push('creazioneLocation')
+        browserHistory.go()
     }
 
     renderListe = () => {
@@ -125,13 +131,11 @@ class SchedaUtente extends Component {
     }
 
     visualizzaListaPg = () => {
-        // alert(this.props.visualizzaPgAdmin)
         if (this.props.visualizzaPgAdmin || this.props.visualizzaPgAdmin === undefined) {
             visualizzaPgAdmin()
         }
         sessionStorage.setItem('listaUtenti', null)
         this.forceUpdate()
-        // visualizzaPgAdmin()
     }
 
     visualizzaPgAdmin = () => {
