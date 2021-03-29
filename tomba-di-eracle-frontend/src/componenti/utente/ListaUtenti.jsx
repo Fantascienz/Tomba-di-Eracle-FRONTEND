@@ -11,18 +11,14 @@ class ListaUtenti extends Component {
     formModificaTipo = (utente) => {
         if (utente.id !== JSON.parse(sessionStorage.getItem('utente')).id) {
             return (
-                <div className="row">
-                    <div className="col-sm-6" >
-                        <select name="nuovoTipo" id="nuovoTipo" onChange={this.handleChange}>
-                            <option selected="selected" value="standard">Standard</option>
-                            <option value="vip">VIP</option>
-                            <option value="master">Master</option>
-                            <option value="admin">Admin</option>
-                        </select>
-                    </div>
-                    <div className="col-sm-6" >
-                        <button className="btn btn-secondary" onClick={() => this.modificaTipo(utente)} >Modifica</button>
-                    </div>
+                <div style={{display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center"}}>
+                    <select name="nuovoTipo" id="nuovoTipo" onChange={this.handleChange}>
+                        <option selected="selected" value="standard">Standard</option>
+                        <option value="vip">VIP</option>
+                        <option value="master">Master</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                    <button className="btn btn-secondary btn-sm" onClick={() => this.modificaTipo(utente)} >Modifica</button>
                 </div>
             )
         }
@@ -31,7 +27,7 @@ class ListaUtenti extends Component {
     tastoBan = (utente) => {
         if (utente.id !== JSON.parse(sessionStorage.getItem('utente')).id) {
             return (
-                <button className="btn btn-danger" onClick={() => this.ban(utente)}>{utente.tipo === 'bannato' ? 'Sbanna' : 'Banna'}</button>
+                <button className="btn btn-danger btn-sm" onClick={() => this.ban(utente)}>{utente.tipo === 'bannato' ? 'Sbanna' : 'Banna'}</button>
             )
         }
     }
@@ -70,7 +66,7 @@ class ListaUtenti extends Component {
                                 <th>Ban</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody align="center">
                             {this.props.lista.map(utente =>
                                 <tr key={utente.id}>
                                     <td>{utente.id}</td>
@@ -79,7 +75,7 @@ class ListaUtenti extends Component {
                                     <td>{utente.tipo}</td>
                                     <td>{utente.numeroPersonaggi}</td>
                                     <td>{utente.dataRegistrazione}</td>
-                                    <td>{this.formModificaTipo(utente)}</td>
+                                    <td >{this.formModificaTipo(utente)}</td>
                                     <td>{this.tastoBan(utente)}</td>
                                 </tr>
                             )}

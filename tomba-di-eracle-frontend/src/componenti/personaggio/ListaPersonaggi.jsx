@@ -23,8 +23,8 @@ class ListaPersonaggi extends Component {
     formModificaRango = (pg) => {
         return (
             <React.Fragment>
-                <input type="number" placeholder="Rango" min="0" max={this.maxRango(pg)} id="nuovoRango" onChange={this.handleChange} onFocus={(event) => event.target.value = this.state.nuovoRango} />
-                <button className="btn btn-secondary" onClick={() => this.modificaRango(pg)} >Modifica</button>
+                <input type="number" placeholder="Rango" min="0" max={this.maxRango(pg)} id="nuovoRango" onChange={this.handleChange} onFocus={(event) => event.target.value = this.state.nuovoRango} style={{width:"100%"}}/>
+                <button className="btn btn-secondary btn-sm" onClick={() => this.modificaRango(pg)} >Modifica</button>
             </React.Fragment>
         )
     }
@@ -33,7 +33,7 @@ class ListaPersonaggi extends Component {
         return (
             <React.Fragment>
                 <input type="text" placeholder="Nome Garou" id="nuovoNomeGarou" onChange={this.handleChange} onFocus={(event) => event.target.value = this.state.nuovoNomeGarou} />
-                <button className="btn btn-secondary" onClick={() => this.modificaNomeGarou(pg)} >Modifica</button>
+                <button className="btn btn-secondary btn-sm" onClick={() => this.modificaNomeGarou(pg)} >Modifica</button>
             </React.Fragment>
         )
     }
@@ -57,7 +57,7 @@ class ListaPersonaggi extends Component {
                     <option value="Figli di Gaia">Figli di Gaia</option>
                     <option value="Danzatori della Spirale Nera">Danzatori della Spirale Nera</option>
                 </select>
-                <button className="btn btn-secondary" onClick={() => this.modificaTribu(pg)} >Modifica</button>
+                <button className="btn btn-secondary btn-sm" onClick={() => this.modificaTribu(pg)} >Modifica</button>
             </React.Fragment>
         )
     }
@@ -67,7 +67,7 @@ class ListaPersonaggi extends Component {
             <React.Fragment>
                 <input type="text" placeholder="Ruolo" id="nuovoRuoloBranco" onChange={this.handleChange} onFocus={(event) => event.target.value = this.state.nuovoRuoloBranco} onBlur={(event) => event.target.value = this.state.nuovoRuoloBranco} />
                 <input type="text" placeholder="Branco" id="nuovoBranco" onChange={this.handleChange} onFocus={(event) => event.target.value = this.state.nuovoBranco} onBlur={(event) => event.target.value = this.state.nuovoBranco} />
-                <button className="btn btn-secondary" onClick={() => this.modificaBranco(pg)} >Modifica</button>
+                <button className="btn btn-secondary btn-sm" onClick={() => this.modificaBranco(pg)} >Modifica</button>
             </React.Fragment>
         )
     }
@@ -77,7 +77,7 @@ class ListaPersonaggi extends Component {
             <React.Fragment>
                 <input type="text" placeholder="Ruolo" id="nuovoRuoloSept" onChange={this.handleChange} onFocus={(event) => event.target.value = this.state.nuovoRuoloSept} />
                 <input type="text" placeholder="Sept" id="nuovoSept" onChange={this.handleChange} onFocus={(event) => event.target.value = this.state.nuovoSept} />
-                <button className="btn btn-secondary" onClick={() => this.modificaSept(pg)} >Modifica</button>
+                <button className="btn btn-secondary btn-sm" onClick={() => this.modificaSept(pg)} >Modifica</button>
             </React.Fragment>
         )
     }
@@ -221,7 +221,7 @@ class ListaPersonaggi extends Component {
                         <tbody>
                             {JSON.parse(sessionStorage.getItem('listaPersonaggi')).map(pg =>
                                 <tr key={pg.id} align="center">
-                                    <td><img src={pg.urlImmagine} alt="" style={{ height: "100px", width: "100px" }} /></td>
+                                    <td style={{ height: "100px", width: "auto", backgroundImage:`url('${pg.urlImmagine}')`, backgroundPosition:"center center", backgroundSize:"auto 100%", backgroundRepeat:"no-repeat" }}></td>
                                     <td>{pg.id}</td>
                                     <td>{pg.nominativo}</td>
                                     <td>{pg.sesso}</td>
