@@ -30,7 +30,7 @@ class DettagliPersonaggio extends Component {
 
             </div>
         )
-    }
+}
 
 
 
