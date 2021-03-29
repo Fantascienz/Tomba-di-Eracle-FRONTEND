@@ -99,3 +99,11 @@ export const toModificaUtente = () => {
         })
     }
 }
+
+export const toGioco = () => {
+    return (dispatch) => {
+        dispatch({
+            type: 'GIOCA'
+        })
+    }
+}

@@ -30,9 +30,14 @@ const utenteReducer = (state = initState, action) => {
                 redirect: '/creazionePersonaggio/' + action.tipo
             }
             break;
+        case 'GIOCA':
+            state = {
+                redirect: '/game'
+            }
+            break;
 
-            
-        
+
+
         default:
             break;
     }

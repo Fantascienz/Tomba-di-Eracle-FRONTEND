@@ -7,6 +7,8 @@ import frecciaSX from '../../img/freccia_sx.png';
 import frecciaDX from '../../img/freccia_dx.png';
 import noPg from '../../img/no-pg.jpg'
 import cardFrame from '../../img/cardFrame.png'
+import { Link } from 'react-router-dom';
+import { toGioco } from '../../store/azioni/utenteActions';
 
 
 class CarouselPersonaggi extends Component {
@@ -26,7 +28,8 @@ class CarouselPersonaggi extends Component {
                 {this.props.personaggiUtente && this.props.personaggiUtente.map(personaggio => {
                     return (
                         <Carousel.Item >
-                            <DettagliPersonaggio personaggio={personaggio} key={personaggio.id} style={{position:"absolute", top:"0%", left:"0%", height:"100%", width:"100%", backgroundColor:"white"}}/>
+                            <DettagliPersonaggio personaggio={personaggio} key={personaggio.id} style={{ position: "absolute", top: "0%", left: "0%", height: "100%", width: "100%", backgroundColor: "white" }} />
+                            {this.accessoPG(personaggio)}
                         </Carousel.Item>
                     )
                 })}
@@ -47,6 +50,29 @@ class CarouselPersonaggi extends Component {
         )
     }
 
+    accessoPG = (personaggio) => {
+        if (JSON.parse(sessionStorage.getItem('pgAttivo')) !== null) {
+            if (personaggio.id === JSON.parse(sessionStorage.getItem('pgAttivo')).id) {
+                return <button className="btn btn-primary" onClick={() => this.removePGAttivo()}>Esci</button>
+            }
+        }
+        return <button className="btn btn-primary" onClick={() => this.setPGAttivo(personaggio)}>Gioca</button>
+    }
+
+    setPGAttivo = (personaggio) => {
+        sessionStorage.setItem('pgAttivo', JSON.stringify(personaggio))
+        // this.props.history.push('/game')
+        // this.props.history.go()
+        this.props.gioca()
+
+    }
+
+    removePGAttivo = () => {
+        sessionStorage.removeItem('pgAttivo')
+        this.props.getPersonaggiUtente()
+        this.forceUpdate()
+    }
+
 
     render() {
         return (
@@ -61,15 +87,16 @@ class CarouselPersonaggi extends Component {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        getPersonaggiUtente: (utente) => dispatch(getPersonaggiUtente(utente))
-    }
-}
-
 const mapStateToProps = (state) => {
     return {
         personaggiUtente: state.personaggio.personaggiUtente
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getPersonaggiUtente: (utente) => dispatch(getPersonaggiUtente(utente)),
+        gioca: () => dispatch(toGioco())
     }
 }
 
