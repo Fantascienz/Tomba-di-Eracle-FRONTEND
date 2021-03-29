@@ -20,8 +20,12 @@ class PersonaggioService {
         return axios.get(URL);
     }
 
-    getPersonaggiByRazza = (razza) => {
+    getPersonaggiByRazza(razza)  {
         return axios.get(URL + razza)
+    }
+
+    getAllByRazza() {
+        return axios.get(URL + 'orderRazza')
     }
 
     validazioneFormPersonaggio(personaggio) {

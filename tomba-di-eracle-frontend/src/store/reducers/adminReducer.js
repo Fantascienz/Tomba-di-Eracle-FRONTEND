@@ -25,9 +25,8 @@ const adminReducer = (state = initState, action) => {
             }
             break;
         case 'FILTRA_RAZZA':
-            state = {
-                listaPg: action.listaPgFiltrata,
-            }
+            break;
+        case 'ORDINA_PER_RAZZA':
             break;
     }
     return state;

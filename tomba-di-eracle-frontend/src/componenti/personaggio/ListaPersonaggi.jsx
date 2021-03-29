@@ -19,6 +19,7 @@ class ListaPersonaggi extends Component {
 
         }
 import { filtraListaRazza, getListaPersonaggi } from '../../store/azioni/adminActions';
+import { filtraListaRazza, getListaPersonaggi, ordinaPerRazza } from '../../store/azioni/adminActions';
 
 class ListaPersonaggi extends Component {
 
@@ -201,21 +202,21 @@ class ListaPersonaggi extends Component {
 
 
     handleFilter = (e) => {
-        
         this.props.filtraListaRazza(e.target.value)
-        this.setState({
-            razza: ''
-        })
-
         
     }
+
+    // ordinaPerRazza = () => {
+    //     alert('order')
+    //     this.props.ordinaPerRazza()
+    // }
 
 
     renderFiltroRazza = () => {
         
         return (
             <React.Fragment>
-                <select class="form-select" id="razza" onChange={this.handleFilter} aria-label="Default select example">
+                <select class="form-select" value={this.state.razza} onChange={this.handleFilter} aria-label="Default select example">
                     <option value="" >Filtra</option>
                     <option value="Umano">Umano</option>
                     <option value="Lupo">Lupus</option>
@@ -239,7 +240,7 @@ class ListaPersonaggi extends Component {
                                 <th>ID</th>
                                 <th>Nominativo</th>
                                 <th>Sesso</th>
-                                <th>Razza {this.renderFiltroRazza()}</th>
+                                <th>Razza  {this.renderFiltroRazza()}</th>
                                 <th>Rango</th>
                                 <th>Nome Garou</th>
                                 <th>Auspicio</th>
@@ -295,8 +296,13 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         aggiornaLista: () => dispatch(getListaPersonaggi()),
+<<<<<<< HEAD
         modificaPg: (pg) => dispatch(modificaPersonaggio(pg)),
         filtraListaRazza: (razza) => dispatch(filtraListaRazza(razza))
+=======
+        filtraListaRazza: (razza) => dispatch(filtraListaRazza(razza)),
+        ordinaPerRazza: () => dispatch(ordinaPerRazza())
+>>>>>>> 6adc53e (inizio implementazione ordinazione lista personaggi)
     }
 }
 
