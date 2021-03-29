@@ -31,7 +31,7 @@ class PersonaggioService {
         return true
     }
 
-    validazioneFormGarou(personaggio) {
+    validazioneFormGarouAdminMaster(personaggio) {
         if (personaggio.nominativo === ''
             || personaggio.sesso === ''
             || personaggio.rango === ''
@@ -42,7 +42,22 @@ class PersonaggioService {
             || personaggio.ruoloSept === ''
             || personaggio.urlImmagine === ''
             || personaggio.urlCrinos === ''
-            || personaggio.urlLupo === '') {
+            || personaggio.urlLupo === ''
+            || personaggio.tribu === '') {
+            return false;
+        } 
+        return true
+    }
+
+    validazioneFormGarouVip(personaggio) {
+        if (personaggio.nominativo === ''
+            || personaggio.sesso === ''
+            || personaggio.rango === ''
+            || personaggio.razza === ''
+            || personaggio.urlImmagine === ''
+            || personaggio.urlCrinos === ''
+            || personaggio.urlLupo === ''
+            || personaggio.tribu === '') {
             return false;
         } 
         return true
