@@ -70,3 +70,16 @@ export const visualizzaPgAdmin = () => {
         })
     }
 }
+
+export const filtraListaRazza = (razza) => {
+    return (dispatch)  => {
+        PersonaggioService.getPersonaggiByRazza(razza).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'FILTRA_RAZZA',
+                listaPgFiltrata: res.data,
+            })
+        })
+            
+    }
+}

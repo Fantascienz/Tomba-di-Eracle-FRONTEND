@@ -1,8 +1,10 @@
+
 const initState = {
     listaUtenti: [],
     listaPg: [],
+    listaPgFiltrata: [],
     redirect: '',
-    visualizzaPgAdmin: false
+    visualizzaPgAdmin: false,
 }
 
 const adminReducer = (state = initState, action) => {
@@ -20,6 +22,11 @@ const adminReducer = (state = initState, action) => {
         case "VISUALIZZA_PG":
             state = {
                 visualizzaPgAdmin: !state.visualizzaPgAdmin,
+            }
+            break;
+        case 'FILTRA_RAZZA':
+            state = {
+                listaPg: action.listaPgFiltrata,
             }
             break;
     }

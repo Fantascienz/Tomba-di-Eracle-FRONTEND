@@ -12,12 +12,12 @@ const masterReducer = (state = initState, action) => {
                 visualizzaPg: !state.visualizzaPg
             }
             break;
-            case 'VISUALIZZA_MIEI_PG':
+        case 'VISUALIZZA_MIEI_PG':
             state = {
                 visualizzaPg: !state.visualizzaPg
             }
             break;
-
+        
         default:
             break;
     }
