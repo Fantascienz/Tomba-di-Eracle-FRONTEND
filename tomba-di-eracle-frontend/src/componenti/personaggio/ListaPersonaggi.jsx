@@ -199,7 +199,7 @@ class ListaPersonaggi extends Component {
                     <table className="table align-middle table-hover table-sm caption-top">
                         <caption >Lista Personaggi</caption>
                         <thead className="table-dark align-middle" align="center">
-                            <tr>
+                            <tr style={{color:"#eeaa44"}}>
                                 <th>Immagine</th>
                                 <th>ID</th>
                                 <th>Nominativo</th>

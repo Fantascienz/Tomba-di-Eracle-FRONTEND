@@ -56,7 +56,7 @@ class ListaUtenti extends Component {
                     <table className="table align-middle table-hover table-sm caption-top">
                         <caption>Lista Utenti</caption>
                         <thead className="table-dark align-middle" align="center">
-                            <tr>
+                            <tr style={{color:"#eeaa44"}}>
                                 <th>ID</th>
                                 <th>Nominativo</th>
                                 <th>Email</th>
