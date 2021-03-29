@@ -52,9 +52,10 @@ class ListaUtenti extends Component {
     render() {
         return (
             <React.Fragment>
-                <div style={{ width: "100%", backgroundColor: "white", overflowY: "scroll" }}>
-                    <table className="table align-middle">
-                        <thead align="center">
+                <div className="table-responsive ombra" style={{ width: "100%", backgroundColor: "white" }}>
+                    <table className="table align-middle table-hover table-sm caption-top">
+                        <caption>Lista Utenti</caption>
+                        <thead className="table-dark align-middle" align="center">
                             <tr>
                                 <th>ID</th>
                                 <th>Nominativo</th>

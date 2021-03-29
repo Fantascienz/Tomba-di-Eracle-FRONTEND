@@ -194,10 +194,11 @@ class ListaPersonaggi extends Component {
     render() {
         return (
             <React.Fragment>
-                <div style={{ width: "100%", backgroundColor: "white", overflowY: "scroll" }}>
+                <div className="table-responsive ombra" style={{ width: "100%", backgroundColor: "white" }}>
                     {/* <button className="btn btn-secondary" onClick={() => this.aggiorna()} >Aggiorna Lista</button> */}
-                    <table className="table align-middle">
-                        <thead align="center">
+                    <table className="table align-middle table-hover table-sm caption-top">
+                        <caption >Lista Personaggi</caption>
+                        <thead className="table-dark align-middle" align="center">
                             <tr>
                                 <th>Immagine</th>
                                 <th>ID</th>

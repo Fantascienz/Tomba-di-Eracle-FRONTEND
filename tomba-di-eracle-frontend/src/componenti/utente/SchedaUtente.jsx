@@ -125,7 +125,7 @@ class SchedaUtente extends Component {
 
                 <div style={{ zIndex: "999", position: "absolute", left: "10%", height: "80%", width: "20%" }}>
                     <div style={{ height: "100%", display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
-                        <img src={avatarEracle} className="tombaJPG rounded-circle" alt="" style={{ boxShadow: "0 24px 32px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19)", width: "80%", height: "auto" }} /> <br /><br />
+                        <img src={avatarEracle} className="tombaJPG rounded-circle ombra" alt="" style={{ width: "80%", height: "auto" }} /> <br /><br />
                         {this.isAdminCreazionePg()}
                         {this.isAdmin()}
                         {this.isStandard()}
