@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import cardFrame from '../../img/cardFrame.png';
 import noPg from '../../img/no-pg.jpg';
 import { toModificaPersonaggio } from '../../store/azioni/personaggioActions';
+import { toGioco } from '../../store/azioni/utenteActions';
 
 
 class DettagliPersonaggio extends Component {
@@ -25,12 +26,18 @@ class DettagliPersonaggio extends Component {
                     <div style={{ position: "absolute", bottom: "7%", width: "100%" }}>
                         <button className="btn-gold" style={{ width: "80%", height: "10%" }} >{singleCharacter.nominativo}</button>
                         <button className="btn-gold" style={{ width: "80%", height: "10%" }} onClick={() => this.modificaPersonaggio(singleCharacter)}>Modifica</button>
+                        <button className="btn-gold" style={{ width: "80%", height: "10%" }} onClick={() => this.setPGAttivo(singleCharacter)}>Gioca</button>
                     </div>
                 </div>
 
             </div>
         )
-}
+    }
+
+    setPGAttivo = (personaggio) => {
+        sessionStorage.setItem('pgAttivo', JSON.stringify(personaggio))
+        this.props.gioca()
+    }
 
 
 
@@ -46,7 +53,8 @@ class DettagliPersonaggio extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        toModificaPersonaggio: (personaggio) => dispatch(toModificaPersonaggio(personaggio))
+        toModificaPersonaggio: (personaggio) => dispatch(toModificaPersonaggio(personaggio)),
+        gioca: () => dispatch(toGioco())
     }
 }
 
