@@ -27,7 +27,7 @@ export const getListaPersonaggi = () => {
 }
 
 export const modificaTipoUtente = (utente, nuovoTipo) => {
-    sessionStorage.setItem('listaUtenti',null)
+    sessionStorage.setItem('listaUtenti', null)
     utente.tipo = nuovoTipo;
     return (dispatch) => {
         AdminService.modificaTipo(utente).then(
@@ -35,6 +35,20 @@ export const modificaTipoUtente = (utente, nuovoTipo) => {
                 dispatch({
                     type: "LISTA_UTENTI",
                     listaUtenti: res.data,
+                })
+            })
+        )
+    }
+}
+
+export const modificaPersonaggio = (personaggio) => {
+    return (dispatch) => {
+        PersonaggioService.modificaPersonaggio(personaggio).then(
+            PersonaggioService.getAllPersonaggi().then(res => {
+                sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+                dispatch({
+                    type: "LISTA_PG",
+                    listaPg: res.data
                 })
             })
         )

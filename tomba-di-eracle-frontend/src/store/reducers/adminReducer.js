@@ -12,7 +12,7 @@ const adminReducer = (state = initState, action) => {
                 listaUtenti: action.listaUtenti,
             }
             break;
-        case "LISTA_UTENTI":
+        case "LISTA_PG":
             state = {
                 listaPg: action.listaPg,
             }
