@@ -45,6 +45,7 @@ class Registrazione extends Component {
                 title: <div>
                     <p>Tutti i campi sono obbligatori!</p>
                 </div>
+                
             })
         }
     }

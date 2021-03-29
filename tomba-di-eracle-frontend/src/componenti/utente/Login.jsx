@@ -34,16 +34,13 @@ class Login extends Component {
             this.props.login(this.state)
          } else {
             withReactContent(Swal).fire({
-                // title:  <div style={{backgroundColor:"green"}}>
-                            
-                //         </div>,
 
-                html:   <div style={{height:"500px"}}>
-                            <b style={{color:"#b30000", backgroundColor:"green"}}>Tutti i campi sono obbligatori!</b>
+                html:   <div style={{height:"400px", backgroundColor:"transparent", display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center"}}>
+                            <b style={{color: "#eeaa44", backgroundColor:"transparent", fontSize:"30px", width:"150%"}}>Tutti i campi sono obbligatori!</b>
                             <audio src={bashImpact} autoPlay/>
                         </div>,
 
-                background: `rgba(0, 0, 0, 0.5) url('${brokenShield}') no-repeat fixed center center `,
+                background: `rgba(0, 0, 0, 0.4) url('${brokenShield}') no-repeat fixed center center `,
 
                 confirmButtonColor: "#212529",
 

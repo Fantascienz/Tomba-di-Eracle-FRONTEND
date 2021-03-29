@@ -2,6 +2,8 @@ import Swal from "sweetalert2"
 import withReactContent from "sweetalert2-react-content"
 import PersonaggioService from "../../servizi/PersonaggioService"
 import UtenteService from "../../servizi/UtenteService"
+import bashImpact from "../../suoni/bash_impact.mp3"
+import brokenShield from "../../img/broken_shield.png"
 
 export const login = (utente) => {
     return (dispatch) => {
@@ -21,10 +23,17 @@ export const login = (utente) => {
             } else if (res.data.tipo === 'bannato') {
                 sessionStorage.removeItem('utente')
                 withReactContent(Swal).fire({
-                    title: <div>
-                        <p>Impossibile accedere!</p>
-                        <p>Sei stato bannato!</p>
-                    </div>
+                    html: <div style={{ height: "400px", backgroundColor: "transparent", display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
+                        <b style={{ color: "#eeaa44", backgroundColor: "transparent", fontSize: "30px", width: "150%" }}>Impossibile accedere!</b>
+                        <b style={{ color: "#eeaa44", backgroundColor: "transparent", fontSize: "30px", width: "150%" }}>Sei stato bannato!</b>
+                        <audio src={bashImpact} autoPlay />
+                    </div>,
+
+                    background: `rgba(0, 0, 0, 0.4) url('${brokenShield}') no-repeat fixed center center `,
+
+                    confirmButtonColor: "#212529",
+
+                    confirmButtonText: <b style={{ color: "#b30000" }}>Ok</b>
                 })
             } else {
                 dispatch({
@@ -35,10 +44,17 @@ export const login = (utente) => {
             }
         }).catch(err => {
             withReactContent(Swal).fire({
-                title: <div>
-                    <p>Errore {err.response.status}</p>
-                    <p>Credenziali errate!</p>
-                </div>
+                html: <div style={{ height: "400px", backgroundColor: "transparent", display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
+                    <b style={{ color: "#eeaa44", backgroundColor: "transparent", fontSize: "30px", width: "150%" }}>Errore {err.response.status}</b>
+                    <b style={{ color: "#eeaa44", backgroundColor: "transparent", fontSize: "30px", width: "150%" }}>Credenziali errate!</b>
+                    <audio src={bashImpact} autoPlay />
+                </div>,
+
+                background: `rgba(0, 0, 0, 0.4) url('${brokenShield}') no-repeat fixed center center `,
+
+                confirmButtonColor: "#212529",
+
+                confirmButtonText: <b style={{ color: "#b30000" }}>Ok</b>
             })
         })
     }
@@ -56,6 +72,7 @@ export const registrazione = (utente) => {
                     <p>Errore {err.response.status}</p>
                     <p>Email già registrata!</p>
                 </div>
+                
             })
         })
     }
