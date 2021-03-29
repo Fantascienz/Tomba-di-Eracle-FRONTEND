@@ -26,7 +26,7 @@ class CarouselPersonaggi extends Component {
                 {this.props.personaggiUtente && this.props.personaggiUtente.map(personaggio => {
                     return (
                         <Carousel.Item >
-                            <DettagliPersonaggio personaggio={personaggio} key={personaggio.id} />
+                            <DettagliPersonaggio personaggio={personaggio} key={personaggio.id} style={{position:"absolute", top:"0%", left:"0%", height:"100%", width:"100%", backgroundColor:"white"}}/>
                         </Carousel.Item>
                     )
                 })}
