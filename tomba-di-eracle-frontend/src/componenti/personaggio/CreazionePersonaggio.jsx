@@ -50,7 +50,19 @@ class CreazionePersonaggio extends Component {
 
         if (this.state.tipo === 'normale') {
             if (PersonaggioService.validazioneFormPersonaggio(this.state)) {
-                this.props.creaPersonaggio(this.state)
+                let umano = {
+                    nominativo: this.state.nominativo,
+                    sesso: this.state.sesso,
+                    razza: this.state.razza,
+                    rango: this.state.rango,
+                    urlImmagine: this.state.urlImmagine,
+                    auspicio: null,
+                    urlCrinos: null,
+                    urlLupo: null,
+                    utente: this.state.utente
+
+                }
+                this.props.creaPersonaggio(umano)
             } else {
                 withReactContent(Swal).fire({
                     title: <p>Tutti i campi sono obbligatori!</p>

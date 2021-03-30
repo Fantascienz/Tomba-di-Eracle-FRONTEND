@@ -6,6 +6,7 @@ import ListaPersonaggi from '../personaggio/ListaPersonaggi';
 import ListaUtenti from './ListaUtenti';
 import avatarEracle from '../../img/eracleCapovolto.png';
 import { browserHistory } from "../.."
+import { visualizzaListaPg, visualizzaPgMaster } from '../../store/azioni/masterActions';
 
 class SchedaUtente extends Component {
 
@@ -33,7 +34,7 @@ class SchedaUtente extends Component {
         }
     }
 
-    isMaster = () => {
+    isMasterCreazionePg = () => {
         if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'master') {
             return (
                 <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
@@ -45,6 +46,25 @@ class SchedaUtente extends Component {
                     <br /><br />
                 </div>
             )
+        }
+    }
+
+    isMasterListe = () => {
+        if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'master') {
+            if (this.props.visualizzaPg) {
+                return (
+                    <React.Fragment>
+                        <button className="btn btn-dark" style={{ color: "#eeaa44", width: "80%" }} onClick={() => this.visualizzaPgMaster()}>I Tuoi Personaggi</button> <br />
+
+                    </React.Fragment>
+                )
+            } else {
+                return (
+                    <React.Fragment>
+                        <button className="btn btn-dark" style={{ color: "#eeaa44", width: "80%" }} onClick={() => this.visualizzaListMaster()}>Lista Personaggi</button> <br />
+                    </React.Fragment>
+                )
+            }
         }
     }
 
@@ -105,6 +125,7 @@ class SchedaUtente extends Component {
         browserHistory.go()
     }
 
+
     renderListe = () => {
         if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin') {
             if (this.props.visualizzaPgAdmin) {
@@ -119,6 +140,12 @@ class SchedaUtente extends Component {
                     return <CarouselPersonaggi />
                 }
             }
+        } else if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'master') {
+            if (this.props.visualizzaPg) {
+                return <ListaPersonaggi />
+            } else {
+                return <CarouselPersonaggi />
+            }
         }
         return <CarouselPersonaggi />
     }
@@ -128,6 +155,14 @@ class SchedaUtente extends Component {
             visualizzaPgAdmin()
         }
         this.props.getListaUtenti();
+    }
+
+    visualizzaListMaster = () => {
+        this.props.visualizzaListaPg();
+    }
+
+    visualizzaPgMaster = () => {
+        this.props.visualizzaPgMaster();
     }
 
     visualizzaListaPg = () => {
@@ -159,6 +194,9 @@ class SchedaUtente extends Component {
                         {this.isVip()}
                         {this.isMaster()}
                         {this.creazioneLocation()}
+                        {this.isMasterCreazionePg()}
+                        {this.isMasterListe()}
+
                         <button className="btn btn-dark" style={{ color: "#eeaa44", width: "80%" }} onClick={() => this.props.modificaUtente()}>Modifica Account</button>
                     </div>
                 </div>
@@ -178,14 +216,17 @@ class SchedaUtente extends Component {
 const mapStateToProps = (state) => {
     return {
         listaUtenti: state.admin.listaUtenti,
-        visualizzaPgAdmin: state.admin.visualizzaPgAdmin
+        visualizzaPgAdmin: state.admin.visualizzaPgAdmin,
+        visualizzaPg: state.master.visualizzaPg
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         getListaUtenti: () => dispatch(getListaUtenti()),
-        visulizzaPgAdmin: () => dispatch(visualizzaPgAdmin())
+        visulizzaPgAdmin: () => dispatch(visualizzaPgAdmin()),
+        visualizzaListaPg: () => dispatch(visualizzaListaPg()),
+        visualizzaPgMaster: () => dispatch(visualizzaPgMaster()) 
     }
 }
 
