@@ -5,8 +5,8 @@ class Macromappa extends Component {
     render() {
         return (
             <div>
-                <div style={{ height:"600px", width:"600px", position: "fixed", top: "0", left: "50px", backgroundImage: `url('${macromappa}')`, backgroundPosition: "0px 0px", backgroundSize: "contain", backgroundRepeat: "no-repeat" }}>
-                    <div className="row" style={{ marginLeft:"0.01%" }}>
+                <div style={{ height: "600px", width: "600px", position: "fixed", top: "0", left: "50px", backgroundImage: `url('${macromappa}')`, backgroundPosition: "0px 0px", backgroundSize: "contain", backgroundRepeat: "no-repeat" }}>
+                    <div className="row" style={{ marginLeft: "0.01%" }}>
                         <div className="col-sm-1 griglia-macromappa" id="1"></div>
                         <div className="col-sm-1 griglia-macromappa" id="2"></div>
                         <div className="col-sm-1 griglia-macromappa" id="3"></div>
@@ -20,7 +20,7 @@ class Macromappa extends Component {
                         <div className="col-sm-1 griglia-macromappa" id="11"></div>
                         <div className="col-sm-1 griglia-macromappa" id="12"></div>
                     </div>
-                    <div className="row" style={{ marginLeft:"0.01%" }}>
+                    <div className="row" style={{ marginLeft: "0.01%" }}>
                         <div className="col-sm-1 griglia-macromappa" id="13"></div>
                         <div className="col-sm-1 griglia-macromappa" id="14"></div>
                         <div className="col-sm-1 griglia-macromappa" id="15"></div>
@@ -34,7 +34,7 @@ class Macromappa extends Component {
                         <div className="col-sm-1 griglia-macromappa" id="23"></div>
                         <div className="col-sm-1 griglia-macromappa" id="24"></div>
                     </div>
-                    <div className="row" style={{ marginLeft:"0.01%" }}>
+                    <div className="row" style={{ marginLeft: "0.01%" }}>
                         <div className="col-sm-1 griglia-macromappa" id="25"></div>
                         <div className="col-sm-1 griglia-macromappa" id="26"></div>
                         <div className="col-sm-1 griglia-macromappa" id="27"></div>
@@ -48,7 +48,7 @@ class Macromappa extends Component {
                         <div className="col-sm-1 griglia-macromappa" id="35"></div>
                         <div className="col-sm-1 griglia-macromappa" id="36"></div>
                     </div>
-                    <div className="row" style={{ marginLeft:"0.01%" }}>
+                    <div className="row" style={{ marginLeft: "0.01%" }}>
                         <div className="col-sm-1 griglia-macromappa" id="37"></div>
                         <div className="col-sm-1 griglia-macromappa" id="38"></div>
                         <div className="col-sm-1 griglia-macromappa" id="39"></div>
@@ -62,7 +62,7 @@ class Macromappa extends Component {
                         <div className="col-sm-1 griglia-macromappa" id="47"></div>
                         <div className="col-sm-1 griglia-macromappa" id="48"></div>
                     </div>
-                    <div className="row" style={{ marginLeft:"0.01%" }}>
+                    <div className="row" style={{ marginLeft: "0.01%" }}>
                         <div className="col-sm-1 griglia-macromappa" id="49"></div>
                         <div className="col-sm-1 griglia-macromappa" id="50"></div>
                         <div className="col-sm-1 griglia-macromappa" id="51"></div>
@@ -76,7 +76,7 @@ class Macromappa extends Component {
                         <div className="col-sm-1 griglia-macromappa" id="59"></div>
                         <div className="col-sm-1 griglia-macromappa" id="60"></div>
                     </div>
-                    <div className="row" style={{ marginLeft:"0.01%" }}>
+                    <div className="row" style={{ marginLeft: "0.01%" }}>
                         <div className="col-sm-1 griglia-macromappa" id="61"></div>
                         <div className="col-sm-1 griglia-macromappa" id="62"></div>
                         <div className="col-sm-1 griglia-macromappa" id="63"></div>
@@ -90,7 +90,7 @@ class Macromappa extends Component {
                         <div className="col-sm-1 griglia-macromappa" id="71"></div>
                         <div className="col-sm-1 griglia-macromappa" id="72"></div>
                     </div>
-                    <div className="row" style={{ marginLeft:"0.01%" }}>
+                    <div className="row" style={{ marginLeft: "0.01%" }}>
                         <div className="col-sm-1 griglia-macromappa" id="73"></div>
                         <div className="col-sm-1 griglia-macromappa" id="74"></div>
                         <div className="col-sm-1 griglia-macromappa" id="75"></div>
@@ -104,7 +104,7 @@ class Macromappa extends Component {
                         <div className="col-sm-1 griglia-macromappa" id="83"></div>
                         <div className="col-sm-1 griglia-macromappa" id="84"></div>
                     </div>
-                    <div className="row" style={{ marginLeft:"0.01%" }}>
+                    <div className="row" style={{ marginLeft: "0.01%" }}>
                         <div className="col-sm-1 griglia-macromappa" id="85"></div>
                         <div className="col-sm-1 griglia-macromappa" id="86"></div>
                         <div className="col-sm-1 griglia-macromappa" id="87"></div>
@@ -118,7 +118,7 @@ class Macromappa extends Component {
                         <div className="col-sm-1 griglia-macromappa" id="95"></div>
                         <div className="col-sm-1 griglia-macromappa" id="96"></div>
                     </div>
-                    <div className="row" style={{ marginLeft:"0.01%" }}>
+                    <div className="row" style={{ marginLeft: "0.01%" }}>
                         <div className="col-sm-1 griglia-macromappa" id="97"></div>
                         <div className="col-sm-1 griglia-macromappa" id="98"></div>
                         <div className="col-sm-1 griglia-macromappa" id="99"></div>
@@ -132,7 +132,7 @@ class Macromappa extends Component {
                         <div className="col-sm-1 griglia-macromappa" id="107"></div>
                         <div className="col-sm-1 griglia-macromappa" id="108"></div>
                     </div>
-                    <div className="row" style={{ marginLeft:"0.01%" }}>
+                    <div className="row" style={{ marginLeft: "0.01%" }}>
                         <div className="col-sm-1 griglia-macromappa" id="109"></div>
                         <div className="col-sm-1 griglia-macromappa" id="110"></div>
                         <div className="col-sm-1 griglia-macromappa" id="111"></div>
@@ -146,7 +146,7 @@ class Macromappa extends Component {
                         <div className="col-sm-1 griglia-macromappa" id="119"></div>
                         <div className="col-sm-1 griglia-macromappa" id="120"></div>
                     </div>
-                    <div className="row" style={{ marginLeft:"0.01%" }}>
+                    <div className="row" style={{ marginLeft: "0.01%" }}>
                         <div className="col-sm-1 griglia-macromappa" id="121"></div>
                         <div className="col-sm-1 griglia-macromappa" id="122"></div>
                         <div className="col-sm-1 griglia-macromappa" id="123"></div>
@@ -160,7 +160,7 @@ class Macromappa extends Component {
                         <div className="col-sm-1 griglia-macromappa" id="131"></div>
                         <div className="col-sm-1 griglia-macromappa" id="132"></div>
                     </div>
-                    <div className="row" style={{ marginLeft:"0.01%" }}>
+                    <div className="row" style={{ marginLeft: "0.01%" }}>
                         <div className="col-sm-1 griglia-macromappa" id="133"></div>
                         <div className="col-sm-1 griglia-macromappa" id="134"></div>
                         <div className="col-sm-1 griglia-macromappa" id="135"></div>
@@ -175,6 +175,8 @@ class Macromappa extends Component {
                         <div className="col-sm-1 griglia-macromappa" id="144"></div>
                     </div>
                 </div>
+
+                
             </div>
         );
     }

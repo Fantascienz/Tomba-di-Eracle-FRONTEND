@@ -214,7 +214,7 @@ class ListaPersonaggi extends Component {
                     <option value="" >Filtra</option>
                     <option value="Umano">Umano</option>
                     <option value="Lupo">Lupus</option>
-                    <option value="Meticcio">Methis</option>
+                    <option value="Meticcio">Metis</option>
                 </select>
             </React.Fragment>
         )
