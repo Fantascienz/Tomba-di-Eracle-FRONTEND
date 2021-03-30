@@ -3,7 +3,7 @@ import { ThemeProvider } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-import { filtraListaRazza, modificaPersonaggio,getListaPersonaggi, ordinaPerRazza, ordinaPerNominativo } from '../../store/azioni/adminActions';
+import { filtraListaRazza, modificaPersonaggio,getListaPersonaggi, ordinaPerRazza, ordinaPerNominativo, ordinaPerSesso } from '../../store/azioni/adminActions';
 
 class ListaPersonaggi extends Component {
 
@@ -211,6 +211,10 @@ class ListaPersonaggi extends Component {
         this.props.ordinaPerNominativo()
     }
 
+    ordinaPerSesso = () => {
+        this.props.ordinaPerSesso()
+    }
+
 
     renderFiltroRazza = () => {
         
@@ -240,7 +244,7 @@ class ListaPersonaggi extends Component {
                                 <th>Immagine</th>
                                 <th>ID</th>
                                 <th><a href="#" onClick={() => this.ordinaPerNominativo()}>Nominativo</a> </th>
-                                <th>Sesso</th>
+                                <th><a href="#" onClick={() => this.ordinaPerSesso()}>Sesso</a></th>
                                 <th><a href="#" onClick={() => this.ordinaPerRazza()}>Razza</a>   {this.renderFiltroRazza()}</th>
                                 <th>Rango</th>
                                 <th>Nome Garou</th>
@@ -300,7 +304,8 @@ const mapDispatchToProps = (dispatch) => {
         modificaPg: (pg) => dispatch(modificaPersonaggio(pg)),
         filtraListaRazza: (razza) => dispatch(filtraListaRazza(razza)),
         ordinaPerRazza: () => dispatch(ordinaPerRazza()),
-        ordinaPerNominativo: () => dispatch(ordinaPerNominativo())
+        ordinaPerNominativo: () => dispatch(ordinaPerNominativo()),
+        ordinaPerSesso: () => dispatch(ordinaPerSesso())
     }
 }
 

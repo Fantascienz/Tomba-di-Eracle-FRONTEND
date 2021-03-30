@@ -24,12 +24,16 @@ class PersonaggioService {
         return axios.get(URL + razza)
     }
 
-    getAllByRazza() {
+    getAllOrderByRazza() {
         return axios.get(URL + 'orderRazza')
     }
 
-    getAllByNominativo() {
+    getAllOrderByNominativo() {
         return axios.get(URL + 'orderNominativo')
+    }
+
+    getAllOrderBySesso() {
+        return axios.get(URL + 'orderSesso')
     }
 
     validazioneFormPersonaggio(personaggio) {
