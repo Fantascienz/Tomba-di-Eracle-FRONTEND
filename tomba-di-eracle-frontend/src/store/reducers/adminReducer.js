@@ -45,6 +45,11 @@ const adminReducer = (state = initState, action) => {
                 listaPgFiltrata: action.listaPgFiltrata
             }
             break;
+        case 'ORDINA_PER_RANGO':
+            state = {
+                listaPgFiltrata: action.listaPgFiltrata
+            }
+            break;
     }
     return state;
 }

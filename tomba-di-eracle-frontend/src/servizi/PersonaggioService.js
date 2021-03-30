@@ -36,6 +36,10 @@ class PersonaggioService {
         return axios.get(URL + 'orderSesso')
     }
 
+    getAllOrderByRango() {
+        return axios.get(URL + 'orderRango')
+    }
+
     validazioneFormPersonaggio(personaggio) {
         if (personaggio.nominativo === ''
             || personaggio.sesso === ''

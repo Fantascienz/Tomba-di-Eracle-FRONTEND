@@ -3,7 +3,7 @@ import { ThemeProvider } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-import { filtraListaRazza, modificaPersonaggio,getListaPersonaggi, ordinaPerRazza, ordinaPerNominativo, ordinaPerSesso } from '../../store/azioni/adminActions';
+import { filtraListaRazza, modificaPersonaggio,getListaPersonaggi, ordinaPerRazza, ordinaPerNominativo, ordinaPerSesso, ordinaPerRango } from '../../store/azioni/adminActions';
 
 class ListaPersonaggi extends Component {
 
@@ -215,6 +215,10 @@ class ListaPersonaggi extends Component {
         this.props.ordinaPerSesso()
     }
 
+    ordinaPerRango = () => {
+        this.props.ordinaPerRango()
+    }
+
 
     renderFiltroRazza = () => {
         
@@ -245,8 +249,8 @@ class ListaPersonaggi extends Component {
                                 <th>ID</th>
                                 <th><a href="#" onClick={() => this.ordinaPerNominativo()}>Nominativo</a> </th>
                                 <th><a href="#" onClick={() => this.ordinaPerSesso()}>Sesso</a></th>
-                                <th><a href="#" onClick={() => this.ordinaPerRazza()}>Razza</a>   {this.renderFiltroRazza()}</th>
-                                <th>Rango</th>
+                                <th><a href="#" onClick={() => this.ordinaPerRazza()}>Razza</a>{this.renderFiltroRazza()}</th>
+                                <th><a href="#" onClick={() => this.ordinaPerRango()}>Rango</a></th>
                                 <th>Nome Garou</th>
                                 <th>Auspicio</th>
                                 <th>Tribù</th>
@@ -305,7 +309,8 @@ const mapDispatchToProps = (dispatch) => {
         filtraListaRazza: (razza) => dispatch(filtraListaRazza(razza)),
         ordinaPerRazza: () => dispatch(ordinaPerRazza()),
         ordinaPerNominativo: () => dispatch(ordinaPerNominativo()),
-        ordinaPerSesso: () => dispatch(ordinaPerSesso())
+        ordinaPerSesso: () => dispatch(ordinaPerSesso()),
+        ordinaPerRango: () => dispatch(ordinaPerRango())
     }
 }
 

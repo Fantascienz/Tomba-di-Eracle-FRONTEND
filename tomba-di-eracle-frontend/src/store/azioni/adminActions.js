@@ -132,3 +132,15 @@ export const ordinaPerSesso = () => {
         })
     }
 }
+
+export const ordinaPerRango = () => {
+    return (dispatch) => {
+        PersonaggioService.getAllOrderByRango().then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_RANGO',
+                listaPgFiltrata: res.data
+            })
+        })
+    }
+}
