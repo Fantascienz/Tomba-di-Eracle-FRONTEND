@@ -5,7 +5,10 @@ import { modificaTipoUtente, getListaUtenti } from '../../store/azioni/adminActi
 class ListaUtenti extends Component {
 
     state = {
-        nuovoTipo: 'standard'
+        nuovoTipo: 'standard',
+        nuovoMaxUmani: '',
+        nuovoMaxGarou: '',
+        nuovoMaxPng: ''
     }
 
     formModificaTipo = (utente) => {
@@ -24,12 +27,54 @@ class ListaUtenti extends Component {
         }
     }
 
+    formModificaUmani = (utente) => {
+        return (
+            <React.Fragment>
+                <input type="number" placeholder="Umani" min="0" id="nuovoMaxUmani" onChange={this.handleChange} />
+                <button className="btn btn-secondary" onClick={() => this.modificaUmani(utente)} >Modifica</button>
+            </React.Fragment>
+        )
+    }
+
+    formModificaGarou = (utente) => {
+        return (
+            <React.Fragment>
+                <input type="number" placeholder="Garou" min="0" id="nuovoMaxGarou" onChange={this.handleChange} />
+                <button className="btn btn-secondary" onClick={() => this.modificaGarou(utente)} >Modifica</button>
+            </React.Fragment>
+        )
+    }
+
+    formModificaPng = (utente) => {
+        return (
+            <React.Fragment>
+                <input type="number" placeholder="PNG" min="0" id="nuovoMaxPng" onChange={this.handleChange} />
+                <button className="btn btn-secondary" onClick={() => this.modificaPng(utente)} >Modifica</button>
+            </React.Fragment>
+        )
+    }
+
     tastoBan = (utente) => {
         if (utente.id !== JSON.parse(sessionStorage.getItem('utente')).id) {
             return (
                 <button className="btn btn-danger btn-sm" onClick={() => this.ban(utente)}>{utente.tipo === 'bannato' ? 'Sbanna' : 'Banna'}</button>
             )
         }
+    }
+
+    modificaUmani = (utente) => {
+        utente.maxUmani = this.state.nuovoMaxUmani
+        alert(utente.maxUmani)
+    }
+
+    modificaGarou = (utente) => {
+        utente.maxGarou = this.state.nuovoMaxGarou
+        alert(utente.maxGarou)
+    }
+
+    modificaPng = (utente) => {
+        utente.maxPng = this.state.nuovoMaxPng
+        alert(utente.maxPng)
     }
 
     modificaTipo = (utente) => {
@@ -62,8 +107,14 @@ class ListaUtenti extends Component {
                                 <th>Email</th>
                                 <th>Tipo</th>
                                 <th>Personaggi</th>
+                                <th>MAX Umani</th>
+                                <th>MAX Garou</th>
+                                <th>MAX PNG</th>
                                 <th>Data di Registrazione</th>
                                 <th>Modifica Tipo</th>
+                                <th>Modifica MAX Umani</th>
+                                <th>Modifica MAX Garou</th>
+                                <th>Modifica MAX PNG</th>
                                 <th>Ban</th>
                             </tr>
                         </thead>
@@ -75,8 +126,14 @@ class ListaUtenti extends Component {
                                     <td>{utente.email}</td>
                                     <td>{utente.tipo}</td>
                                     <td>{utente.numeroPersonaggi}</td>
+                                    <td>{utente.maxUmani}</td>
+                                    <td>{utente.maxGarou}</td>
+                                    <td>{utente.maxPng}</td>
                                     <td>{utente.dataRegistrazione}</td>
-                                    <td >{this.formModificaTipo(utente)}</td>
+                                    <td>{this.formModificaTipo(utente)}</td>
+                                    <td>{this.formModificaUmani(utente)}</td>
+                                    <td>{this.formModificaGarou(utente)}</td>
+                                    <td>{this.formModificaPng(utente)}</td>
                                     <td>{this.tastoBan(utente)}</td>
                                 </tr>
                             )}

@@ -55,10 +55,41 @@ export const modificaPersonaggio = (personaggio) => {
     }
 }
 
+export const toCreazioneLocation = () => {
+    return (dispatch) => {
+        dispatch({
+            type: 'TO_CREAZIONE_LOCATION',
+        })
+    }
+}
+
 export const visualizzaPgAdmin = () => {
     return (dispatch) => {
         dispatch({
             type: 'VISUALIZZA_PG',
+        })
+    }
+}
+
+export const filtraListaRazza = (razza) => {
+    return (dispatch)  => {
+        PersonaggioService.getPersonaggiByRazza(razza).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'FILTRA_RAZZA',
+            })
+        })
+            
+    }
+}
+
+export const ordinaPerRazza = () => {
+    return (dispatch) => {
+        PersonaggioService.getAllByRazza().then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_RAZZA'
+            })
         })
     }
 }

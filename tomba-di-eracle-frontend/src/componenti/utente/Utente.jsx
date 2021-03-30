@@ -12,11 +12,8 @@ class Utente extends Component {
         if (this.props.redirect !== '' && this.props.redirect !== '/paginaUtente') {
             this.props.history.push(this.props.redirect)
         }
-
         
     }
-
-    
 
     render() {
         return (

@@ -9,6 +9,7 @@ import noPg from '../../img/no-pg.jpg'
 import cardFrame from '../../img/cardFrame.png'
 
 
+
 class CarouselPersonaggi extends Component {
 
     state = {
@@ -26,7 +27,7 @@ class CarouselPersonaggi extends Component {
                 {this.props.personaggiUtente && this.props.personaggiUtente.map(personaggio => {
                     return (
                         <Carousel.Item >
-                            <DettagliPersonaggio personaggio={personaggio} key={personaggio.id} style={{position:"absolute", top:"0%", left:"0%", height:"100%", width:"100%", backgroundColor:"white"}}/>
+                            <DettagliPersonaggio personaggio={personaggio} key={personaggio.id} style={{ position: "absolute", top: "0%", left: "0%", height: "100%", width: "100%", backgroundColor: "white" }} />
                         </Carousel.Item>
                     )
                 })}
@@ -47,7 +48,6 @@ class CarouselPersonaggi extends Component {
         )
     }
 
-
     render() {
         return (
             <div>
@@ -61,15 +61,16 @@ class CarouselPersonaggi extends Component {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        getPersonaggiUtente: (utente) => dispatch(getPersonaggiUtente(utente))
-    }
-}
-
 const mapStateToProps = (state) => {
     return {
         personaggiUtente: state.personaggio.personaggiUtente
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getPersonaggiUtente: (utente) => dispatch(getPersonaggiUtente(utente)),
+        
     }
 }
 
