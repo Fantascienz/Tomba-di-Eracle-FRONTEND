@@ -245,3 +245,15 @@ a:hover{
   height: 50px;
   width: 50px
 }
+
+@font-face {
+  font-family: 'Lombardia';
+  src: url('./font/Lombardia.eot');
+  src: url('./font/Lombardia.eot?#iefix') format('embedded-opentype'),
+      url('./font/Lombardia.woff2') format('woff2'),
+      url('./font/Lombardia.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+

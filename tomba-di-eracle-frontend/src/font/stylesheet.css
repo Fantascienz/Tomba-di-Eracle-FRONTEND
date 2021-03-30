@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'Lombardia';
+    src: url('Lombardia.eot');
+    src: url('Lombardia.eot?#iefix') format('embedded-opentype'),
+        url('Lombardia.woff2') format('woff2'),
+        url('Lombardia.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
