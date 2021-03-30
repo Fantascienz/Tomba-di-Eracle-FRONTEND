@@ -102,7 +102,8 @@ export const ordinaPerRazza = () => {
         PersonaggioService.getAllByRazza().then(res => {
             sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
             dispatch({
-                type: 'ORDINA_PER_RAZZA'
+                type: 'ORDINA_PER_RAZZA',
+                listaPgFiltrata: res.data
             })
         })
     }

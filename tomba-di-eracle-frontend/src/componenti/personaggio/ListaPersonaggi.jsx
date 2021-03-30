@@ -163,7 +163,6 @@ class ListaPersonaggi extends Component {
             nuovoBranco: '',
             nuovoRuoloSept: '',
             nuovoSept: '',
-            razza: ''
         })
         withReactContent(Swal).fire({
             title:
@@ -204,17 +203,16 @@ class ListaPersonaggi extends Component {
        
     }
 
-    // ordinaPerRazza = () => {
-    //     alert('order')
-    //     this.props.ordinaPerRazza()
-    // }
+    ordinaPerRazza = () => {
+        this.props.ordinaPerRazza()
+    }
 
 
     renderFiltroRazza = () => {
         
         return (
             <React.Fragment>
-                <select class="form-select" value={this.state.razza} onChange={this.handleFilter} aria-label="Default select example">
+                <select class="form-select"  onChange={this.handleFilter} aria-label="Default select example">
                     <option value="" >Filtra</option>
                     <option value="Umano">Umano</option>
                     <option value="Lupo">Lupus</option>
@@ -239,7 +237,7 @@ class ListaPersonaggi extends Component {
                                 <th>ID</th>
                                 <th>Nominativo</th>
                                 <th>Sesso</th>
-                                <th>Razza  {this.renderFiltroRazza()}</th>
+                                <th><a href="#" onClick={() => this.ordinaPerRazza()}>Razza</a>   {this.renderFiltroRazza()}</th>
                                 <th>Rango</th>
                                 <th>Nome Garou</th>
                                 <th>Auspicio</th>
