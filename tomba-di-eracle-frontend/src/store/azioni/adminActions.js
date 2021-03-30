@@ -90,6 +90,7 @@ export const filtraListaRazza = (razza) => {
             sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
             dispatch({
                 type: 'FILTRA_RAZZA',
+                listaPgFiltrata: res.data
             })
         })
             
