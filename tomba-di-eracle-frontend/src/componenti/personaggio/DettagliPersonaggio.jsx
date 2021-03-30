@@ -23,10 +23,20 @@ class DettagliPersonaggio extends Component {
                     position: "relative", width: "100%", height: "100%",
                     backgroundImage: `url(${cardFrame})`, backgroundSize: "100% 100%", backgroundRepeat: "no-repeat", backgroundPosition: "center center",
                 }}>
-                    <div style={{ position: "absolute", bottom: "7%", width: "100%" }}>
-                        <button className="btn-gold" style={{ width: "80%", height: "10%" }} >{singleCharacter.nominativo}</button>
-                        <button className="btn-gold" style={{ width: "80%", height: "10%" }} onClick={() => this.modificaPersonaggio(singleCharacter)}>Modifica</button>
-                        <button className="btn-gold" style={{ width: "80%", height: "10%" }} onClick={() => this.setPGAttivo(singleCharacter)}>Gioca</button>
+                    <div style={{ position: "absolute", bottom: "0%", width: "100%", height: "100%" }}>
+                        <div className="flip-box" style={{ position: "absolute", top: "0", backgroundColor: "transparent", width: "100%", height: "100%" }}>
+                            <div className="flip-box-inner" style={{ position: "absolute", bottom: "7%", backgroundColor: "transparent", width: "100%", height: "auto" }}>
+                                
+                                <div className="flip-box-front" style={{ position: "absolute", bottom:"0%", backgroundColor: "transparent", width: "100%", height: "auto" }}>
+                                    <button className="btn-gold" style={{ width: "80%", height: "10%" }} ><b className="font-lombardia" style={{fontSize:"1.5vw"}}>{singleCharacter.nominativo}</b></button>
+                                </div>
+                                
+                                <div className="flip-box-back" style={{ backgroundImage:"none", position: "absolute", bottom:"0%", backgroundColor: "transparent", width: "100%", height: "auto" }}>
+                                    <button className="btn-gold" style={{ width: "80%", height: "10%" }} onClick={() => this.modificaPersonaggio(singleCharacter)}>Modifica</button>
+                                    <button className="btn-gold" style={{ width: "80%", height: "10%" }} onClick={() => this.setPGAttivo(singleCharacter)}>Gioca</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

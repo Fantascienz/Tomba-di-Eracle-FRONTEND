@@ -99,9 +99,9 @@ class SchedaUtente extends Component {
         if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' || JSON.parse(sessionStorage.getItem('utente')).tipo === 'master') {
             return (
                 <React.Fragment>
-                    <button className="btn btn-dark" style={{ color: "#eeaa44", width: "80%" }} onClick={() => this.creaLocation()}>Creazione Location</button>
+                    <button className="btn btn-dark" style={{ marginTop: "5px",color: "#eeaa44", width: "80%" }} onClick={() => this.creaLocation()}>Creazione Location</button>
                     <br />
-                    <button className="btn btn-dark" style={{ color: "#eeaa44", width: "80%" }} onClick={() => this.modificaLocation()}>Modifica Location</button>
+                    <button className="btn btn-dark" style={{ marginTop: "5px",color: "#eeaa44", width: "80%" }} onClick={() => this.modificaLocation()}>Modifica Location</button>
                     <br />
                 </React.Fragment>
             )
@@ -177,29 +177,29 @@ class SchedaUtente extends Component {
             <div className="corpoComponente">
 
                 <div style={{ backgroundColor: "transparent", height: "15%", zIndex: "998", color: "#eeaa44", textShadow: "2px 2px black", display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
-                    <span className="font-lombardia" style={{ fontSize: "48px" }}>Salute {JSON.parse(sessionStorage.getItem('utente')).nominativo}</span>
+                    <span className="font-lombardia" style={{ fontSize: "5vw" }}>Salute {JSON.parse(sessionStorage.getItem('utente')).nominativo}</span>
                 </div>
 
                 <div style={{position: "absolute", left: "2%", height: "80%", width: "23%" }}>
                     <div style={{ height: "100%", display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
 
                         {/* -------------FLIP BOX------------------ */}
-                        <div className="square-box" style={{backgroundColor:"transparent", width:"80%"}}>
+                        <div className="square-box" style={{backgroundColor:"transparent", width:"75%"}}>
                             <div className="flip-box square-content">
                                 <div className="flip-box-inner" >
 
                                     <div className="flip-box-front rounded-circle">
-                                        <div style={{ width: "100%", height: "auto" }}>
-                                            <img className="tombaJPG rounded-circle" src={avatarEracle} alt="Paris" style={{ width: "100%", height: "auto" }} />
+                                        <div style={{ width: "auto", height: "100%" }}>
+                                            <img className="tombaJPG rounded-circle" src={avatarEracle} alt="Paris" style={{ width: "auto", height: "100%" }} />
                                         </div>
                                     </div>
 
                                     <div className="flip-box-back rounded-circle" style={{ display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
                                         <div style={{ width: "80%", height: "auto" }}>
-                                            <u style={{fontSize:"18px"}}>{JSON.parse(sessionStorage.getItem('utente')).nominativo}</u>
+                                            <u style={{fontSize:"1.2vw"}}>{JSON.parse(sessionStorage.getItem('utente')).nominativo}</u>
                                             <br/> <br/>
-                                            <p style={{fontSize:"10px"}}>{JSON.parse(sessionStorage.getItem('utente')).email}</p>
-                                            <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%", fontSize:"12px" }} onClick={() => this.props.modificaUtente()}>Modifica Account</button>
+                                            <p style={{fontSize:"1vw"}}>{JSON.parse(sessionStorage.getItem('utente')).email}</p>
+                                            <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%", fontSize:"1vw" }} onClick={() => this.props.modificaUtente()}>Modifica Account</button>
                                         </div>
                                     </div>
                                     
