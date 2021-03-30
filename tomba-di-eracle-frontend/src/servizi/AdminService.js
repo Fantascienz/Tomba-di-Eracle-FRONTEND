@@ -12,6 +12,10 @@ class AdminService {
     modificaTipo(utente) {
         return axios.post(URL_ADMIN + 'modificaTipo',utente)
     }
+
+    modificaMassimali(utente) {
+        return axios.post(URL_UTENTI + "massimali",utente)
+    }
 }
 
 export default new AdminService();
