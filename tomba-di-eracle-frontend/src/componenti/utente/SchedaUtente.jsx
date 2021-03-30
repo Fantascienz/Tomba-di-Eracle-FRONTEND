@@ -114,14 +114,21 @@ class SchedaUtente extends Component {
                 <React.Fragment>
                     <button className="btn btn-dark" style={{ color: "#eeaa44", width: "80%" }} onClick={() => this.creaLocation()}>Creazione Location</button>
                     <br />
+                    <button className="btn btn-dark" style={{ color: "#eeaa44", width: "80%" }} onClick={() => this.modificaLocation()}>Modifica Location</button>
+                    <br />
                 </React.Fragment>
             )
         }
-
     }
+
 
     creaLocation = () => {
         browserHistory.push('creazioneLocation')
+        browserHistory.go()
+    }
+
+    modificaLocation = () => {
+        browserHistory.push('modificaLocation')
         browserHistory.go()
     }
 
