@@ -35,6 +35,10 @@ const adminReducer = (state = initState, action) => {
                 listaPgFiltrata: action.listaPgFiltrata
             }
             break;
+        case 'ORDINA_PER_NOMINATIVO':
+            state = {
+                listaPgFiltrata: action.listaPgFiltrata
+            }
     }
     return state;
 }

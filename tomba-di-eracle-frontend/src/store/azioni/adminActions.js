@@ -85,7 +85,7 @@ export const visualizzaPgAdmin = () => {
 }
 
 export const filtraListaRazza = (razza) => {
-    return (dispatch)  => {
+    return (dispatch) => {
         PersonaggioService.getPersonaggiByRazza(razza).then(res => {
             sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
             dispatch({
@@ -93,7 +93,7 @@ export const filtraListaRazza = (razza) => {
                 listaPgFiltrata: res.data
             })
         })
-            
+
     }
 }
 
@@ -103,6 +103,18 @@ export const ordinaPerRazza = () => {
             sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
             dispatch({
                 type: 'ORDINA_PER_RAZZA',
+                listaPgFiltrata: res.data
+            })
+        })
+    }
+}
+
+export const ordinaPerNominativo = () => {
+    return (dispatch) => {
+        PersonaggioService.getAllByNominativo().then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_NOMINATIVO',
                 listaPgFiltrata: res.data
             })
         })

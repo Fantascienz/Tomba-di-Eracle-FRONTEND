@@ -28,6 +28,10 @@ class PersonaggioService {
         return axios.get(URL + 'orderRazza')
     }
 
+    getAllByNominativo() {
+        return axios.get(URL + 'orderNominativo')
+    }
+
     validazioneFormPersonaggio(personaggio) {
         if (personaggio.nominativo === ''
             || personaggio.sesso === ''
