@@ -4,6 +4,7 @@ import PersonaggioService from "../../servizi/PersonaggioService"
 import UtenteService from "../../servizi/UtenteService"
 import bashImpact from "../../suoni/bash_impact.mp3"
 import brokenShield from "../../img/broken_shield.png"
+import LocationService from "../../servizi/LocationService"
 
 export const login = (utente) => {
     return (dispatch) => {
@@ -14,6 +15,10 @@ export const login = (utente) => {
                 PersonaggioService.getAllPersonaggi().then(res => {
                     sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
                 }).then(
+                    LocationService.getAllMacro().then(res => {
+                        sessionStorage.setItem('listaMacroLocation', JSON.stringify(res.data))
+                    })
+                ).then(
                     dispatch({
                         type: 'LOGIN_UTENTE',
                         utente: utente,
@@ -71,7 +76,7 @@ export const registrazione = (utente) => {
                     <p>Errore {err.response.status}</p>
                     <p>Email già registrata!</p>
                 </div>
-                
+
             })
         })
     }
