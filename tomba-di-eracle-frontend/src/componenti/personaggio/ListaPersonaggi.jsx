@@ -12,7 +12,7 @@ class ListaPersonaggi extends Component {
         this.state = {
             nuovoRango: '',
             nuovoNomeGarou: '',
-            nuovaTribu: '',
+            nuovaTribu: 'Senza Tribu',
             nuovoRuoloBranco: '',
             nuovoBranco: '',
             nuovoRuoloSept: '',
@@ -20,7 +20,6 @@ class ListaPersonaggi extends Component {
             razza: ''
 
         }
-
 
     }
     formModificaRango = (pg) => {
@@ -45,7 +44,7 @@ class ListaPersonaggi extends Component {
         return (
             <React.Fragment>
                 <select name="nuovaTribu" id="nuovaTribu" onChange={this.handleChange} onFocus={(event) => event.target.value = 'Senza Tribu'} >
-                    <option selected="selected" value="Senza Tribu">Senza Tribù</option>
+                    <option value="Senza Tribu">Senza Tribù</option>
                     <option value="Signori delle Ombre">Signori delle Ombre</option>
                     <option value="Zanne d'Argento">Zanne d'Argento</option>
                     <option value="Fianna">Fianna</option>
