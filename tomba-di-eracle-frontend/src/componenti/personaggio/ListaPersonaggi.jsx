@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-import { getListaPersonaggi, modificaPersonaggio } from '../../store/azioni/adminActions';
+import { filtraListaRazza, modificaPersonaggio,getListaPersonaggi, ordinaPerRazza } from '../../store/azioni/adminActions';
 
 class ListaPersonaggi extends Component {
 
@@ -16,18 +16,12 @@ class ListaPersonaggi extends Component {
             nuovoBranco: '',
             nuovoRuoloSept: '',
             nuovoSept: '',
+            razza: ''
 
         }
-import { filtraListaRazza, getListaPersonaggi } from '../../store/azioni/adminActions';
-import { filtraListaRazza, getListaPersonaggi, ordinaPerRazza } from '../../store/azioni/adminActions';
 
-class ListaPersonaggi extends Component {
 
-    state = {
-        nuovoRango: '',
-        razza: ''
     }
-
     formModificaRango = (pg) => {
         return (
             <React.Fragment>
@@ -296,13 +290,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         aggiornaLista: () => dispatch(getListaPersonaggi()),
-<<<<<<< HEAD
         modificaPg: (pg) => dispatch(modificaPersonaggio(pg)),
-        filtraListaRazza: (razza) => dispatch(filtraListaRazza(razza))
-=======
         filtraListaRazza: (razza) => dispatch(filtraListaRazza(razza)),
         ordinaPerRazza: () => dispatch(ordinaPerRazza())
->>>>>>> 6adc53e (inizio implementazione ordinazione lista personaggi)
     }
 }
 
