@@ -185,7 +185,7 @@ class SchedaUtente extends Component {
                     <h1>Salute {JSON.parse(sessionStorage.getItem('utente')).nominativo}</h1>
                 </div>
 
-                <div style={{ zIndex: "999", position: "absolute", left: "10%", height: "80%", width: "20%" }}>
+                <div style={{ zIndex: "999", position: "absolute", left: "5%", height: "80%", width: "20%" }}>
                     <div style={{ height: "100%", display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
                         <img src={avatarEracle} className="tombaJPG rounded-circle ombra" alt="" style={{ width: "80%", height: "auto" }} /> <br /><br />
                         {this.isAdminCreazionePg()}
@@ -201,7 +201,7 @@ class SchedaUtente extends Component {
                 </div>
 
                 <div style={{
-                    zIndex: "999", position: "absolute", right: "10%", height: "80%", width: "60%", backgroundColor: "transparent",
+                    zIndex: "999", position: "absolute", right: "5%", height: "80%", width: "70%", backgroundColor: "transparent",
                     display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center"
                 }} align="center">
                     {this.renderListe()}

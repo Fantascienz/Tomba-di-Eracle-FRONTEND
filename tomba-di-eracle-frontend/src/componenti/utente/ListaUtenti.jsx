@@ -15,13 +15,13 @@ class ListaUtenti extends Component {
         if (utente.id !== JSON.parse(sessionStorage.getItem('utente')).id) {
             return (
                 <div style={{display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center"}}>
-                    <select name="nuovoTipo" id="nuovoTipo" onChange={this.handleChange}>
+                    <select name="nuovoTipo" id="nuovoTipo" onChange={this.handleChange} style={{width:"100px"}}>
                         <option selected="selected" value="standard">Standard</option>
                         <option value="vip">VIP</option>
                         <option value="master">Master</option>
                         <option value="admin">Admin</option>
                     </select>
-                    <button className="btn btn-secondary btn-sm" onClick={() => this.modificaTipo(utente)} >Modifica</button>
+                    <button className="btn btn-secondary btn-sm" onClick={() => this.modificaTipo(utente)} style={{width:"100px"}}>Modifica</button>
                 </div>
             )
         }
@@ -30,8 +30,8 @@ class ListaUtenti extends Component {
     formModificaUmani = (utente) => {
         return (
             <React.Fragment>
-                <input type="number" placeholder="Umani" min="0" id="nuovoMaxUmani" onChange={this.handleChange} />
-                <button className="btn btn-secondary" onClick={() => this.modificaUmani(utente)} >Modifica</button>
+                <input type="number" placeholder="Umani" min="0" id="nuovoMaxUmani" onChange={this.handleChange} style={{width:"100px"}}/>
+                <button className="btn btn-secondary btn-sm" onClick={() => this.modificaUmani(utente)} style={{width:"100px"}}>Modifica</button>
             </React.Fragment>
         )
     }
@@ -39,8 +39,8 @@ class ListaUtenti extends Component {
     formModificaGarou = (utente) => {
         return (
             <React.Fragment>
-                <input type="number" placeholder="Garou" min="0" id="nuovoMaxGarou" onChange={this.handleChange} />
-                <button className="btn btn-secondary" onClick={() => this.modificaGarou(utente)} >Modifica</button>
+                <input type="number" placeholder="Garou" min="0" id="nuovoMaxGarou" onChange={this.handleChange} style={{width:"100px"}}/>
+                <button className="btn btn-secondary btn-sm" onClick={() => this.modificaGarou(utente)} style={{width:"100px"}}>Modifica</button>
             </React.Fragment>
         )
     }
@@ -48,8 +48,8 @@ class ListaUtenti extends Component {
     formModificaPng = (utente) => {
         return (
             <React.Fragment>
-                <input type="number" placeholder="PNG" min="0" id="nuovoMaxPng" onChange={this.handleChange} />
-                <button className="btn btn-secondary" onClick={() => this.modificaPng(utente)} >Modifica</button>
+                <input type="number" placeholder="PNG" min="0" id="nuovoMaxPng" onChange={this.handleChange} style={{width:"100px"}}/>
+                <button className="btn btn-secondary btn-sm" onClick={() => this.modificaPng(utente)} style={{width:"100px"}}>Modifica</button>
             </React.Fragment>
         )
     }
@@ -57,7 +57,7 @@ class ListaUtenti extends Component {
     tastoBan = (utente) => {
         if (utente.id !== JSON.parse(sessionStorage.getItem('utente')).id) {
             return (
-                <button className="btn btn-danger btn-sm" onClick={() => this.ban(utente)}>{utente.tipo === 'bannato' ? 'Sbanna' : 'Banna'}</button>
+                <button className="btn btn-danger btn-sm" onClick={() => this.ban(utente)} >{utente.tipo === 'bannato' ? 'Sbanna' : 'Banna'}</button>
             )
         }
     }
@@ -107,15 +107,29 @@ class ListaUtenti extends Component {
                                 <th>Email</th>
                                 <th>Tipo</th>
                                 <th>Personaggi</th>
-                                <th>MAX Umani</th>
-                                <th>MAX Garou</th>
-                                <th>MAX PNG</th>
+                                <th colspan="3">Personaggi Creabili</th>
                                 <th>Data di Registrazione</th>
                                 <th>Modifica Tipo</th>
-                                <th>Modifica MAX Umani</th>
-                                <th>Modifica MAX Garou</th>
-                                <th>Modifica MAX PNG</th>
+                                <th colspan="3">Modifica Personaggi Creabili</th>
+                                {/* <th>Modifica MAX Garou</th>
+                                <th>Modifica MAX PNG</th> */}
                                 <th>Ban</th>
+                            </tr>
+                            <tr style={{color:"#eeaa44"}}>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th>Umani</th>
+                                <th>Garou</th>
+                                <th>PNG</th>
+                                <th></th>
+                                <th></th>
+                                <th>Max Umani</th>
+                                <th>Max Garou</th>
+                                <th>Max PNG</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody align="center">

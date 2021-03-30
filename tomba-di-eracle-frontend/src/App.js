@@ -9,6 +9,7 @@ import ModificaUtente from './componenti/utente/ModificaUtente';
 import Gamepage from './componenti/game/Gamepage';
 import ModificaPersonaggio from './componenti/personaggio/ModificaPersonaggio';
 import CreazioneLocation from './componenti/location/CreazioneLocation'
+import Macromappa from './componenti/location/Macromappa';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/modificaUtente" component={ModificaUtente} />
           <Route path="/game" component={ Gamepage } />
           <Route path="/creazioneLocation" component ={CreazioneLocation}/>
+          <Route path="/macromappa" component ={ Macromappa }/>
         </Switch>
       </Router>
       <Footer />
