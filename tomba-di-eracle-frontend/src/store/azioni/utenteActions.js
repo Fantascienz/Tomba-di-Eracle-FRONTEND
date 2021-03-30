@@ -45,7 +45,6 @@ export const login = (utente) => {
         }).catch(err => {
             withReactContent(Swal).fire({
                 html: <div style={{ height: "400px", backgroundColor: "transparent", display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
-                    <b style={{ color: "#eeaa44", backgroundColor: "transparent", fontSize: "30px", width: "150%" }}>Errore {err.response.status}</b>
                     <b style={{ color: "#eeaa44", backgroundColor: "transparent", fontSize: "30px", width: "150%" }}>Credenziali errate!</b>
                     <audio src={bashImpact} autoPlay />
                 </div>,

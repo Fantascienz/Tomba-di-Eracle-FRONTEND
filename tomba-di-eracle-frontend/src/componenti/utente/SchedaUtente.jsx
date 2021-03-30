@@ -192,7 +192,6 @@ class SchedaUtente extends Component {
                         {this.isAdmin()}
                         {this.isStandard()}
                         {this.isVip()}
-                        {this.isMaster()}
                         {this.creazioneLocation()}
                         {this.isMasterCreazionePg()}
                         {this.isMasterListe()}
