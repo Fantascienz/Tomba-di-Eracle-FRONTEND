@@ -195,9 +195,6 @@ class ListaPersonaggi extends Component {
         this.props.aggiornaLista()
     }
 
-    componentWillUnmount() {
-        alert('unmount')
-    }
 
 
 
