@@ -197,6 +197,7 @@ class ListaPersonaggi extends Component {
 
     handleFilter = (e) => {
         this.props.filtraListaRazza(e.target.value)
+        this.forceUpdate();
         
     }
 
