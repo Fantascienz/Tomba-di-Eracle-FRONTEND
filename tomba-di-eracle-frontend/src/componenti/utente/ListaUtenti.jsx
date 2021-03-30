@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { modificaTipoUtente, getListaUtenti } from '../../store/azioni/adminActions';
+import { modificaTipoUtente, getListaUtenti, modificaMassimali } from '../../store/azioni/adminActions';
 
 class ListaUtenti extends Component {
 
@@ -64,17 +64,20 @@ class ListaUtenti extends Component {
 
     modificaUmani = (utente) => {
         utente.maxUmani = this.state.nuovoMaxUmani
-        alert(utente.maxUmani)
+        this.props.modificaMassimali(utente)
+        this.props.getListaUtenti()
     }
 
     modificaGarou = (utente) => {
         utente.maxGarou = this.state.nuovoMaxGarou
-        alert(utente.maxGarou)
+        this.props.modificaMassimali(utente)
+        this.props.getListaUtenti()
     }
 
     modificaPng = (utente) => {
         utente.maxPng = this.state.nuovoMaxPng
-        alert(utente.maxPng)
+        this.props.modificaMassimali(utente)
+        this.props.getListaUtenti()
     }
 
     modificaTipo = (utente) => {
@@ -93,6 +96,9 @@ class ListaUtenti extends Component {
         })
     }
 
+// componentDidUpdate() {
+//     alert('appodeito')
+// }
 
     render() {
         return (
@@ -168,7 +174,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         modificaTipo: (utente, nuovoTipo) => dispatch(modificaTipoUtente(utente, nuovoTipo)),
-        getListaUtenti: () => dispatch(getListaUtenti())
+        getListaUtenti: () => dispatch(getListaUtenti()),
+        modificaMassimali: (utente) => dispatch(modificaMassimali(utente))
     }
 }
 

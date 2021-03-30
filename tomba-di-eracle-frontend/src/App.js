@@ -10,6 +10,7 @@ import Gamepage from './componenti/game/Gamepage';
 import ModificaPersonaggio from './componenti/personaggio/ModificaPersonaggio';
 import CreazioneLocation from './componenti/location/CreazioneLocation'
 import Macromappa from './componenti/location/Macromappa';
+import ModificaLocation from './componenti/location/ModificaLocation';
 
 function App() {
   return (
@@ -17,15 +18,16 @@ function App() {
       <Router>
         <Switch>
           <Route path="/" exact component={Login}></Route>
-          <Route path="/registrazione" component={Registrazione}/>
-          <Route path="/paginaUtente" component={Utente}/>
-          <Route path="/creazionePersonaggio/:tipo" component={CreazionePersonaggio}/>
+          <Route path="/registrazione" component={Registrazione} />
+          <Route path="/paginaUtente" component={Utente} />
+          <Route path="/creazionePersonaggio/:tipo" component={CreazionePersonaggio} />
           <Route path="/modificaPersonaggio" component={ModificaPersonaggio} />
           <Route path="/registrazione" component={Registrazione} />
           <Route path="/paginaUtente" component={Utente} />
           <Route path="/modificaUtente" component={ModificaUtente} />
-          <Route path="/game" component={ Gamepage } />
-          <Route path="/creazioneLocation" component ={CreazioneLocation}/>
+          <Route path="/game" component={Gamepage} />
+          <Route path="/creazioneLocation" component={CreazioneLocation} />
+          <Route path="/modificaLocation" component={ModificaLocation} />
           <Route path="/macromappa" component ={ Macromappa }/>
         </Switch>
       </Router>

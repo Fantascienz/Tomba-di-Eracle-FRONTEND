@@ -55,6 +55,19 @@ export const modificaPersonaggio = (personaggio) => {
     }
 }
 
+export const modificaMassimali = (utente) => {
+    return (dispatch) => {
+        AdminService.modificaMassimali(utente).then(
+            AdminService.getListaUtenti().then(res => {
+                dispatch({
+                    type: "LISTA_UTENTI",
+                    listaUtenti: res.data,
+                })
+            })
+        )
+    }
+}
+
 export const toCreazioneLocation = () => {
     return (dispatch) => {
         dispatch({
@@ -77,6 +90,7 @@ export const filtraListaRazza = (razza) => {
             sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
             dispatch({
                 type: 'FILTRA_RAZZA',
+                listaPgFiltrata: res.data
             })
         })
             

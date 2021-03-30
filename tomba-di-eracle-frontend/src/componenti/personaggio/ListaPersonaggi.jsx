@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { ThemeProvider } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
@@ -161,7 +162,8 @@ class ListaPersonaggi extends Component {
             nuovoRuoloBranco: '',
             nuovoBranco: '',
             nuovoRuoloSept: '',
-            nuovoSept: ''
+            nuovoSept: '',
+            razza: ''
         })
         withReactContent(Swal).fire({
             title:
@@ -195,9 +197,11 @@ class ListaPersonaggi extends Component {
 
 
 
+
     handleFilter = (e) => {
-        this.props.filtraListaRazza(e.target.value)
         
+            this.props.filtraListaRazza(e.target.value)
+       
     }
 
     // ordinaPerRazza = () => {
