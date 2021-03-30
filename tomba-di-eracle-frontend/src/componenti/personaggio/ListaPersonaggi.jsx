@@ -3,7 +3,7 @@ import { ThemeProvider } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-import { filtraListaRazza, modificaPersonaggio,getListaPersonaggi, ordinaPerRazza } from '../../store/azioni/adminActions';
+import { filtraListaRazza, modificaPersonaggio,getListaPersonaggi, ordinaPerRazza, ordinaPerNominativo, ordinaPerSesso, ordinaPerRango } from '../../store/azioni/adminActions';
 
 class ListaPersonaggi extends Component {
 
@@ -163,7 +163,6 @@ class ListaPersonaggi extends Component {
             nuovoBranco: '',
             nuovoRuoloSept: '',
             nuovoSept: '',
-            razza: ''
         })
         withReactContent(Swal).fire({
             title:
@@ -204,17 +203,28 @@ class ListaPersonaggi extends Component {
        
     }
 
-    // ordinaPerRazza = () => {
-    //     alert('order')
-    //     this.props.ordinaPerRazza()
-    // }
+    ordinaPerRazza = () => {
+        this.props.ordinaPerRazza()
+    }
+
+    ordinaPerNominativo = () => {
+        this.props.ordinaPerNominativo()
+    }
+
+    ordinaPerSesso = () => {
+        this.props.ordinaPerSesso()
+    }
+
+    ordinaPerRango = () => {
+        this.props.ordinaPerRango()
+    }
 
 
     renderFiltroRazza = () => {
         
         return (
             <React.Fragment>
-                <select class="form-select" value={this.state.razza} onChange={this.handleFilter} aria-label="Default select example">
+                <select class="form-select"  onChange={this.handleFilter} aria-label="Default select example">
                     <option value="" >Filtra</option>
                     <option value="Umano">Umano</option>
                     <option value="Lupo">Lupus</option>
@@ -237,10 +247,10 @@ class ListaPersonaggi extends Component {
                             <tr style={{color:"#eeaa44"}}>
                                 <th>Immagine</th>
                                 <th>ID</th>
-                                <th>Nominativo</th>
-                                <th>Sesso</th>
-                                <th>Razza  {this.renderFiltroRazza()}</th>
-                                <th>Rango</th>
+                                <th><a href="#" onClick={() => this.ordinaPerNominativo()}>Nominativo</a> </th>
+                                <th><a href="#" onClick={() => this.ordinaPerSesso()}>Sesso</a></th>
+                                <th><a href="#" onClick={() => this.ordinaPerRazza()}>Razza</a>{this.renderFiltroRazza()}</th>
+                                <th><a href="#" onClick={() => this.ordinaPerRango()}>Rango</a></th>
                                 <th>Nome Garou</th>
                                 <th>Auspicio</th>
                                 <th>Tribù</th>
@@ -297,7 +307,10 @@ const mapDispatchToProps = (dispatch) => {
         aggiornaLista: () => dispatch(getListaPersonaggi()),
         modificaPg: (pg) => dispatch(modificaPersonaggio(pg)),
         filtraListaRazza: (razza) => dispatch(filtraListaRazza(razza)),
-        ordinaPerRazza: () => dispatch(ordinaPerRazza())
+        ordinaPerRazza: () => dispatch(ordinaPerRazza()),
+        ordinaPerNominativo: () => dispatch(ordinaPerNominativo()),
+        ordinaPerSesso: () => dispatch(ordinaPerSesso()),
+        ordinaPerRango: () => dispatch(ordinaPerRango())
     }
 }
 

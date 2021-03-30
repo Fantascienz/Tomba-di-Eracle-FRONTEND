@@ -85,7 +85,7 @@ export const visualizzaPgAdmin = () => {
 }
 
 export const filtraListaRazza = (razza) => {
-    return (dispatch)  => {
+    return (dispatch) => {
         PersonaggioService.getPersonaggiByRazza(razza).then(res => {
             sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
             dispatch({
@@ -93,16 +93,53 @@ export const filtraListaRazza = (razza) => {
                 listaPgFiltrata: res.data
             })
         })
-            
+
     }
 }
 
 export const ordinaPerRazza = () => {
     return (dispatch) => {
-        PersonaggioService.getAllByRazza().then(res => {
+        PersonaggioService.getAllOrderByRazza().then(res => {
             sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
             dispatch({
-                type: 'ORDINA_PER_RAZZA'
+                type: 'ORDINA_PER_RAZZA',
+                listaPgFiltrata: res.data
+            })
+        })
+    }
+}
+
+export const ordinaPerNominativo = () => {
+    return (dispatch) => {
+        PersonaggioService.getAllOrderByNominativo().then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_NOMINATIVO',
+                listaPgFiltrata: res.data
+            })
+        })
+    }
+}
+
+export const ordinaPerSesso = () => {
+    return (dispatch) => {
+        PersonaggioService.getAllOrderBySesso().then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_SESSO',
+                listaPgFiltrata: res.data
+            })
+        })
+    }
+}
+
+export const ordinaPerRango = () => {
+    return (dispatch) => {
+        PersonaggioService.getAllOrderByRango().then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_RANGO',
+                listaPgFiltrata: res.data
             })
         })
     }
