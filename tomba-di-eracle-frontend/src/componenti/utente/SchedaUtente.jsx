@@ -5,9 +5,11 @@ import CarouselPersonaggi from '../personaggio/CarouselPersonaggi';
 import ListaPersonaggi from '../personaggio/ListaPersonaggi';
 import ListaUtenti from './ListaUtenti';
 import avatarEracle from '../../img/eracleCapovolto.png';
-import avatarEracleCapovolto from '../../img/eracle.png';
+import bashImpact from '../../suoni/bash_impact.mp3';
 import { browserHistory } from "../.."
 import { visualizzaListaPg, visualizzaPgMaster } from '../../store/azioni/masterActions';
+import { SoundDiv } from '../utils/SuonoSuImmagine'
+import coinFlip from '../../suoni/flip_coin.mp3'
 
 class SchedaUtente extends Component {
 
@@ -25,8 +27,8 @@ class SchedaUtente extends Component {
         if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'vip') {
             return (
                 <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
-                    <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "50%", fontSize: "80%" }} onClick={() => this.props.creazionePG()}>Crea Umano</button>
-                    <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "50%", fontSize: "80%", borderRadius: "0 5px 5px 0" }} onClick={() => this.props.creazioneGarou()} >Crea Garou</button>
+                    <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "50%", fontSize: "0.8vw" }} onClick={() => this.props.creazionePG()}>Crea Umano</button>
+                    <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "50%", fontSize: "0.8vw", borderRadius: "0 5px 5px 0" }} onClick={() => this.props.creazioneGarou()} >Crea Garou</button>
                 </div>
             )
         }
@@ -36,9 +38,9 @@ class SchedaUtente extends Component {
         if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'master') {
             return (
                 <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
-                    <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "33.33%", fontSize: "65%" }} onClick={() => this.props.creazionePG()}>Crea Umano</button>
-                    <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "33.33%", fontSize: "65%" }} onClick={() => this.props.creazioneGarou()} >Crea Garou</button>
-                    <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "33.33%", fontSize: "70%", borderRadius: "0 5px 5px 0" }} onClick={() => this.props.creazionePng()} >Crea Png</button>
+                    <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "33.33%", fontSize: "0.8vw" }} onClick={() => this.props.creazionePG()}>Crea Umano</button>
+                    <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "33.33%", fontSize: "0.8vw" }} onClick={() => this.props.creazioneGarou()} >Crea Garou</button>
+                    <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "33.33%", fontSize: "0.8vw", borderRadius: "0 5px 5px 0" }} onClick={() => this.props.creazionePng()} >Crea Png</button>
                 </div>
             )
         }
@@ -66,9 +68,9 @@ class SchedaUtente extends Component {
         if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin') {
             return (
                 <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
-                    <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "33.33%", fontSize: "65%" }} onClick={() => this.props.creazionePG()}>Crea Umano</button>
-                    <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "33.33%", fontSize: "65%" }} onClick={() => this.props.creazioneGarou()} >Crea Garou</button>
-                    <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "33.33%", fontSize: "70%", borderRadius: "0 5px 5px 0" }} onClick={() => this.props.creazionePng()} >Crea Png</button>
+                    <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "33.33%", fontSize: "0.8vw" }} onClick={() => this.props.creazionePG()}>Crea Umano</button>
+                    <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "33.33%", fontSize: "0.8vw" }} onClick={() => this.props.creazioneGarou()} >Crea Garou</button>
+                    <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "33.33%", fontSize: "0.8vw", borderRadius: "0 5px 5px 0" }} onClick={() => this.props.creazionePng()} >Crea Png</button>
                 </div>
             )
         }
@@ -99,10 +101,10 @@ class SchedaUtente extends Component {
         if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' || JSON.parse(sessionStorage.getItem('utente')).tipo === 'master') {
             return (
                 <React.Fragment>
-                    <button className="btn btn-dark" style={{ marginTop: "5px",color: "#eeaa44", width: "80%" }} onClick={() => this.creaLocation()}>Creazione Location</button>
-                    <br />
-                    <button className="btn btn-dark" style={{ marginTop: "5px",color: "#eeaa44", width: "80%" }} onClick={() => this.modificaLocation()}>Modifica Location</button>
-                    <br />
+                    <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
+                        <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%", fontSize: "0.8vw" }} onClick={() => this.creaLocation()}>Crea Location</button>
+                        <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%", fontSize: "0.8vw" }} onClick={() => this.modificaLocation()}>Modifica Location</button>
+                    </div>
                 </React.Fragment>
             )
         }
@@ -180,29 +182,37 @@ class SchedaUtente extends Component {
                     <span className="font-lombardia" style={{ fontSize: "5vw" }}>Salute {JSON.parse(sessionStorage.getItem('utente')).nominativo}</span>
                 </div>
 
-                <div style={{position: "absolute", left: "2%", height: "80%", width: "23%" }}>
+                <div style={{ position: "absolute", left: "2%", height: "80%", width: "23%" }}>
                     <div style={{ height: "100%", display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
 
                         {/* -------------FLIP BOX------------------ */}
-                        <div className="square-box" style={{backgroundColor:"transparent", width:"75%"}}>
+                        <div className="square-box" style={{ backgroundColor: "transparent", width: "75%" }}>
                             <div className="flip-box square-content">
                                 <div className="flip-box-inner" >
 
                                     <div className="flip-box-front rounded-circle">
                                         <div style={{ width: "auto", height: "100%" }}>
-                                            <img className="tombaJPG rounded-circle" src={avatarEracle} alt="Paris" style={{ width: "auto", height: "100%" }} />
+
+                                            <SoundDiv suono={coinFlip}
+                                                contenuto={
+                                                    <img className="tombaJPG rounded-circle" src={avatarEracle} alt="Paris" style={{ width: "auto", height: "100%" }} />
+                                                }
+                                            />
+                                            
                                         </div>
                                     </div>
 
                                     <div className="flip-box-back rounded-circle" style={{ display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
+
                                         <div style={{ width: "80%", height: "auto" }}>
-                                            <u style={{fontSize:"1.2vw"}}>{JSON.parse(sessionStorage.getItem('utente')).nominativo}</u>
-                                            <br/> <br/>
-                                            <p style={{fontSize:"1vw"}}>{JSON.parse(sessionStorage.getItem('utente')).email}</p>
-                                            <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%", fontSize:"1vw" }} onClick={() => this.props.modificaUtente()}>Modifica Account</button>
+                                            <u style={{ fontSize: "1.2vw" }}>{JSON.parse(sessionStorage.getItem('utente')).nominativo}</u>
+                                            <br /> <br />
+                                            <p style={{ fontSize: "1vw" }}>{JSON.parse(sessionStorage.getItem('utente')).email}</p>
+                                            <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%", fontSize: "1vw" }} onClick={() => this.props.modificaUtente()}>Modifica Account</button>
                                         </div>
                                     </div>
-                                    
+
+
                                 </div>
                             </div>
                         </div>
@@ -213,9 +223,9 @@ class SchedaUtente extends Component {
                             {this.isAdmin()}
                             {this.isStandard()}
                             {this.isVip()}
-                            {this.creazioneLocation()}
                             {this.isMasterCreazionePg()}
                             {this.isMasterListe()}
+                            {this.creazioneLocation()}
                         </div>
                     </div>
                 </div>
