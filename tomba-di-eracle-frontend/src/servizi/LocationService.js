@@ -8,6 +8,10 @@ class LocationService {
         return axios.get(URL + 'macro')
     }
 
+    getLocationByDirezioneLibera(direzione) {
+        return axios.get(URL + direzione)
+    }
+
     validaCampiCreazione(location) {
         if(location.nome === '' || location.tipo === '' || location.ambiente === '' || location.urlImgGiorno === '' || location.urlAudio === '') {
             return false;
