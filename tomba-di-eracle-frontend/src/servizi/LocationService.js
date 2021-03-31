@@ -12,8 +12,12 @@ class LocationService {
         return axios.get(URL + direzione)
     }
 
+    creaLocation(locationCreata) {
+        return axios.post(URL,locationCreata)
+    }
+
     validaCampiCreazione(location) {
-        if(location.nome === '' || location.tipo === '' || location.ambiente === '' || location.urlImgGiorno === '' || location.urlAudio === '') {
+        if(location.nome === '' || location.tipo === '' || location.ambiente === '' || location.urlImgGiorno === '' || location.urlAudio === '' || location.ingresso === '') {
             return false;
         }
         return true;

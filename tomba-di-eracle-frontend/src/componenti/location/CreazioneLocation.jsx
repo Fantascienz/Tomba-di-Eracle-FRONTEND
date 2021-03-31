@@ -14,7 +14,7 @@ class CreazioneLocation extends Component {
         urlImgGiorno: '',
         urlImgNotte: '',
         urlAudio: '',
-        chiave: ''
+        chiave: '',
     }
 
     handleChange = (event) => {
@@ -24,13 +24,29 @@ class CreazioneLocation extends Component {
     }
 
     handleSubmit = (event) => {
-        event.preventDefault()
         if (LocationService.validaCampiCreazione(this.state)) {
-            console.log(this.state)
+            // event.preventDefault() // ELIMINA
+            let locationCreata = {
+                location: {
+                    nome: this.state.nome,
+                    ambiente: this.state.ambiente,
+                    ingresso: this.state.ingresso,
+                    urlImgGiorno: this.state.urlImgGiorno,
+                    urlImgNotte: this.state.urlImgNotte,
+                    urlAudio: this.state.urlAudio,
+                    chiave: this.state.chiave,
+                    creatore: JSON.parse(sessionStorage.getItem('utente'))
+                },
+                ingresso: this.state.ingresso
+            }
+            LocationService.creaLocation(locationCreata).then(
+               alert('Location creata con successo!')
+            )
         } else {
+            event.preventDefault()
             withReactContent(Swal).fire({
                 title: <div>
-                    <p>Nome,Ambiente,</p>
+                    <p>Nome,Ambiente,Ingresso</p>
                     <p>Immagine giorno e Audio</p>
                     <p>sono obbligatori!</p>
                 </div>
@@ -69,18 +85,19 @@ class CreazioneLocation extends Component {
                                 <input type="text" id="urlImgNotte" placeholder="URL Immagine Notte" onChange={this.handleChange} /> <br /> <br />
                                 <input type="text" id="urlAudio" placeholder="URL Audio" onChange={this.handleChange} /> <br /> <br />
                                 <input type="text" id="chiave" placeholder="Chiave d'accesso" onChange={this.handleChange} /> <br /> <br />
-                                <select name="ingresso" id="ingresso" onChange={this.handleChange} style={{ width: "100px" }}>
+                                <select name="ingresso" id="ingresso" onChange={this.handleChange} style={{ width: "150px" }}>
+                                    <option value="">Seleziona...</option>
                                     {JSON.parse(sessionStorage.getItem('locationsNordLibero')).map(location =>
-                                        <option value={location.id} key={location.id}>NORD di {location.nome}: {location.id}</option>
+                                        <option value={"nord "+location.id} key={location.id}>NORD di {location.nome}: {location.id}</option>
                                     )}
                                     {JSON.parse(sessionStorage.getItem('locationsEstLibero')).map(location =>
-                                        <option value={location.id} key={location.id}>EST di {location.nome}: {location.id}</option>
+                                        <option value={"est "+location.id} key={location.id}>EST di {location.nome}: {location.id}</option>
                                     )}
                                     {JSON.parse(sessionStorage.getItem('locationsSudLibero')).map(location =>
-                                        <option value={location.id} key={location.id}>SUD di {location.nome}: {location.id}</option>
+                                        <option value={"sud "+location.id} key={location.id}>SUD di {location.nome}: {location.id}</option>
                                     )}
                                     {JSON.parse(sessionStorage.getItem('locationsOvestLibero')).map(location =>
-                                        <option value={location.id} key={location.id}>OVEST di {location.nome}: {location.id}</option>
+                                        <option value={"ovest "+location.id} key={location.id}>OVEST di {location.nome}: {location.id}</option>
                                     )}
                                 </select> <br /><br />
                                 <button className="btn btn-dark">Crea</button>
