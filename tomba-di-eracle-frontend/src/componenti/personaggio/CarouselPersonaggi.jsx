@@ -7,6 +7,9 @@ import frecciaSX from '../../img/freccia_sx.png';
 import frecciaDX from '../../img/freccia_dx.png';
 import noPg from '../../img/no-pg.jpg'
 import cardFrame from '../../img/cardFrame.png'
+import DettagliPersonaggioBack from './DettagliPersonaggioBack';
+import { SoundDiv } from '../utils/SuonoSuImmagine'
+import cardFlip from '../../suoni/flip_card.mp3'
 
 
 
@@ -22,12 +25,35 @@ class CarouselPersonaggi extends Component {
     caroselloPersonaggi() {
         return (
             <Carousel interval={null}
-                prevIcon={<img src={frecciaDX} style={{ opacity: "none", marginLeft: "630px" }} height="55px" />} prevLabel={null}
-                nextIcon={<img src={frecciaSX} style={{ opacity: "none", marginRight: "630px" }} height="55px" />} nextLabel={null}>
+                prevIcon={<img src={frecciaDX} style={{ opacity: "none", marginLeft: "550px" }} height="55px" />} prevLabel={null}
+                nextIcon={<img src={frecciaSX} style={{ opacity: "none", marginRight: "550px" }} height="55px" />} nextLabel={null}
+                style={{ position: "relative", backgroundColor: "transparent", width: "250px", height: "auto" }}
+            >
                 {this.props.personaggiUtente && this.props.personaggiUtente.map(personaggio => {
                     return (
                         <Carousel.Item >
-                            <DettagliPersonaggio personaggio={personaggio} key={personaggio.id} style={{ position: "absolute", top: "0%", left: "0%", height: "100%", width: "100%", backgroundColor: "white" }} />
+                            <div className="flip-box" >
+
+                                <div className="flip-box-inner" >
+                                    <div className="flip-box-front" style={{ position: "absolute", top: "0", left: "0%", backgroundColor: "transparent" }}>
+
+                                        <SoundDiv suono={cardFlip}
+                                            contenuto={
+                                                <DettagliPersonaggio personaggio={personaggio} key={personaggio.id} />
+                                            }
+                                        />
+
+                                    </div>
+
+                                    <div className="flip-box-back" style={{ position: "relative", top: "0", left: "0%", backgroundImage:"none" }}>
+                                        
+                                        <div style={{ position: "absolute", top: "0", left: "0%", backgroundColor: "white", opacity:"0.3", width:"100%", height:"100%"  }}>
+                                        </div>
+                                        <DettagliPersonaggioBack personaggio={personaggio} key={personaggio.id} />
+                                    </div>
+                                </div>
+
+                            </div>
                         </Carousel.Item>
                     )
                 })}
@@ -70,7 +96,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         getPersonaggiUtente: (utente) => dispatch(getPersonaggiUtente(utente)),
-        
+
     }
 }
 
