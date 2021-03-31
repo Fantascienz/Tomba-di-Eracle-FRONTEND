@@ -96,10 +96,6 @@ class ListaUtenti extends Component {
         })
     }
 
-// componentDidUpdate() {
-//     alert('appodeito')
-// }
-
     render() {
         return (
             <React.Fragment>
