@@ -62,7 +62,21 @@ class CreazioneLocation extends Component {
     }
 
     componentDidMount() {
-        LocationService.getLocationDirezioniLibere()
+        LocationService.getLocationByDirezioneLibera('nord').then(res => {
+            sessionStorage.setItem('locationsNordLibero', JSON.stringify(res.data))
+        }).then(
+            LocationService.getLocationByDirezioneLibera('est').then(res => {
+                sessionStorage.setItem('locationsEstLibero', JSON.stringify(res.data))
+            })
+        ).then(
+            LocationService.getLocationByDirezioneLibera('sud').then(res => {
+                sessionStorage.setItem('locationsSudLibero', JSON.stringify(res.data))
+            })
+        ).then(
+            LocationService.getLocationByDirezioneLibera('ovest').then(res => {
+                sessionStorage.setItem('locationsOvestLibero', JSON.stringify(res.data))
+            })
+        )
     }
 
     render() {
@@ -75,16 +89,16 @@ class CreazioneLocation extends Component {
                             <h1 className="font-lombardia" style={{ fontSize: "5vw", color: "#eeaa44", textShadow: "2px 2px black" }}>Creazione Location Esterna</h1>
                             <br />
                             <form onSubmit={this.handleSubmit}>
-                                <input type="text" id="nome" placeholder="Nome" onChange={this.handleChange} style={{width: '50%'}} /> <br /> <br />
-                                <input type="text" id="ambiente" placeholder="Ambiente" onChange={this.handleChange} style={{width: '50%'}} /> <br /> <br />
-                                <input type="text" id="urlImgGiorno" placeholder="URL Immagine Giorno" onChange={this.handleChange} style={{width: '50%'}} /> <br /> <br />
-                                <input type="text" id="urlImgNotte" placeholder="URL Immagine Notte" onChange={this.handleChange} style={{width: '50%'}} /> <br /> <br />
-                                <input type="text" id="urlAudio" placeholder="URL Audio" onChange={this.handleChange} style={{width: '50%'}} /> <br /> <br />
-                                <input type="text" id="chiave" placeholder="Chiave d'accesso" onChange={this.handleChange} style={{width: '50%'}} /> <br /> <br />
-                                <input type="text" id="urlImgGiornoUmbra" placeholder="URL Immagine Giorno Umbra" onChange={this.handleChange} style={{width: '50%'}} /> <br /> <br />
-                                <input type="text" id="urlImgNotteUmbra" placeholder="URL Immagine Notte Umbra" onChange={this.handleChange} style={{width: '50%'}} /> <br /> <br />
-                                <input type="text" id="urlAudioUmbra" placeholder="URL Audio Umbra" onChange={this.handleChange} style={{width: '50%'}}/> <br /> <br />
-                                <select name="ingresso" id="ingresso" onChange={this.handleChange} style={{width: '50%'}}>
+                                <input type="text" id="nome" placeholder="Nome" onChange={this.handleChange} style={{ width: '50%' }} /> <br /> <br />
+                                <input type="text" id="ambiente" placeholder="Ambiente" onChange={this.handleChange} style={{ width: '50%' }} /> <br /> <br />
+                                <input type="text" id="urlImgGiorno" placeholder="URL Immagine Giorno" onChange={this.handleChange} style={{ width: '50%' }} /> <br /> <br />
+                                <input type="text" id="urlImgNotte" placeholder="URL Immagine Notte" onChange={this.handleChange} style={{ width: '50%' }} /> <br /> <br />
+                                <input type="text" id="urlAudio" placeholder="URL Audio" onChange={this.handleChange} style={{ width: '50%' }} /> <br /> <br />
+                                <input type="text" id="chiave" placeholder="Chiave d'accesso" onChange={this.handleChange} style={{ width: '50%' }} /> <br /> <br />
+                                <input type="text" id="urlImgGiornoUmbra" placeholder="URL Immagine Giorno Umbra" onChange={this.handleChange} style={{ width: '50%' }} /> <br /> <br />
+                                <input type="text" id="urlImgNotteUmbra" placeholder="URL Immagine Notte Umbra" onChange={this.handleChange} style={{ width: '50%' }} /> <br /> <br />
+                                <input type="text" id="urlAudioUmbra" placeholder="URL Audio Umbra" onChange={this.handleChange} style={{ width: '50%' }} /> <br /> <br />
+                                <select name="ingresso" id="ingresso" onChange={this.handleChange} style={{ width: '50%' }}>
                                     <option value="">Seleziona Ingresso</option>
                                     {JSON.parse(sessionStorage.getItem('locationsNordLibero')).map(location =>
                                         <option value={"nord " + location.id} key={location.id}>NORD di {location.nome}: {location.id}</option>

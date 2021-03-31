@@ -4,6 +4,10 @@ const URL = "http://localhost:8080/locations/"
 
 class LocationService {
 
+    delete(id) {
+       return axios.delete(URL + 'delete/' + id)
+    }
+
     getAllMacro() {
         return axios.get(URL + 'macro')
     }
@@ -46,6 +50,7 @@ class LocationService {
         this.getLocationByDirezioneLibera('ovest').then(res => {
             sessionStorage.setItem('locationsOvestLibero', JSON.stringify(res.data))
         })
+        return axios.get(URL + 'macro')
     }
 
     validaCampiCreazione(location) {
