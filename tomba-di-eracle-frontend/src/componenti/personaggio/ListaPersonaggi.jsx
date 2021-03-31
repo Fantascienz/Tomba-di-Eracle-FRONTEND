@@ -254,6 +254,10 @@ class ListaPersonaggi extends Component {
 
     }
 
+    resetFiltro = () => {
+        this.props.aggiornaLista()
+    }
+
     ordinaPerRazza = () => {
         this.props.ordinaPerRazza()
     }
@@ -316,7 +320,7 @@ class ListaPersonaggi extends Component {
                 <div className="table-responsive ombra" style={{ width: "100%", backgroundColor: "white" }}>
                     {/* <button className="btn btn-secondary" onClick={() => this.aggiorna()} >Aggiorna Lista</button> */}
                     <table className="table align-middle table-hover table-sm caption-top">
-                        <caption >Lista Personaggi <button className="btn btn-primary">Reset Filtro</button></caption>
+                        <caption >Lista Personaggi <button className="btn btn-primary" onClick={() => this.resetFiltro()}>Reset Filtro</button></caption>
                         <thead className="table-dark align-middle" align="center">
                             <tr style={{ color: "#eeaa44" }}>
                                 <th>Immagine</th>
