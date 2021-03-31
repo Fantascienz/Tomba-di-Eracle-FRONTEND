@@ -3,7 +3,7 @@ import { ThemeProvider } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-import { filtraListaRazza, modificaPersonaggio,getListaPersonaggi, ordinaPerRazza, ordinaPerNominativo, ordinaPerSesso, ordinaPerRango, ordinaPerDataCreazione, filtraListaStato } from '../../store/azioni/adminActions';
+import { filtraListaRazza, modificaPersonaggio, getListaPersonaggi, ordinaPerRazza, ordinaPerNominativo, ordinaPerSesso, ordinaPerRango, ordinaPerDataCreazione, filtraListaStato, getByRazzaAndStato } from '../../store/azioni/adminActions';
 
 class ListaPersonaggi extends Component {
 
@@ -24,7 +24,7 @@ class ListaPersonaggi extends Component {
     formModificaRango = (pg) => {
         return (
             <React.Fragment>
-                <input type="number" placeholder="Rango" min="0" max={this.maxRango(pg)} id="nuovoRango" onChange={this.handleChange} onFocus={(event) => event.target.value = this.state.nuovoRango} style={{width:"100%"}}/>
+                <input type="number" placeholder="Rango" min="0" max={this.maxRango(pg)} id="nuovoRango" onChange={this.handleChange} onFocus={(event) => event.target.value = this.state.nuovoRango} style={{ width: "100%" }} />
                 <button className="btn btn-secondary btn-sm" onClick={() => this.modificaRango(pg)} >Modifica</button>
             </React.Fragment>
         )
@@ -196,12 +196,62 @@ class ListaPersonaggi extends Component {
 
 
     handleFilterRazza = (e) => {
+        
+        if(e.target.value === "Reset" && this.props.filtroStato !== undefined) {
+            this.props.filtraListaStato(this.props.filtroStato)
+        }
+        if (this.props.filtroStato === 'Online') {
+            let filtro = {
+                razza: e.target.value,
+                stato: this.props.filtroStato
+            }
+
+            this.props.getByRazzaAndStato(filtro)
+        } else if (this.props.filtroStato === 'Offline') {
+            let filtro = {
+                razza: e.target.value,
+                stato: this.props.filtroStato
+            }
+
+            this.props.getByRazzaAndStato(filtro)
+        } else {
+
             this.props.filtraListaRazza(e.target.value)
-       
+        }
+
+
+
     }
 
     handleFilterStato = (e) => {
-        this.props.filtraListaStato(e.target.value)
+
+        if (e.target.value === "Reset" && this.props.filtroRazza === undefined) {
+            this.props.filtraListaStato(e.target.value)
+        } else if (e.target.value === "Reset" && this.props.filtroRazza !== undefined) {
+            this.props.filtraListaRazza(this.props.filtroRazza)
+        } else if (this.props.filtroRazza === "Umano") {
+            let filtro = {
+                razza: this.props.filtroRazza,
+                stato: e.target.value
+            }
+            this.props.getByRazzaAndStato(filtro)
+        } else if (this.props.filtroRazza === "Lupo") {
+            let filtro = {
+                razza: this.props.filtroRazza,
+                stato: e.target.value
+            }
+            this.props.getByRazzaAndStato(filtro)
+        } else if (this.props.filtroRazza === "Meticcio") {
+            let filtro = {
+                razza: this.props.filtroRazza,
+                stato: e.target.value
+            }
+            this.props.getByRazzaAndStato(filtro)
+        }
+        else {
+            this.props.filtraListaStato(e.target.value)
+        }
+
     }
 
     ordinaPerRazza = () => {
@@ -226,27 +276,29 @@ class ListaPersonaggi extends Component {
 
 
     renderFiltroRazza = () => {
-        
+
         return (
             <React.Fragment>
-                <select class="form-select"  onChange={this.handleFilterRazza} aria-label="Default select example">
+                <select class="form-select" onChange={this.handleFilterRazza} aria-label="Default select example">
                     <option value="" >Filtra</option>
-                    <option value="Umano">Umano</option>
-                    <option value="Lupo">Lupus</option>
-                    <option value="Meticcio">Metis</option>
+                    <option id="umano" value="Umano">Umano</option>
+                    <option id="lupo" value="Lupo">Lupus</option>
+                    <option id="meticcio" value="Meticcio">Metis</option>
+                    <option id="reset" value="Reset" >Reset Filtro</option>
                 </select>
             </React.Fragment>
         )
     }
 
-    renderFiltroRazza = () => {
-        
+    renderFiltroStato = () => {
+
         return (
             <React.Fragment>
-                <select class="form-select"  onChange={this.handleFilterStato} aria-label="Default select example">
+                <select class="form-select" onChange={this.handleFilterStato} aria-label="Default select example">
                     <option value="" >Filtra</option>
                     <option value="Online">Online</option>
                     <option value="Offline">Offline</option>
+                    <option value="Reset" >Reset Filtro</option>
                 </select>
             </React.Fragment>
         )
@@ -262,7 +314,7 @@ class ListaPersonaggi extends Component {
                     <table className="table align-middle table-hover table-sm caption-top">
                         <caption >Lista Personaggi</caption>
                         <thead className="table-dark align-middle" align="center">
-                            <tr style={{color:"#eeaa44"}}>
+                            <tr style={{ color: "#eeaa44" }}>
                                 <th>Immagine</th>
                                 <th>ID</th>
                                 <th><a href="#" onClick={() => this.ordinaPerNominativo()}>Nominativo</a> </th>
@@ -276,7 +328,7 @@ class ListaPersonaggi extends Component {
                                 <th>Sept</th>
                                 <th>Proprietario</th>
                                 <th><a href="#" onClick={() => this.ordinaPerDataCreazione()}>Data Creazione</a></th>
-                                <th>Stato {this.renderFiltroRazza()}</th>
+                                <th>Stato {this.renderFiltroStato()} </th>
                                 <th>Modifica Rango</th>
                                 <th>Modifica Nome Garou</th>
                                 <th>Modifica Tribù</th>
@@ -287,7 +339,7 @@ class ListaPersonaggi extends Component {
                         <tbody>
                             {JSON.parse(sessionStorage.getItem('listaPersonaggi')).map(pg =>
                                 <tr key={pg.id} align="center">
-                                    <td style={{ height: "100px", width: "auto", backgroundImage:`url('${pg.urlImmagine}')`, backgroundPosition:"center center", backgroundSize:"auto 100%", backgroundRepeat:"no-repeat" }}></td>
+                                    <td style={{ height: "100px", width: "auto", backgroundImage: `url('${pg.urlImmagine}')`, backgroundPosition: "center center", backgroundSize: "auto 100%", backgroundRepeat: "no-repeat" }}></td>
                                     <td>{pg.id}</td>
                                     <td>{pg.nominativo}</td>
                                     <td>{pg.sesso}</td>
@@ -320,9 +372,7 @@ const mapStateToProps = (state) => {
     return {
         listaPg: state.admin.listaPg,
         listaPgFiltrata: state.admin.listaPgFiltrata,
-        filtroUmano: state.admin.filtroUmano,
-        filtroLupo: state.admin.filtroLupo,
-        filtroMeticcio: state.admin.filtroMeticcio,
+        filtroRazza: state.admin.filtroRazza,
         filtroStato: state.admin.filtroStato
     }
 }
@@ -337,7 +387,8 @@ const mapDispatchToProps = (dispatch) => {
         ordinaPerNominativo: () => dispatch(ordinaPerNominativo()),
         ordinaPerSesso: () => dispatch(ordinaPerSesso()),
         ordinaPerRango: () => dispatch(ordinaPerRango()),
-        ordinaPerDataCreazione: () => dispatch(ordinaPerDataCreazione())
+        ordinaPerDataCreazione: () => dispatch(ordinaPerDataCreazione()),
+        getByRazzaAndStato: (filtro) => dispatch(getByRazzaAndStato(filtro))
 
     }
 }

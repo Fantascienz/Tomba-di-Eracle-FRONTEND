@@ -5,10 +5,8 @@ const initState = {
     listaPgFiltrata: [],
     redirect: '',
     visualizzaPgAdmin: false,
-    filtroUmano: false,
-    filtroLupo: false,
-    filtroMeticcio: false,
-    filtroStato: false
+    filtroRazza: '',
+    filtroStato: ''
 }
 
 const adminReducer = (state = initState, action) => {
@@ -31,38 +29,59 @@ const adminReducer = (state = initState, action) => {
         case 'FILTRA_LUPO':
             state = {
                 listaPgFiltrata: action.listaPgFiltrata,
-                filtroUmano: false,
-                filtroLupo: true,
-                filtroMeticcio: false
+                filtroRazza: action.filtroRazza
             }
             break;
         case 'FILTRA_UMANO':
             state = {
                 listaPgFiltrata: action.listaPgFiltrata,
-                filtroUmano: true,
-                filtroLupo: false,
-                filtroMeticcio: false
+                filtroRazza: action.filtroRazza
             }
             break;
         case 'FILTRA_METICCIO':
             state = {
                 listaPgFiltrata: action.listaPgFiltrata,
-                filtroUmano: false,
-                filtroLupo: false,
-                filtroMeticcio: true
+                filtroRazza: action.filtroRazza
             }
             break;
-        case 'FILTRA_STATO':
+        case 'FILTRA_STATO_ONLINE':
             state = {
                 listaPgFiltrata: action.listaPgFiltrata,
-                filtroStato: true
+                filtroStato: action.filtroStato
             }
+            break;
+        case 'FILTRA_STATO_OFFLINE':
+            state = {
+                listaPgFiltrata: action.listaPgFiltrata,
+                filtroStato: action.filtroStato
+            }
+            break;
+
+        case 'FILTRA_RAZZA_STATO_ONLINE':
+            state = {
+                listaPgFiltrata: action.listaPgFiltrata,
+                filtroRazza: action.filtroRazza,
+                filtroStato: action.filtroStato
+
+            }
+            break;
+        case 'FILTRA_RAZZA_STATO_OFFLINE':
+            state = {
+                listaPgFiltrata: action.listaPgFiltrata,
+                filtroRazza: action.filtroRazza,
+                filtroStato: action.filtroStato
+            }
+            break;
         case 'RESET_FILTRO_RAZZA':
             state = {
                 listaPgFiltrata: action.listaPgFiltrata,
-                filtroUmano: false,
-                filtroLupo: false,
-                filtroMeticcio:false
+                filtroRazza: action.filtroRazza
+            }
+            break;
+        case 'RESET_FILTRO_STATO':
+            state = {
+                listaPgFiltrata: action.listaPgFiltrata,
+                filtroStato: action.filtroStato
             }
             break;
         case 'ORDINA_PER_RAZZA':

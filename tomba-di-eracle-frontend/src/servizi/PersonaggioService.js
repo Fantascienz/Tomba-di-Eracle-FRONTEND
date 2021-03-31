@@ -48,6 +48,10 @@ class PersonaggioService {
         return axios.get(URL + 'orderDataCreazione')
     }
 
+    getByRazzaAndStato(filtro) {
+        return axios.post(URL + 'razzaAndStato', filtro)
+    }
+
     validazioneFormPersonaggio(personaggio) {
         if (personaggio.nominativo === ''
             || personaggio.sesso === ''

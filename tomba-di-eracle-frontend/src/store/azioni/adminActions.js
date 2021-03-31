@@ -86,31 +86,49 @@ export const visualizzaPgAdmin = () => {
 
 export const filtraListaRazza = (razza) => {
     return (dispatch) => {
-        PersonaggioService.getPersonaggiByRazza(razza).then(res => {
-            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
-            if(razza === 'Umano') {
-                dispatch({
-                    type: 'FILTRA_UMANO',
-                    listaPgFiltrata: res.data
+            if (razza === 'Umano') {
+                PersonaggioService.getPersonaggiByRazza(razza).then(res => {
+                    sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+                    dispatch({
+                        type: 'FILTRA_UMANO',
+                        listaPgFiltrata: res.data,
+                        filtroRazza: razza
+                    })
                 })
+
             } else if (razza === 'Lupo') {
-                dispatch({
-                    type: 'FILTRA_LUPO',
-                    listaPgFiltrata: res.data
+                PersonaggioService.getPersonaggiByRazza(razza).then(res => {
+                    sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+                    dispatch({
+                        type: 'FILTRA_LUPO',
+                        listaPgFiltrata: res.data,
+                        filtroRazza: razza
+                    })
                 })
+
             } else if (razza === 'Meticcio') {
-                dispatch({
-                    type: 'FILTRA_METICCIO',
-                    listaPgFiltrata: res.data
+                PersonaggioService.getPersonaggiByRazza(razza).then(res => {
+                    sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+                    dispatch({
+                        type: 'FILTRA_METICCIO',
+                        listaPgFiltrata: res.data,
+                        filtroRazza: razza
+                    })
                 })
-            } else if (razza === '') {
-                dispatch({
-                    type: 'RESET_FILTRO_RAZZA',
-                    listaPgFiltrata: res.data
+                
+            } else if (razza === 'Reset') {
+                PersonaggioService.getAllPersonaggi().then(res => {
+                    sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+                    dispatch({
+                        type: 'RESET_FILTRO_RAZZA',
+                        listaPgFiltrata: res.data,
+                        filtroRazza: ''
+                    })
                 })
+
             }
-            
-        })
+
+        
 
     }
 }
@@ -118,13 +136,35 @@ export const filtraListaRazza = (razza) => {
 
 export const filtraListaStato = (stato) => {
     return (dispatch) => {
-        PersonaggioService.getPersonaggiByStato(stato).then(res => {
-            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
-            dispatch({
-                type: 'FILTRA_STATO',
-                listaPgFiltrata: res.data
-            })
-        })
+            if(stato === 'Online') {
+                PersonaggioService.getPersonaggiByStato(stato).then(res => {
+                    sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+                    dispatch({
+                        type: 'FILTRA_STATO_ONLINE',
+                        listaPgFiltrata: res.data,
+                        filtroStato: stato
+                    })
+                })
+            } else if (stato === 'Offline') {
+                PersonaggioService.getPersonaggiByStato(stato).then(res => {
+                    sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+                    dispatch({
+                        type: 'FILTRA_STATO_OFFLINE',
+                        listaPgFiltrata: res.data,
+                        filtroStato: stato
+                    })
+                })
+            } else if (stato === 'Reset') {
+                PersonaggioService.getAllPersonaggi().then(res => {
+                    sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+                    dispatch({
+                        type: 'RESET_FILTRO_STATO',
+                        listaPgFiltrata: res.data,
+                        filtroStato: ''
+                    })
+                })
+            }
+            
     }
 }
 
@@ -185,5 +225,32 @@ export const ordinaPerDataCreazione = () => {
                 listaPgFiltrata: res.data
             })
         })
+    }
+}
+
+export const getByRazzaAndStato = (filtro) => {
+    return (dispatch) => {
+        if(filtro.stato === 'Online') {
+            PersonaggioService.getByRazzaAndStato(filtro).then(res => {
+                sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+                dispatch({
+                    type: 'FILTRA_RAZZA_STATO_ONLINE',
+                    listaPgFiltrata: res.data,
+                    filtroRazza: filtro.razza,
+                    filtroStato: filtro.stato
+                })
+            })
+        } else if (filtro.stato === 'Offline') {
+            PersonaggioService.getByRazzaAndStato(filtro).then(res => {
+                sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+                dispatch({
+                    type: 'FILTRA_RAZZA_STATO_OFFLINE',
+                    listaPgFiltrata: res.data,
+                    filtroRazza: filtro.razza,
+                    filtroStato: filtro.stato
+                })
+            })
+        }
+        
     }
 }
