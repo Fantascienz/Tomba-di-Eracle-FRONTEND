@@ -110,6 +110,13 @@ const adminReducer = (state = initState, action) => {
                 listaPgFiltrata: action.listaPgFiltrata
             }
             break;
+        case 'ORDINA_PER_ID':
+            state = {
+                listaPgFiltrata: action.listaPgFiltrata
+            }
+            break;
+        default:
+            break;
     }
     return state;
 }

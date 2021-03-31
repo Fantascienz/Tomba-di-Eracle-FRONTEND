@@ -228,6 +228,18 @@ export const ordinaPerDataCreazione = () => {
     }
 }
 
+export const ordinaPerId = () => {
+    return (dispatch) => {
+        PersonaggioService.getAllOrderById().then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_ID',
+                listaPgFiltrata: res.data
+            })
+        })
+    }
+}
+
 export const getByRazzaAndStato = (filtro) => {
     return (dispatch) => {
         if(filtro.stato === 'Online') {
