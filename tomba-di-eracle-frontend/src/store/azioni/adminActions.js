@@ -88,12 +88,43 @@ export const filtraListaRazza = (razza) => {
     return (dispatch) => {
         PersonaggioService.getPersonaggiByRazza(razza).then(res => {
             sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            if(razza === 'Umano') {
+                dispatch({
+                    type: 'FILTRA_UMANO',
+                    listaPgFiltrata: res.data
+                })
+            } else if (razza === 'Lupo') {
+                dispatch({
+                    type: 'FILTRA_LUPO',
+                    listaPgFiltrata: res.data
+                })
+            } else if (razza === 'Meticcio') {
+                dispatch({
+                    type: 'FILTRA_METICCIO',
+                    listaPgFiltrata: res.data
+                })
+            } else if (razza === '') {
+                dispatch({
+                    type: 'RESET_FILTRO_RAZZA',
+                    listaPgFiltrata: res.data
+                })
+            }
+            
+        })
+
+    }
+}
+
+
+export const filtraListaStato = (stato) => {
+    return (dispatch) => {
+        PersonaggioService.getPersonaggiByStato(stato).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
             dispatch({
-                type: 'FILTRA_RAZZA',
+                type: 'FILTRA_STATO',
                 listaPgFiltrata: res.data
             })
         })
-
     }
 }
 
@@ -139,6 +170,18 @@ export const ordinaPerRango = () => {
             sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
             dispatch({
                 type: 'ORDINA_PER_RANGO',
+                listaPgFiltrata: res.data
+            })
+        })
+    }
+}
+
+export const ordinaPerDataCreazione = () => {
+    return (dispatch) => {
+        PersonaggioService.getAllOrderByDataCreazione().then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_DATA_CREAZIONE',
                 listaPgFiltrata: res.data
             })
         })

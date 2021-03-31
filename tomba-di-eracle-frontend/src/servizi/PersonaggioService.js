@@ -21,7 +21,11 @@ class PersonaggioService {
     }
 
     getPersonaggiByRazza(razza)  {
-        return axios.get(URL + razza)
+        return axios.get(URL + 'filtraRazza/' + razza)
+    }
+
+    getPersonaggiByStato(stato) {
+        return axios.get(URL + 'filtraStato/' + stato)
     }
 
     getAllOrderByRazza() {
@@ -38,6 +42,10 @@ class PersonaggioService {
 
     getAllOrderByRango() {
         return axios.get(URL + 'orderRango')
+    }
+
+    getAllOrderByDataCreazione() {
+        return axios.get(URL + 'orderDataCreazione')
     }
 
     validazioneFormPersonaggio(personaggio) {

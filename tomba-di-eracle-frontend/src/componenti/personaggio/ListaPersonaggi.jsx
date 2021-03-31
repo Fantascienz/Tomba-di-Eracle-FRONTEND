@@ -3,7 +3,7 @@ import { ThemeProvider } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-import { filtraListaRazza, modificaPersonaggio,getListaPersonaggi, ordinaPerRazza, ordinaPerNominativo, ordinaPerSesso, ordinaPerRango } from '../../store/azioni/adminActions';
+import { filtraListaRazza, modificaPersonaggio,getListaPersonaggi, ordinaPerRazza, ordinaPerNominativo, ordinaPerSesso, ordinaPerRango, ordinaPerDataCreazione, filtraListaStato } from '../../store/azioni/adminActions';
 
 class ListaPersonaggi extends Component {
 
@@ -17,7 +17,6 @@ class ListaPersonaggi extends Component {
             nuovoBranco: '',
             nuovoRuoloSept: '',
             nuovoSept: '',
-            razza: ''
 
         }
 
@@ -196,10 +195,13 @@ class ListaPersonaggi extends Component {
 
 
 
-    handleFilter = (e) => {
-        
+    handleFilterRazza = (e) => {
             this.props.filtraListaRazza(e.target.value)
        
+    }
+
+    handleFilterStato = (e) => {
+        this.props.filtraListaStato(e.target.value)
     }
 
     ordinaPerRazza = () => {
@@ -218,16 +220,33 @@ class ListaPersonaggi extends Component {
         this.props.ordinaPerRango()
     }
 
+    ordinaPerDataCreazione = () => {
+        this.props.ordinaPerDataCreazione()
+    }
+
 
     renderFiltroRazza = () => {
         
         return (
             <React.Fragment>
-                <select class="form-select"  onChange={this.handleFilter} aria-label="Default select example">
+                <select class="form-select"  onChange={this.handleFilterRazza} aria-label="Default select example">
                     <option value="" >Filtra</option>
                     <option value="Umano">Umano</option>
                     <option value="Lupo">Lupus</option>
                     <option value="Meticcio">Metis</option>
+                </select>
+            </React.Fragment>
+        )
+    }
+
+    renderFiltroRazza = () => {
+        
+        return (
+            <React.Fragment>
+                <select class="form-select"  onChange={this.handleFilterStato} aria-label="Default select example">
+                    <option value="" >Filtra</option>
+                    <option value="Online">Online</option>
+                    <option value="Offline">Offline</option>
                 </select>
             </React.Fragment>
         )
@@ -256,6 +275,8 @@ class ListaPersonaggi extends Component {
                                 <th>Branco</th>
                                 <th>Sept</th>
                                 <th>Proprietario</th>
+                                <th><a href="#" onClick={() => this.ordinaPerDataCreazione()}>Data Creazione</a></th>
+                                <th>Stato {this.renderFiltroRazza()}</th>
                                 <th>Modifica Rango</th>
                                 <th>Modifica Nome Garou</th>
                                 <th>Modifica Tribù</th>
@@ -278,6 +299,8 @@ class ListaPersonaggi extends Component {
                                     <td>{pg.branco !== null ? pg.branco : '/---/'}</td>
                                     <td>{pg.sept !== null ? pg.sept : '/---/'}</td>
                                     <td><p>ID: {pg.utente.id}</p> <p>{pg.utente.nominativo}</p> <p>{pg.utente.email}</p></td>
+                                    <td>{pg.dataCreazione}</td>
+                                    <td>{pg.stato}</td>
                                     <td>{this.formModificaRango(pg)}</td>
                                     <td>{this.formModificaNomeGarou(pg)}</td>
                                     <td>{this.formModificaTribu(pg)}</td>
@@ -297,7 +320,10 @@ const mapStateToProps = (state) => {
     return {
         listaPg: state.admin.listaPg,
         listaPgFiltrata: state.admin.listaPgFiltrata,
-        filtroRazza: state.admin.razza
+        filtroUmano: state.admin.filtroUmano,
+        filtroLupo: state.admin.filtroLupo,
+        filtroMeticcio: state.admin.filtroMeticcio,
+        filtroStato: state.admin.filtroStato
     }
 }
 
@@ -306,10 +332,13 @@ const mapDispatchToProps = (dispatch) => {
         aggiornaLista: () => dispatch(getListaPersonaggi()),
         modificaPg: (pg) => dispatch(modificaPersonaggio(pg)),
         filtraListaRazza: (razza) => dispatch(filtraListaRazza(razza)),
+        filtraListaStato: (stato) => dispatch(filtraListaStato(stato)),
         ordinaPerRazza: () => dispatch(ordinaPerRazza()),
         ordinaPerNominativo: () => dispatch(ordinaPerNominativo()),
         ordinaPerSesso: () => dispatch(ordinaPerSesso()),
-        ordinaPerRango: () => dispatch(ordinaPerRango())
+        ordinaPerRango: () => dispatch(ordinaPerRango()),
+        ordinaPerDataCreazione: () => dispatch(ordinaPerDataCreazione())
+
     }
 }
 
