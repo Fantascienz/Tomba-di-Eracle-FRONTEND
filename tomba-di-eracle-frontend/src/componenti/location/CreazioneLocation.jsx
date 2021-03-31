@@ -15,6 +15,9 @@ class CreazioneLocation extends Component {
         urlImgNotte: '',
         urlAudio: '',
         chiave: '',
+        urlImgGiornoUmbra: '',
+        urlImgNotteUmbra: '',
+        urlAudioUmbra: ''
     }
 
     handleChange = (event) => {
@@ -25,7 +28,6 @@ class CreazioneLocation extends Component {
 
     handleSubmit = (event) => {
         if (LocationService.validaCampiCreazione(this.state)) {
-            // event.preventDefault() // ELIMINA
             let locationCreata = {
                 location: {
                     nome: this.state.nome,
@@ -37,10 +39,15 @@ class CreazioneLocation extends Component {
                     chiave: this.state.chiave,
                     creatore: JSON.parse(sessionStorage.getItem('utente'))
                 },
-                ingresso: this.state.ingresso
+                ingresso: this.state.ingresso,
+                umbra: {
+                    urlImgGiorno: this.state.urlImgGiornoUmbra,
+                    urlImgNotte: this.state.urlImgNotteUmbra,
+                    urlAudio: this.state.urlAudioUmbra
+                }
             }
             LocationService.creaLocation(locationCreata).then(
-               alert('Location creata con successo!')
+                alert('Location creata con successo!')
             )
         } else {
             event.preventDefault()
@@ -55,18 +62,7 @@ class CreazioneLocation extends Component {
     }
 
     componentDidMount() {
-        LocationService.getLocationByDirezioneLibera('nord').then(res => {
-            sessionStorage.setItem('locationsNordLibero', JSON.stringify(res.data))
-        })
-        LocationService.getLocationByDirezioneLibera('est').then(res => {
-            sessionStorage.setItem('locationsEstLibero', JSON.stringify(res.data))
-        })
-        LocationService.getLocationByDirezioneLibera('sud').then(res => {
-            sessionStorage.setItem('locationsSudLibero', JSON.stringify(res.data))
-        })
-        LocationService.getLocationByDirezioneLibera('ovest').then(res => {
-            sessionStorage.setItem('locationsOvestLibero', JSON.stringify(res.data))
-        })
+        LocationService.getLocationDirezioniLibere()
     }
 
     render() {
@@ -79,25 +75,28 @@ class CreazioneLocation extends Component {
                             <h1 className="font-lombardia" style={{ fontSize: "5vw", color: "#eeaa44", textShadow: "2px 2px black" }}>Creazione Location Esterna</h1>
                             <br />
                             <form onSubmit={this.handleSubmit}>
-                                <input type="text" id="nome" placeholder="Nome" onChange={this.handleChange} /> <br /> <br />
-                                <input type="text" id="ambiente" placeholder="Ambiente" onChange={this.handleChange} /> <br /> <br />
-                                <input type="text" id="urlImgGiorno" placeholder="URL Immagine Giorno" onChange={this.handleChange} /> <br /> <br />
-                                <input type="text" id="urlImgNotte" placeholder="URL Immagine Notte" onChange={this.handleChange} /> <br /> <br />
-                                <input type="text" id="urlAudio" placeholder="URL Audio" onChange={this.handleChange} /> <br /> <br />
-                                <input type="text" id="chiave" placeholder="Chiave d'accesso" onChange={this.handleChange} /> <br /> <br />
-                                <select name="ingresso" id="ingresso" onChange={this.handleChange} style={{ width: "150px" }}>
-                                    <option value="">Seleziona...</option>
+                                <input type="text" id="nome" placeholder="Nome" onChange={this.handleChange} style={{width: '50%'}} /> <br /> <br />
+                                <input type="text" id="ambiente" placeholder="Ambiente" onChange={this.handleChange} style={{width: '50%'}} /> <br /> <br />
+                                <input type="text" id="urlImgGiorno" placeholder="URL Immagine Giorno" onChange={this.handleChange} style={{width: '50%'}} /> <br /> <br />
+                                <input type="text" id="urlImgNotte" placeholder="URL Immagine Notte" onChange={this.handleChange} style={{width: '50%'}} /> <br /> <br />
+                                <input type="text" id="urlAudio" placeholder="URL Audio" onChange={this.handleChange} style={{width: '50%'}} /> <br /> <br />
+                                <input type="text" id="chiave" placeholder="Chiave d'accesso" onChange={this.handleChange} style={{width: '50%'}} /> <br /> <br />
+                                <input type="text" id="urlImgGiornoUmbra" placeholder="URL Immagine Giorno Umbra" onChange={this.handleChange} style={{width: '50%'}} /> <br /> <br />
+                                <input type="text" id="urlImgNotteUmbra" placeholder="URL Immagine Notte Umbra" onChange={this.handleChange} style={{width: '50%'}} /> <br /> <br />
+                                <input type="text" id="urlAudioUmbra" placeholder="URL Audio Umbra" onChange={this.handleChange} style={{width: '50%'}}/> <br /> <br />
+                                <select name="ingresso" id="ingresso" onChange={this.handleChange} style={{width: '50%'}}>
+                                    <option value="">Seleziona Ingresso</option>
                                     {JSON.parse(sessionStorage.getItem('locationsNordLibero')).map(location =>
-                                        <option value={"nord "+location.id} key={location.id}>NORD di {location.nome}: {location.id}</option>
+                                        <option value={"nord " + location.id} key={location.id}>NORD di {location.nome}: {location.id}</option>
                                     )}
                                     {JSON.parse(sessionStorage.getItem('locationsEstLibero')).map(location =>
-                                        <option value={"est "+location.id} key={location.id}>EST di {location.nome}: {location.id}</option>
+                                        <option value={"est " + location.id} key={location.id}>EST di {location.nome}: {location.id}</option>
                                     )}
                                     {JSON.parse(sessionStorage.getItem('locationsSudLibero')).map(location =>
-                                        <option value={"sud "+location.id} key={location.id}>SUD di {location.nome}: {location.id}</option>
+                                        <option value={"sud " + location.id} key={location.id}>SUD di {location.nome}: {location.id}</option>
                                     )}
                                     {JSON.parse(sessionStorage.getItem('locationsOvestLibero')).map(location =>
-                                        <option value={"ovest "+location.id} key={location.id}>OVEST di {location.nome}: {location.id}</option>
+                                        <option value={"ovest " + location.id} key={location.id}>OVEST di {location.nome}: {location.id}</option>
                                     )}
                                 </select> <br /><br />
                                 <button className="btn btn-dark">Crea</button>

@@ -10,6 +10,8 @@ import { browserHistory } from "../.."
 import { visualizzaListaPg, visualizzaPgMaster } from '../../store/azioni/masterActions';
 import { SoundDiv } from '../utils/SuonoSuImmagine'
 import coinFlip from '../../suoni/flip_coin.mp3'
+import LocationService from '../../servizi/LocationService';
+
 
 class SchedaUtente extends Component {
 
@@ -112,6 +114,7 @@ class SchedaUtente extends Component {
 
 
     creaLocation = () => {
+        LocationService.getLocationDirezioniLibere()
         browserHistory.push('creazioneLocation')
         browserHistory.go()
     }
