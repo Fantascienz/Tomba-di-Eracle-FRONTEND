@@ -12,11 +12,15 @@ import frecciaGIU from '../../img/freccia_giu.png'
 import avatarEracle from '../../img/eracle.png'
 import bashImpact from '../../suoni/bash_impact.mp3'
 import { SoundImage, SoundDiv } from '../utils/SuonoSuImmagine'
+import DettagliPersonaggio from '../personaggio/DettagliPersonaggio'
 
 
 class Gamepage extends Component {
 
     render() {
+
+        const PG = JSON.parse(sessionStorage.getItem('pgAttivo'));
+
         return (
             <div style={{ position: "absolute", top: "0", height: "100%", width: "100%", backgroundColor: "dimgray" }}>
 
@@ -88,10 +92,9 @@ class Gamepage extends Component {
 
                 <div className="chat-sezione">
 
-                    <SoundDiv   suono={bashImpact} 
-                                contenuto={<img src="http://t1.gstatic.com/licensed-image?q=tbn:ANd9GcStRMw1nJOUYDmzdtJnwdNeVl8n3gxKs2GD_uWh2uf6Vte6eLvjQn98PnvT3uUqZ572BkhKa8YO-eAYwWjPvBM" style={{height:"50px", width:"50px"}}/>}
-                                stile={{height:"50px", width:"50px"}}/>
-
+                    <div title={PG.nominativo} style={{backgroundColor:"transparent", position:"absolute", bottom:"10px", left:"10px", width:"100px", height:"100px"}}>
+                        <DettagliPersonaggio personaggio={PG} altezza="100px" larghezza="auto" immagine={PG.urlImmagine} dimImmagine="100px auto"/>
+                    </div>
 
                 </div>
             </div>

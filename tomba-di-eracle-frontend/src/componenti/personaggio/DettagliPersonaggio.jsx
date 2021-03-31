@@ -12,53 +12,31 @@ class DettagliPersonaggio extends Component {
         this.props.toModificaPersonaggio(singleCharacter)
     }
 
-    viewCard(singleCharacter) {
+    viewCard(singleCharacter, altezza, larghezza, bottone, immagine, dimImmagine) {
         return (
-            // <div className="card" style={{
-            //     backgroundImage: `url(${singleCharacter.urlImmagine})`, backgroundSize: "auto 100%", backgroundRepeat: "no-repeat", backgroundPosition: "center center",
-            //     backgroundColor: "transparent", width: "250px", height: "350px"
-            // }}>
-            //     <div style={{
-            //         position: "relative", width: "100%", height: "100%",
-            //         backgroundImage: `url(${cardFrame})`, backgroundSize: "100% 100%", backgroundRepeat: "no-repeat", backgroundPosition: "center center",
-            //     }}>
-            //         <div style={{ position: "absolute", bottom: "0%", width: "100%", height: "100%" }}>
-            //             <div className="flip-box" style={{ position: "absolute", top: "0", backgroundColor: "transparent", width: "100%", height: "100%" }}>
-            //                 <div className="flip-box-inner" style={{ position: "absolute", bottom: "7%", backgroundColor: "transparent", width: "100%", height: "auto" }}>
-
-            //                     <div className="flip-box-front" style={{ position: "absolute", bottom:"0%", backgroundColor: "transparent", width: "100%", height: "auto" }}>
-            //                         <button className="btn-gold" style={{ width: "80%", height: "10%" }} ><b className="font-lombardia" style={{fontSize:"1.5vw"}}>{singleCharacter.nominativo}</b></button>
-            //                     </div>
-
-            //                     <div className="flip-box-back" style={{ backgroundImage:"none", position: "absolute", bottom:"0%", backgroundColor: "transparent", width: "100%", height: "auto" }}>
-            //                         <button className="btn-gold" style={{ width: "80%", height: "10%" }} onClick={() => this.modificaPersonaggio(singleCharacter)}>Modifica</button>
-            //                         <button className="btn-gold" style={{ width: "80%", height: "10%" }} onClick={() => this.setPGAttivo(singleCharacter)}>Gioca</button>
-            //                     </div>
-            //                 </div>
-            //             </div>
-            //         </div>
-            //     </div>
-            // </div>
 
             <div className="card" style={{
-                backgroundImage: `url(${singleCharacter.urlImmagine})`, backgroundSize: "auto 100%", backgroundRepeat: "no-repeat", backgroundPosition: "center center",
-                backgroundColor: "transparent", width: "250px", height: "350px"
+                backgroundColor: "transparent", width: `${larghezza}`, height: `${altezza}`
             }}>
-                <div style={{
-                    position: "relative", width: "100%", height: "100%",
-                    backgroundImage: `url(${cardFrame})`, backgroundSize: "100% 100%", backgroundRepeat: "no-repeat", backgroundPosition: "center center",
-                }}>
-                    <div style={{ position: "absolute", bottom: "7%", backgroundColor: "transparent", width: "100%", height: "auto" }}>
 
-                        <div style={{ position: "absolute", bottom: "0%", backgroundColor: "transparent", width: "100%", height: "auto" }}>
-                            <button className="btn-gold" style={{ width: "80%", height: "10%" }} ><b className="font-lombardia" style={{ fontSize: "1.5vw" }}>{singleCharacter.nominativo}</b></button>
+                <div className="card-immagine-personaggio" style={{ backgroundImage: `url('${immagine}')`, backgroundSize: `${dimImmagine}`}}></div>
+
+                <div className="card-immagine-cornice" style={{ backgroundImage: `url(${cardFrame})`}}>
+                    {bottone ?
+                        <div className="card-posizione-pulsanti">
+
+                            <div className="centrato" style={{ position: "absolute", bottom: "0%", backgroundColor: "transparent", width: "100%", height: "auto" }}>
+                                <div className="banner-gold" style={{ width: "80%", height: "10%" }} ><b className="font-lombardia" style={{ fontSize: "1.5vw" }}>{singleCharacter.nominativo}</b></div>
+                            </div>
+
                         </div>
-
-                    </div>
+                    : null}
                 </div>
+
             </div>
         )
     }
+
 
     setPGAttivo = (personaggio) => {
         sessionStorage.setItem('pgAttivo', JSON.stringify(personaggio))
@@ -69,9 +47,14 @@ class DettagliPersonaggio extends Component {
 
     render() {
         const { personaggio } = this.props
+        var { altezza } = this.props
+        var { larghezza } = this.props
+        var { bottone } = this.props
+        var { immagine } = this.props
+        var { dimImmagine } = this.props
         return (
             <div>
-                {this.viewCard(personaggio)}
+                {this.viewCard(personaggio, altezza, larghezza, bottone, immagine, dimImmagine)}
             </div>
         );
     }

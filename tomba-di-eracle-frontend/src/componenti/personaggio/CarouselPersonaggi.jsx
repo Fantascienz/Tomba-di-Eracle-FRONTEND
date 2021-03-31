@@ -39,15 +39,15 @@ class CarouselPersonaggi extends Component {
 
                                         <SoundDiv suono={cardFlip}
                                             contenuto={
-                                                <DettagliPersonaggio personaggio={personaggio} key={personaggio.id} />
+                                                <DettagliPersonaggio personaggio={personaggio} altezza="350px" larghezza="100%" bottone key={personaggio.id} immagine={personaggio.urlImmagine} dimImmagine="auto 100%" />
                                             }
                                         />
 
                                     </div>
 
-                                    <div className="flip-box-back" style={{ position: "relative", top: "0", left: "0%", backgroundImage:"none" }}>
-                                        
-                                        <div style={{ position: "absolute", top: "0", left: "0%", backgroundColor: "white", opacity:"0.3", width:"100%", height:"100%"  }}>
+                                    <div className="flip-box-back" style={{ position: "relative", top: "0", left: "0%", backgroundImage: "none" }}>
+
+                                        <div style={{ position: "absolute", top: "0", left: "0%", backgroundColor: "white", opacity: "0.3", width: "100%", height: "100%" }}>
                                         </div>
                                         <DettagliPersonaggioBack personaggio={personaggio} key={personaggio.id} />
                                     </div>
@@ -63,14 +63,33 @@ class CarouselPersonaggi extends Component {
 
     cardPersonaggioVuoto() {
         return (
-            <div className="card" style={{ backgroundImage: `url(${noPg})`, backgroundSize: "auto 100%", backgroundRepeat: "no-repeat", backgroundPosition: "center center", backgroundColor: "transparent", width: "85%", height: "450px" }}>
-                <div style={{ height: "100%", display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
-                    <img src={cardFrame} alt="..." style={{ height: "100%", width: "105%", boxShadow: "0 16px 16px 0 rgba(0,0,0,2), 0 16px 16px 0 rgba(0,0,0,2)" }} />
-                    <div className={"card-body"} style={{ position: "absolute", bottom: "5%", width: "100%" }}>
-                        <button className="btn-gold-disabled" style={{ width: "100%" }} disabled>Nessun Personaggio Creato</button>
+            <Carousel interval={null}
+                prevIcon={null} prevLabel={null} nextIcon={null} nextLabel={null}
+                style={{ position: "relative", backgroundColor: "transparent", width: "250px", height: "auto" }}
+            >
+                <Carousel.Item >
+                    <div style={{ position: "relative", top: "0", left: "0%", backgroundColor: "transparent" }}>
+
+                        <div className="card" style={{
+                            backgroundColor: "transparent", width: "100%", height: "350px"
+                        }}>
+
+                            <div className="card-immagine-personaggio" style={{ backgroundImage: `url('${noPg}')`, backgroundSize: "auto 100%" }}></div>
+
+                            <div className="card-immagine-cornice" style={{ backgroundImage: `url(${cardFrame})` }}>
+                                    <div className="card-posizione-pulsanti">
+
+                                        <div className="centrato" style={{ position: "absolute", bottom: "0%", backgroundColor: "transparent", width: "100%", height: "auto" }}>
+                                            <div className="banner-gold" style={{ width: "80%", height: "10%" }} ><b className="font-lombardia" style={{ fontSize: "1.5vw" }}>Nessun Personaggio Creato</b></div>
+                                        </div>
+
+                                    </div>
+                            </div>
+
+                        </div>
                     </div>
-                </div>
-            </div>
+                </Carousel.Item>
+            </Carousel>
         )
     }
 
