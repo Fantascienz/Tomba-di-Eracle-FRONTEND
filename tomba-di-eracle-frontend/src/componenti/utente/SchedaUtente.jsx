@@ -120,6 +120,7 @@ class SchedaUtente extends Component {
     }
 
     modificaLocation = () => {
+        LocationService.getAllEsterne()
         browserHistory.push('modificaLocation')
         browserHistory.go()
     }

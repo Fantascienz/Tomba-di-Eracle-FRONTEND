@@ -8,6 +8,23 @@ class LocationService {
         return axios.get(URL + 'macro')
     }
 
+    getAllEsterne() {
+        this.getEsterneReame().then(res =>
+            sessionStorage.setItem('listaEsterneReame', JSON.stringify(res.data))
+        )
+        this.getEsterneUmbra().then(res =>
+            sessionStorage.setItem('listaEsterneUmbra', JSON.stringify(res.data))
+        )
+    }
+
+    getEsterneReame() {
+        return axios.get(URL + 'esterne/reame')
+    }
+
+    getEsterneUmbra() {
+        return axios.get(URL + 'esterne/umbra')
+    }
+
     getLocationByDirezioneLibera(direzione) {
         return axios.get(URL + direzione)
     }

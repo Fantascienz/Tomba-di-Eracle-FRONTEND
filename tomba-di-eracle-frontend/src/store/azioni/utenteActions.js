@@ -19,6 +19,8 @@ export const login = (utente) => {
                         sessionStorage.setItem('listaMacroLocation', JSON.stringify(res.data))
                     })
                 ).then(
+                    LocationService.getAllEsterne()
+                ).then(
                     dispatch({
                         type: 'LOGIN_UTENTE',
                         utente: utente,
