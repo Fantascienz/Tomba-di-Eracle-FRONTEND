@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PersonaggioService from "../../servizi/PersonaggioService";
 import { modificaPersonaggio } from "../../store/azioni/personaggioActions";
+import ModificaPersonaggioForm from "../forms/ModificaPersonaggioForm";
 import Header from "../layout/Header";
 
 class ModificaPersonaggio extends Component {
@@ -16,10 +17,6 @@ class ModificaPersonaggio extends Component {
         dataCreazione: JSON.parse(sessionStorage.getItem('personaggio')).dataCreazione,
         id: JSON.parse(sessionStorage.getItem('personaggio')).id
 
-    }
-
-
-    componentDidMount() {
     }
 
     handleChange = (e) => {
@@ -41,45 +38,8 @@ class ModificaPersonaggio extends Component {
                 <Header />
                 <div className="corpoComponente">
                     <div style={{ height: "100%", display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
-
                         <div className="container" style={{ width: "50%" }}>
-                            <form onSubmit={this.handleSubmit}>
-                                <div className="input-group">
-                                    <span className="input-group-text" style={{ width: "20%" }}>Nome completo</span>
-                                    <input  placeholder={this.state.nominativo} className="form-control" type="text" id="nominativo" onChange={this.handleChange} value={this.state.nominativo} />
-                                </div>
-
-                                <div className="input-group">
-                                    <span className="input-group-text" style={{ width: "20%" }}>Sesso</span>
-                                    <select className="form-select" id="sesso" value={this.state.sesso} onChange={this.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)" }}>
-                                        <option defaultValue="">Sesso:</option>
-                                        <option value="M">Uomo</option>
-                                        <option value="F">Donna</option>
-                                    </select>
-                                </div>
-
-                                <div className="input-group">
-                                    <span className="input-group-text" style={{ width: "20%" }}>Rango</span>
-                                    <select className="form-select" id="rango" value={this.state.rango} onChange={this.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)" }}>
-                                        <option defaultValue="" >Rango</option>
-                                        <option value="0">0</option>
-                                    </select>
-                                </div>
-                                
-                                <div className="input-group">
-                                    <span className="input-group-text" style={{ width: "20%" }}>Razza</span>
-                                    <select className="form-select" id="razza" value={this.state.razza} onChange={this.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)" }}>
-                                        <option defaultValue="" >Razza</option>
-                                        <option value="Umano">Umano</option>
-                                    </select>
-                                </div>
-                                
-                                <div className="input-group">
-                                    <span className="input-group-text" style={{ width: "20%" }}>Url Immagine</span>
-                                    <input className="form-control" id="urlImmagine" type="text" value={this.state.urlImmagine} onChange={this.handleChange} />
-                                </div>
-                                <button className="btn btn-dark" style={{ marginTop: "10px" }}>Modifica</button>
-                            </form>
+                           <ModificaPersonaggioForm state={this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
                         </div>
                     </div>
                 </div>

@@ -31,7 +31,7 @@ class UtenteService {
     }
 
     validaModifica(utente) {
-        if (utente.email === '' || utente.nominativo === '' || utente.pswVecchia === '') {
+        if (utente.pswVecchia === '') {
             return false;
         }
         return true;

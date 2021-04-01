@@ -5,7 +5,6 @@ import CarouselPersonaggi from '../personaggio/CarouselPersonaggi';
 import ListaPersonaggi from '../personaggio/ListaPersonaggi';
 import ListaUtenti from './ListaUtenti';
 import avatarEracle from '../../img/eracleCapovolto.png';
-import bashImpact from '../../suoni/bash_impact.mp3';
 import { browserHistory } from "../.."
 import { visualizzaListaPg, visualizzaPgMaster } from '../../store/azioni/masterActions';
 import { SoundDiv } from '../utils/SuonoSuImmagine'

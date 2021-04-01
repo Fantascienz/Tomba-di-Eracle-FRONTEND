@@ -5,12 +5,13 @@ import { modificaUtente } from '../../store/azioni/utenteActions';
 import Header from '../layout/Header';
 import Swal from "sweetalert2"
 import withReactContent from "sweetalert2-react-content"
+import ModificaUtenteForm from '../forms/ModificaUtenteForm';
 
 class ModificaUtente extends Component {
 
     state = {
-        nominativo: this.props.utente.nominativo,
-        email: this.props.utente.email,
+        nominativo: '',
+        email: '',
         psw: '',
         pswVecchia: ''
     }
@@ -53,7 +54,7 @@ class ModificaUtente extends Component {
         } else {
             withReactContent(Swal).fire({
                 title: <div>
-                    <p>Tutti i campi sono obbligatori!</p>
+                    <p>Inserisci la vecchia password!</p>
                 </div>
             })
         }
@@ -63,41 +64,11 @@ class ModificaUtente extends Component {
         return (
             <React.Fragment>
                 <Header />
-                <div className="corpoComponente" style={{ paddingTop: "5%",zIndex: "998", color: "#eeaa44", textShadow: "2px 2px black" }}>
+                <div className="corpoComponente" style={{ paddingTop: "5%", zIndex: "998", color: "#eeaa44", textShadow: "2px 2px black" }}>
                     <h1>Modifica Account</h1>
                     <br />
                     <div style={{ align: "center" }}>
-                        <form onSubmit={this.handleSubmit}>
-                            <div className="row">
-                                <h3>Nuovo Nominativo</h3>
-                                <div className="col-md-3"></div>
-                                <div className="form-group col-md-6">
-                                    <input type="text" id="nominativo" placeholder={this.props.utente.nominativo} className="form-control" onChange={this.handleChange} /> <br />
-                                </div>
-                            </div>
-                            <div className="row">
-                                <h3>Nuova Email</h3>
-                                <div className="col-md-3"></div>
-                                <div className="form-group col-md-6">
-                                    <input type="email" id="email" placeholder={this.props.utente.email} className="form-control" onChange={this.handleChange} /> <br />
-                                </div>
-                            </div>
-                            <div className="row">
-                                <h3>Nuova Password</h3>
-                                <div className="col-md-3"></div>
-                                <div className="form-group col-md-6">
-                                    <input type="password" id="psw" placeholder="Password (Lascia vuoto per mantenere la vecchia password)" className="form-control" onChange={this.handleChange} /> <br />
-                                </div>
-                            </div>
-                            <div className="row">
-                                <h3>Vecchia password</h3>
-                                <div className="col-md-3"></div>
-                                <div className="form-group col-md-6">
-                                    <input type="password" id="pswVecchia" placeholder="Password per confermare" className="form-control" onChange={this.handleChange} /> <br />
-                                </div>
-                            </div>
-                            <button className="btn btn-dark" type="submit">Modifica</button>
-                        </form>
+                        <ModificaUtenteForm utente={this.props.utente} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
                     </div >
                 </div>
             </React.Fragment>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import LocationService from '../../servizi/LocationService';
+import CreazioneLocationForm from '../forms/CreazioneLocationForm';
 import Header from '../layout/Header';
 import Macromappa from './Macromappa';
 
@@ -62,21 +63,7 @@ class CreazioneLocation extends Component {
     }
 
     componentDidMount() {
-        LocationService.getLocationByDirezioneLibera('nord').then(res => {
-            sessionStorage.setItem('locationsNordLibero', JSON.stringify(res.data))
-        }).then(
-            LocationService.getLocationByDirezioneLibera('est').then(res => {
-                sessionStorage.setItem('locationsEstLibero', JSON.stringify(res.data))
-            })
-        ).then(
-            LocationService.getLocationByDirezioneLibera('sud').then(res => {
-                sessionStorage.setItem('locationsSudLibero', JSON.stringify(res.data))
-            })
-        ).then(
-            LocationService.getLocationByDirezioneLibera('ovest').then(res => {
-                sessionStorage.setItem('locationsOvestLibero', JSON.stringify(res.data))
-            })
-        )
+        LocationService.sessioneDirezioniLibere()
     }
 
     render() {
@@ -88,33 +75,7 @@ class CreazioneLocation extends Component {
                         <div className="col-md-6">
                             <h1 className="font-lombardia" style={{ fontSize: "5vw", color: "#eeaa44", textShadow: "2px 2px black" }}>Creazione Location Esterna</h1>
                             <br />
-                            <form onSubmit={this.handleSubmit}>
-                                <input type="text" id="nome" placeholder="Nome" onChange={this.handleChange} style={{ width: '50%' }} /> <br /> <br />
-                                <input type="text" id="ambiente" placeholder="Ambiente" onChange={this.handleChange} style={{ width: '50%' }} /> <br /> <br />
-                                <input type="text" id="urlImgGiorno" placeholder="URL Immagine Giorno" onChange={this.handleChange} style={{ width: '50%' }} /> <br /> <br />
-                                <input type="text" id="urlImgNotte" placeholder="URL Immagine Notte" onChange={this.handleChange} style={{ width: '50%' }} /> <br /> <br />
-                                <input type="text" id="urlAudio" placeholder="URL Audio" onChange={this.handleChange} style={{ width: '50%' }} /> <br /> <br />
-                                <input type="text" id="chiave" placeholder="Chiave d'accesso" onChange={this.handleChange} style={{ width: '50%' }} /> <br /> <br />
-                                <input type="text" id="urlImgGiornoUmbra" placeholder="URL Immagine Giorno Umbra" onChange={this.handleChange} style={{ width: '50%' }} /> <br /> <br />
-                                <input type="text" id="urlImgNotteUmbra" placeholder="URL Immagine Notte Umbra" onChange={this.handleChange} style={{ width: '50%' }} /> <br /> <br />
-                                <input type="text" id="urlAudioUmbra" placeholder="URL Audio Umbra" onChange={this.handleChange} style={{ width: '50%' }} /> <br /> <br />
-                                <select name="ingresso" id="ingresso" onChange={this.handleChange} style={{ width: '50%' }}>
-                                    <option value="">Seleziona Ingresso</option>
-                                    {JSON.parse(sessionStorage.getItem('locationsNordLibero')).map(location =>
-                                        <option value={"nord " + location.id} key={location.id}>NORD di {location.nome}: {location.id}</option>
-                                    )}
-                                    {JSON.parse(sessionStorage.getItem('locationsEstLibero')).map(location =>
-                                        <option value={"est " + location.id} key={location.id}>EST di {location.nome}: {location.id}</option>
-                                    )}
-                                    {JSON.parse(sessionStorage.getItem('locationsSudLibero')).map(location =>
-                                        <option value={"sud " + location.id} key={location.id}>SUD di {location.nome}: {location.id}</option>
-                                    )}
-                                    {JSON.parse(sessionStorage.getItem('locationsOvestLibero')).map(location =>
-                                        <option value={"ovest " + location.id} key={location.id}>OVEST di {location.nome}: {location.id}</option>
-                                    )}
-                                </select> <br /><br />
-                                <button className="btn btn-dark">Crea</button>
-                            </form>
+                            <CreazioneLocationForm handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
                         </div>
                         <div className="col-md-4">
                             <div style={{ marginTop: "10%" }}>

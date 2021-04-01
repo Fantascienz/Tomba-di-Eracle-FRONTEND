@@ -33,6 +33,24 @@ class LocationService {
         )
     }
 
+    sessioneDirezioniLibere () {
+        this.getLocationByDirezioneLibera('nord').then(res => {
+            sessionStorage.setItem('locationsNordLibero', JSON.stringify(res.data))
+        }).then(
+            this.getLocationByDirezioneLibera('est').then(res => {
+                sessionStorage.setItem('locationsEstLibero', JSON.stringify(res.data))
+            })
+        ).then(
+            this.getLocationByDirezioneLibera('sud').then(res => {
+                sessionStorage.setItem('locationsSudLibero', JSON.stringify(res.data))
+            })
+        ).then(
+            this.getLocationByDirezioneLibera('ovest').then(res => {
+                sessionStorage.setItem('locationsOvestLibero', JSON.stringify(res.data))
+            })
+        )
+    }
+
     getEsterneReame() {
         return axios.get(URL + 'esterne/reame')
     }
