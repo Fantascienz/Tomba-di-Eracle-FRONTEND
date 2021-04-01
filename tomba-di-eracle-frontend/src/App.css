@@ -259,8 +259,6 @@ div.centrato{
 
 .griglia-macromappa{
   border: 1px solid black;
-  height: 50px;
-  width: 50px
 }
 
 /* FONT------------------------------------------------------------ */
@@ -339,9 +337,9 @@ div.centrato{
 }
 		
 .square-box:before {
-	content:"";
-	display: block;
-	padding-top: 100%;
+	/* content:""; */
+	/* display: block; */
+	/* padding-top: 100%; */
 }
 		
 .square-content {
@@ -388,4 +386,20 @@ div.centrato{
   bottom: 7%;
   width: 100%;
   height: auto;
+}
+
+
+/* LENTE DI INGRANDIMENTO----------------------------------------------- */
+.img-magnifier-container {
+  position: relative;
+}
+
+.img-magnifier-glass {
+  position: absolute;
+  border: 3px solid #000;
+  border-radius: 50%;
+  cursor: none;
+  /*Set the size of the magnifier glass:*/
+  width: 100px;
+  height: 100px;
 }
