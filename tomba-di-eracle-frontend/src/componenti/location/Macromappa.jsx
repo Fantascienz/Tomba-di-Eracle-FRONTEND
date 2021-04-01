@@ -7,7 +7,7 @@ const Macromappa = ({ idLocation, pxDimensioniMappa, lenteDisplay }) => {
 
     idLocation = "100";
     pxDimensioniMappa = "500" //min 320
-    lenteDisplay = ""
+    lenteDisplay = "none"
 
     return (
         <>
