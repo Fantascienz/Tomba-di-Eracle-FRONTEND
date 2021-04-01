@@ -3,7 +3,7 @@ import { ThemeProvider } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-import { filtraListaRazza, modificaPersonaggio, getListaPersonaggi, ordinaPerRazza, ordinaPerNominativo, ordinaPerSesso, ordinaPerRango, ordinaPerDataCreazione, filtraListaStato, getByRazzaAndStato } from '../../store/azioni/adminActions';
+import { filtraListaRazza, modificaPersonaggio, getListaPersonaggi, ordinaPerRazza, ordinaPerNominativo, ordinaPerSesso, ordinaPerRango, ordinaPerDataCreazione, filtraListaStato, getByRazzaAndStato, ordinaPerId } from '../../store/azioni/adminActions';
 
 class ListaPersonaggi extends Component {
 
@@ -254,6 +254,10 @@ class ListaPersonaggi extends Component {
 
     }
 
+    resetFiltro = () => {
+        this.props.aggiornaLista()
+    }
+
     ordinaPerRazza = () => {
         this.props.ordinaPerRazza()
     }
@@ -272,6 +276,10 @@ class ListaPersonaggi extends Component {
 
     ordinaPerDataCreazione = () => {
         this.props.ordinaPerDataCreazione()
+    }
+
+    ordinaPerId = () => {
+        this.props.ordinaPerId()
     }
 
 
@@ -312,11 +320,11 @@ class ListaPersonaggi extends Component {
                 <div className="table-responsive ombra" style={{ width: "100%", backgroundColor: "white" }}>
                     {/* <button className="btn btn-secondary" onClick={() => this.aggiorna()} >Aggiorna Lista</button> */}
                     <table className="table align-middle table-hover table-sm caption-top">
-                        <caption >Lista Personaggi</caption>
+                        <caption >Lista Personaggi <button className="btn btn-primary" onClick={() => this.resetFiltro()}>Reset Filtro</button></caption>
                         <thead className="table-dark align-middle" align="center">
                             <tr style={{ color: "#eeaa44" }}>
                                 <th>Immagine</th>
-                                <th>ID</th>
+                                <th><a href="#"onClick={() => this.ordinaPerId()} >ID</a></th>
                                 <th><a href="#" onClick={() => this.ordinaPerNominativo()}>Nominativo</a> </th>
                                 <th><a href="#" onClick={() => this.ordinaPerSesso()}>Sesso</a></th>
                                 <th><a href="#" onClick={() => this.ordinaPerRazza()}>Razza</a>{this.renderFiltroRazza()}</th>
@@ -388,7 +396,8 @@ const mapDispatchToProps = (dispatch) => {
         ordinaPerSesso: () => dispatch(ordinaPerSesso()),
         ordinaPerRango: () => dispatch(ordinaPerRango()),
         ordinaPerDataCreazione: () => dispatch(ordinaPerDataCreazione()),
-        getByRazzaAndStato: (filtro) => dispatch(getByRazzaAndStato(filtro))
+        getByRazzaAndStato: (filtro) => dispatch(getByRazzaAndStato(filtro)),
+        ordinaPerId: () => dispatch(ordinaPerId())
 
     }
 }

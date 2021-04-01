@@ -48,6 +48,10 @@ class PersonaggioService {
         return axios.get(URL + 'orderDataCreazione')
     }
 
+    getAllOrderById() {
+        return axios.get(URL + 'orderId')
+    }
+
     getByRazzaAndStato(filtro) {
         return axios.post(URL + 'razzaAndStato', filtro)
     }

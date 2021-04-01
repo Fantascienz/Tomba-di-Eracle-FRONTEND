@@ -10,6 +10,8 @@ import { browserHistory } from "../.."
 import { visualizzaListaPg, visualizzaPgMaster } from '../../store/azioni/masterActions';
 import { SoundDiv } from '../utils/SuonoSuImmagine'
 import coinFlip from '../../suoni/flip_coin.mp3'
+import LocationService from '../../servizi/LocationService';
+
 
 class SchedaUtente extends Component {
 
@@ -112,15 +114,39 @@ class SchedaUtente extends Component {
 
 
     creaLocation = () => {
-        browserHistory.push('creazioneLocation')
-        browserHistory.go()
+        LocationService.getLocationByDirezioneLibera('nord').then(res => {
+            sessionStorage.setItem('locationsNordLibero', JSON.stringify(res.data))
+        }).then(
+            LocationService.getLocationByDirezioneLibera('est').then(res => {
+                sessionStorage.setItem('locationsEstLibero', JSON.stringify(res.data))
+            })
+        ).then(
+            LocationService.getLocationByDirezioneLibera('sud').then(res => {
+                sessionStorage.setItem('locationsSudLibero', JSON.stringify(res.data))
+            })
+        ).then(
+            LocationService.getLocationByDirezioneLibera('ovest').then(res => {
+                sessionStorage.setItem('locationsOvestLibero', JSON.stringify(res.data))
+            })
+        ).then(
+            browserHistory.push('creazioneLocation'),
+            browserHistory.go()
+        )
+
     }
 
     modificaLocation = () => {
+        LocationService.getAllEsterne()
         browserHistory.push('modificaLocation')
         browserHistory.go()
     }
 
+    componentDidMount() {
+        if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' || JSON.parse(sessionStorage.getItem('utente')).tipo === 'master') {
+            LocationService.getAllEsterne()
+        }
+        
+    }
 
     renderListe = () => {
         if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin') {
@@ -198,7 +224,7 @@ class SchedaUtente extends Component {
                                                     <img className="tombaJPG rounded-circle" src={avatarEracle} alt="Paris" style={{ width: "auto", height: "100%" }} />
                                                 }
                                             />
-                                            
+
                                         </div>
                                     </div>
 
