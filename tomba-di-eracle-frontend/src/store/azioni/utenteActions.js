@@ -19,7 +19,7 @@ export const login = (utente) => {
                         sessionStorage.setItem('listaMacroLocation', JSON.stringify(res.data))
                     })
                 ).then(
-                    LocationService.getAllEsterne()
+                    LocationService.sessioneMappeEsterne()
                 ).then(
                     LocationService.getLocationByDirezioneLibera('nord').then(res => {
                         sessionStorage.setItem('locationsNordLibero', JSON.stringify(res.data))

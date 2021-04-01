@@ -136,14 +136,15 @@ class SchedaUtente extends Component {
     }
 
     modificaLocation = () => {
-        LocationService.getAllEsterne()
+        LocationService.sessioneMappeEsterne()
         browserHistory.push('modificaLocation')
         browserHistory.go()
     }
 
     componentDidMount() {
         if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' || JSON.parse(sessionStorage.getItem('utente')).tipo === 'master') {
-            LocationService.getAllEsterne()
+            LocationService.sessioneMappeEsterne()
+            LocationService.sessioneMappeMacro()
         }
         
     }
