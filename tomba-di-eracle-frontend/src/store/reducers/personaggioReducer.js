@@ -1,4 +1,4 @@
-import { browserHistory } from "../..";
+
 
 const initState = {
     personaggio: {},

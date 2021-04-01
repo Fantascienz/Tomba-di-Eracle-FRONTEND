@@ -18,6 +18,16 @@ class LocationService {
         return axios.get(URL + 'macro')
     }
 
+    getUltimaLocationPersonaggio(id) {
+        return axios.get(URL + 'ultima/' + id)
+    }
+
+    sessioneUltimaLocationPersonaggio(id) {
+        this.getUltimaLocationPersonaggio(id).then(res => 
+            sessionStorage.setItem('ultimaLocation',JSON.stringify(res.data))
+        )
+    }
+
     sessioneMappeMacro() {
         this.getAllMacro().then(res =>
             sessionStorage.setItem('listaMacroLocation', JSON.stringify(res.data))

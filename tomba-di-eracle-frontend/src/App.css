@@ -342,9 +342,9 @@ div.centrato{
 }
 		
 .square-box:before {
-	/* content:""; */
-	/* display: block; */
-	/* padding-top: 100%; */
+	content:"";
+	display: block;
+	padding-top: 100%;
 }
 		
 .square-content {
