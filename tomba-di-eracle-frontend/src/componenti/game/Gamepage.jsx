@@ -13,13 +13,16 @@ import avatarEracle from '../../img/eracle.png'
 import bashImpact from '../../suoni/bash_impact.mp3'
 import { SoundImage, SoundDiv } from '../utils/SuonoSuImmagine'
 import DettagliPersonaggio from '../personaggio/DettagliPersonaggio'
+import { primoAccesso } from '../../store/azioni/gameActions'
+import { connect } from 'react-redux'
 
 
 class Gamepage extends Component {
 
     render() {
 
-        const PG = JSON.parse(sessionStorage.getItem('pgAttivo'));
+        var PG = JSON.parse(sessionStorage.getItem('pgAttivo'));
+        var location = JSON.parse(sessionStorage.getItem('ultimaLocation'));
 
         return (
             <div style={{ position: "absolute", top: "0", height: "100%", width: "100%", backgroundColor: "dimgray" }}>
@@ -28,7 +31,7 @@ class Gamepage extends Component {
                 <div className="navigazione-sezione">
                     <div className="navigazione-area">
 
-                        <div className="navigazione-immagine" style={{ backgroundImage: "url('https://i.pinimg.com/564x/f9/80/b6/f980b6f06e927d8ccc12fcb4f31295ed.jpg')" }}></div>
+                        <div className="navigazione-immagine" style={{ backgroundImage: `url('${location.urlImgGiorno}')` }}></div>
 
                         <img src={cardGame} style={{ position: "relative", zIndex: "9999", width: "auto", height: "100%" }} />
 
@@ -84,7 +87,7 @@ class Gamepage extends Component {
 
                         {/* ------------NOME LOCATION------------ */}
                         <div className="navigazione-link" title="Location" style={{ left: "28.75%", top: "79.7%", width: "41.65%", height: "4.97%", zIndex: "9999" }}>
-                            <b>NOME LOCATION</b>
+                            <b>{location.nome}</b>
                         </div>
                     </div>
                 </div>
@@ -102,4 +105,11 @@ class Gamepage extends Component {
     }
 }
 
-export default Gamepage
+const mapStateToProps = (state) => {
+    return ({
+        pgAttivo: state.game.pgAttivo,
+        ultimaLocation: state.game.ultimaLocation
+    })
+}
+
+export default connect(mapStateToProps) (Gamepage)

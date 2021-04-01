@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import cardFrame from '../../img/cardFrame.png';
 import noPg from '../../img/no-pg.jpg';
+import LocationService from '../../servizi/LocationService';
+import { primoAccesso } from '../../store/azioni/gameActions';
 import { toModificaPersonaggio } from '../../store/azioni/personaggioActions';
-import { toGioco } from '../../store/azioni/utenteActions';
+import { browserHistory } from '../../'
 
 
 class DettagliPersonaggioBack extends Component {
@@ -12,12 +14,19 @@ class DettagliPersonaggioBack extends Component {
         this.props.toModificaPersonaggio(singleCharacter)
     }
 
+    componentDidUpdate() {
+        if (this.props.redirect !== '') {
+            browserHistory.push(this.props.redirect);
+            browserHistory.go()
+        }
+    }
+
     viewCard(singleCharacter) {
         return (
             <div className="card" style={{
                 backgroundImage: `url(${singleCharacter.urlImmagine}) transform:"scaleX(-1)"`, backgroundSize: "auto 100%", backgroundRepeat: "no-repeat", backgroundPosition: "center center",
                 backgroundColor: "transparent", width: "250px", height: "350px",
-                
+
             }}>
                 <div style={{
                     position: "relative", width: "100%", height: "100%",
@@ -37,8 +46,11 @@ class DettagliPersonaggioBack extends Component {
     }
 
     setPGAttivo = (personaggio) => {
-        sessionStorage.setItem('pgAttivo', JSON.stringify(personaggio))
-        this.props.gioca()
+        // sessionStorage.setItem('pgAttivo', JSON.stringify(personaggio))
+        // LocationService.sessioneUltimaLocationPersonaggio(personaggio.id).then(
+            
+        // )
+        this.props.primoAccesso(personaggio)
     }
 
 
@@ -53,12 +65,18 @@ class DettagliPersonaggioBack extends Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+        redirect: state.game.redirect
+    }
+}
+
 const mapDispatchToProps = (dispatch) => {
     return {
         toModificaPersonaggio: (personaggio) => dispatch(toModificaPersonaggio(personaggio)),
-        gioca: () => dispatch(toGioco())
+        primoAccesso: (personaggio) => dispatch(primoAccesso(personaggio)) 
     }
 }
 
 
-export default connect(null, mapDispatchToProps)(DettagliPersonaggioBack);
+export default connect(mapStateToProps, mapDispatchToProps)(DettagliPersonaggioBack);
