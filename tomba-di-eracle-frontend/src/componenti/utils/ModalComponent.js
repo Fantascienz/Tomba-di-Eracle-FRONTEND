@@ -15,7 +15,8 @@ export const ModalComponente = ({ bottone, contenuto, suono }) => {
             :   <div onClick={() => setShow(true)}>
                     {bottone}
                 </div>
-            }        
+            }
+                   
             <Modal
                 show={show}
                 onHide={() => setShow(false)}

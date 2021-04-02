@@ -88,7 +88,7 @@ class CreazioneLocation extends Component {
                             <br />
                             <CreazioneLocationForm handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
                         </div>
-                        <div className="col-md-4">
+                        <div className="col-md-4 centrato">
                             <div style={{ marginTop: "10%" }}>
                                 <Macromappa pxDimensioniMappa="400" lenteDisplay="none" idLocation={parseInt(this.state.ingresso)} />
                             </div>
