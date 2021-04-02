@@ -23,6 +23,13 @@ export const getListaPersonaggi = () => {
                 listaPg: res.data
             })
         })
+        PersonaggioService.getAllRazzeGroupBy().then(res => {
+            sessionStorage.setItem('listaRazze', JSON.stringify(res.data))
+            dispatch({
+                type: 'LISTA_RAZZE',
+                listaRazze: res.data
+            })
+        })
     }
 }
 

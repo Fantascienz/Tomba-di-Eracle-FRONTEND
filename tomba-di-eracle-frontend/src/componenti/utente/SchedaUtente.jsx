@@ -280,6 +280,7 @@ const mapStateToProps = (state) => {
         listaUtenti: state.admin.listaUtenti,
         visualizzaPgAdmin: state.admin.visualizzaPgAdmin,
         visualizzaPg: state.master.visualizzaPg
+
     }
 }
 

@@ -216,7 +216,7 @@ class ListaPersonaggi extends Component {
             this.props.getByRazzaAndStato(filtro)
         } else {
 
-            this.props.filtraListaRazza(e.target.value)
+            this.props.filtraListaRazza(e.targe.value)
         }
 
 
@@ -287,13 +287,16 @@ class ListaPersonaggi extends Component {
 
         return (
             <React.Fragment>
-                <select class="form-select" onChange={this.handleFilterRazza} aria-label="Default select example">
-                    <option value="" >Filtra</option>
-                    <option id="umano" value="Umano">Umano</option>
-                    <option id="lupo" value="Lupo">Lupus</option>
-                    <option id="meticcio" value="Meticcio">Metis</option>
-                    <option id="reset" value="Reset" >Reset Filtro</option>
+                
+                    <select class="form-select" onChange={this.handleFilterRazza} aria-label="Default select example">
+                    {JSON.parse(sessionStorage.getItem('listaRazze')).map(razza =>
+                    <option key={razza.id}  value={razza}>{razza}</option>
+                    
+                    )}
                 </select>
+                
+                
+            
             </React.Fragment>
         )
     }
