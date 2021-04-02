@@ -1,3 +1,5 @@
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 import GameService from "../../servizi/GameService";
 
 
@@ -8,9 +10,15 @@ export const primoAccesso = (pg) => {
             sessionStorage.setItem('ultimaLocation', JSON.stringify(res.data))
             GameService.getDirezioniRelativeLocation(res.data.id).then(res => {
                 sessionStorage.setItem('direzioniUltimaLocation', JSON.stringify(res.data))
-                alert(res.data.id)
             }
+            
             )
+            // withReactContent(Swal).fire({  TOGLI COMMENTO SE DIREZIONI ULTIMA LOCATION ARRIVA NULL
+            //     title: 
+            //     <div>
+            //         <p>Salute {JSON.parse(sessionStorage.getItem('pgAttivo')).nominativo}</p>
+            //     </div>
+            // })
             dispatch({
                 type: 'PRIMO_ACCESSO',
                 pgAttivo: pg,

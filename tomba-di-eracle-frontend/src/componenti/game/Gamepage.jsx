@@ -9,20 +9,32 @@ import frecciaSX from '../../img/freccia_sx.png'
 import frecciaDX from '../../img/freccia_dx.png'
 import frecciaSU from '../../img/freccia_su.png'
 import frecciaGIU from '../../img/freccia_giu.png'
-import avatarEracle from '../../img/eracle.png'
-import bashImpact from '../../suoni/bash_impact.mp3'
-import { SoundImage, SoundDiv } from '../utils/SuonoSuImmagine'
 import DettagliPersonaggio from '../personaggio/DettagliPersonaggio'
 import { naviga, primoAccesso } from '../../store/azioni/gameActions'
 import { connect } from 'react-redux'
-import Header from '../layout/Header'
+import withReactContent from 'sweetalert2-react-content'
+import Swal from 'sweetalert2'
+import { browserHistory } from '../..'
 
 
 class Gamepage extends Component {
 
     navigazione = (location) => {
-        this.props.naviga(location)
-        // this.props.naviga(location)
+        if (location !== null) {
+            this.props.naviga(location)
+        } else {
+            withReactContent(Swal).fire({
+                title: <p>Non c'è nulla in questa direzione!</p>
+            })
+        }
+    }
+
+    logout = () => {
+        sessionStorage.removeItem('pgAttivo')
+        sessionStorage.removeItem('ultimaLocation')
+        sessionStorage.removeItem('direzioniUltimaLocation')
+        browserHistory.push('/paginaUtente')
+        browserHistory.go()
     }
 
     componentDidMount() {
@@ -40,13 +52,13 @@ class Gamepage extends Component {
 
         return (
             <div style={{ position: "absolute", top: "0", height: "100%", width: "100%", backgroundColor: "dimgray" }}>
-                
+
 
                 <div className="navigazione-sezione">
                     <div className="navigazione-area">
 
                         <div className="navigazione-immagine" style={{ backgroundImage: `url('${location.urlImgGiorno}')` }}></div>
-                        
+
                         <img src={cardGame} style={{ position: "relative", zIndex: "9999", width: "auto", height: "100%" }} />
                         <h1>{location.id}</h1>
                         {/* ------------PULSANTI AZIONI------------ */}
@@ -112,6 +124,7 @@ class Gamepage extends Component {
                     <h1>est {locationEST}</h1>
                     <h1>sud {locationSUD}</h1>
                     <h1>ovest {locationOVEST}</h1>
+                    <button onClick={() => this.logout()}>Logout</button>
 
                     <div title={PG.nominativo} style={{ backgroundColor: "transparent", position: "absolute", bottom: "10px", right: "10px", width: "100px", height: "100px" }}>
                         <DettagliPersonaggio personaggio={PG} altezza="100px" larghezza="auto" immagine={PG.urlImmagine} dimImmagine="100px auto" />

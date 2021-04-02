@@ -47,10 +47,6 @@ class DettagliPersonaggioBack extends Component {
     }
 
     setPGAttivo = (personaggio) => {
-        // sessionStorage.setItem('pgAttivo', JSON.stringify(personaggio))
-        // LocationService.sessioneUltimaLocationPersonaggio(personaggio.id).then(
-
-        // )
         this.props.primoAccesso(personaggio)
     }
 
