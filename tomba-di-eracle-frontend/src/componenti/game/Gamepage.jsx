@@ -169,14 +169,8 @@ class Gamepage extends Component {
 
 
                         {/* ------------NOME LOCATION------------ */}
-<<<<<<< HEAD
                         <div className="navigazione-link" title={"Id: " + location.id} style={{ left: "28.75%", top: "79.7%", width: "41.65%", height: "4.97%", zIndex: "9999", backgroundColor: "transparent" }}>
                             <b className="font-lombardia" style={{ fontSize: "1.5em", color: `${location.tipo == "Umbra" ? "blue" : "black"}` }} >{location.nome}</b>
-=======
-                        <div className="navigazione-link" title="Location" style={{ left: "28.75%", top: "79.7%", width: "41.65%", height: "4.97%", zIndex: "9999" }}>
-                            <b>{location.nome}</b>
-                            <b>{location.id}</b>
->>>>>>> 6482392a27f53405cc8cef68036c310b4a6862a7
                         </div>
                     </div>
                 </div>
