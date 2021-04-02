@@ -71,13 +71,13 @@ class ModificaLocation extends Component {
                             <h1 className="font-lombardia-yellow">Modifica Location {this.state.locationMod}</h1>
                             <ModificaLocationForm handleChange={this.handleChange} handleUpdate={this.handleUpdate} />
                         </div>
-                        <div className="col-md-5">
-                        <Macromappa pxDimensioniMappa="700" lenteDisplay="none" idLocation={this.state.locationMod} />
+                        <div className="col-md-5 centrato">
+                            <Macromappa pxDimensioniMappa="400" lenteDisplay="none" idLocation={this.state.locationMod} />
                         </div>
                         <div className="col-md-3">
                             <h1 className="font-lombardia-yellow">Elimina Location</h1>
                             <form onSubmit={this.handleDelete}>
-                                <SelezionaLocationForm lista={JSON.parse(sessionStorage.getItem('listaEsterneReame'))} handleChange={this.handleChange}/>
+                                <SelezionaLocationForm lista={JSON.parse(sessionStorage.getItem('listaEsterneReame'))} handleChange={this.handleChange} />
                                 <button className="btn btn-dark">Elimina</button>
                             </form>
                         </div>

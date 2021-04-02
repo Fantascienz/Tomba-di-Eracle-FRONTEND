@@ -26,7 +26,7 @@ class CreazioneStanza extends Component {
         return (
             <div>
                 <SelezionaLocationForm lista={JSON.parse(sessionStorage.getItem('allLocations'))} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
-                <Macromappa pxDimensioniMappa="700" lenteDisplay="none" idLocation={parseInt(this.state.loc)} />
+                <Macromappa pxDimensioniMappa="400" lenteDisplay="none" idLocation={parseInt(this.state.loc)} />
             </div>
         );
     }

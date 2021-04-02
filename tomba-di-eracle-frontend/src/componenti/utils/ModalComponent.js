@@ -8,10 +8,14 @@ export const ModalComponente = ({ bottone, contenuto, suono }) => {
 
     return (
         <>
+            {suono != undefined ? 
             <SuonoModal suono={suono}
                         funzione={{ onend: () => setShow(true) }}
                         bottone={bottone}/>
-
+            :   <div onClick={() => setShow(true)}>
+                    {bottone}
+                </div>
+            }        
             <Modal
                 show={show}
                 onHide={() => setShow(false)}

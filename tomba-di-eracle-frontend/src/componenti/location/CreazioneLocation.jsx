@@ -90,8 +90,7 @@ class CreazioneLocation extends Component {
                         </div>
                         <div className="col-md-4">
                             <div style={{ marginTop: "10%" }}>
-                                <Macromappa pxDimensioniMappa="700" lenteDisplay="none" idLocation={parseInt(this.state.ingresso)} />
-
+                                <Macromappa pxDimensioniMappa="400" lenteDisplay="none" idLocation={parseInt(this.state.ingresso)} />
                             </div>
                         </div>
                     </div>
