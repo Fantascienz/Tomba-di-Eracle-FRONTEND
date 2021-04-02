@@ -1,23 +1,20 @@
-import LocationService from "./LocationService";
+import axios from 'axios'
 
+const URL = "http://localhost:8080/game/"
 
 class GameService {
 
-//     primoAccesso(pg) {
-//         let ultimaLoc;
-//         LocationService.getUltimaLocationPersonaggio(pg.id).then(res => {
-//             sessionStorage.setItem('pgAttivo', JSON.stringify(pg))
-//             sessionStorage.setItem('ultimaLocation',JSON.stringify(res.data))
-//             ultimaLoc = res.data
-//         }).then(
-//             dispatch({
-//                 type: 'PRIMO_ACCESSO',
-//                 pgAttivo: pg,
-//                 ultimaLocation: ultimaLoc
+    getUltimaLocationPersonaggio(id) {
+        return axios.get(URL + 'ultimaLocation/' + id)
+    }
 
-//             })
-//         )
-//     }
-// }
+    getDirezioniRelativeLocation(id) {
+        return axios.get(URL + 'direzioniRelativeLocation/' + id)
+    }
+
+    naviga(idLocation) {
+        return axios.post(URL + 'naviga/' + idLocation,JSON.parse(sessionStorage.getItem('pgAttivo')))
+    }
+}
 
 export default new GameService();

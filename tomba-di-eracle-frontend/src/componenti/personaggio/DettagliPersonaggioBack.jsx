@@ -6,6 +6,7 @@ import LocationService from '../../servizi/LocationService';
 import { primoAccesso } from '../../store/azioni/gameActions';
 import { toModificaPersonaggio } from '../../store/azioni/personaggioActions';
 import { browserHistory } from '../../'
+import GameService from '../../servizi/GameService';
 
 
 class DettagliPersonaggioBack extends Component {
@@ -46,10 +47,6 @@ class DettagliPersonaggioBack extends Component {
     }
 
     setPGAttivo = (personaggio) => {
-        // sessionStorage.setItem('pgAttivo', JSON.stringify(personaggio))
-        // LocationService.sessioneUltimaLocationPersonaggio(personaggio.id).then(
-            
-        // )
         this.props.primoAccesso(personaggio)
     }
 
@@ -67,6 +64,7 @@ class DettagliPersonaggioBack extends Component {
 
 const mapStateToProps = (state) => {
     return {
+        ultimaLocation: state.game.ultimaLocation,
         redirect: state.game.redirect
     }
 }
@@ -74,7 +72,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         toModificaPersonaggio: (personaggio) => dispatch(toModificaPersonaggio(personaggio)),
-        primoAccesso: (personaggio) => dispatch(primoAccesso(personaggio)) 
+        primoAccesso: (personaggio) => dispatch(primoAccesso(personaggio))
     }
 }
 
