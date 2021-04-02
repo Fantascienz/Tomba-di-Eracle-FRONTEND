@@ -25,8 +25,8 @@ class CreazionePersonaggio extends Component {
         urlLupo: '',
         urlCrinos: '',
         utente: JSON.parse(sessionStorage.getItem('utente')),
-        crinos: false,
-        umbra: false
+        crinos: '',
+        umbra: ''
     }
 
     componentDidUpdate() {
@@ -120,6 +120,7 @@ class CreazionePersonaggio extends Component {
             }
 
         } else if (this.state.tipo === 'png') {
+            alert(this.state.umbra)
             if (PersonaggioService.validazioneFormPersonaggio(this.state)) {
                 this.props.creaPersonaggio(this.state)
             } else {
@@ -331,6 +332,40 @@ class CreazionePersonaggio extends Component {
         }
     }
 
+    isPngUmbra = () => {
+        if (this.state.tipo === 'png') {
+            return (
+                <React.Fragment>
+                     <div className="input-group">
+                        <span className="input-group-text" style={{ width: "30%" }}>E' nell'Umbra?</span>
+                        <select className="form-select" id="umbra" value={this.state.umbra} onChange={this.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)" }}>
+                            <option defaultValue="">Scegli se il png è nell'Umbra</option>
+                            <option value={true}>Si</option>
+                            <option value={false}>No</option>
+                        </select>
+                    </div>
+                </React.Fragment>
+            )
+        }
+    }
+
+    isPngCrinos = () => {
+        if (this.state.tipo === 'png') {
+            return (
+                <React.Fragment>
+                     <div className="input-group">
+                        <span className="input-group-text" style={{ width: "30%" }}>Può inviare un chirottero?</span>
+                        <select className="form-select" id="crinos" value={this.state.crinos} onChange={this.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)" }}>
+                            <option defaultValue="">Scegli se il png può inviare un chirottero</option>
+                            <option value={true}>Si</option>
+                            <option value={false}>No</option>
+                        </select>
+                    </div>
+                </React.Fragment>
+            )
+        }
+    }
+
     showImmaginePG() {
         return (
             <React.Fragment>
@@ -442,6 +477,8 @@ class CreazionePersonaggio extends Component {
                                         {this.isGarouRuolo()}
                                         {this.isGarouSept()}
                                         {this.isGarouRuoloSept()}
+                                        {this.isPngUmbra()}
+                                        {this.isPngCrinos()}
 
                                         <div className="input-group">
                                             <span className="input-group-text" style={{ width: "30%" }}>Url Immagine Personaggio</span>
