@@ -5,14 +5,14 @@ import { Magnifier } from 'react-image-magnifiers'
 
 const Macromappa = ({ idLocation, pxDimensioniMappa, lenteDisplay }) => {
 
-    idLocation = "100";
-    pxDimensioniMappa = "500" //min 320
-    lenteDisplay = "none"
+    // idLocation = "100";
+    // pxDimensioniMappa = "500" //min 320
+    // lenteDisplay = "none"
 
     return (
         <>
             <div>
-                <div style={{ position: "relative", height: `${pxDimensioniMappa}px`, width: `${pxDimensioniMappa}px`, top: "0", left: "50px" }}>
+                <div style={{ position: "relative", height: `${pxDimensioniMappa}px`, width: `${pxDimensioniMappa}px`, top: "0" }}>
 
                     <div style={{ position: "absolute", zIndex: "1", height: "100%", width: "100%" }}>
                         <img id="giovanni" src={macromappa} alt="..." style={{ height: "100%", width: "100%" }} />

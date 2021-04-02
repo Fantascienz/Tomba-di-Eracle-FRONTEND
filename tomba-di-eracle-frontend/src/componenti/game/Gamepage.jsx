@@ -9,12 +9,13 @@ import frecciaSX from '../../img/freccia_sx.png'
 import frecciaDX from '../../img/freccia_dx.png'
 import frecciaSU from '../../img/freccia_su.png'
 import frecciaGIU from '../../img/freccia_giu.png'
-import avatarEracle from '../../img/eracle.png'
-import bashImpact from '../../suoni/bash_impact.mp3'
-import { SoundImage, SoundDiv } from '../utils/SuonoSuImmagine'
 import DettagliPersonaggio from '../personaggio/DettagliPersonaggio'
-import { primoAccesso } from '../../store/azioni/gameActions'
 import { connect } from 'react-redux'
+import Macromappa from '../location/Macromappa'
+import { ModalComponente } from '../utils/ModalComponent'
+import Scroll from '../../img/scroll.png'
+
+
 
 
 class Gamepage extends Component {
@@ -33,12 +34,26 @@ class Gamepage extends Component {
 
                         <div className="navigazione-immagine" style={{ backgroundImage: `url('${location.urlImgGiorno}')` }}></div>
 
-                        <img src={cardGame} style={{ position: "relative", zIndex: "9999", width: "auto", height: "100%" }} />
+                        <img src={cardGame} style={{ position: "relative", zIndex: "1", width: "auto", height: "100%" }} />
 
                         {/* ------------PULSANTI AZIONI------------ */}
                         {/* pulsante: mappa */}
                         <div className="navigazione-link" title="Apri la Minimappa" style={{ left: "6.99%", top: "4.47%", width: "14.67%", height: "9.2%", zIndex: "9999" }}>
-                            <img className="icona-alta" src={mappa} />
+                            <ModalComponente 
+                                bottone={<img className="icona-alta" src={mappa} />}
+                                contenuto={
+                                    <div className="centrato" >
+
+                                        <div className="centrato" style={{ position: "fixed", backgroundColor: "none" }}>
+                                            <img src={Scroll} style={{ height: "800px", transform: "rotate(90deg)" }} />
+                                        </div>
+
+                                        <div className="centrato" style={{ position: "relative", backgroundColor: "transparent", height: "100%", width: "100%" }}>
+                                            <Macromappa idLocation={location.id} pxDimensioniMappa="500" lenteDisplay="none" />
+                                        </div>
+
+                                    </div>
+                                } />
                         </div>
 
                         {/* pulsante: porta */}
@@ -87,7 +102,7 @@ class Gamepage extends Component {
 
                         {/* ------------NOME LOCATION------------ */}
                         <div className="navigazione-link" title="Location" style={{ left: "28.75%", top: "79.7%", width: "41.65%", height: "4.97%", zIndex: "9999" }}>
-                            <b>{location.nome}</b>
+                            <b className="font-lombardia" style={{ fontSize: "2.2vw" }}>{location.nome}</b>
                         </div>
                     </div>
                 </div>
@@ -95,8 +110,15 @@ class Gamepage extends Component {
 
                 <div className="chat-sezione">
 
-                    <div title={PG.nominativo} style={{backgroundColor:"transparent", position:"absolute", bottom:"10px", right:"10px", width:"100px", height:"100px"}}>
-                        <DettagliPersonaggio personaggio={PG} altezza="100px" larghezza="auto" immagine={PG.urlImmagine} dimImmagine="100px auto"/>
+                    <div style={{ backgroundColor: "red", position: "absolute", top: "10px", left: "10px", width: "15%", height: "100px" }}>
+                    </div>
+
+                    <div style={{ backgroundColor: "yellow", position: "absolute", top: "10px", right: "10px", width: "400px", height: "400px" }}>
+                    </div>
+
+
+                    <div title={PG.nominativo} style={{ backgroundColor: "transparent", position: "absolute", bottom: "10px", right: "10px", width: "100px", height: "100px" }}>
+                        <DettagliPersonaggio personaggio={PG} altezza="100px" larghezza="auto" immagine={PG.urlImmagine} dimImmagine="100px auto" />
                     </div>
 
                 </div>
@@ -112,4 +134,4 @@ const mapStateToProps = (state) => {
     })
 }
 
-export default connect(mapStateToProps) (Gamepage)
+export default connect(mapStateToProps)(Gamepage)

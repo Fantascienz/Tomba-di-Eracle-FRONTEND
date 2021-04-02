@@ -162,7 +162,7 @@ div.centrato{
 }
 
 .navigazione-sezione{
-  z-index: 9999;
+  z-index: 1;
   position: relative; 
   top: 5%;
   left: 1%; 
@@ -407,4 +407,16 @@ div.centrato{
   /*Set the size of the magnifier glass:*/
   width: 100px;
   height: 100px;
+}
+
+/* MODAL ---------------------------------------------------------------- */
+
+.modal-50w{
+  background-color: transparent;
+  width: 50%;
+  height: 90%;
+}
+
+.custom-modal-body {
+  background: pink url('../src/img/eracle.png');
 }
