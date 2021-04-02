@@ -15,7 +15,8 @@ class ModificaPersonaggio extends Component {
         urlImmagine: JSON.parse(sessionStorage.getItem('personaggio')).urlImmagine,
         utente: JSON.parse(sessionStorage.getItem('personaggio')).utente,
         dataCreazione: JSON.parse(sessionStorage.getItem('personaggio')).dataCreazione,
-        id: JSON.parse(sessionStorage.getItem('personaggio')).id
+        id: JSON.parse(sessionStorage.getItem('personaggio')).id,
+        ultimaLocation: JSON.parse(sessionStorage.getItem('personaggio')).ultimaLocation
 
     }
 

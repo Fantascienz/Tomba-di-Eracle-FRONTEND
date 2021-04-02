@@ -60,7 +60,6 @@ class Gamepage extends Component {
                         <div className="navigazione-immagine" style={{ backgroundImage: `url('${location.urlImgGiorno}')` }}></div>
 
                         <img src={cardGame} style={{ position: "relative", zIndex: "9999", width: "auto", height: "100%" }} />
-                        <h1>{location.id}</h1>
                         {/* ------------PULSANTI AZIONI------------ */}
                         {/* pulsante: mappa */}
                         <div className="navigazione-link" title="Apri la Minimappa" style={{ left: "6.99%", top: "4.47%", width: "14.67%", height: "9.2%", zIndex: "9999" }}>
@@ -114,6 +113,7 @@ class Gamepage extends Component {
                         {/* ------------NOME LOCATION------------ */}
                         <div className="navigazione-link" title="Location" style={{ left: "28.75%", top: "79.7%", width: "41.65%", height: "4.97%", zIndex: "9999" }}>
                             <b>{location.nome}</b>
+                            <b>{location.id}</b>
                         </div>
                     </div>
                 </div>
