@@ -12,6 +12,7 @@ class CreazioneLocation extends Component {
         nome: '',
         ambiente: '',
         ingresso: '',
+        provaIdLocation: '',
         urlImgGiorno: '',
         urlImgNotte: '',
         urlAudio: '',
@@ -27,19 +28,30 @@ class CreazioneLocation extends Component {
         })
     }
 
+    estrapolaDirezione = (ingresso) => {
+        let direzione = ''
+        for (let i = 0; i < ingresso.length; i++) {
+            if (isNaN(ingresso.charAt(i))) {
+                direzione += ingresso.charAt(i)
+            }
+        }
+        return direzione;
+    }
+
     handleSubmit = (event) => {
         if (LocationService.validaCampiCreazione(this.state)) {
             let locationCreata = {
                 location: {
                     nome: this.state.nome,
                     ambiente: this.state.ambiente,
-                    ingresso: this.state.ingresso,
                     urlImgGiorno: this.state.urlImgGiorno,
                     urlImgNotte: this.state.urlImgNotte,
                     urlAudio: this.state.urlAudio,
                     chiave: this.state.chiave,
                     creatore: JSON.parse(sessionStorage.getItem('utente'))
                 },
+                idLocationIngresso: parseInt(this.state.ingresso, 10),
+                direzioneIngresso: this.estrapolaDirezione(this.state.ingresso),
                 ingresso: this.state.ingresso,
                 umbra: {
                     urlImgGiorno: this.state.urlImgGiornoUmbra,
@@ -79,7 +91,8 @@ class CreazioneLocation extends Component {
                         </div>
                         <div className="col-md-4">
                             <div style={{ marginTop: "10%" }}>
-                                <Macromappa />
+                                <Macromappa pxDimensioniMappa="700" lenteDisplay="none" idLocation={this.state.ingresso} />
+
                             </div>
                         </div>
                     </div>

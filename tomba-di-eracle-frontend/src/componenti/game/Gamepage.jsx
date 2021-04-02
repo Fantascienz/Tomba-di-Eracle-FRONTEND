@@ -131,7 +131,7 @@ class Gamepage extends Component {
 
                         {/* ------------NOME LOCATION------------ */}
                         <div className="navigazione-link" title="Location" style={{ left: "28.75%", top: "79.7%", width: "41.65%", height: "4.97%", zIndex: "9999" }}>
-                            <b className="font-lombardia" style={{ fontSize: "2.2vw" }}>{location.nome}</b>
+                            <b>{location.nome}</b>
                             <b>{location.id}</b>
                         </div>
                     </div>
