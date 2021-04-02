@@ -17,16 +17,16 @@ class CreazioneLocationForm extends Component {
                     <select name="ingresso" id="ingresso" onChange={this.props.handleChange} style={{ width: '50%' }}>
                         <option value="">Seleziona Ingresso</option>
                         {JSON.parse(sessionStorage.getItem('locationsNordLibero')).map(location =>
-                            <option value={"nord " + location.id} key={location.id}>NORD di {location.nome}: {location.id}</option>
+                            <option value={location.id + " nord"} key={location.id}>NORD di {location.nome}: {location.id}</option>
                         )}
                         {JSON.parse(sessionStorage.getItem('locationsEstLibero')).map(location =>
-                            <option value={"est " + location.id} key={location.id}>EST di {location.nome}: {location.id}</option>
+                            <option value={location.id + " est"} key={location.id}>EST di {location.nome}: {location.id}</option>
                         )}
                         {JSON.parse(sessionStorage.getItem('locationsSudLibero')).map(location =>
-                            <option value={"sud " + location.id} key={location.id}>SUD di {location.nome}: {location.id}</option>
+                            <option value={location.id + " sud"} key={location.id}>SUD di {location.nome}: {location.id}</option>
                         )}
                         {JSON.parse(sessionStorage.getItem('locationsOvestLibero')).map(location =>
-                            <option value={"ovest " + location.id} key={location.id}>OVEST di {location.nome}: {location.id}</option>
+                            <option value={location.id + " ovest"} key={location.id}>OVEST di {location.nome}: {location.id}</option>
                         )}
                     </select> <br /><br />
                     <button className="btn btn-dark">Crea</button>
