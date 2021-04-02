@@ -3,6 +3,7 @@ import PersonaggioService from "../../servizi/PersonaggioService"
 export const visualizzaListaPg = () => {
     return (dispatch) => {
         PersonaggioService.getAllPersonaggi().then(res => {
+            
             dispatch({
                 type: 'VISUALIZZA_LISTA_PG',
                 listaPg: res.data

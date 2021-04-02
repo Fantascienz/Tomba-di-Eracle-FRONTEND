@@ -32,19 +32,7 @@ const adminReducer = (state = initState, action) => {
                 visualizzaPgAdmin: !state.visualizzaPgAdmin,
             }
             break;
-        case 'FILTRA_LUPO':
-            state = {
-                listaPgFiltrata: action.listaPgFiltrata,
-                filtroRazza: action.filtroRazza
-            }
-            break;
-        case 'FILTRA_UMANO':
-            state = {
-                listaPgFiltrata: action.listaPgFiltrata,
-                filtroRazza: action.filtroRazza
-            }
-            break;
-        case 'FILTRA_METICCIO':
+            case 'FILTRA_RAZZA':
             state = {
                 listaPgFiltrata: action.listaPgFiltrata,
                 filtroRazza: action.filtroRazza
@@ -75,18 +63,6 @@ const adminReducer = (state = initState, action) => {
             state = {
                 listaPgFiltrata: action.listaPgFiltrata,
                 filtroRazza: action.filtroRazza,
-                filtroStato: action.filtroStato
-            }
-            break;
-        case 'RESET_FILTRO_RAZZA':
-            state = {
-                listaPgFiltrata: action.listaPgFiltrata,
-                filtroRazza: action.filtroRazza
-            }
-            break;
-        case 'RESET_FILTRO_STATO':
-            state = {
-                listaPgFiltrata: action.listaPgFiltrata,
                 filtroStato: action.filtroStato
             }
             break;

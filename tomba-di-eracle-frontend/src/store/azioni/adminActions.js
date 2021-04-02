@@ -16,21 +16,20 @@ export const getListaUtenti = () => {
 
 export const getListaPersonaggi = () => {
     return (dispatch) => {
-        PersonaggioService.getAllPersonaggi().then(res => {
-            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
-            dispatch({
-                type: "LISTA_PG",
-                listaPg: res.data
-            })
-        })
         PersonaggioService.getAllRazzeGroupBy().then(res => {
             sessionStorage.setItem('listaRazze', JSON.stringify(res.data))
-            dispatch({
-                type: 'LISTA_RAZZE',
-                listaRazze: res.data
+        }).then(
+            PersonaggioService.getAllPersonaggi().then(res => {
+                sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+                dispatch({
+                    type: "LISTA_PG",
+                    listaPg: res.data
+                })
             })
-        })
+
+        )
     }
+
 }
 
 export const modificaTipoUtente = (utente, nuovoTipo) => {
@@ -93,49 +92,15 @@ export const visualizzaPgAdmin = () => {
 
 export const filtraListaRazza = (razza) => {
     return (dispatch) => {
-            if (razza === 'Umano') {
-                PersonaggioService.getPersonaggiByRazza(razza).then(res => {
-                    sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
-                    dispatch({
-                        type: 'FILTRA_UMANO',
-                        listaPgFiltrata: res.data,
-                        filtroRazza: razza
-                    })
-                })
 
-            } else if (razza === 'Lupo') {
-                PersonaggioService.getPersonaggiByRazza(razza).then(res => {
-                    sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
-                    dispatch({
-                        type: 'FILTRA_LUPO',
-                        listaPgFiltrata: res.data,
-                        filtroRazza: razza
-                    })
-                })
-
-            } else if (razza === 'Meticcio') {
-                PersonaggioService.getPersonaggiByRazza(razza).then(res => {
-                    sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
-                    dispatch({
-                        type: 'FILTRA_METICCIO',
-                        listaPgFiltrata: res.data,
-                        filtroRazza: razza
-                    })
-                })
-                
-            } else if (razza === 'Reset') {
-                PersonaggioService.getAllPersonaggi().then(res => {
-                    sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
-                    dispatch({
-                        type: 'RESET_FILTRO_RAZZA',
-                        listaPgFiltrata: res.data,
-                        filtroRazza: ''
-                    })
-                })
-
-            }
-
-        
+        PersonaggioService.getPersonaggiByRazza(razza).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'FILTRA_RAZZA',
+                listaPgFiltrata: res.data,
+                filtroRazza: razza
+            })
+        })
 
     }
 }
@@ -143,35 +108,27 @@ export const filtraListaRazza = (razza) => {
 
 export const filtraListaStato = (stato) => {
     return (dispatch) => {
-            if(stato === 'Online') {
-                PersonaggioService.getPersonaggiByStato(stato).then(res => {
-                    sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
-                    dispatch({
-                        type: 'FILTRA_STATO_ONLINE',
-                        listaPgFiltrata: res.data,
-                        filtroStato: stato
-                    })
+        if (stato === 'Online') {
+            PersonaggioService.getPersonaggiByStato(stato).then(res => {
+                sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+                dispatch({
+                    type: 'FILTRA_STATO_ONLINE',
+                    listaPgFiltrata: res.data,
+                    filtroStato: stato
                 })
-            } else if (stato === 'Offline') {
-                PersonaggioService.getPersonaggiByStato(stato).then(res => {
-                    sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
-                    dispatch({
-                        type: 'FILTRA_STATO_OFFLINE',
-                        listaPgFiltrata: res.data,
-                        filtroStato: stato
-                    })
+            })
+        } else if (stato === 'Offline') {
+            PersonaggioService.getPersonaggiByStato(stato).then(res => {
+                sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+                dispatch({
+                    type: 'FILTRA_STATO_OFFLINE',
+                    listaPgFiltrata: res.data,
+                    filtroStato: stato
                 })
-            } else if (stato === 'Reset') {
-                PersonaggioService.getAllPersonaggi().then(res => {
-                    sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
-                    dispatch({
-                        type: 'RESET_FILTRO_STATO',
-                        listaPgFiltrata: res.data,
-                        filtroStato: ''
-                    })
-                })
-            }
-            
+            })
+        } 
+        
+
     }
 }
 
@@ -249,7 +206,7 @@ export const ordinaPerId = () => {
 
 export const getByRazzaAndStato = (filtro) => {
     return (dispatch) => {
-        if(filtro.stato === 'Online') {
+        if (filtro.stato === 'Online') {
             PersonaggioService.getByRazzaAndStato(filtro).then(res => {
                 sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
                 dispatch({
@@ -270,6 +227,6 @@ export const getByRazzaAndStato = (filtro) => {
                 })
             })
         }
-        
+
     }
 }

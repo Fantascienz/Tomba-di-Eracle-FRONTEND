@@ -35,6 +35,10 @@ export const login = (utente) => {
                         LocationService.getLocationByDirezioneLibera('ovest').then(res => {
                             sessionStorage.setItem('locationsOvestLibero', JSON.stringify(res.data))
                         })
+                    ).then (
+                        PersonaggioService.getAllRazzeGroupBy().then(res => {
+                            sessionStorage.setItem('listaRazze', JSON.stringify(res.data))
+                        })
                     )
                 )
                     .then(

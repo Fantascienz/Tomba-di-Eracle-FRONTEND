@@ -196,10 +196,6 @@ class ListaPersonaggi extends Component {
 
 
     handleFilterRazza = (e) => {
-        
-        if(e.target.value === "Reset" && this.props.filtroStato !== undefined) {
-            this.props.filtraListaStato(this.props.filtroStato)
-        }
         if (this.props.filtroStato === 'Online') {
             let filtro = {
                 razza: e.target.value,
@@ -216,7 +212,7 @@ class ListaPersonaggi extends Component {
             this.props.getByRazzaAndStato(filtro)
         } else {
 
-            this.props.filtraListaRazza(e.targe.value)
+            this.props.filtraListaRazza(e.target.value)
         }
 
 
@@ -225,23 +221,7 @@ class ListaPersonaggi extends Component {
 
     handleFilterStato = (e) => {
 
-        if (e.target.value === "Reset" && this.props.filtroRazza === undefined) {
-            this.props.filtraListaStato(e.target.value)
-        } else if (e.target.value === "Reset" && this.props.filtroRazza !== undefined) {
-            this.props.filtraListaRazza(this.props.filtroRazza)
-        } else if (this.props.filtroRazza === "Umano") {
-            let filtro = {
-                razza: this.props.filtroRazza,
-                stato: e.target.value
-            }
-            this.props.getByRazzaAndStato(filtro)
-        } else if (this.props.filtroRazza === "Lupo") {
-            let filtro = {
-                razza: this.props.filtroRazza,
-                stato: e.target.value
-            }
-            this.props.getByRazzaAndStato(filtro)
-        } else if (this.props.filtroRazza === "Meticcio") {
+         if (this.props.filtroRazza !== undefined) {
             let filtro = {
                 razza: this.props.filtroRazza,
                 stato: e.target.value
@@ -287,16 +267,18 @@ class ListaPersonaggi extends Component {
 
         return (
             <React.Fragment>
-                
-                    <select class="form-select" onChange={this.handleFilterRazza} aria-label="Default select example">
+                <select class="form-select" onChange={this.handleFilterRazza} aria-label="Default select example">
                     {JSON.parse(sessionStorage.getItem('listaRazze')).map(razza =>
-                    <option key={razza.id}  value={razza}>{razza}</option>
-                    
+
+
+                        <option key={razza} value={razza}>{razza}</option>
+
                     )}
                 </select>
-                
-                
-            
+
+
+
+
             </React.Fragment>
         )
     }
@@ -309,7 +291,6 @@ class ListaPersonaggi extends Component {
                     <option value="" >Filtra</option>
                     <option value="Online">Online</option>
                     <option value="Offline">Offline</option>
-                    <option value="Reset" >Reset Filtro</option>
                 </select>
             </React.Fragment>
         )
@@ -327,7 +308,7 @@ class ListaPersonaggi extends Component {
                         <thead className="table-dark align-middle" align="center">
                             <tr style={{ color: "#eeaa44" }}>
                                 <th>Immagine</th>
-                                <th><a href="#"onClick={() => this.ordinaPerId()} >ID</a></th>
+                                <th><a href="#" onClick={() => this.ordinaPerId()} >ID</a></th>
                                 <th><a href="#" onClick={() => this.ordinaPerNominativo()}>Nominativo</a> </th>
                                 <th><a href="#" onClick={() => this.ordinaPerSesso()}>Sesso</a></th>
                                 <th><a href="#" onClick={() => this.ordinaPerRazza()}>Razza</a>{this.renderFiltroRazza()}</th>
