@@ -28,6 +28,7 @@ import passi from '../../suoni/suono_passi.mp3'
 import attraversaUmbra from '../../suoni/attraversa_guanto.mp3'
 import srotolaCarta from '../../suoni/flip_card.mp3'
 
+var stanzeSessione = JSON.parse(sessionStorage.getItem('stanze'))
 
 class Gamepage extends Component {
 
@@ -40,6 +41,18 @@ class Gamepage extends Component {
                 title: <p>Non c'è nulla in questa direzione!</p>
             })
         }
+    }
+
+    visualizzazioneStanze = () => {
+        let stanze = [];
+        stanzeSessione.map(stanza => {
+            if (stanza.location.id === JSON.parse(sessionStorage.getItem('ultimaLocation')).id) {
+                stanze.push(stanza)
+            }
+        })
+        // alert(stanze[0].subLocation.nome)
+
+
     }
 
     logout = () => {
@@ -72,6 +85,7 @@ class Gamepage extends Component {
         var PG = JSON.parse(sessionStorage.getItem('pgAttivo'));
         var location = JSON.parse(sessionStorage.getItem('ultimaLocation'));
 
+
         return (
             <div style={{ position: "absolute", top: "0", height: "100%", width: "100%", backgroundColor: "dimgray" }}>
 
@@ -101,9 +115,8 @@ class Gamepage extends Component {
                                 } />
                         </div>
 
-
-                        {/* pulsante: porta------------------------------------------------- */}
-                        <div className="navigazione-link" title="Accedi ad una Stanza della Location" style={{ left: "77.65%", top: "4.43%", width: "14.67%", height: "9.2%", zIndex: "9999" }}>
+                        {/* pulsante: porta */}
+                        <div className="navigazione-link" title="Accedi ad una Stanza della Location" onClick={() => this.visualizzazioneStanze()} style={{ left: "77.65%", top: "4.43%", width: "14.67%", height: "9.2%", zIndex: "9999" }}>
                             <img className="icona-larga" src={porta} />
                         </div>
 

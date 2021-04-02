@@ -31,6 +31,16 @@ class LocationService {
         return axios.get(URL + 'macro')
     }
 
+    getAllStanze() {
+        return axios.get(URL + 'stanze')
+    }
+
+    sessioneStanze() {
+        this.getAllStanze().then(res => 
+            sessionStorage.setItem('stanze',JSON.stringify(res.data))
+        )
+    }
+
     sessioneUltimaLocationPersonaggio(id) {
         this.getUltimaLocationPersonaggio(id).then(res =>
             sessionStorage.setItem('ultimaLocation', JSON.stringify(res.data))

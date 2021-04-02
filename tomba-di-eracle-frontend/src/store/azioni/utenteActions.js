@@ -21,6 +21,9 @@ export const login = (utente) => {
                 ).then(
                     LocationService.sessioneMappeEsterne()
                 ).then(
+                    LocationService.sessioneStanze()
+                )
+                .then(
                     LocationService.getLocationByDirezioneLibera('nord').then(res => {
                         sessionStorage.setItem('locationsNordLibero', JSON.stringify(res.data))
                     }).then(
