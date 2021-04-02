@@ -1,15 +1,16 @@
 import Modal from 'react-bootstrap/Modal'
 import React, { useState } from 'react';
+import { SuonoModal } from './SuonoSuImmagine';
 
 
-export const ModalComponente = ({ bottone, contenuto }) => {
+export const ModalComponente = ({ bottone, contenuto, suono }) => {
     const [show, setShow] = useState(false);
 
     return (
         <>
-            <div onClick={() => setShow(true)} >
-                {bottone}
-            </div>
+            <SuonoModal suono={suono}
+                        funzione={{ onend: () => setShow(true) }}
+                        bottone={bottone}/>
 
             <Modal
                 show={show}
