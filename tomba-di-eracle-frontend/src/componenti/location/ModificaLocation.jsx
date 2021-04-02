@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import LocationService from '../../servizi/LocationService';
-import EliminaLocationForm from '../forms/EliminaLocationForm';
+import SelezionaLocationForm from '../forms/SelezionaLocationForm';
 import ModificaLocationForm from '../forms/ModificaLocationForm';
 import Header from '../layout/Header';
 import Macromappa from './Macromappa';
@@ -8,7 +8,7 @@ import Macromappa from './Macromappa';
 class ModificaLocation extends Component {
 
     state = {
-        cancellaLoc: '',
+        loc: '',
         locationMod: '',
         fasciaOraria: '',
         meteo: '',
@@ -72,11 +72,14 @@ class ModificaLocation extends Component {
                             <ModificaLocationForm handleChange={this.handleChange} handleUpdate={this.handleUpdate} />
                         </div>
                         <div className="col-md-5">
-                            <Macromappa />
+                        <Macromappa pxDimensioniMappa="700" lenteDisplay="none" idLocation={this.state.locationMod} />
                         </div>
                         <div className="col-md-3">
                             <h1 className="font-lombardia-yellow">Elimina Location</h1>
-                            <EliminaLocationForm handleChange={this.handleChange} handleDelete={this.handleDelete}/>
+                            <form onSubmit={this.handleDelete}>
+                                <SelezionaLocationForm lista={JSON.parse(sessionStorage.getItem('listaEsterneReame'))} handleChange={this.handleChange}/>
+                                <button className="btn btn-dark">Elimina</button>
+                            </form>
                         </div>
                     </div>
                 </div>

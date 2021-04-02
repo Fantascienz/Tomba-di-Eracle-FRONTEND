@@ -11,6 +11,7 @@ import ModificaPersonaggio from './componenti/personaggio/ModificaPersonaggio';
 import CreazioneLocation from './componenti/location/CreazioneLocation'
 import Macromappa from './componenti/location/Macromappa';
 import ModificaLocation from './componenti/location/ModificaLocation';
+import CreazioneStanza from './componenti/location/CreazioneStanza';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/game" component={Gamepage} />
           <Route path="/creazioneLocation" component={CreazioneLocation} />
           <Route path="/modificaLocation" component={ModificaLocation} />
+          <Route path="/creazioneStanza" component={CreazioneStanza}/>
           <Route path="/macromappa" component ={ Macromappa }/>
         </Switch>
       </Router>

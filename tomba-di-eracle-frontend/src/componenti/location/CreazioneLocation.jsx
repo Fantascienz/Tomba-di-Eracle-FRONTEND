@@ -12,7 +12,6 @@ class CreazioneLocation extends Component {
         nome: '',
         ambiente: '',
         ingresso: '',
-        provaIdLocation: '',
         urlImgGiorno: '',
         urlImgNotte: '',
         urlAudio: '',
@@ -91,7 +90,7 @@ class CreazioneLocation extends Component {
                         </div>
                         <div className="col-md-4">
                             <div style={{ marginTop: "10%" }}>
-                                <Macromappa pxDimensioniMappa="700" lenteDisplay="none" idLocation={this.state.ingresso} />
+                                <Macromappa pxDimensioniMappa="700" lenteDisplay="none" idLocation={parseInt(this.state.ingresso)} />
 
                             </div>
                         </div>

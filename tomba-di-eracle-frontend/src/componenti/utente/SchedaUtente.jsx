@@ -103,8 +103,9 @@ class SchedaUtente extends Component {
             return (
                 <React.Fragment>
                     <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
-                        <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%", fontSize: "0.8vw" }} onClick={() => this.creaLocation()}>Crea Location</button>
-                        <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%", fontSize: "0.8vw" }} onClick={() => this.modificaLocation()}>Modifica Location</button>
+                        <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%", fontSize: "0.6vw" }} onClick={() => this.creaLocation()}>Crea Location</button>
+                        <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%", fontSize: "0.6vw" }} onClick={() => this.creaStanza()}>Crea Stanza</button>
+                        <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%", fontSize: "0.6vw" }} onClick={() => this.modificaLocation()}>Modifica Location</button>
                     </div>
                 </React.Fragment>
             )
@@ -140,12 +141,21 @@ class SchedaUtente extends Component {
         browserHistory.go()
     }
 
+    creaStanza = () => {
+        LocationService.sessioneAllLocation().then(() => {
+            browserHistory.push('creazioneStanza')
+            browserHistory.go()
+        }
+        )
+
+    }
+
     componentDidMount() {
         if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' || JSON.parse(sessionStorage.getItem('utente')).tipo === 'master') {
             LocationService.sessioneMappeEsterne()
             LocationService.sessioneMappeMacro()
         }
-        
+
     }
 
     renderListe = () => {

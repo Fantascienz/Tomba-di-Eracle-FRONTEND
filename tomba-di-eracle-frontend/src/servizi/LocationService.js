@@ -6,6 +6,17 @@ const URL = "http://localhost:8080/locations/"
 
 class LocationService {
 
+    getAll() {
+        return axios.get(URL)
+    }
+
+    sessioneAllLocation () {
+        this.getAll().then( res =>
+            sessionStorage.setItem('allLocations',JSON.stringify(res.data))
+        )
+        return this.getAll()
+    }
+
     delete(id) {
         return axios.delete(URL + 'delete/' + id)
     }
