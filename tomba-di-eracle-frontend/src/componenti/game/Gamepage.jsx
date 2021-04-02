@@ -49,6 +49,7 @@ class Gamepage extends Component {
         var locationEST = direzioni.idLocationEst;
         var locationSUD = direzioni.idLocationSud;
         var locationOVEST = direzioni.idLocationOvest;
+        var locationUMBRA = direzioni.idLocationSpecchio;
 
         return (
             <div style={{ position: "absolute", top: "0", height: "100%", width: "100%", backgroundColor: "dimgray" }}>
@@ -72,7 +73,7 @@ class Gamepage extends Component {
                         </div>
 
                         {/* pulsante: specchio */}
-                        <div className="navigazione-link" title="Oltrepassa il Guanto" style={{ left: "73.23%", top: "82.23%", width: "11.25%", height: "7.04%", zIndex: "9999" }}>
+                        <div className="navigazione-link" title="Oltrepassa il Guanto" onClick={() => this.navigazione(locationUMBRA)} style={{ left: "73.23%", top: "82.23%", width: "11.25%", height: "7.04%", zIndex: "9999" }}>
                             <img className="icona-larga" src={specchio} />
                         </div>
 
