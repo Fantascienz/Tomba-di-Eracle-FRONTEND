@@ -10,6 +10,7 @@ import { visualizzaListaPg, visualizzaPgMaster } from '../../store/azioni/master
 import { SoundDiv } from '../utils/SuonoSuImmagine'
 import coinFlip from '../../suoni/flip_coin.mp3'
 import LocationService from '../../servizi/LocationService';
+import { TitoloPagina } from '../layout/TitoloPagina';
 
 
 class SchedaUtente extends Component {
@@ -213,11 +214,7 @@ class SchedaUtente extends Component {
     render() {
         return (
             <div className="corpoComponente">
-
-                <div style={{ backgroundColor: "transparent", height: "15%", zIndex: "998", color: "#eeaa44", textShadow: "2px 2px black", display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
-                    <span className="font-lombardia" style={{ fontSize: "5vw" }}>Salute {JSON.parse(sessionStorage.getItem('utente')).nominativo}</span>
-                </div>
-
+                <TitoloPagina titolo={'Salute ' + JSON.parse(sessionStorage.getItem('utente')).nominativo} />
                 <div style={{ position: "absolute", left: "2%", height: "80%", width: "23%" }}>
                     <div style={{ height: "100%", display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
 

@@ -1,19 +1,11 @@
 import React, { Component } from 'react';
 
 class CreazioneLocationForm extends Component {
-    render() {
-        return (
-            <div>
-                <form onSubmit={this.props.handleSubmit}>
-                    <input type="text" id="nome" placeholder="Nome" onChange={this.props.handleChange} style={{ width: '50%' }} /> <br /> <br />
-                    <input type="text" id="ambiente" placeholder="Ambiente" onChange={this.props.handleChange} style={{ width: '50%' }} /> <br /> <br />
-                    <input type="text" id="urlImgGiorno" placeholder="URL Immagine Giorno" onChange={this.props.handleChange} style={{ width: '50%' }} /> <br /> <br />
-                    <input type="text" id="urlImgNotte" placeholder="URL Immagine Notte" onChange={this.props.handleChange} style={{ width: '50%' }} /> <br /> <br />
-                    <input type="text" id="urlAudio" placeholder="URL Audio" onChange={this.props.handleChange} style={{ width: '50%' }} /> <br /> <br />
-                    <input type="text" id="chiave" placeholder="Chiave d'accesso" onChange={this.props.handleChange} style={{ width: '50%' }} /> <br /> <br />
-                    <input type="text" id="urlImgGiornoUmbra" placeholder="URL Immagine Giorno Umbra" onChange={this.props.handleChange} style={{ width: '50%' }} /> <br /> <br />
-                    <input type="text" id="urlImgNotteUmbra" placeholder="URL Immagine Notte Umbra" onChange={this.props.handleChange} style={{ width: '50%' }} /> <br /> <br />
-                    <input type="text" id="urlAudioUmbra" placeholder="URL Audio Umbra" onChange={this.props.handleChange} style={{ width: '50%' }} /> <br /> <br />
+
+    isStanza = () => {
+        if (!this.props.stanza) {
+            return (
+                <React.Fragment>
                     <select name="ingresso" id="ingresso" onChange={this.props.handleChange} style={{ width: '50%' }}>
                         <option value="">Seleziona Ingresso</option>
                         {JSON.parse(sessionStorage.getItem('locationsNordLibero')).map(location =>
@@ -29,8 +21,24 @@ class CreazioneLocationForm extends Component {
                             <option value={location.id + " ovest"} key={location.id}>OVEST di {location.nome}: {location.id}</option>
                         )}
                     </select> <br /><br />
-                    <button className="btn btn-dark">Crea</button>
-                </form>
+                </React.Fragment>
+            )
+        }
+    }
+
+    render() {
+        return (
+            <div>
+                <input type="text" id="nome" placeholder="Nome" onChange={this.props.handleChange} style={{ width: '50%' }} /> <br /> <br />
+                <input type="text" id="ambiente" placeholder="Ambiente" onChange={this.props.handleChange} style={{ width: '50%' }} /> <br /> <br />
+                <input type="text" id="urlImgGiorno" placeholder="URL Immagine Giorno" onChange={this.props.handleChange} style={{ width: '50%' }} /> <br /> <br />
+                <input type="text" id="urlImgNotte" placeholder="URL Immagine Notte" onChange={this.props.handleChange} style={{ width: '50%' }} /> <br /> <br />
+                <input type="text" id="urlAudio" placeholder="URL Audio" onChange={this.props.handleChange} style={{ width: '50%' }} /> <br /> <br />
+                <input type="text" id="chiave" placeholder="Chiave d'accesso" onChange={this.props.handleChange} style={{ width: '50%' }} /> <br /> <br />
+                <input type="text" id="urlImgGiornoUmbra" placeholder="URL Immagine Giorno Umbra" onChange={this.props.handleChange} style={{ width: '50%' }} /> <br /> <br />
+                <input type="text" id="urlImgNotteUmbra" placeholder="URL Immagine Notte Umbra" onChange={this.props.handleChange} style={{ width: '50%' }} /> <br /> <br />
+                <input type="text" id="urlAudioUmbra" placeholder="URL Audio Umbra" onChange={this.props.handleChange} style={{ width: '50%' }} /> <br /> <br />
+                {this.isStanza()}
             </div>
         );
     }

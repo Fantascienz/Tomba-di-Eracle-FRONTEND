@@ -4,6 +4,7 @@ import withReactContent from 'sweetalert2-react-content';
 import LocationService from '../../servizi/LocationService';
 import CreazioneLocationForm from '../forms/CreazioneLocationForm';
 import Header from '../layout/Header';
+import { TitoloPagina } from '../layout/TitoloPagina';
 import Macromappa from './Macromappa';
 
 class CreazioneLocation extends Component {
@@ -38,7 +39,7 @@ class CreazioneLocation extends Component {
     }
 
     handleSubmit = (event) => {
-        if (LocationService.validaCampiCreazione(this.state)) {
+        if (LocationService.validaCampiCreazione(this.state,false)) {
             let locationCreata = {
                 location: {
                     nome: this.state.nome,
@@ -63,13 +64,6 @@ class CreazioneLocation extends Component {
             )
         } else {
             event.preventDefault()
-            withReactContent(Swal).fire({
-                title: <div>
-                    <p>Nome,Ambiente,Ingresso</p>
-                    <p>Immagine giorno e Audio</p>
-                    <p>sono obbligatori!</p>
-                </div>
-            })
         }
     }
 
@@ -84,9 +78,12 @@ class CreazioneLocation extends Component {
                 <div className="corpoComponente">
                     <div className="row">
                         <div className="col-md-6">
-                            <h1 className="font-lombardia" style={{ fontSize: "5vw", color: "#eeaa44", textShadow: "2px 2px black" }}>Creazione Location Esterna</h1>
+                            <TitoloPagina titolo="Creazione Location Esterna" />
                             <br />
-                            <CreazioneLocationForm handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
+                            <form onSubmit={this.handleSubmit}>
+                                <CreazioneLocationForm handleChange={this.handleChange} stanza={false} />
+                                <button className="btn btn-dark">Crea</button>
+                            </form>
                         </div>
                         <div className="col-md-4">
                             <div style={{ marginTop: "10%" }}>
