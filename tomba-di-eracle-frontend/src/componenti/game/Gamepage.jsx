@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import cardGame from '../../img/gameCard.png'
+import cardGameUmbra from '../../img/gameCard_umbra.png'
 import mappa from '../../img/mappa_icona.png'
 import porta from '../../img/porta_icona.png'
 import specchio from '../../img/specchio_icona.png'
@@ -43,6 +44,20 @@ class Gamepage extends Component {
     componentDidMount() {
         this.props.primoAccesso(JSON.parse(sessionStorage.getItem('pgAttivo')))
     }
+
+    corniceNavigazione(tipoLocation) {
+        if (tipoLocation == "Umbra") {
+            return (
+                <img src={cardGameUmbra} style={{ position: "relative", zIndex: "1", width: "auto", height: "100%" }} />
+            )
+        } else {
+            return (
+                <img src={cardGame} style={{ position: "relative", zIndex: "1", width: "auto", height: "100%" }} />
+            )
+        }
+    }
+
+
     render() {
 
         var PG = JSON.parse(sessionStorage.getItem('pgAttivo'));
@@ -63,16 +78,15 @@ class Gamepage extends Component {
 
                         <div className="navigazione-immagine" style={{ backgroundImage: `url('${location.urlImgGiorno}')` }}></div>
 
-                        <img src={cardGame} style={{ position: "relative", zIndex: "1", width: "auto", height: "100%" }} />
+                        {this.corniceNavigazione(location.tipo)}
 
                         {/* ------------PULSANTI AZIONI------------ */}
                         {/* pulsante: mappa */}
                         <div className="navigazione-link" title="Apri la Minimappa" style={{ left: "6.99%", top: "4.47%", width: "14.67%", height: "9.2%", zIndex: "9999" }}>
-                            <ModalComponente 
+                            <ModalComponente
                                 bottone={<img className="icona-alta" src={mappa} />}
                                 contenuto={
                                     <div className="centrato" >
-
                                         <div className="centrato" style={{ position: "fixed", backgroundColor: "none" }}>
                                             <img src={Scroll} style={{ height: "800px", transform: "rotate(90deg)" }} />
                                         </div>
@@ -80,7 +94,6 @@ class Gamepage extends Component {
                                         <div className="centrato" style={{ position: "relative", backgroundColor: "transparent", height: "100%", width: "100%" }}>
                                             <Macromappa idLocation={location.id} pxDimensioniMappa="500" lenteDisplay="none" />
                                         </div>
-
                                     </div>
                                 } />
                         </div>
@@ -130,9 +143,8 @@ class Gamepage extends Component {
 
 
                         {/* ------------NOME LOCATION------------ */}
-                        <div className="navigazione-link" title="Location" style={{ left: "28.75%", top: "79.7%", width: "41.65%", height: "4.97%", zIndex: "9999" }}>
-                            <b className="font-lombardia" style={{ fontSize: "2.2vw" }}>{location.nome}</b>
-                            <b>{location.id}</b>
+                        <div className="navigazione-link" title={"Id: "+location.id} style={{ left: "28.75%", top: "79.7%", width: "41.65%", height: "4.97%", zIndex: "9999", backgroundColor:"transparent" }}>
+                            <b className="font-lombardia" style={{ fontSize: "1.5em", color:`${location.tipo == "Umbra" ? "blue" : "black"}` }} >{location.nome}</b>
                         </div>
                     </div>
                 </div>
@@ -146,14 +158,29 @@ class Gamepage extends Component {
                     <div style={{ backgroundColor: "yellow", position: "absolute", top: "10px", right: "10px", width: "400px", height: "400px" }}>
                     </div>
 
-                    <h1>NORD {locationNORD}</h1>
-                    <h1>est {locationEST}</h1>
-                    <h1>sud {locationSUD}</h1>
-                    <h1>ovest {locationOVEST}</h1>
-                    <button onClick={() => this.logout()}>Logout</button>
+
 
                     <div title={PG.nominativo} style={{ backgroundColor: "transparent", position: "absolute", bottom: "10px", right: "10px", width: "100px", height: "100px" }}>
-                        <DettagliPersonaggio personaggio={PG} altezza="100px" larghezza="auto" immagine={PG.urlImmagine} dimImmagine="100px auto" />
+
+                        <ModalComponente
+                            bottone={<DettagliPersonaggio personaggio={PG} altezza="100px" larghezza="auto" immagine={PG.urlImmagine} dimImmagine="100px auto" />}
+                            contenuto={
+                                <div className="centrato" >
+                                    <div className="centrato" style={{ position: "fixed", backgroundColor: "none" }}>
+                                        <img src={Scroll} style={{ height: "800px", transform: "rotate(90deg)" }} />
+                                    </div>
+
+                                    <div className="centrato" style={{ position: "relative", backgroundColor: "transparent", height: "100%", width: "100%" }}>
+                                        <h1>NORD {locationNORD}</h1>
+                                        <h1>est {locationEST}</h1>
+                                        <h1>sud {locationSUD}</h1>
+                                        <h1>ovest {locationOVEST}</h1>
+                                        <button onClick={() => this.logout()}>Logout</button>
+                                    </div>
+                                </div>
+                            }
+                        />
+
                     </div>
 
                 </div>
