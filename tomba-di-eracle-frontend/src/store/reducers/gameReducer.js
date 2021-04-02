@@ -3,6 +3,7 @@ const initState = {
     pgAttivo: {},
     ultimaLocation: {},
     direzioniRelativeUltimaLocation: {},
+    stanzeLocation: [],
     redirect: ''
 }
 
@@ -14,6 +15,7 @@ const gameReducer = (state = initState, action) => {
                 pgAttivo: action.pgAttivo,
                 ultimaLocation: action.location,
                 direzioniRelativeUltimaLocation: action.direzioniRelativeUltimaLocation,
+                stanzeLocation: action.stanzeLocation,
                 redirect: '/game'
             }
             break;
@@ -23,6 +25,7 @@ const gameReducer = (state = initState, action) => {
                 pgAttivo: action.pgAttivo,
                 ultimaLocation: action.location,
                 direzioniRelativeUltimaLocation: action.direzioniRelativeUltimaLocation,
+                stanzeLocation: action.stanzeLocation
             }
             // alert('state ' + state.direzioniRelativeUltimaLocation.id)
             break;
