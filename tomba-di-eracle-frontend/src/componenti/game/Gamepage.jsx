@@ -10,11 +10,11 @@ import frecciaDX from '../../img/freccia_dx.png'
 import frecciaSU from '../../img/freccia_su.png'
 import frecciaGIU from '../../img/freccia_giu.png'
 import DettagliPersonaggio from '../personaggio/DettagliPersonaggio'
+import { connect } from 'react-redux'
 import Macromappa from '../location/Macromappa'
 import { ModalComponente } from '../utils/ModalComponent'
 import Scroll from '../../img/scroll.png'
 import { naviga, primoAccesso } from '../../store/azioni/gameActions'
-import { connect } from 'react-redux'
 import withReactContent from 'sweetalert2-react-content'
 import Swal from 'sweetalert2'
 import { browserHistory } from '../..'
@@ -62,6 +62,8 @@ class Gamepage extends Component {
                     <div className="navigazione-area">
 
                         <div className="navigazione-immagine" style={{ backgroundImage: `url('${location.urlImgGiorno}')` }}></div>
+
+                        <img src={cardGame} style={{ position: "relative", zIndex: "1", width: "auto", height: "100%" }} />
 
                         {/* ------------PULSANTI AZIONI------------ */}
                         {/* pulsante: mappa */}
