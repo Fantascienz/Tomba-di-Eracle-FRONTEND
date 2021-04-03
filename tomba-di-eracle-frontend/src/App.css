@@ -266,7 +266,7 @@ div.centrato{
 }
 
 .griglia-macromappa{
-  border: 1px solid black;
+  border: 0.001em solid rgba(0,0,0,0.3);
 }
 
 /* FONT------------------------------------------------------------ */
