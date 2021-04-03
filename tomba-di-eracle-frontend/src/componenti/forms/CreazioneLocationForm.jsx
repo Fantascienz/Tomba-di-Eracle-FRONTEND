@@ -4,6 +4,23 @@ class CreazioneLocationForm extends Component {
 
     isStanza = () => {
         if (!this.props.stanza) {
+
+            let listaOrdinataNORD = JSON.parse(sessionStorage.getItem('locationsNordLibero')).sort(
+                (a, b) => (a.id < b.id ? -1 : Number(a.id > b.id))
+            );
+
+            let listaOrdinataEST = JSON.parse(sessionStorage.getItem('locationsEstLibero')).sort(
+                (a, b) => (a.id < b.id ? -1 : Number(a.id > b.id))
+            );
+
+            let listaOrdinataSUD = JSON.parse(sessionStorage.getItem('locationsSudLibero')).sort(
+                (a, b) => (a.id < b.id ? -1 : Number(a.id > b.id))
+            );
+
+            let listaOrdinataOVEST = JSON.parse(sessionStorage.getItem('locationsOvestLibero')).sort(
+                (a, b) => (a.id < b.id ? -1 : Number(a.id > b.id))
+            );
+
             return (
                 <React.Fragment>
                     <div className="input-group">
@@ -13,25 +30,25 @@ class CreazioneLocationForm extends Component {
 
                             <option value="" style={{ fontWeight: 'bold' }}>-----NORD-----</option>
 
-                            {JSON.parse(sessionStorage.getItem('locationsNordLibero')).map(location =>
+                            {listaOrdinataNORD.map(location =>
                                 <option value={location.id + " nord"} key={location.id}>NORD di {location.nome} - (id: {location.id})</option>
                             )}
 
                             <option value="" style={{ fontWeight: 'bold' }}>-----EST-----</option>
 
-                            {JSON.parse(sessionStorage.getItem('locationsEstLibero')).map(location =>
+                            {listaOrdinataEST.map(location =>
                                 <option value={location.id + " est"} key={location.id}>EST di {location.nome} - (id: {location.id})</option>
                             )}
 
                             <option value="" style={{ fontWeight: 'bold' }}>-----SUD-----</option>
 
-                            {JSON.parse(sessionStorage.getItem('locationsSudLibero')).map(location =>
+                            {listaOrdinataSUD.map(location =>
                                 <option value={location.id + " sud"} key={location.id}>SUD di {location.nome} - (id: {location.id})</option>
                             )}
 
                             <option value="" style={{ fontWeight: 'bold' }}>-----OVEST-----</option>
 
-                            {JSON.parse(sessionStorage.getItem('locationsOvestLibero')).map(location =>
+                            {listaOrdinataOVEST.map(location =>
                                 <option value={location.id + " ovest"} key={location.id}>OVEST di {location.nome} - (id: {location.id})</option>
                             )}
                         </select>
