@@ -20,8 +20,9 @@ class SelezionaLocationForm extends Component {
         );
 
         return (
-            <div className="input-group">
-                <select className="form-select" name="loc" id="loc" onChange={this.props.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)", marginBottom: "1%" }}>
+
+            <div className="input-group ">
+                <select className="form-select" name="loc" id="loc" onChange={this.props.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)", marginBottom: "2%" }}>
                     <option value="">Seleziona Location</option>
                     {listaOrdinata.map(location =>
                         this.renderLista(location)

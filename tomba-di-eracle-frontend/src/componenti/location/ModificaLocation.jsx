@@ -63,26 +63,33 @@ class ModificaLocation extends Component {
     }
 
     render() {
+
+        let listaOrdinataESTERNE = JSON.parse(sessionStorage.getItem('listaEsterneReame')).sort(
+            (a, b) => (a.id < b.id ? -1 : Number(a.id > b.id))
+        );
+
         return (
             <React.Fragment>
                 <Header />
                 <div className="corpoComponente">
                     <div className="row">
                         <div className="col-md-4 centrato">
-                            <TitoloPagina titolo="Modifica Location"/>
+                            <TitoloPagina titolo="Modifica Location" />
                             <ModificaLocationForm handleChange={this.handleChange} handleUpdate={this.handleUpdate} />
                         </div>
 
-                        <div className="col-md-5 centrato">
+                        <div className="col-md-4 centrato">
                             <Macromappa pxDimensioniMappa="400" lenteDisplay="none" idLocation={this.state.locationMod} />
                         </div>
-                        
-                        <div className="col-md-3">
-                        <TitoloPagina titolo="Elimina Location"/>
-                            <form onSubmit={this.handleDelete}>
-                                <SelezionaLocationForm lista={JSON.parse(sessionStorage.getItem('listaEsterneReame'))} handleChange={this.handleChange} />
-                                <button className="btn btn-dark">Elimina</button>
-                            </form>
+
+                        <div className="col-md-4 " >
+                            <TitoloPagina titolo="Elimina Location" />
+                            <div className="centrato">
+                                <form onSubmit={this.handleDelete}>
+                                    <SelezionaLocationForm lista={listaOrdinataESTERNE} handleChange={this.handleChange} />
+                                    <button className="btn btn-dark">Elimina</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
