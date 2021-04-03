@@ -43,7 +43,7 @@ class CreazioneLocationForm extends Component {
 
     render() {
         return (
-            <div className="centrato">
+            <div className="centrato" >
                     <div className="input-group">
                         <input type="text" className="form-control" id="nome" placeholder="Nome" onChange={this.props.handleChange} style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} /> <br />
                     </div>

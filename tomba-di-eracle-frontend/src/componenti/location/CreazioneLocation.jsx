@@ -77,19 +77,23 @@ class CreazioneLocation extends Component {
                 <Header />
                 <div className="corpoComponente">
                     <div className="row">
-                        <div className="col-md-6">
+                        <div className="col-md-6 centrato">
                             <TitoloPagina titolo="Creazione Location Esterna" />
+
                             <br />
-                            <form onSubmit={this.handleSubmit}>
+
+                            <form onSubmit={this.handleSubmit} style={{width:"50%"}}>
                                 <CreazioneLocationForm handleChange={this.handleChange} stanza={false} />
                                 <button className="btn btn-dark">Crea</button>
                             </form>
                         </div>
+
                         <div className="col-md-4 centrato">
                             <div style={{ marginTop: "10%" }}>
                                 <Macromappa pxDimensioniMappa="400" lenteDisplay="none" idLocation={parseInt(this.state.ingresso)} />
                             </div>
                         </div>
+
                     </div>
                 </div>
             </React.Fragment>

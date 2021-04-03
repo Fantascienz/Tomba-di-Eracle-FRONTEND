@@ -268,17 +268,10 @@ class ListaPersonaggi extends Component {
         return (
             <React.Fragment>
                 <select class="form-select" onChange={this.handleFilterRazza} aria-label="Default select example">
-                    {JSON.parse(sessionStorage.getItem('listaRazze')).map(razza =>
-
-
+                    {/* {JSON.parse(sessionStorage.getItem('listaRazze')).map(razza =>
                         <option key={razza} value={razza}>{razza}</option>
-
-                    )}
+                    )} */}
                 </select>
-
-
-
-
             </React.Fragment>
         )
     }

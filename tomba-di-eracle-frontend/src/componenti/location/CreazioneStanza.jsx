@@ -66,14 +66,16 @@ class CreazioneStanza extends Component {
                 <Header />
                 <div className="corpoComponente">
                     <TitoloPagina titolo="Creazione Stanza" />
+
                     <div className="row">
-                        <div className="col-md-6">
+                        <div className="col-md-6 centrato">
                             <form onSubmit={this.handleSubmit} >
                                 <SelezionaLocationForm lista={JSON.parse(sessionStorage.getItem('allLocations'))} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
                                 <CreazioneLocationForm handleChange={this.handleChange} stanza={true} />
                                 <button className="btn btn-dark">Crea</button>
                             </form>
                         </div>
+
                         <div className="col-md-6">
                             <Macromappa pxDimensioniMappa="400" lenteDisplay="none" idLocation={parseInt(this.state.loc)} />
                         </div>

@@ -68,7 +68,7 @@ class ModificaLocation extends Component {
                 <Header />
                 <div className="corpoComponente">
                     <div className="row">
-                        <div className="col-md-4">
+                        <div className="col-md-4 centrato">
                             <TitoloPagina titolo="Modifica Location"/>
                             <ModificaLocationForm handleChange={this.handleChange} handleUpdate={this.handleUpdate} />
                         </div>
