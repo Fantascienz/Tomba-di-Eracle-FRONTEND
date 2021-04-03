@@ -45,11 +45,6 @@ class Gamepage extends Component {
     }
 
     visualizzazioneStanze = () => {
-        // if (this.props.ultimaLocation.tipo === 'Stanza') {
-        //     withReactContent(Swal).fire({
-        //         html: <button onClick={() => this.navigazione(JSON.parse(sessionStorage.getItem('locationPrecedente')))}>Esci</button>
-        //     })
-        // } else
         withReactContent(Swal).fire({
             html: <TabellaStanze lista={this.props.stanzeLocation} entra={this.navigazione} />
         })

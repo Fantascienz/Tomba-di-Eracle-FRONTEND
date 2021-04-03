@@ -15,7 +15,7 @@ class LocationService {
     }
 
     creaStanza(stanza) {
-        return axios.post(URL + "stanze",stanza)
+        return axios.post(URL + "stanze", stanza)
     }
 
 
@@ -36,8 +36,10 @@ class LocationService {
     }
 
     sessioneStanze() {
-        this.getAllStanze().then(res => 
-            sessionStorage.setItem('stanze',JSON.stringify(res.data))
+        this.getAllStanze().then(res => {
+            console.log(res.data)
+            sessionStorage.setItem('stanze', JSON.stringify(res.data))
+        }
         )
     }
 

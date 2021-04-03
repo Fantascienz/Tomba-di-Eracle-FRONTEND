@@ -48,8 +48,9 @@ class CreazioneStanza extends Component {
                 },
                 superLocation: this.state.loc
             }
-            LocationService.creaStanza(stanza).then(
+            LocationService.creaStanza(stanza).then(() => {
                 alert('Stanza creata con successo!')
+            }
             )
         } else {
             event.preventDefault();

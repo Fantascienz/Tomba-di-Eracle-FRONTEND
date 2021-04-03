@@ -47,6 +47,7 @@ class DettagliPersonaggioBack extends Component {
     }
 
     setPGAttivo = (personaggio) => {
+        LocationService.sessioneStanze()
         this.props.primoAccesso(personaggio)
     }
 
