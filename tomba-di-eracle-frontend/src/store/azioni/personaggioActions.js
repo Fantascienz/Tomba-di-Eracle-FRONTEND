@@ -10,7 +10,8 @@ export const creaPersonaggio = (personaggio) => {
                 type: 'CREA_PERSONAGGIO',
                 personaggio: res.data
             })
-        }).then(() => {
+        })
+        .then(() => {
             browserHistory.push('/paginaUtente');
             browserHistory.go();
         }).catch(() => {

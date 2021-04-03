@@ -21,6 +21,9 @@ export const login = (utente) => {
                 ).then(
                     LocationService.sessioneMappeEsterne()
                 ).then(
+                    LocationService.sessioneStanze()
+                )
+                .then(
                     LocationService.getLocationByDirezioneLibera('nord').then(res => {
                         sessionStorage.setItem('locationsNordLibero', JSON.stringify(res.data))
                     }).then(
@@ -34,6 +37,10 @@ export const login = (utente) => {
                     ).then(
                         LocationService.getLocationByDirezioneLibera('ovest').then(res => {
                             sessionStorage.setItem('locationsOvestLibero', JSON.stringify(res.data))
+                        })
+                    ).then (
+                        PersonaggioService.getAllRazzeGroupBy().then(res => {
+                            sessionStorage.setItem('listaRazze', JSON.stringify(res.data))
                         })
                     )
                 )

@@ -1,10 +1,49 @@
 import React, { Component } from 'react';
 
 class CreazioneLocationForm extends Component {
+
+    isStanza = () => {
+        if (!this.props.stanza) {
+            return (
+                <React.Fragment>
+                    <div className="input-group">
+                        <select className="form-select" name="ingresso" id="ingresso" onChange={this.props.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)", marginBottom: "1%" }}>
+
+                            <option value="">Seleziona Ingresso</option>
+
+                            <option value="" style={{ fontWeight: 'bold' }}>-----NORD-----</option>
+
+                            {JSON.parse(sessionStorage.getItem('locationsNordLibero')).map(location =>
+                                <option value={location.id + " nord"} key={location.id}>NORD di {location.nome} - (id: {location.id})</option>
+                            )}
+
+                            <option value="" style={{ fontWeight: 'bold' }}>-----EST-----</option>
+
+                            {JSON.parse(sessionStorage.getItem('locationsEstLibero')).map(location =>
+                                <option value={location.id + " est"} key={location.id}>EST di {location.nome} - (id: {location.id})</option>
+                            )}
+
+                            <option value="" style={{ fontWeight: 'bold' }}>-----SUD-----</option>
+
+                            {JSON.parse(sessionStorage.getItem('locationsSudLibero')).map(location =>
+                                <option value={location.id + " sud"} key={location.id}>SUD di {location.nome} - (id: {location.id})</option>
+                            )}
+
+                            <option value="" style={{ fontWeight: 'bold' }}>-----OVEST-----</option>
+
+                            {JSON.parse(sessionStorage.getItem('locationsOvestLibero')).map(location =>
+                                <option value={location.id + " ovest"} key={location.id}>OVEST di {location.nome} - (id: {location.id})</option>
+                            )}
+                        </select>
+                    </div>
+                </React.Fragment>
+            )
+        }
+    }
+
     render() {
         return (
             <div className="centrato">
-                <form onSubmit={this.props.handleSubmit}>
                     <div className="input-group">
                         <input type="text" className="form-control" id="nome" placeholder="Nome" onChange={this.props.handleChange} style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} /> <br />
                     </div>
@@ -40,39 +79,7 @@ class CreazioneLocationForm extends Component {
                     <div className="input-group">
                         <input type="text" className="form-control" id="urlAudioUmbra" placeholder="URL Audio Umbra" onChange={this.props.handleChange} style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} /> <br />
                     </div>
-
-                    <div className="input-group">
-                        <select className="form-select" name="ingresso" id="ingresso" onChange={this.props.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)", marginBottom: "1%" }}>
-                            
-                            <option value="">Seleziona Ingresso</option>
-                            
-                            <option value="" style={{ fontWeight: 'bold' }}>-----NORD-----</option>
-                            
-                            {JSON.parse(sessionStorage.getItem('locationsNordLibero')).map(location =>
-                                <option value={location.id + " nord"} key={location.id}>NORD di {location.nome} - (id: {location.id})</option>
-                            )}
-                            
-                            <option value="" style={{ fontWeight: 'bold' }}>-----EST-----</option>
-                            
-                            {JSON.parse(sessionStorage.getItem('locationsEstLibero')).map(location =>
-                                <option value={location.id + " est"} key={location.id}>EST di {location.nome} - (id: {location.id})</option>
-                            )}
-                            
-                            <option value="" style={{ fontWeight: 'bold' }}>-----SUD-----</option>
-                            
-                            {JSON.parse(sessionStorage.getItem('locationsSudLibero')).map(location =>
-                                <option value={location.id + " sud"} key={location.id}>SUD di {location.nome} - (id: {location.id})</option>
-                            )}
-                            
-                            <option value="" style={{ fontWeight: 'bold' }}>-----OVEST-----</option>
-                            
-                            {JSON.parse(sessionStorage.getItem('locationsOvestLibero')).map(location =>
-                                <option value={location.id + " ovest"} key={location.id}>OVEST di {location.nome} - (id: {location.id})</option>
-                            )}
-                        </select>
-                    </div>
-                    <button className="btn btn-dark">Crea</button>
-                </form>
+                    {this.isStanza()}
             </div>
         );
     }

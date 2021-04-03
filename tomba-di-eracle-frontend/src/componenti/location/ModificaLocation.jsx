@@ -4,6 +4,7 @@ import SelezionaLocationForm from '../forms/SelezionaLocationForm';
 import ModificaLocationForm from '../forms/ModificaLocationForm';
 import Header from '../layout/Header';
 import Macromappa from './Macromappa';
+import { TitoloPagina } from '../layout/TitoloPagina';
 
 class ModificaLocation extends Component {
 
@@ -68,7 +69,7 @@ class ModificaLocation extends Component {
                 <div className="corpoComponente">
                     <div className="row">
                         <div className="col-md-4">
-                            <h1 className="font-lombardia-yellow">Modifica Location {this.state.locationMod}</h1>
+                            <TitoloPagina titolo="Modifica Location"/>
                             <ModificaLocationForm handleChange={this.handleChange} handleUpdate={this.handleUpdate} />
                         </div>
 
@@ -77,7 +78,7 @@ class ModificaLocation extends Component {
                         </div>
                         
                         <div className="col-md-3">
-                            <h1 className="font-lombardia-yellow">Elimina Location</h1>
+                        <TitoloPagina titolo="Elimina Location"/>
                             <form onSubmit={this.handleDelete}>
                                 <SelezionaLocationForm lista={JSON.parse(sessionStorage.getItem('listaEsterneReame'))} handleChange={this.handleChange} />
                                 <button className="btn btn-dark">Elimina</button>

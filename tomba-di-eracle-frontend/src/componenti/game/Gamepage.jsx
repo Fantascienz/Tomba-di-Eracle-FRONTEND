@@ -27,6 +27,7 @@ import Scroll from '../../img/scroll.png'
 import passi from '../../suoni/suono_passi.mp3'
 import attraversaUmbra from '../../suoni/attraversa_guanto.mp3'
 import srotolaCarta from '../../suoni/flip_card.mp3'
+import { TabellaStanze } from '../tabelle/TabellaStanze'
 
 
 class Gamepage extends Component {
@@ -34,12 +35,24 @@ class Gamepage extends Component {
     navigazione = (location) => {
 
         if (location !== null) {
+            // sessionStorage.setItem('locationPrecedente',JSON.stringify(this.props.ultimaLocation))
             this.props.naviga(location)
         } else {
             withReactContent(Swal).fire({
                 title: <p>Non c'è nulla in questa direzione!</p>
             })
         }
+    }
+
+    visualizzazioneStanze = () => {
+        // if (this.props.ultimaLocation.tipo === 'Stanza') {
+        //     withReactContent(Swal).fire({
+        //         html: <button onClick={() => this.navigazione(JSON.parse(sessionStorage.getItem('locationPrecedente')))}>Esci</button>
+        //     })
+        // } else
+        withReactContent(Swal).fire({
+            html: <TabellaStanze lista={this.props.stanzeLocation} entra={this.navigazione} />
+        })
     }
 
     logout = () => {
@@ -51,7 +64,13 @@ class Gamepage extends Component {
     }
 
     componentDidMount() {
+        console.log(this.props.stanzeLocation)
         this.props.primoAccesso(JSON.parse(sessionStorage.getItem('pgAttivo')))
+    }
+
+    componentDidUpdate() {
+        console.log(this.props.stanzeLocation)
+        // this.visualizzazioneStanze();
     }
 
     corniceNavigazione(tipoLocation) {
@@ -72,6 +91,7 @@ class Gamepage extends Component {
         var PG = JSON.parse(sessionStorage.getItem('pgAttivo'));
         var location = JSON.parse(sessionStorage.getItem('ultimaLocation'));
 
+
         return (
             <div style={{ position: "absolute", top: "0", height: "100%", width: "100%", backgroundColor: "dimgray" }}>
 
@@ -86,7 +106,7 @@ class Gamepage extends Component {
                         {/* pulsante: mappa------------------------------------------------- */}
                         <div className="navigazione-link" title="Apri la Minimappa" style={{ left: "6.99%", top: "4.47%", width: "14.67%", height: "9.2%", zIndex: "9999" }}>
                             <ModalComponente
-                                suono = {srotolaCarta}
+                                suono={srotolaCarta}
                                 bottone={<img className="icona-alta" src={mappa} />}
                                 contenuto={
                                     <div className="centrato" >
@@ -101,30 +121,29 @@ class Gamepage extends Component {
                                 } />
                         </div>
 
-
-                        {/* pulsante: porta------------------------------------------------- */}
-                        <div className="navigazione-link" title="Accedi ad una Stanza della Location" style={{ left: "77.65%", top: "4.43%", width: "14.67%", height: "9.2%", zIndex: "9999" }}>
+                        {/* pulsante: porta */}
+                        <div className="navigazione-link" title="Accedi ad una Stanza della Location" onClick={() => this.visualizzazioneStanze()} style={{ left: "77.65%", top: "4.43%", width: "14.67%", height: "9.2%", zIndex: "9999" }}>
                             <img className="icona-larga" src={porta} />
                         </div>
-
+                      
 
                         {/* pulsante: specchio------------------------------------------------- */}
-                        {PG.umbra ? 
-                        <SuonoDirezione suono={attraversaUmbra}
-                            funzione={{ onend: () => this.navigazione(JSON.parse(sessionStorage.getItem('direzioniUltimaLocation')).idLocationSpecchio) }}
-                            title="Oltrepassa il Guanto"
-                            className="icona-larga"
-                            src={specchio}
-                            style={{ left: "73.23%", top: "82.23%", width: "11.25%", height: "7.04%", zIndex: "9999" }} />
-                        : null}
+                        {PG.umbra ?
+                            <SuonoDirezione suono={attraversaUmbra}
+                                funzione={{ onend: () => this.navigazione(JSON.parse(sessionStorage.getItem('direzioniUltimaLocation')).idLocationSpecchio) }}
+                                title="Oltrepassa il Guanto"
+                                className="icona-larga"
+                                src={specchio}
+                                style={{ left: "73.23%", top: "82.23%", width: "11.25%", height: "7.04%", zIndex: "9999" }} />
+                            : null}
 
 
                         {/* pulsante: chirottero------------------------------------------------- */}
                         {PG.chirottero ?
-                        <div className="navigazione-link" title="Invia un Chirottero" style={{ left: "14.93%", top: "82.23%", width: "11.25%", height: "7.04%", zIndex: "9999" }}>
-                            <img className="icona-alta" src={chirottero} />
-                        </div>
-                        : null}
+                            <div className="navigazione-link" title="Invia un Chirottero" style={{ left: "14.93%", top: "82.23%", width: "11.25%", height: "7.04%", zIndex: "9999" }}>
+                                <img className="icona-alta" src={chirottero} />
+                            </div>
+                            : null}
 
 
 
@@ -180,11 +199,10 @@ class Gamepage extends Component {
 
                     <div style={{ backgroundColor: "yellow", position: "absolute", top: "10px", right: "10px", width: "400px", height: "400px" }}>
                     </div>
-
                     <div title={PG.nominativo} style={{ backgroundColor: "transparent", position: "absolute", bottom: "10px", right: "10px", width: "100px", height: "100px" }}>
 
                         <ModalComponente
-                            suono = {srotolaCarta}
+                            suono={srotolaCarta}
                             bottone={<DettagliPersonaggio personaggio={PG} altezza="100px" larghezza="auto" immagine={PG.urlImmagine} dimImmagine="100px auto" />}
                             contenuto={
                                 <div className="centrato" >
@@ -212,6 +230,7 @@ const mapStateToProps = (state) => {
         pgAttivo: state.game.pgAttivo,
         ultimaLocation: state.game.ultimaLocation,
         direzioniLocation: state.game.direzioniRelativeUltimaLocation,
+        stanzeLocation: state.game.stanzeLocation
 
     })
 }

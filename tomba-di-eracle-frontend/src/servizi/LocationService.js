@@ -10,28 +10,40 @@ class LocationService {
         return axios.get(URL)
     }
 
-    sessioneAllLocation () {
-        this.getAll().then( res =>
-            sessionStorage.setItem('allLocations',JSON.stringify(res.data))
-        )
-        return this.getAll()
+    creaLocation(locationCreata) {
+        return axios.post(URL, locationCreata)
     }
+
+    creaStanza(stanza) {
+        return axios.post(URL + "stanze",stanza)
+    }
+
 
     delete(id) {
         return axios.delete(URL + 'delete/' + id)
     }
 
-    update(location){
-        return axios.post(URL + "update",location)
+    update(location) {
+        return axios.post(URL + "update", location)
     }
 
     getAllMacro() {
         return axios.get(URL + 'macro')
     }
 
+    getAllStanze() {
+        return axios.get(URL + 'stanze')
+    }
+
+    sessioneStanze() {
+        this.getAllStanze().then(res => 
+            sessionStorage.setItem('stanze',JSON.stringify(res.data))
+        )
+    }
+
     sessioneUltimaLocationPersonaggio(id) {
-        this.getUltimaLocationPersonaggio(id).then(res => 
-            sessionStorage.setItem('ultimaLocation',JSON.stringify(res.data))
+        this.getUltimaLocationPersonaggio(id).then(res =>
+            sessionStorage.setItem('ultimaLocation', JSON.stringify(res.data))
         )
     }
 
@@ -50,7 +62,7 @@ class LocationService {
         )
     }
 
-    sessioneDirezioniLibere () {
+    sessioneDirezioniLibere() {
         this.getLocationByDirezioneLibera('nord').then(res => {
             sessionStorage.setItem('locationsNordLibero', JSON.stringify(res.data))
         }).then(
@@ -68,6 +80,13 @@ class LocationService {
         )
     }
 
+    sessioneAllLocation() {
+        this.getAll().then(res =>
+            sessionStorage.setItem('allLocations', JSON.stringify(res.data))
+        )
+        return this.getAll()
+    }
+
     getEsterneReame() {
         return axios.get(URL + 'esterne/reame')
     }
@@ -80,17 +99,45 @@ class LocationService {
         return axios.get(URL + direzione)
     }
 
-    creaLocation(locationCreata) {
-        return axios.post(URL, locationCreata)
+    validaCampiCreazione(location, isStanza) {
+        if (!isStanza) {
+            if (location.nome === '' || location.tipo === '' || location.ambiente === '' || location.urlImgGiorno === ''
+                || location.urlAudio === '' || location.ingresso === '' || location.urlImgGiornoUmbra === '' || location.urlAudioUmbra === '') {
+                withReactContent(Swal).fire({
+                    title: <div>
+                        <p>Nome,Ambiente,Ingresso</p>
+                        <p>Immagine giorno e Audio</p>
+                        <p>sono obbligatori!</p>
+                    </div>
+                })
+                return false;
+            }
+            return true;
+        } else {
+            if (location.loc === '') {
+                withReactContent(Swal).fire({
+                    title: <p>Indica una Location per la Stanza!</p>
+                })
+                return false;
+            } else {
+
+                if (location.nome === '' || location.ambiente === '' || location.urlImgGiorno === ''
+                    || location.urlAudio === '' || location.urlImgGiornoUmbra === '' || location.urlAudioUmbra === '') {
+                    withReactContent(Swal).fire({
+                        title: <div>
+                            <p>Nome,Ambiente,Ingresso</p>
+                            <p>Immagine giorno e Audio</p>
+                            <p>sono obbligatori!</p>
+                        </div>
+                    })
+                    return false;
+                }
+                return true;
+            }
+        }
+
     }
 
-    validaCampiCreazione(location) {
-        if (location.nome === '' || location.tipo === '' || location.ambiente === '' || location.urlImgGiorno === ''
-            || location.urlAudio === '' || location.ingresso === '' || location.urlImgGiornoUmbra === '' || location.urlAudioUmbra === '') {
-            return false;
-        }
-        return true;
-    }
 
     validaCampiModifica(location) {
         if (location.id === "") {

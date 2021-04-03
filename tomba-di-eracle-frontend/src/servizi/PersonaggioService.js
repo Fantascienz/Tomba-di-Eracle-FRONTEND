@@ -56,6 +56,10 @@ class PersonaggioService {
         return axios.post(URL + 'razzaAndStato', filtro)
     }
 
+    getAllRazzeGroupBy() {
+        return axios.get(URL + '/getAllRazze')
+    }
+
     validazioneFormPersonaggio(personaggio) {
         if (personaggio.nominativo === ''
             || personaggio.sesso === ''
