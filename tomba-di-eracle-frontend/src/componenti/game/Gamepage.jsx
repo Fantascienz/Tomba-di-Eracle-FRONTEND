@@ -10,6 +10,8 @@ import { ModalComponente } from '../utils/ModalComponent'
 import { naviga, primoAccesso } from '../../store/azioni/gameActions'
 import DettagliPersonaggio from '../personaggio/DettagliPersonaggio'
 import { SuonoDirezione } from '../utils/SuonoSuImmagine'
+import MinimappaRegolabile from '../location/MinimappaReagolabile'
+import GiornoNotte from './GiornoNotte'
 //IMPORT IMMAGINI------------------------------------
 import cardGame from '../../img/gameCard.png'
 import cardGameUmbra from '../../img/gameCard_umbra.png'
@@ -17,7 +19,6 @@ import mappa from '../../img/mappa_icona.png'
 import porta from '../../img/porta_icona.png'
 import specchio from '../../img/specchio_icona.png'
 import chirottero from '../../img/chirottero_icona.png'
-import astro from '../../img/2_lunaGibbosa_decrescente_icona.png'
 import frecciaSX from '../../img/freccia_sx.png'
 import frecciaDX from '../../img/freccia_dx.png'
 import frecciaSU from '../../img/freccia_su.png'
@@ -28,7 +29,6 @@ import passi from '../../suoni/suono_passi.mp3'
 import attraversaUmbra from '../../suoni/attraversa_guanto.mp3'
 import srotolaCarta from '../../suoni/flip_card.mp3'
 import { TabellaStanze } from '../tabelle/TabellaStanze'
-import MinimappaRegolabile from '../location/MinimappaReagolabile'
 
 
 class Gamepage extends Component {
@@ -111,7 +111,10 @@ class Gamepage extends Component {
                                         </div>
 
                                         <div className="centrato" style={{ position: "relative", backgroundColor: "transparent", height: "100%", width: "100%" }}>
+                                            {location.tipo != "Stanza" ?
                                             <Macromappa idLocation={location.id} pxDimensioniMappa="500" lenteDisplay="none" />
+                                            : 
+                                            <MinimappaRegolabile idLocation="" pxDimensioniMappa="500" lenteDisplay="" cellePerRiga="1" immagineMinimappa={location.urlMinimappa}/>}
                                         </div>
                                     </div>
                                 } />
@@ -178,9 +181,7 @@ class Gamepage extends Component {
 
 
                         {/* ------------SOLE/LUNA------------ */}
-                        <div className="navigazione-link" title="Giorno / Notte" style={{ left: "45.97%", top: "2.91%", width: "7.36%", height: "4.97%", zIndex: "9999" }}>
-                            <img src={astro} style={{ width: "100%" }} />
-                        </div>
+                        <GiornoNotte/>
 
 
                         {/* ------------NOME LOCATION------------ */}
@@ -194,7 +195,7 @@ class Gamepage extends Component {
                 <div className="chat-sezione">
 
                     <div style={{ backgroundColor: "yellow", position: "absolute", top: "10px", right: "10px", width: "400px", height: "400px" }}>
-                            <MinimappaRegolabile idLocation="1" pxDimensioniMappa="400" lenteDisplay="none" cellePerRiga="5" immagineMinimappa="https://i.pinimg.com/originals/d4/31/ec/d431ec0502753e09f432698fcec8ccd0.jpg"/>
+                    
                     </div>
 
                     <div title={PG.nominativo} style={{ backgroundColor: "transparent", position: "absolute", bottom: "10px", right: "10px", width: "100px", height: "100px" }}>

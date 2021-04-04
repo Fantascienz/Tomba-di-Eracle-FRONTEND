@@ -30,7 +30,7 @@ const MinimappaRegolabile = ({ idLocation, pxDimensioniMappa, lenteDisplay, cell
             <div>
                 <div className="container-fluid" style={{
                     position: "relative", height: `${pxDimensioniMappa}px`, width: `${pxDimensioniMappa}px`, top: "0",
-                    backgroundImage: `url('${immagineMinimappa}')`, backgroundPosition: "center center", backgroundSize: "100% auto",
+                    backgroundImage: `url('${immagineMinimappa}')`, backgroundPosition: "center center", backgroundSize: "100% 100%", backgroundRepeat:"no-repeat",
                     backgroundColor: "red"
                 }}>
 
