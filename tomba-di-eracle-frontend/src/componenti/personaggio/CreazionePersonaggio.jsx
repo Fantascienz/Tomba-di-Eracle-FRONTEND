@@ -337,9 +337,9 @@ class CreazionePersonaggio extends Component {
             return (
                 <React.Fragment>
                      <div className="input-group">
-                        <span className="input-group-text" style={{ width: "30%" }}>E' nell'Umbra?</span>
+                        <span className="input-group-text" style={{ width: "30%" }}>Può attraversare il Guanto?</span>
                         <select className="form-select" id="umbra" value={this.state.umbra} onChange={this.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)" }}>
-                            <option defaultValue="">Scegli se il png è nell'Umbra</option>
+                            <option defaultValue="">Scegli se il png può attraversare il Guanto</option>
                             <option value={true}>Si</option>
                             <option value={false}>No</option>
                         </select>
@@ -354,9 +354,9 @@ class CreazionePersonaggio extends Component {
             return (
                 <React.Fragment>
                      <div className="input-group">
-                        <span className="input-group-text" style={{ width: "30%" }}>Può inviare un chirottero?</span>
+                        <span className="input-group-text" style={{ width: "30%" }}>Può inviare un Chirottero?</span>
                         <select className="form-select" id="crinos" value={this.state.crinos} onChange={this.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)" }}>
-                            <option defaultValue="">Scegli se il png può inviare un chirottero</option>
+                            <option defaultValue="">Scegli se il png può inviare un Chirottero</option>
                             <option value={true}>Si</option>
                             <option value={false}>No</option>
                         </select>
