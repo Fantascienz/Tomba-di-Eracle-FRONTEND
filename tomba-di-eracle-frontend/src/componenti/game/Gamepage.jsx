@@ -28,6 +28,7 @@ import passi from '../../suoni/suono_passi.mp3'
 import attraversaUmbra from '../../suoni/attraversa_guanto.mp3'
 import srotolaCarta from '../../suoni/flip_card.mp3'
 import { TabellaStanze } from '../tabelle/TabellaStanze'
+import MinimappaRegolabile from '../location/MinimappaReagolabile'
 
 
 class Gamepage extends Component {
@@ -193,9 +194,10 @@ class Gamepage extends Component {
                 <div className="chat-sezione">
 
                     <div style={{ backgroundColor: "yellow", position: "absolute", top: "10px", right: "10px", width: "400px", height: "400px" }}>
+                            <MinimappaRegolabile idLocation="1" pxDimensioniMappa="400" lenteDisplay="none" cellePerRiga="5" immagineMinimappa="https://i.pinimg.com/originals/d4/31/ec/d431ec0502753e09f432698fcec8ccd0.jpg"/>
                     </div>
-                    <div title={PG.nominativo} style={{ backgroundColor: "transparent", position: "absolute", bottom: "10px", right: "10px", width: "100px", height: "100px" }}>
 
+                    <div title={PG.nominativo} style={{ backgroundColor: "transparent", position: "absolute", bottom: "10px", right: "10px", width: "100px", height: "100px" }}>
                         <ModalComponente
                             suono={srotolaCarta}
                             bottone={<DettagliPersonaggio personaggio={PG} altezza="100px" larghezza="auto" immagine={PG.urlImmagine} dimImmagine="100px auto" />}
@@ -211,7 +213,6 @@ class Gamepage extends Component {
                                 </div>
                             }
                         />
-
                     </div>
 
                 </div>

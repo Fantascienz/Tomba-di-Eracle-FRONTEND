@@ -1,11 +1,11 @@
 import macromappa from '../../img/macromappa.jpg'
-import { RigaGriglia } from '../location/ContenutoGriglia'
+import { Puntatore, RigaGriglia } from '../location/ContenutoGriglia'
 import { Magnifier } from 'react-image-magnifiers'
 
 
 const Macromappa = ({ idLocation, pxDimensioniMappa, lenteDisplay }) => {
 
-    // idLocation = "100";
+    // idLocation = "144";
     // pxDimensioniMappa = "500" //min 320
     // lenteDisplay = "none"
 
@@ -23,10 +23,11 @@ const Macromappa = ({ idLocation, pxDimensioniMappa, lenteDisplay }) => {
                     </div>
 
                     <div style={{ position: "absolute", top: "0", zIndex: "3", height: "100%", width: "100%", display: `${lenteDisplay}` }}>
-                        {/* <GlassMagnifier imageSrc={macromappa} magnifierSize="80%" allowOverflow="false"/> */}
-                        <Magnifier imageSrc={macromappa} magnifierSize="80%" />
+                {/* <GlassMagnifier imageSrc={macromappa} magnifierSize="80%" allowOverflow="false"/> */}
+                <Magnifier imageSrc={macromappa} magnifierSize="80%" />
                     </div>
                 </div>
+                
             </div>
         </>
     );

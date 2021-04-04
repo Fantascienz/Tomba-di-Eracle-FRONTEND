@@ -12,8 +12,11 @@ export const Puntatore = ({ display, idCella }) => {
     };
 
     return (
-        <div className="centrato" style={{ position: "relative", marginLeft: "-50%", backgroundColor: "transparent", height: "100%", width: "200%" }}>
-            <img src={star} alt="..." style={{ height: "100%", width: "auto", display: `${attivaDisplay()}` }} />
+        // <div className="centrato" style={{ position: "relative", marginLeft: "-50%", backgroundColor: "transparent", height: "100%", width: "200%" }}>
+        //     <img src={star} alt="..." style={{ height: "100%", width: "auto", display: `${attivaDisplay()}` }} />
+        // </div>
+        <div className="centrato" style={{ position: "relative", backgroundColor: "transparent", height: "100%", width: "100%" }}>
+            <img src={star} alt="..." style={{backgroundColor:"transparent", position: "absolute", height: "100%", width: "auto", display: `${attivaDisplay()}` }} />
         </div>
     )
 }
@@ -30,7 +33,8 @@ export const RigaGriglia = ({inizio, fine, idLocation, pxDimensioniMappa}) => {
                 arrayGriglia.push({
                     codice:
                         <div className="col-sm-1 griglia-macromappa" title={i} id={i} style={{height: `${pxDimensioniCella}px`, width: `${pxDimensioniCella}px`}}>
-                            <Puntatore display={idLocation} idCella={i} />
+                            {/* <Puntatore display={idLocation} idCella={i} /> */}
+                            <ContenutoCella idLocation={idLocation} idCella={i}/>
                         </div>
                 })
         }
@@ -45,3 +49,9 @@ export const RigaGriglia = ({inizio, fine, idLocation, pxDimensioniMappa}) => {
     )
 }
 
+
+export const ContenutoCella = ({idLocation, idCella}) => {
+    return(
+        <Puntatore display={idLocation} idCella={idCella} />
+    )
+}
