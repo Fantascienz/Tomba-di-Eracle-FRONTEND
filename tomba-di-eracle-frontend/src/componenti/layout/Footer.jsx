@@ -16,7 +16,7 @@ class Footer extends Component {
                     <a href="https://www.linkedin.com/in/tiziano-massa-061151158/" target="_blank">Tiziano Massa</a> <br/>
                     <a href="https://www.linkedin.com/in/paolo-marchitto-553433b2/" target="_blank">Paolo Marchitto</a> <br/> <br/>
                     <h3>GRAFICA DI:</h3>
-                    <p>Sara Fiorucci</p>
+                    <a href="https://www.instagram.com/sara__fiorucci/" target="_blank">Sara Fiorucci</a>
                 </div>
         })
     }

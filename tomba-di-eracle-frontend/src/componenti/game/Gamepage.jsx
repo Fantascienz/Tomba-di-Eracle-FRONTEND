@@ -114,7 +114,7 @@ class Gamepage extends Component {
                                             {location.tipo != "Stanza" ?
                                             <Macromappa idLocation={location.id} pxDimensioniMappa="500" lenteDisplay="none" />
                                             : 
-                                            <MinimappaRegolabile idLocation="" pxDimensioniMappa="500" lenteDisplay="" cellePerRiga="1" immagineMinimappa={location.urlMinimappa}/>}
+                                            <MinimappaRegolabile idLocation="" pxDimensioniMappa="500" lenteDisplay="none" cellePerRiga="2" immagineMinimappa={location.urlMinimappa}/>}
                                         </div>
                                     </div>
                                 } />
