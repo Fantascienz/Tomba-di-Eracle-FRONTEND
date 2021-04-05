@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
 import LocationService from '../../servizi/LocationService';
 import CreazioneLocationForm from '../forms/CreazioneLocationForm';
 import Header from '../layout/Header';
