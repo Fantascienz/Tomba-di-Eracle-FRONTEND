@@ -195,7 +195,7 @@ class Gamepage extends Component {
                 <div className="chat-sezione">
 
                     <div style={{ backgroundColor: "yellow", position: "absolute", top: "10px", right: "10px", width: "400px", height: "400px" }}>
-                    
+                            <GiornoNotte/>
                     </div>
 
                     <div title={PG.nominativo} style={{ backgroundColor: "transparent", position: "absolute", bottom: "10px", right: "10px", width: "100px", height: "100px" }}>
