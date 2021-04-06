@@ -5,6 +5,7 @@ import ModificaLocationForm from '../forms/ModificaLocationForm';
 import Header from '../layout/Header';
 import Macromappa from './Macromappa';
 import { TitoloPagina } from '../layout/TitoloPagina';
+import ModificaStanzaForm from '../forms/ModificaStanzaForm';
 
 class ModificaLocation extends Component {
 
@@ -32,7 +33,6 @@ class ModificaLocation extends Component {
         if (this.state.loc !== '') {
             LocationService.delete(this.state.loc).then(
                 alert('Location eliminata correttamente!')
-
             )
         }
     }
@@ -77,16 +77,20 @@ class ModificaLocation extends Component {
                 <Header />
                 <div className="corpoComponente">
                     <div className="row">
-                        <div className="col-md-4 centrato">
+                        <div className="col-md-3 centrato">
                             <TitoloPagina titolo="Modifica Location" />
                             <ModificaLocationForm handleChange={this.handleChange} handleUpdate={this.handleUpdate} />
                         </div>
+                        <div className="col-md-3 centrato">
+                            <TitoloPagina titolo="Modifica Stanza" />
+                            <ModificaStanzaForm handleChange={this.handleChange} handleUpdate={this.handleUpdate} />
+                        </div>
 
-                        <div className="col-md-4 centrato">
+                        <div className="col-md-3 centrato">
                             <Macromappa pxDimensioniMappa="400" lenteDisplay="none" idLocation={this.state.locationMod} />
                         </div>
 
-                        <div className="col-md-4 " >
+                        <div className="col-md-3 " >
                             <TitoloPagina titolo="Elimina Location" />
                             <div className="centrato">
                                 <form onSubmit={this.handleDelete}>
