@@ -37,7 +37,6 @@ class LocationService {
 
     sessioneStanze() {
         this.getAllStanze().then(res => {
-            console.log(res.data)
             sessionStorage.setItem('stanze', JSON.stringify(res.data))
         }
         )
