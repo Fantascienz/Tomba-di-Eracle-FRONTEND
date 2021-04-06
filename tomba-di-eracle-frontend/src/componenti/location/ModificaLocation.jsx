@@ -30,7 +30,7 @@ class ModificaLocation extends Component {
 
     handleDelete = (event) => {
         if (this.state.cancellaLoc !== '') {
-            LocationService.delete(this.state.cancellaLoc).then(
+            LocationService.delete(this.state.loc).then(
                 alert('Location eliminata correttamente!')
             )
         }

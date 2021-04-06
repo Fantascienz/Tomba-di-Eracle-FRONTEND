@@ -6,7 +6,7 @@ class SelezionaLocationForm extends Component {
 
     renderLista = (location) => {
         if ((location.creatore !== null && utente.id === location.creatore.id) || utente.tipo === 'admin') {
-            if (location.tipo === 'Reame') {
+            if (location.tipo === 'Reame' || location.tipo === 'Stanza') {
                 return <option value={location.id} key={location.id}>{location.id}: {location.nome}</option>
             } else {
                 return <option value={location.id} key={location.id}> {location.id}: UMBRA {location.nome}  </option>

@@ -41,7 +41,6 @@ class CreazioneStanza extends Component {
     }
 
     handleSubmit = (event) => {
-        event.preventDefault()
         if (LocationService.validaCampiCreazione(this.state, true)) {
             let stanza = {
                 location: {
