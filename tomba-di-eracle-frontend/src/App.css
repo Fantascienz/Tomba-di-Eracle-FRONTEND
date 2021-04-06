@@ -215,6 +215,11 @@ div.centrato{
   width: 85%;
 }
 
+.icona-alta-disabled{
+  width: 85%;
+  filter: grayscale(100%);
+}
+
 .icona-alta:hover{
   cursor: pointer;
   width: 95%;
@@ -222,6 +227,11 @@ div.centrato{
 
 .icona-larga{
   height: 85%;
+}
+
+.icona-larga-disabled{
+  height: 85%;
+  filter: grayscale(100%);
 }
 
 .icona-larga:hover{
@@ -233,13 +243,24 @@ div.centrato{
   width: 100%;
 }
 
+.icona-freccia-larga-disabled{
+  width: 100%;
+  filter: grayscale(100%);
+}
+
 .icona-freccia-larga:hover{
   cursor: pointer;
   width: 135%;
 }
 
+
 .icona-freccia-alta{
   height: 100%;
+}
+
+.icona-freccia-alta-disabled{
+  height: 100%;
+  filter: grayscale(100%);
 }
 
 .icona-freccia-alta:hover{
@@ -428,4 +449,14 @@ div.centrato{
 
 .custom-modal-body {
   background: pink url('../src/img/eracle.png');
+}
+
+
+/* DIV TRASCINABILE------------------------------------------------------ */
+
+.my-draggable {
+  cursor: pointer;
+  width: 200px;
+  height: 200px;
+  background-color: #cca;
 }
