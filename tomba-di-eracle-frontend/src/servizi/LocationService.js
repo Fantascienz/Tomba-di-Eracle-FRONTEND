@@ -20,7 +20,6 @@ class LocationService {
 
 
     delete(id) {
-        alert(id)
         return axios.delete(URL + 'delete/' + id)
     }
 

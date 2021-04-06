@@ -4,12 +4,20 @@ const utente = JSON.parse(sessionStorage.getItem('utente'));
 
 class SelezionaLocationForm extends Component {
 
-    renderLista = (location) => {
-        if ((location.creatore !== null && utente.id === location.creatore.id) || utente.tipo === 'admin') {
-            if (location.tipo === 'Reame' || location.tipo === 'Stanza') {
-                return <option value={location.id} key={location.id}>{location.id}: {location.nome}</option>
-            } else {
-                return <option value={location.id} key={location.id}> {location.id}: UMBRA {location.nome}  </option>
+    renderLista = (elemento) => {
+        if (!this.props.stanza) {
+            if ((elemento.creatore !== null && utente.id === elemento.creatore.id) || utente.tipo === 'admin') {
+                if (elemento.tipo === 'Reame' || elemento.tipo === 'Stanza') {
+                    return <option value={elemento.id} key={elemento.id}>{elemento.id}: {elemento.nome}</option>
+                } else {
+                    return <option value={elemento.id} key={elemento.id}> {elemento.id}: UMBRA {elemento.nome}  </option>
+                }
+            }
+        } else {
+            if ((elemento.subLocation.creatore !== null && utente.id === elemento.subLocation.creatore.id) || utente.tipo === 'admin') {
+                if (elemento.subLocation.tipo === 'Stanza') {
+                    return <option value={elemento.subLocation.id} key={elemento.subLocation.id}>{elemento.subLocation.id}: {elemento.subLocation.nome}</option>
+                }
             }
         }
     }

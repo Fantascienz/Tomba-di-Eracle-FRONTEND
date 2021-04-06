@@ -29,9 +29,10 @@ class ModificaLocation extends Component {
     }
 
     handleDelete = (event) => {
-        if (this.state.cancellaLoc !== '') {
+        if (this.state.loc !== '') {
             LocationService.delete(this.state.loc).then(
                 alert('Location eliminata correttamente!')
+
             )
         }
     }
@@ -60,6 +61,7 @@ class ModificaLocation extends Component {
     componentDidMount() {
         LocationService.sessioneMappeEsterne()
         LocationService.sessioneMappeMacro()
+        LocationService.sessioneStanze()
     }
 
     render() {
@@ -67,6 +69,8 @@ class ModificaLocation extends Component {
         let listaOrdinataESTERNE = JSON.parse(sessionStorage.getItem('listaEsterneReame')).sort(
             (a, b) => (a.id < b.id ? -1 : Number(a.id > b.id))
         );
+
+        let stanze = JSON.parse(sessionStorage.getItem('stanze'));
 
         return (
             <React.Fragment>
@@ -86,7 +90,14 @@ class ModificaLocation extends Component {
                             <TitoloPagina titolo="Elimina Location" />
                             <div className="centrato">
                                 <form onSubmit={this.handleDelete}>
-                                    <SelezionaLocationForm lista={listaOrdinataESTERNE} handleChange={this.handleChange} />
+                                    <SelezionaLocationForm lista={listaOrdinataESTERNE} stanza={false} handleChange={this.handleChange} />
+                                    <button className="btn btn-dark">Elimina</button>
+                                </form>
+                            </div>
+                            <TitoloPagina titolo="Elimina Stanza" />
+                            <div className="centrato">
+                                <form onSubmit={this.handleDelete}>
+                                    <SelezionaLocationForm lista={stanze} stanza={true} handleChange={this.handleChange} />
                                     <button className="btn btn-dark">Elimina</button>
                                 </form>
                             </div>

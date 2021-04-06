@@ -155,6 +155,7 @@ class SchedaUtente extends Component {
         if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' || JSON.parse(sessionStorage.getItem('utente')).tipo === 'master') {
             LocationService.sessioneMappeEsterne()
             LocationService.sessioneMappeMacro()
+            LocationService.sessioneStanze()
         }
 
     }
