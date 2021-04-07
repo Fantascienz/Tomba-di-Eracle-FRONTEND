@@ -29,6 +29,7 @@ import passi from '../../suoni/suono_passi.mp3'
 import attraversaUmbra from '../../suoni/attraversa_guanto.mp3'
 import srotolaCarta from '../../suoni/flip_card.mp3'
 import { TabellaStanze } from '../tabelle/TabellaStanze'
+import Draggable from 'react-draggable';
 
 
 class Gamepage extends Component {
@@ -92,134 +93,136 @@ class Gamepage extends Component {
 
         return (
             <div style={{ position: "absolute", top: "0", height: "100%", width: "100%", backgroundColor: "dimgray" }}>
+                <Draggable>
+                    <div className="navigazione-sezione">
 
-                <div className="navigazione-sezione">
-                    <div className="navigazione-area">
+                        <div className="navigazione-area">
 
-                        <div className="navigazione-immagine" style={{ backgroundImage: `url('${location.urlImgGiorno}')` }}></div>
+                            <div className="navigazione-immagine" style={{ backgroundImage: `url('${location.urlImgGiorno}')` }}></div>
 
-                        {this.corniceNavigazione(location.tipo)}
+                            {this.corniceNavigazione(location.tipo)}
 
-                        {/* ------------PULSANTI AZIONI------------ */}
-                        {/* pulsante: mappa------------------------------------------------- */}
-                        <div className="navigazione-link" title="Apri la Minimappa" style={{ left: "6.99%", top: "4.47%", width: "14.67%", height: "9.2%", zIndex: "9999" }}>
-                            <ModalComponente
-                                suono={srotolaCarta}
-                                bottone={<img className="icona-alta" src={mappa} />}
-                                contenuto={
-                                    <div className="centrato" >
-                                        <div className="centrato" style={{ position: "fixed", backgroundColor: "none" }}>
-                                            <img src={Scroll} style={{ height: "800px", transform: "rotate(90deg)" }} />
+                            {/* ------------PULSANTI AZIONI------------ */}
+                            {/* pulsante: mappa------------------------------------------------- */}
+                            <div className="navigazione-link" title="Apri la Minimappa" style={{ left: "6.99%", top: "4.47%", width: "14.67%", height: "9.2%", zIndex: "9999" }}>
+                                <ModalComponente
+                                    suono={srotolaCarta}
+                                    bottone={<img className="icona-alta" src={mappa} />}
+                                    size='sm'
+                                    contenuto={
+                                        <div className="centrato" >
+                                            <div className="centrato" style={{ position: "fixed", backgroundColor: "none" }}>
+                                                <img src={Scroll} style={{ height: "800px", transform: "rotate(90deg)" }} />
+                                            </div>
+
+                                            <div className="centrato" style={{ position: "fixed", backgroundColor: "transparent", height: "500px", width: "500px" }}>
+                                                {location.tipo != "Stanza" ?
+                                                    <Macromappa idLocation={location.id} pxDimensioniMappa="500" />
+                                                    :
+                                                    <MinimappaRegolabile idLocation="" pxDimensioniMappa="500" lenteDisplay="none" cellePerRiga="2" immagineMinimappa={location.urlMinimappa} />}
+                                            </div>
                                         </div>
+                                    } />
+                            </div>
 
-                                        <div className="centrato" style={{ position: "relative", backgroundColor: "transparent", height: "100%", width: "100%" }}>
-                                            {location.tipo != "Stanza" ?
-                                                <Macromappa idLocation={location.id} pxDimensioniMappa="500" />
-                                                :
-                                                <MinimappaRegolabile idLocation="" pxDimensioniMappa="500" lenteDisplay="none" cellePerRiga="2" immagineMinimappa={location.urlMinimappa} />}
-                                        </div>
-                                    </div>
-                                } />
-                        </div>
+                            {/* pulsante: porta */}
+                            <div className="navigazione-link" onClick={() => this.visualizzazioneStanze()} style={{ left: "77.65%", top: "4.43%", width: "14.67%", height: "9.2%", zIndex: "9999" }}>
+                                {stanze[0] == null ?
+                                    <img className="icona-larga-disabled" title="Non ci sono Stanze nella Location" src={porta} />
+                                    :
+                                    <img className="icona-larga" title="Accedi ad una Stanza della Location" src={porta} />
+                                }
+                            </div>
 
-                        {/* pulsante: porta */}
-                        <div className="navigazione-link" onClick={() => this.visualizzazioneStanze()} style={{ left: "77.65%", top: "4.43%", width: "14.67%", height: "9.2%", zIndex: "9999" }}>
-                            {stanze[0] == null ?
-                                <img className="icona-larga-disabled" title="Non ci sono Stanze nella Location" src={porta} />
+
+                            {/* pulsante: specchio------------------------------------------------- */}
+                            {PG.umbra ?
+                                <SuonoDirezione suono={attraversaUmbra}
+                                    funzione={{ onend: () => this.navigazione(JSON.parse(sessionStorage.getItem('direzioniUltimaLocation')).idLocationSpecchio) }}
+                                    title="Oltrepassa il Guanto"
+                                    className="icona-larga"
+                                    src={specchio}
+                                    style={{ left: "73.23%", top: "82.23%", width: "11.25%", height: "7.04%", zIndex: "9999" }} />
+                                : null}
+
+
+                            {/* pulsante: chirottero------------------------------------------------- */}
+                            {PG.chirottero ?
+                                <div className="navigazione-link" title="Invia un Chirottero" style={{ left: "14.93%", top: "82.23%", width: "11.25%", height: "7.04%", zIndex: "9999" }}>
+                                    <img className="icona-alta" src={chirottero} />
+                                </div>
+                                : null}
+
+
+
+                            {/* ------------PULSANTI MOVIMENTO------------ */}
+                            {/* NORD */}
+                            {direzioni.idLocationNord == null ?
+                                <div className="navigazione-link" title="Nessuna Location a Nord!" style={{ left: "44.05%", top: "8.73%", width: "11.25%", height: "8.56%", zIndex: "9999" }}>
+                                    <img className="icona-freccia-alta-disabled" src={frecciaSU} />
+                                </div>
                                 :
-                                <img className="icona-larga" title="Accedi ad una Stanza della Location" src={porta} />
+                                <SuonoDirezione suono={passi}
+                                    funzione={{ onend: () => this.navigazione(JSON.parse(sessionStorage.getItem('direzioniUltimaLocation')).idLocationNord) }}
+                                    title="Vai a Nord"
+                                    className="icona-freccia-alta"
+                                    src={frecciaSU}
+                                    style={{ left: "44.05%", top: "8.73%", width: "11.25%", height: "8.56%", zIndex: "9999" }} />
                             }
-                        </div>
+
+                            {/* EST */}
+                            {direzioni.idLocationEst == null ?
+                                <div className="navigazione-link" title="Nessuna Location ad Est!" style={{ left: "79.47%", top: "46.33%", width: "13.07%", height: "7.01%", zIndex: "9999" }}>
+                                    <img className="icona-freccia-larga-disabled" src={frecciaDX} />
+                                </div>
+                                :
+                                <SuonoDirezione suono={passi}
+                                    funzione={{ onend: () => this.navigazione(JSON.parse(sessionStorage.getItem('direzioniUltimaLocation')).idLocationEst) }}
+                                    title="Vai a Est"
+                                    className="icona-freccia-larga"
+                                    src={frecciaDX}
+                                    style={{ left: "79.47%", top: "46.33%", width: "13.07%", height: "7.01%", zIndex: "9999" }} />
+                            }
+
+                            {/* SUD */}
+                            {direzioni.idLocationSud == null ?
+                                <div className="navigazione-link" title="Nessuna Location a Sud!" style={{ left: "44%", top: "85.89%", width: "11.25%", height: "8.09%", zIndex: "9999" }}>
+                                    <img className="icona-freccia-alta-disabled" src={frecciaGIU} />
+                                </div>
+                                :
+                                <SuonoDirezione suono={passi}
+                                    funzione={{ onend: () => this.navigazione(JSON.parse(sessionStorage.getItem('direzioniUltimaLocation')).idLocationSud) }}
+                                    title="Vai a Sud"
+                                    className="icona-freccia-alta"
+                                    src={frecciaGIU}
+                                    style={{ left: "44%", top: "85.89%", width: "11.25%", height: "8.09%", zIndex: "9999" }} />
+                            }
+
+                            {/* OVEST */}
+                            {direzioni.idLocationOvest == null ?
+                                <div className="navigazione-link" title="Nessuna Location ad Ovest!" style={{ left: "6.77%", top: "46.2%", width: "13.07%", height: "7.01%", zIndex: "9999" }}>
+                                    <img className="icona-freccia-larga-disabled" src={frecciaSX} />
+                                </div>
+                                :
+                                <SuonoDirezione suono={passi}
+                                    funzione={{ onend: () => this.navigazione(JSON.parse(sessionStorage.getItem('direzioniUltimaLocation')).idLocationOvest) }}
+                                    title="Vai a Ovest"
+                                    className="icona-freccia-larga"
+                                    src={frecciaSX}
+                                    style={{ left: "6.77%", top: "46.2%", width: "13.07%", height: "7.01%", zIndex: "9999" }} />
+                            }
+
+                            {/* ------------SOLE/LUNA------------ */}
+                            <GiornoNotte />
 
 
-                        {/* pulsante: specchio------------------------------------------------- */}
-                        {PG.umbra ?
-                            <SuonoDirezione suono={attraversaUmbra}
-                                funzione={{ onend: () => this.navigazione(JSON.parse(sessionStorage.getItem('direzioniUltimaLocation')).idLocationSpecchio) }}
-                                title="Oltrepassa il Guanto"
-                                className="icona-larga"
-                                src={specchio}
-                                style={{ left: "73.23%", top: "82.23%", width: "11.25%", height: "7.04%", zIndex: "9999" }} />
-                            : null}
-
-
-                        {/* pulsante: chirottero------------------------------------------------- */}
-                        {PG.chirottero ?
-                            <div className="navigazione-link" title="Invia un Chirottero" style={{ left: "14.93%", top: "82.23%", width: "11.25%", height: "7.04%", zIndex: "9999" }}>
-                                <img className="icona-alta" src={chirottero} />
+                            {/* ------------NOME LOCATION------------ */}
+                            <div className="navigazione-link" title={"Id: " + location.id} style={{ left: "28.75%", top: "79.7%", width: "41.65%", height: "4.97%", zIndex: "9999", backgroundColor: "transparent" }}>
+                                <b className="font-lombardia" style={{ fontSize: "1.5em", color: `${location.tipo == "Umbra" ? "blue" : "black"}` }} >{location.nome}</b>
                             </div>
-                            : null}
-
-
-
-                        {/* ------------PULSANTI MOVIMENTO------------ */}
-                        {/* NORD */}
-                        {direzioni.idLocationNord == null ?
-                            <div className="navigazione-link" title="Nessuna Location a Nord!" style={{ left: "44.05%", top: "8.73%", width: "11.25%", height: "8.56%", zIndex: "9999" }}>
-                                <img className="icona-freccia-alta-disabled" src={frecciaSU} />
-                            </div>
-                            :
-                            <SuonoDirezione suono={passi}
-                                funzione={{ onend: () => this.navigazione(JSON.parse(sessionStorage.getItem('direzioniUltimaLocation')).idLocationNord) }}
-                                title="Vai a Nord"
-                                className="icona-freccia-alta"
-                                src={frecciaSU}
-                                style={{ left: "44.05%", top: "8.73%", width: "11.25%", height: "8.56%", zIndex: "9999" }} />
-                        }
-
-                        {/* EST */}
-                        {direzioni.idLocationEst == null ?
-                            <div className="navigazione-link" title="Nessuna Location ad Est!" style={{ left: "79.47%", top: "46.33%", width: "13.07%", height: "7.01%", zIndex: "9999" }}>
-                                <img className="icona-freccia-larga-disabled" src={frecciaDX} />
-                            </div>
-                            :
-                            <SuonoDirezione suono={passi}
-                                funzione={{ onend: () => this.navigazione(JSON.parse(sessionStorage.getItem('direzioniUltimaLocation')).idLocationEst) }}
-                                title="Vai a Est"
-                                className="icona-freccia-larga"
-                                src={frecciaDX}
-                                style={{ left: "79.47%", top: "46.33%", width: "13.07%", height: "7.01%", zIndex: "9999" }} />
-                        }
-
-                        {/* SUD */}
-                        {direzioni.idLocationSud == null ?
-                            <div className="navigazione-link" title="Nessuna Location a Sud!" style={{ left: "44%", top: "85.89%", width: "11.25%", height: "8.09%", zIndex: "9999" }}>
-                                <img className="icona-freccia-alta-disabled" src={frecciaGIU} />
-                            </div>
-                            :
-                            <SuonoDirezione suono={passi}
-                                funzione={{ onend: () => this.navigazione(JSON.parse(sessionStorage.getItem('direzioniUltimaLocation')).idLocationSud) }}
-                                title="Vai a Sud"
-                                className="icona-freccia-alta"
-                                src={frecciaGIU}
-                                style={{ left: "44%", top: "85.89%", width: "11.25%", height: "8.09%", zIndex: "9999" }} />
-                        }
-
-                        {/* OVEST */}
-                        {direzioni.idLocationOvest == null ?
-                            <div className="navigazione-link" title="Nessuna Location ad Ovest!" style={{ left: "6.77%", top: "46.2%", width: "13.07%", height: "7.01%", zIndex: "9999" }}>
-                                <img className="icona-freccia-larga-disabled" src={frecciaSX} />
-                            </div>
-                            :
-                            <SuonoDirezione suono={passi}
-                                funzione={{ onend: () => this.navigazione(JSON.parse(sessionStorage.getItem('direzioniUltimaLocation')).idLocationOvest) }}
-                                title="Vai a Ovest"
-                                className="icona-freccia-larga"
-                                src={frecciaSX}
-                                style={{ left: "6.77%", top: "46.2%", width: "13.07%", height: "7.01%", zIndex: "9999" }} />
-                        }
-
-                        {/* ------------SOLE/LUNA------------ */}
-                        <GiornoNotte />
-
-
-                        {/* ------------NOME LOCATION------------ */}
-                        <div className="navigazione-link" title={"Id: " + location.id} style={{ left: "28.75%", top: "79.7%", width: "41.65%", height: "4.97%", zIndex: "9999", backgroundColor: "transparent" }}>
-                            <b className="font-lombardia" style={{ fontSize: "1.5em", color: `${location.tipo == "Umbra" ? "blue" : "black"}` }} >{location.nome}</b>
                         </div>
                     </div>
-                </div>
-
+                </Draggable>
 
                 <div className="chat-sezione">
 
@@ -231,6 +234,7 @@ class Gamepage extends Component {
                         <ModalComponente
                             suono={srotolaCarta}
                             bottone={<DettagliPersonaggio personaggio={PG} altezza="100px" larghezza="auto" immagine={PG.urlImmagine} dimImmagine="100px auto" />}
+                            size='sm'
                             contenuto={
                                 <div className="centrato" >
                                     <div className="centrato" style={{ position: "fixed", backgroundColor: "none" }}>

@@ -3,8 +3,10 @@ import React, { useState } from 'react';
 import { SuonoModal } from './SuonoSuImmagine';
 
 
-export const ModalComponente = ({ bottone, contenuto, suono }) => {
+export const ModalComponente = ({ bottone, contenuto, suono, size }) => {
     const [show, setShow] = useState(false);
+    
+    var taglia = size == undefined ? 'xl' : size;
 
     return (
         <>
@@ -22,7 +24,7 @@ export const ModalComponente = ({ bottone, contenuto, suono }) => {
                 onHide={() => setShow(false)}
                 dialogClassName="modal-50w"
                 aria-labelledby="example-custom-modal-styling-title"
-                size="xl"
+                size={taglia}
                 scrollable="true"
                 centered
             >
