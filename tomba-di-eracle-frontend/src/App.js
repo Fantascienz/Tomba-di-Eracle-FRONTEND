@@ -12,6 +12,25 @@ import CreazioneLocation from './componenti/location/CreazioneLocation'
 import Macromappa from './componenti/location/Macromappa';
 import ModificaLocation from './componenti/location/ModificaLocation';
 import CreazioneStanza from './componenti/location/CreazioneStanza';
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+import 'firebase/auth';
+import { ChatRoom } from './componenti/game/Chat';
+
+// Your web app's Firebase configuration
+var firebaseConfig = {
+  apiKey: "AIzaSyA8wJClnPKCMWn7r5SPBwqDvvF4ZozAHvQ",
+  authDomain: "live-chat-5ec32.firebaseapp.com",
+  projectId: "live-chat-5ec32",
+  storageBucket: "live-chat-5ec32.appspot.com",
+  messagingSenderId: "513828209517",
+  appId: "1:513828209517:web:880fc5f10cbeaaaf169064"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+// const auth = firebase.auth();
+export const firestore = firebase.firestore();
 
 function App() {
   return (
@@ -34,6 +53,7 @@ function App() {
         </Switch>
       </Router>
       <Footer />
+      {/* <ChatRoom/> */}
     </div>
   );
 }

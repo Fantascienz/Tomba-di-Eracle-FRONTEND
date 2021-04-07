@@ -1,46 +1,73 @@
-import React, {Component} from 'react'
-import {Launcher} from 'react-chat-window'
+import { firestore } from "../../App";
+import React, { useEffect, useRef, useState } from 'react';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
+import firebase from 'firebase/app';
 
-class Chat extends Component {
 
-  constructor() {
-    super();
-    this.state = {
-      messageList: []
-    };
-  }
+export const ChatRoom = () => {
+  const dummy = useRef();
+  const dbMessaggi = firestore.collection('messaggi'); //richiamo la raccolta dei messaggi e quindi tutti documenti al suo interno
+  const query = dbMessaggi.orderBy('inviatoAlle').limit(25); //creo una query ordinata in base al momento dell'invio
 
-  _onMessageWasSent(message) {
-    this.setState({
-      messageList: [...this.state.messageList, message]
+  //, { idField: 'id' } AGGIUNGI DOPO query SE ESPLODE TUTTO
+  const [messaggi] = useCollectionData(query); //recupera i documenti e li salva in un array
+
+  const [formValue, setFormValue] = useState(''); //hook per creare il messaggio con i dati del personaggio e della location
+
+
+  const inviaMessaggio = async (e) => {
+    e.preventDefault();
+
+    const personaggio = JSON.parse(sessionStorage.getItem('pgAttivo'));
+    const location = JSON.parse(sessionStorage.getItem('ultimaLocation'));
+    // const immagine = 'https://scontent-fco1-1.xx.fbcdn.net/v/t1.0-9/27972830_10215420827663791_8161575043461459674_n.jpg?_nc_cat=104&ccb=1-3&_nc_sid=174925&_nc_ohc=CXaF0sWDiiIAX_U63Rb&_nc_ht=scontent-fco1-1.xx&oh=bc5b6073fa9cb270a6f150feb0791f5f&oe=607DFA75';
+
+
+    await dbMessaggi.add({ //add fa l'insert del documento nella raccolta,è un JSON
+      testo: formValue,
+      inviatoAlle: firebase.firestore.FieldValue.serverTimestamp(),
+      idPersonaggio: personaggio.id,
+      idLocation: location.id,
+      immagine: personaggio.urlImmagine
     })
+
+    setFormValue('');
+    dummy.current.scrollIntoView({ behavior: 'smooth' });
   }
 
-  _sendMessage(text) {
-    if (text.length > 0) {
-      this.setState({
-        messageList: [...this.state.messageList, {
-          author: 'them',
-          type: 'text',
-          data: { text }
-        }]
-      })
-    }
-  }
+  return (<>
+    {/* NEL TAG MAIN VENGONO VISUALIZZATI I MESSAGGI */}
+    <div className="chat">
+      <main>
 
-  render() {
-    return (<div>
-      <Launcher
-        agentProfile={{
-          teamName: 'react-chat-window',
-          imageUrl: 'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png'
-        }}
-        onMessageWasSent={this._onMessageWasSent.bind(this)}
-        messageList={this.state.messageList}
-        showEmoji
-      />
-    </div>)
-  }
+        {messaggi && messaggi.map(msg => <MessaggioChat key={msg.id} messaggio={msg} />)}
+
+        <span ref={dummy}></span>
+
+      </main>
+
+      <form onSubmit={inviaMessaggio}>
+
+        <textarea name="areaMsg" id="areaMsg" cols="30" rows="10" value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="Scrivi messaggio..."></textarea>
+
+        <button type="submit" disabled={!formValue}>🕊️</button>
+
+      </form>
+    </div>
+  </>)
 }
+function MessaggioChat(props) {
+  const { testo, idPersonaggio, immagine } = props.messaggio;
 
-export default Chat
+  const personaggioAttivo = JSON.parse(sessionStorage.getItem('pgAttivo'));
+
+  const messageClass = idPersonaggio === personaggioAttivo.id ? 'sent' : 'received'; 
+
+  return (<>
+    <div className={`message ${messageClass}`}>
+      {/*se non c'è un immagine,mette l'immagine di default corrispondente all'url*/}
+      <img src={immagine || 'https://myasw.org/wp-content/uploads/2020/05/mr-anonymous.png'}  />
+      <p>{testo}</p>
+    </div>
+  </>)
+}
