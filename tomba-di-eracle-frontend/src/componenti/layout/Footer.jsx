@@ -14,9 +14,9 @@ class Footer extends Component {
             title:
                 <div>
                     <h3>SVILUPPATO DA:</h3>
-                    <a href="https://www.linkedin.com/in/gianluca-spadazzi-53303981/" target="_blank">Gianluca Spadazzi</a> <br/>
-                    <a href="https://www.linkedin.com/in/tiziano-massa-061151158/" target="_blank">Tiziano Massa</a> <br/>
-                    <a href="https://www.linkedin.com/in/paolo-marchitto-553433b2/" target="_blank">Paolo Marchitto</a> <br/> <br/>
+                    <a href="https://www.linkedin.com/in/gianluca-spadazzi-53303981/" target="_blank">Gianluca Spadazzi</a> <br />
+                    <a href="https://www.linkedin.com/in/tiziano-massa-061151158/" target="_blank">Tiziano Massa</a> <br />
+                    <a href="https://www.linkedin.com/in/paolo-marchitto-553433b2/" target="_blank">Paolo Marchitto</a> <br /> <br />
                     <h3>GRAFICA DI:</h3>
                     <a href="https://www.instagram.com/sara__fiorucci/" target="_blank">Sara Fiorucci</a>
                 </div>
@@ -26,29 +26,42 @@ class Footer extends Component {
 
     render() {
         return (
-            <div className="bg-dark" style={{ position:"fixed", bottom:"0px", width:"100%", height:"5%", color: "#b30000", paddingTop:"0.5%" }}>
+            <div className="bg-dark" style={{ position: "fixed", bottom: "0px", width: "100%", height: "5%", color: "#b30000" }}>
                 <div className="row">
-                    <div className="col-sm-4">
-                        {(JSON.parse(sessionStorage.getItem('utente')) != null && JSON.parse(sessionStorage.getItem('utente')).tipo == 'admin') ? 
+
+                    <div className="col-sm-2" style={{paddingTop:"0.5%"}}>
+                        <b>SOCIAL</b>
+                    </div>
+
+                    <div className="col-sm-2" style={{paddingTop:"0.5%"}}>
+                        {(JSON.parse(sessionStorage.getItem('utente')) != null && JSON.parse(sessionStorage.getItem('utente')).tipo == 'admin') ?
                             <ModalComponente
-                                bottone={<button className="btn btn-danger">Opzioni Master</button>}
+                                bottone={<a href="#"><b>Opzioni Master</b></a>}
                                 size='sm'
                                 contenuto={
                                     <div className="centrato" style={{ position: "fixed", backgroundColor: "transparent", height: "500px", width: "500px" }}>
-                                        <SchedaUtente style={{width:"50%"}}/>
+                                        <SchedaUtente style={{ width: "50%" }} />
                                     </div>}
                             />
                             :
-                            <b>SOCIAL</b>
+                            null
                         }
                     </div>
 
-                    <div className="col-sm-4">
+                    <div className="col-sm-4" style={{paddingTop:"0.5%"}}>
                         <a href="#" onClick={this.visualizzaAutori}><b>CREDITS</b></a>
                     </div>
 
-                    <div className="col-sm-4" align="right">
-                        <Orologio/>
+                    <div className="col-sm-2">
+                        {(JSON.parse(sessionStorage.getItem('ultimaLocation')) != null) ?
+                            <iframe width="420" height="35" style={{ display: "" }} src={JSON.parse(sessionStorage.getItem('ultimaLocation')).urlAudio} allow="autoplay"></iframe>
+                        :
+                            null
+                        }
+                    </div>
+
+                    <div className="col-sm-2" align="right" style={{paddingTop:"0.5%"}}>
+                        <Orologio />
                     </div>
                 </div>
             </div>

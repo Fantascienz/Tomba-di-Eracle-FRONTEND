@@ -103,20 +103,19 @@ class GiornoNotte extends Component {
 
     faseLunare(){
         var giornoLunare = this.giornoLunare();
-
-        if (giornoLunare == 1 || giornoLunare > 28) {
+        if (giornoLunare == 0 || giornoLunare > 27) {
             return ragabash;
-        } else if (giornoLunare > 1 && giornoLunare < 6){
+        } else if (giornoLunare > 0 && giornoLunare < 6){
             return teurgoCrescente;
-        } else if (giornoLunare > 16 && giornoLunare < 21) {
+        } else if (giornoLunare > 23 && giornoLunare < 28) {
             return teurgoCalante;
         } else if (giornoLunare > 5 && giornoLunare < 10) {
             return philodoxCrescente;
-        } else if (giornoLunare > 20 && giornoLunare < 25) {
+        } else if (giornoLunare > 19 && giornoLunare < 24) {
             return philodoxCalante;
         } else if (giornoLunare > 9 && giornoLunare < 14) {
             return galliardCrescente;
-        } else if (giornoLunare > 24 && giornoLunare < 29) {
+        } else if (giornoLunare > 15 && giornoLunare < 20) {
             return galliardCalante;
         } else {
             return arhoun;
