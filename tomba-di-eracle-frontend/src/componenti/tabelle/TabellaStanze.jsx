@@ -1,7 +1,9 @@
-import React from "react"
-
+import React, { useState } from "react"
+import { ControllaChiave } from "../utils/ControllaChiave"
 
 export const TabellaStanze = ({ lista, entra }) => {
+
+    const [chiave, setChiave] = useState('')
 
     return (
         <React.Fragment>
@@ -20,9 +22,13 @@ export const TabellaStanze = ({ lista, entra }) => {
                             <tr key={stanza.subLocation.id}>
                                 <td>{stanza.subLocation.nome}</td>
                                 <td>{stanza.subLocation.ambiente}</td>
-                                <td>implementa</td>
+                                {stanza.subLocation.chiave == null ?
+                                    <td>Entrata Libera</td>
+                                    :
+                                    <td><input type="text" maxLength="5" placeholder="Chiave" id="inputChiave" onChange={(e) => setChiave(e.target.value)} style={{ width: "50%" }} /></td>
+                                }
                                 <td>
-                                    <button className="btn btn-dark" onClick={() => entra(stanza.subLocation.id)}>Entra</button>
+                                    <button className="btn btn-dark" onClick={() => ControllaChiave(chiave,stanza.subLocation,entra)}>Entra</button>
                                 </td>
                             </tr>
                         )}

@@ -71,7 +71,7 @@ class Gamepage extends Component {
     }
 
     corniceNavigazione(tipoLocation) {
-        if (tipoLocation == "Umbra") {
+        if (tipoLocation === "Umbra" || tipoLocation === "Stanza Umbra") {
             return (
                 <img src={cardGameUmbra} style={{ position: "relative", zIndex: "1", width: "auto", height: "100%" }} />
             )

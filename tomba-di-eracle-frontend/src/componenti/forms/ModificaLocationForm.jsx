@@ -47,6 +47,11 @@ class ModificaLocationForm extends Component {
             (a, b) => (a.id < b.id ? -1 : Number(a.id > b.id))
         );
 
+        let listaOrdinataUMBRA = JSON.parse(sessionStorage.getItem('listaEsterneUmbra')).sort(
+            (a, b) => (a.id < b.id ? -1 : Number(a.id > b.id))
+        );
+
+
         return (
             <div className="centrato">
                 <form onSubmit={this.props.handleUpdate}>
@@ -60,10 +65,18 @@ class ModificaLocationForm extends Component {
                                 this.renderListaModificaEsterne(location)
                             )
                         }
+                        <option value="" style={{ fontWeight: 'bold' }}>--- Umbra Esterne ---</option>
+                        {listaOrdinataUMBRA[0] == null ?
+                            <option value="">(Nessuna location Esterna creata)</option>
+                            :
+                            listaOrdinataUMBRA.map(location =>
+                                <option value={location.id} key={location.id}>({location.id}) - {location.nome}</option>
+                            )}
                         <option value="" style={{ fontWeight: 'bold' }}>--- Macro Location ---</option>
                         {listaOrdinataMACRO.map(location =>
-                            <option value={location.id} key={location.id}>({location.id}) - {location.nome}</option>
+                            <option value={location.id} key={location.id}>({location.id}) {location.tipo === 'Umbra' ? "UMBRA" : ""} - {location.nome}</option>
                         )}
+
                     </select>
 
                     <div className="input-group">
@@ -71,7 +84,7 @@ class ModificaLocationForm extends Component {
                     </div>
 
                     <div className="input-group">
-                        <input className="form-control" type="text" id="chiave" onChange={this.props.handleChange} placeholder="Chiave" style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} />
+                        <input className="form-control" type="text" id="chiave" onChange={this.props.handleChange} placeholder="Chiave" maxlength="5" style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} />
                     </div>
 
                     <div className="input-group">

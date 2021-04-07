@@ -5,6 +5,7 @@ import ModificaLocationForm from '../forms/ModificaLocationForm';
 import Header from '../layout/Header';
 import Macromappa from './Macromappa';
 import { TitoloPagina } from '../layout/TitoloPagina';
+import ModificaStanzaForm from '../forms/ModificaStanzaForm';
 
 class ModificaLocation extends Component {
 
@@ -29,8 +30,8 @@ class ModificaLocation extends Component {
     }
 
     handleDelete = (event) => {
-        if (this.state.cancellaLoc !== '') {
-            LocationService.delete(this.state.cancellaLoc).then(
+        if (this.state.loc !== '') {
+            LocationService.delete(this.state.loc).then(
                 alert('Location eliminata correttamente!')
             )
         }
@@ -60,6 +61,7 @@ class ModificaLocation extends Component {
     componentDidMount() {
         LocationService.sessioneMappeEsterne()
         LocationService.sessioneMappeMacro()
+        LocationService.sessioneStanze()
     }
 
     render() {
@@ -68,25 +70,38 @@ class ModificaLocation extends Component {
             (a, b) => (a.id < b.id ? -1 : Number(a.id > b.id))
         );
 
+        let stanze = JSON.parse(sessionStorage.getItem('stanze'));
+
         return (
             <React.Fragment>
                 <Header />
                 <div className="corpoComponente">
                     <div className="row">
-                        <div className="col-md-4 centrato">
+                        <div className="col-md-3 centrato">
                             <TitoloPagina titolo="Modifica Location" />
                             <ModificaLocationForm handleChange={this.handleChange} handleUpdate={this.handleUpdate} />
                         </div>
+                        <div className="col-md-3 centrato">
+                            <TitoloPagina titolo="Modifica Stanza" />
+                            <ModificaStanzaForm handleChange={this.handleChange} handleUpdate={this.handleUpdate} />
+                        </div>
 
-                        <div className="col-md-4 centrato">
+                        <div className="col-md-3 centrato">
                             <Macromappa pxDimensioniMappa="400" lenteDisplay="none" idLocation={this.state.locationMod} />
                         </div>
 
-                        <div className="col-md-4 " >
+                        <div className="col-md-3 " >
                             <TitoloPagina titolo="Elimina Location" />
                             <div className="centrato">
                                 <form onSubmit={this.handleDelete}>
-                                    <SelezionaLocationForm lista={listaOrdinataESTERNE} handleChange={this.handleChange} />
+                                    <SelezionaLocationForm lista={listaOrdinataESTERNE} stanza={false} handleChange={this.handleChange} />
+                                    <button className="btn btn-dark">Elimina</button>
+                                </form>
+                            </div>
+                            <TitoloPagina titolo="Elimina Stanza" />
+                            <div className="centrato">
+                                <form onSubmit={this.handleDelete}>
+                                    <SelezionaLocationForm lista={stanze} stanza={true} handleChange={this.handleChange} />
                                     <button className="btn btn-dark">Elimina</button>
                                 </form>
                             </div>
