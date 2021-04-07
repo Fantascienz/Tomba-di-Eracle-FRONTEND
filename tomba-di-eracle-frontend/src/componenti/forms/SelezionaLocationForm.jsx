@@ -15,8 +15,9 @@ class SelezionaLocationForm extends Component {
             }
         } else {
             if ((elemento.subLocation.creatore !== null && utente.id === elemento.subLocation.creatore.id) || utente.tipo === 'admin') {
-                if (elemento.subLocation.tipo === 'Stanza') {
-                    return <option value={elemento.subLocation.id} key={elemento.subLocation.id}>{elemento.subLocation.id}: {elemento.subLocation.nome}</option>
+                if (elemento.subLocation.tipo === 'Stanza' || elemento.subLocation.tipo === 'Stanza Umbra') {
+                    return <option value={elemento.subLocation.id} key={elemento.subLocation.id}>
+                        {elemento.subLocation.id}{elemento.subLocation.tipo === 'Stanza Umbra' ? "(UMBRA)" : ""}: {elemento.subLocation.nome}</option>
                 }
             }
         }
