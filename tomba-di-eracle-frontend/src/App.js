@@ -33,8 +33,6 @@ function App() {
           <Route path="/macromappa" component ={ Macromappa }/>
         </Switch>
       </Router>
-
-
       <Footer />
     </div>
   );
