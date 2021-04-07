@@ -2,7 +2,7 @@ import Swal from "sweetalert2"
 import withReactContent from "sweetalert2-react-content"
 
 export const ControllaChiave = (chiave, location, metodoEntra) => {
-    if (chiave === location.chiave) {
+    if (chiave === location.chiave || location.chiave == null) {
         metodoEntra(location.id)
     } else {
         withReactContent(Swal).fire({

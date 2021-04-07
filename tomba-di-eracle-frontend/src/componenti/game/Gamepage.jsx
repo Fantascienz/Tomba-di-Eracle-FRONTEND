@@ -56,6 +56,7 @@ class Gamepage extends Component {
         sessionStorage.removeItem('pgAttivo')
         sessionStorage.removeItem('ultimaLocation')
         sessionStorage.removeItem('direzioniUltimaLocation')
+        sessionStorage.removeItem('stanzeLocation')
         browserHistory.push('/paginaUtente')
         browserHistory.go()
     }
