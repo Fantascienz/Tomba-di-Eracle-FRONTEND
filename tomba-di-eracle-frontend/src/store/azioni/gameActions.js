@@ -13,6 +13,7 @@ export const primoAccesso = (pg) => {
                 if (stanza.location.id === JSON.parse(sessionStorage.getItem('ultimaLocation')).id) {
                     stanze.push(stanza)
                 }
+               
             sessionStorage.setItem('stanzeLocation', JSON.stringify(stanze))
         })
         }

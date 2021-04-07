@@ -204,6 +204,18 @@ export const ordinaPerId = () => {
     }
 }
 
+export const ordinaPerIdUtente = () => {
+    return (dispatch) => {
+        PersonaggioService.getAllOrderByIdUtente().then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_ID_UTENTE',
+                listaPgFiltrata: res.data
+            })
+        })
+    }
+}
+
 export const getByRazzaAndStato = (filtro) => {
     return (dispatch) => {
         if (filtro.stato === 'Online') {
@@ -228,5 +240,167 @@ export const getByRazzaAndStato = (filtro) => {
             })
         }
 
+    }
+}
+
+export const getAllByRazzaOrderByNominativo = (razza) => {
+    return (dispatch) => {
+        PersonaggioService.getAllByRazzeOrderByNominativo(razza).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                    type: 'ORDINA_PER_RAZZA_ORDER_BY_NOMINATIVO',
+                    listaPgFiltrata: res.data,
+                    filtroRazza: razza.razza
+                })
+        })
+    }
+}
+
+export const ordinaPerRazzaEStatoByNominativo = (filtro) => {
+    return (dispatch) => {
+        PersonaggioService.getAllByRazzaAndStatoOrderByNominativo(filtro).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_RAZZA_E_STATO_ORDER_BY',
+                listaPgFiltrata: res.data,
+                filtroRazza: filtro.razza,
+                filtroStato: filtro.stato
+            })
+        })
+    }
+}
+
+export const ordinaPerRazzaById = (razza) => {
+    return (dispatch) => {
+        PersonaggioService.getAllByRazzaOrderById(razza).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_RAZZA_ORDER_BY_ID',
+                listaPgFiltrata: res.data,
+                filtroRazza: razza.razza
+            })
+        })
+    }
+}
+
+export const ordinaPerRazzaEStatoById = (filtro) => {
+    return (dispatch) => {
+        PersonaggioService.getAllByRazzaAndStatoOrderById(filtro).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_RAZZA_E_STATO_ORDER_BY_ID',
+                listaPgFiltrata: res.data,
+                filtroRazza: filtro.razza,
+                filtroStato: filtro.stato
+            })
+        })
+    }
+}
+
+export const ordinaPerRazzaBySesso = (razza) => {
+    return (dispatch) => {
+        PersonaggioService.getAllByRazzaOrderBySesso(razza).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_RAZZA_ORDER_BY_SESSO',
+                listaPgFiltrata: res.data,
+                filtroRazza: razza.razza
+            })
+        })
+    }
+}
+
+export const ordinaPerRazzaEStatoBySesso = (filtro) => {
+    return (dispatch) => {
+        PersonaggioService.getAllByRazzaAndStatoOrderBySesso(filtro).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_RAZZA_E_STATO_ORDER_BY_SESSO',
+                listaPgFiltrata: res.data,
+                filtroRazza: filtro.razza,
+                filtroStato: filtro.stato
+            })
+        })
+    }
+}
+
+export const ordinaPerRazzaByRango = (razza) => {
+    return (dispatch) => {
+        PersonaggioService.getAllByRazzaOrderByRango(razza).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_RAZZA_ORDER_BY_RANGO',
+                listaPgFiltrata: res.data,
+                filtroRazza: razza.razza
+            })
+        })
+    }
+}
+
+export const ordinaPerRazzaEStatoByRango = (filtro) => {
+    return (dispatch) => {
+        PersonaggioService.getAllByRazzaAndStatoOrderByRango(filtro).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_RAZZA_E_STATO_ORDER_BY_RANGO',
+                listaPgFiltrata: res.data,
+                filtroRazza: filtro.razza,
+                filtroStato: filtro.stato
+            })
+        })
+    }
+}
+
+export const ordinaPerRazzaByDataCreazione = (razza) => {
+    return (dispatch) => {
+        PersonaggioService.getAllByRazzaOrderByDataCreazione(razza).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_RAZZA_ORDER_BY_DATA_CREAZIONE',
+                listaPgFiltrata: res.data,
+                filtroRazza: razza.razza
+            })
+        })
+    }
+}
+
+export const ordinaPerRazzaEStatoByDataCreazione = (filtro) => {
+    return (dispatch) => {
+        PersonaggioService.getAllByRazzaAndStatoOrderByDataCreazione(filtro).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_RAZZA_E_STATO_ORDER_BY_DATA_CREAZIONE',
+                listaPgFiltrata: res.data,
+                filtroRazza: filtro.razza,
+                filtroStato: filtro.stato
+            })
+        })
+    }
+}
+
+export const ordinaPerRazzaByIdUtente = (razza) => {
+    return (dispatch) => {
+        PersonaggioService.getAllByRazzaOrderByIdUtente(razza).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_RAZZA_ORDER_BY_ID_UTENTE',
+                listaPgFiltrata: res.data,
+                filtroRazza: razza.razza
+            })
+        })
+    }
+}
+
+export const ordinaPerRazzaEStatoByIdUtente = (filtro) => {
+    return (dispatch) => {
+        PersonaggioService.getAllByRazzaAndStatoOrderByIdUtente(filtro).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_RAZZA_E_STATO_ORDER_BY_ID_UTENTE',
+                listaPgFiltrata: res.data,
+                filtroRazza: filtro.razza,
+                filtroStato: filtro.stato
+            })
+        })
     }
 }

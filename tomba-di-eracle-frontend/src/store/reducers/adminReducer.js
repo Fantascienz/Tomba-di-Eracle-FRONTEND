@@ -32,7 +32,7 @@ const adminReducer = (state = initState, action) => {
                 visualizzaPgAdmin: !state.visualizzaPgAdmin,
             }
             break;
-            case 'FILTRA_RAZZA':
+        case 'FILTRA_RAZZA':
             state = {
                 listaPgFiltrata: action.listaPgFiltrata,
                 filtroRazza: action.filtroRazza
@@ -95,6 +95,90 @@ const adminReducer = (state = initState, action) => {
         case 'ORDINA_PER_ID':
             state = {
                 listaPgFiltrata: action.listaPgFiltrata
+            }
+            break;
+        case 'ORDINA_PER_ID_UTENTE':
+            state = {
+                listaPgFiltrata: action.listaPgFiltrata
+            }
+            break;
+        case 'ORDINA_PER_RAZZA_ORDER_BY_NOMINATIVO':
+            state = {
+                listaPgFiltrata: action.listaPgFiltrata,
+                filtroRazza: action.filtroRazza
+            }
+            break;
+        case 'ORDINA_PER_RAZZA_ORDER_BY_ID':
+            state = {
+                listaPgFiltrata: action.listaPgFiltrata,
+                filtroRazza: action.filtroRazza
+            }
+            break;
+        case 'ORDINA_PER_RAZZA_ORDER_BY_SESSO':
+            state = {
+                listaPgFiltrata: action.listaPgFiltrata,
+                filtroRazza: action.filtroRazza
+            }
+            break;
+        case 'ORDINA_PER_RAZZA_ORDER_BY_RANGO':
+            state = {
+                listaPgFiltrata: action.listaPgFiltrata,
+                filtroRazza: action.filtroRazza
+            }
+            break;
+        case 'ORDINA_PER_RAZZA_ORDER_BY_DATA_CREAZIONE':
+            state = {
+                listaPgFiltrata: action.listaPgFiltrata,
+                filtroRazza: action.filtroRazza
+            }
+            break;
+        case 'ORDINA_PER_RAZZA_ORDER_BY_ID_UTENTE':
+            state = {
+                listaPgFiltrata: action.listaPgFiltrata,
+                filtroRazza: action.filtroRazza
+            }
+            break;
+        case 'ORDINA_PER_RAZZA_E_STATO_ORDER_BY':
+            state = {
+                listaPgFiltrata: action.listaPgFiltrata,
+                filtroRazza: action.filtroRazza,
+                filtroStato: action.filtroStato
+            }
+            break;
+        case 'ORDINA_PER_RAZZA_E_STATO_ORDER_BY_ID':
+            state = {
+                listaPgFiltrata: action.listaPgFiltrata,
+                filtroRazza: action.filtroRazza,
+                filtroStato: action.filtroStato
+            }
+            break;
+
+        case 'ORDINA_PER_RAZZA_E_STATO_ORDER_BY_SESSO':
+            state = {
+                listaPgFiltrata: action.listaPgFiltrata,
+                filtroRazza: action.filtroRazza,
+                filtroStato: action.filtroStato
+            }
+            break;
+        case 'ORDINA_PER_RAZZA_E_STATO_ORDER_BY_RANGO':
+            state = {
+                listaPgFiltrata: action.listaPgFiltrata,
+                filtroRazza: action.filtroRazza,
+                filtroStato: action.filtroStato
+            }
+            break;
+        case 'ORDINA_PER_RAZZA_E_STATO_ORDER_BY_DATA_CREAZIONE':
+            state = {
+                listaPgFiltrata: action.listaPgFiltrata,
+                filtroRazza: action.filtroRazza,
+                filtroStato: action.filtroStato
+            }
+            break;
+        case 'ORDINA_PER_RAZZA_E_STATO_ORDER_BY_ID_UTENTE':
+            state = {
+                listaPgFiltrata: action.listaPgFiltrata,
+                filtroRazza: action.filtroRazza,
+                filtroStato: action.filtroStato
             }
             break;
         default:
