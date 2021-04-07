@@ -84,7 +84,7 @@ class ModificaLocationForm extends Component {
                     </div>
 
                     <div className="input-group">
-                        <input className="form-control" type="text" id="chiave" onChange={this.props.handleChange} placeholder="Chiave" style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} />
+                        <input className="form-control" type="text" id="chiave" onChange={this.props.handleChange} placeholder="Chiave" maxlength="5" style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} />
                     </div>
 
                     <div className="input-group">
