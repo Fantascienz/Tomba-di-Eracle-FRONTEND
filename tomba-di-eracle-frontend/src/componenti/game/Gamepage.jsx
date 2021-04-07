@@ -93,7 +93,6 @@ class Gamepage extends Component {
 
         return (
             <div style={{ position: "absolute", top: "0", height: "100%", width: "100%", backgroundColor: "dimgray" }}>
-                <Draggable>
                     <div className="navigazione-sezione">
 
                         <div className="navigazione-area">
@@ -126,11 +125,11 @@ class Gamepage extends Component {
                             </div>
 
                             {/* pulsante: porta */}
-                            <div className="navigazione-link" onClick={() => this.visualizzazioneStanze()} style={{ left: "77.65%", top: "4.43%", width: "14.67%", height: "9.2%", zIndex: "9999" }}>
-                                {stanze[0] == null ?
+                            <div className="navigazione-link" style={{ left: "77.65%", top: "4.43%", width: "14.67%", height: "9.2%", zIndex: "9999" }}>
+                                {stanze == null || stanze[0] == null ?
                                     <img className="icona-larga-disabled" title="Non ci sono Stanze nella Location" src={porta} />
                                     :
-                                    <img className="icona-larga" title="Accedi ad una Stanza della Location" src={porta} />
+                                    <img className="icona-larga" title="Accedi ad una Stanza della Location" src={porta} onClick={() => this.visualizzazioneStanze()}/>
                                 }
                             </div>
 
@@ -222,7 +221,6 @@ class Gamepage extends Component {
                             </div>
                         </div>
                     </div>
-                </Draggable>
 
                 <div className="chat-sezione">
 
