@@ -5,6 +5,7 @@ import UtenteService from "../../servizi/UtenteService"
 import bashImpact from "../../suoni/bash_impact.mp3"
 import brokenShield from "../../img/broken_shield.png"
 import LocationService from "../../servizi/LocationService"
+import AdminService from "../../servizi/AdminService"
 
 export const login = (utente) => {
     return (dispatch) => {
@@ -23,27 +24,31 @@ export const login = (utente) => {
                 ).then(
                     LocationService.sessioneStanze()
                 )
-                .then(
-                    LocationService.getLocationByDirezioneLibera('nord').then(res => {
-                        sessionStorage.setItem('locationsNordLibero', JSON.stringify(res.data))
-                    }).then(
-                        LocationService.getLocationByDirezioneLibera('est').then(res => {
-                            sessionStorage.setItem('locationsEstLibero', JSON.stringify(res.data))
-                        })
-                    ).then(
-                        LocationService.getLocationByDirezioneLibera('sud').then(res => {
-                            sessionStorage.setItem('locationsSudLibero', JSON.stringify(res.data))
-                        })
-                    ).then(
-                        LocationService.getLocationByDirezioneLibera('ovest').then(res => {
-                            sessionStorage.setItem('locationsOvestLibero', JSON.stringify(res.data))
-                        })
-                    ).then (
-                        PersonaggioService.getAllRazzeGroupBy().then(res => {
-                            sessionStorage.setItem('listaRazze', JSON.stringify(res.data))
-                        })
+                    .then(
+                        LocationService.getLocationByDirezioneLibera('nord').then(res => {
+                            sessionStorage.setItem('locationsNordLibero', JSON.stringify(res.data))
+                        }).then(
+                            LocationService.getLocationByDirezioneLibera('est').then(res => {
+                                sessionStorage.setItem('locationsEstLibero', JSON.stringify(res.data))
+                            })
+                        ).then(
+                            LocationService.getLocationByDirezioneLibera('sud').then(res => {
+                                sessionStorage.setItem('locationsSudLibero', JSON.stringify(res.data))
+                            })
+                        ).then(
+                            LocationService.getLocationByDirezioneLibera('ovest').then(res => {
+                                sessionStorage.setItem('locationsOvestLibero', JSON.stringify(res.data))
+                            })
+                        ).then(
+                            PersonaggioService.getAllRazzeGroupBy().then(res => {
+                                sessionStorage.setItem('listaRazze', JSON.stringify(res.data))
+                            })
+                        ).then(
+                            AdminService.getListaUtenti().then(res => {
+                                sessionStorage.setItem('listaUtenti', JSON.stringify(res.data))
+                            })
+                        )
                     )
-                )
                     .then(
                         dispatch({
                             type: 'LOGIN_UTENTE',

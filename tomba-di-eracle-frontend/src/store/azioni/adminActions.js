@@ -132,6 +132,18 @@ export const filtraListaStato = (stato) => {
     }
 }
 
+export const filtraListaUtente = (utente) => {
+    return (dispatch) => {
+        PersonaggioService.getPersonaggiUtente(utente).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'FILTRA_UTENTE',
+                listaPgFiltrata: res.data
+            })
+        })
+    }
+}
+
 export const ordinaPerRazza = () => {
     return (dispatch) => {
         PersonaggioService.getAllOrderByRazza().then(res => {

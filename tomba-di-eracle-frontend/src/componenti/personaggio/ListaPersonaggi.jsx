@@ -234,6 +234,11 @@ class ListaPersonaggi extends Component {
 
     }
 
+    handleFilterUtente = (e) => {
+
+
+    }
+
     resetFiltro = () => {
         this.props.aggiornaLista()
     }
@@ -374,6 +379,18 @@ class ListaPersonaggi extends Component {
         )
     }
 
+    renderFiltroUtente = () => {
+        return (
+            <React.Fragment>
+                <select class="form-select" onChange={this.handleFilterRazza} aria-label="Default select example">
+                    {JSON.parse(sessionStorage.getItem('listaUtenti')).map(utente =>
+                        <option key={utente.id} value={utente}>ID:{utente.id} {utente.nominativo}</option>
+                    )}
+                </select>
+            </React.Fragment>
+        )
+    }
+
     renderFiltroStato = () => {
 
         return (
@@ -409,7 +426,7 @@ class ListaPersonaggi extends Component {
                                 <th>Tribù</th>
                                 <th>Branco</th>
                                 <th>Sept</th>
-                                <th><a href="#" onClick={() => this.ordinaPerIdUtente()}>Proprietario</a></th>
+                                <th><a href="#" onClick={() => this.ordinaPerIdUtente()}>Proprietario</a> {this.renderFiltroUtente()}</th>
                                 <th><a href="#" onClick={() => this.ordinaPerDataCreazione()}>Data Creazione</a></th>
                                 <th>Stato {this.renderFiltroStato()} </th>
                                 <th>Modifica Rango</th>
