@@ -3,7 +3,7 @@ import { ThemeProvider } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-import { filtraListaRazza, modificaPersonaggio, getListaPersonaggi, ordinaPerRazza, ordinaPerNominativo, ordinaPerSesso, ordinaPerRango, ordinaPerDataCreazione, filtraListaStato, getByRazzaAndStato, ordinaPerId, ordinaPerRazzaEStatoByNominativo, getAllByRazzaOrderByNominativo, ordinaPerRazzaById, ordinaPerRazzaEStatoById,  ordinaPerRazzaBySesso, ordinaPerRazzaEStatoBySesso, ordinaPerRazzaByRango, ordinaPerRazzaEStatoByRango, ordinaPerRazzaEStatoByDataCreazione, ordinaPerRazzaByDataCreazione, ordinaPerRazzaByIdUtente, ordinaPerRazzaEStatoByIdUtente, ordinaPerIdUtente } from '../../store/azioni/adminActions';
+import { filtraListaRazza, modificaPersonaggio, getListaPersonaggi, ordinaPerRazza, ordinaPerNominativo, ordinaPerSesso, ordinaPerRango, ordinaPerDataCreazione, filtraListaStato, getByRazzaAndStato, ordinaPerId, ordinaPerRazzaEStatoByNominativo, getAllByRazzaOrderByNominativo, ordinaPerRazzaById, ordinaPerRazzaEStatoById,  ordinaPerRazzaBySesso, ordinaPerRazzaEStatoBySesso, ordinaPerRazzaByRango, ordinaPerRazzaEStatoByRango, ordinaPerRazzaEStatoByDataCreazione, ordinaPerRazzaByDataCreazione, ordinaPerRazzaByIdUtente, ordinaPerRazzaEStatoByIdUtente, ordinaPerIdUtente, filtraListaPgUtente, ordinaPerUtenteByNominativo, ordinaPerUtenteBySesso, ordinaPerUtenteByRazza, ordinaPerUtenteById, ordinaPerUtenteByRango, ordinaPerUtenteByDataCreazione } from '../../store/azioni/adminActions';
 
 class ListaPersonaggi extends Component {
 
@@ -235,7 +235,10 @@ class ListaPersonaggi extends Component {
     }
 
     handleFilterUtente = (e) => {
-
+        let utente = {
+            id: e.target.value
+        }
+        this.props.filtraListaPgUtente(utente)
 
     }
 
@@ -244,7 +247,17 @@ class ListaPersonaggi extends Component {
     }
 
     ordinaPerRazza = () => {
-        this.props.ordinaPerRazza()
+        if(this.props.filtroUtente !== undefined) {
+            let filtro = {
+                id: this.props.filtroUtente
+            }
+
+            this.props.ordinaPerUtenteByRazza(filtro)
+        } else {
+            this.props.ordinaPerRazza()
+        }
+
+        
     }
 
     ordinaPerNominativo = () => {
@@ -261,7 +274,13 @@ class ListaPersonaggi extends Component {
                 razza: this.props.filtroRazza
             }
             this.props.getByRazzaOrderBy(filtro)
-        } 
+        } else if (this.props.filtroUtente !== undefined) {
+            let filtro = {
+                id: this.props.filtroUtente,
+            }
+            this.props.ordinaPerUtenteByNominativo(filtro)
+
+        }
         else {
             this.props.ordinaPerNominativo()
         }
@@ -281,14 +300,19 @@ class ListaPersonaggi extends Component {
                 razza: this.props.filtroRazza
             }
             this.props.ordinaPerRazzaBySesso(filtro)
-        } else {
+        } else if (this.props.filtroUtente !== undefined) {
+            let filtro = {
+                id: this.props.filtroUtente
+            }
+            this.props.ordinaPerUtenteBySesso(filtro)
+        } 
+        else {
             this.props.ordinaPerSesso()
         }        
         
     }
 
     ordinaPerRango = () => {
-
         if(this.props.filtroRazza !== undefined && this.props.filtroStato !== undefined) {
             let filtro = {
                 razza: this.props.filtroRazza,
@@ -301,14 +325,21 @@ class ListaPersonaggi extends Component {
                 razza: this.props.filtroRazza
             }
             this.props.ordinaPerRazzaByRango(filtro)
-        } else{
+        } else if(this.props.filtroUtente !== undefined) {
+            let filtro = {
+                id: this.props.filtroUtente
+            }
+            this.props.ordinaPerUtenteByRango(filtro)
+        }
+        
+        else{
             this.props.ordinaPerRango()
         }
         
     }
 
     ordinaPerDataCreazione = () => {
-
+alert(this.props.filtroUtente)
         if(this.props.filtroRazza !== undefined && this.props.filtroStato !== undefined) {
             let filtro = {
                 razza: this.props.filtroRazza,
@@ -321,7 +352,15 @@ class ListaPersonaggi extends Component {
                 razza: this.props.filtroRazza
             }
             this.props.ordinaPerRazzaByDataCreazione(filtro)
-        } else {
+        } else if (this.props.filtroUtente !== undefined) {
+            alert('if')
+            let filtro = {
+                id: this.props.filtroUtente
+            }
+
+            this.props.ordinaPerUtenteByDataCreazione(filtro)
+        } 
+        else {
             this.props.ordinaPerDataCreazione()
         }
         
@@ -340,7 +379,14 @@ class ListaPersonaggi extends Component {
                 razza: this.props.filtroRazza
             }
             this.props.ordinaPerRazzaById(filtro)
-        } else {
+        } else if(this.props.filtroUtente !== undefined) {
+            let filtro = {
+                id: this.props.filtroUtente
+            }
+
+            this.props.ordinaPerUtenteById(filtro)
+        } 
+        else {
             this.props.ordinaPerId()
         }
         
@@ -382,9 +428,9 @@ class ListaPersonaggi extends Component {
     renderFiltroUtente = () => {
         return (
             <React.Fragment>
-                <select class="form-select" onChange={this.handleFilterRazza} aria-label="Default select example">
+                <select class="form-select" onChange={this.handleFilterUtente} aria-label="Default select example">
                     {JSON.parse(sessionStorage.getItem('listaUtenti')).map(utente =>
-                        <option key={utente.id} value={utente}>ID:{utente.id} {utente.nominativo}</option>
+                        <option key={utente.id} value={utente.id}>ID:{utente.id} {utente.nominativo}</option>
                     )}
                 </select>
             </React.Fragment>
@@ -473,7 +519,8 @@ const mapStateToProps = (state) => {
         listaPg: state.admin.listaPg,
         listaPgFiltrata: state.admin.listaPgFiltrata,
         filtroRazza: state.admin.filtroRazza,
-        filtroStato: state.admin.filtroStato
+        filtroStato: state.admin.filtroStato,
+        filtroUtente: state.admin.filtroUtente
     }
 }
 
@@ -502,7 +549,14 @@ const mapDispatchToProps = (dispatch) => {
         ordinaPerRazzaEStatoByDataCreazione: (filtro) => dispatch(ordinaPerRazzaEStatoByDataCreazione(filtro)),
         ordinaPerRazzaByIdUtente: (razza) => dispatch(ordinaPerRazzaByIdUtente(razza)),
         ordinaPerRazzaEStatoByIdUtente: (filtro) => dispatch(ordinaPerRazzaEStatoByIdUtente(filtro)),
-        ordinaPerIdUtente: () => dispatch(ordinaPerIdUtente())
+        ordinaPerIdUtente: () => dispatch(ordinaPerIdUtente()),
+        filtraListaPgUtente: (utente) => dispatch(filtraListaPgUtente(utente)),
+        ordinaPerUtenteByNominativo: (filtro) => dispatch(ordinaPerUtenteByNominativo(filtro)),
+        ordinaPerUtenteBySesso: (filtro) => dispatch(ordinaPerUtenteBySesso(filtro)),
+        ordinaPerUtenteByRazza: (filtro) => dispatch(ordinaPerUtenteByRazza(filtro)),
+        ordinaPerUtenteById: (filtro) => dispatch(ordinaPerUtenteById(filtro)),
+        ordinaPerUtenteByRango: (filtro) => dispatch(ordinaPerUtenteByRango(filtro)),
+        ordinaPerUtenteByDataCreazione: (filtro)  => dispatch(ordinaPerUtenteByDataCreazione(filtro))
 
     }
 }

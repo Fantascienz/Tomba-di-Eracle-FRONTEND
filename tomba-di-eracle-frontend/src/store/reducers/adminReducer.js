@@ -7,7 +7,8 @@ const initState = {
     redirect: '',
     visualizzaPgAdmin: false,
     filtroRazza: '',
-    filtroStato: ''
+    filtroStato: '',
+    filtroUtente: ''
 }
 
 const adminReducer = (state = initState, action) => {
@@ -36,6 +37,12 @@ const adminReducer = (state = initState, action) => {
             state = {
                 listaPgFiltrata: action.listaPgFiltrata,
                 filtroRazza: action.filtroRazza
+            }
+            break;
+        case 'FILTRA_UTENTE':
+            state = {
+                listaPgFiltrata: action.listaPgFiltrata,
+                filtroUtente: action.filtroUtente
             }
             break;
         case 'FILTRA_STATO_ONLINE':
@@ -136,6 +143,42 @@ const adminReducer = (state = initState, action) => {
             state = {
                 listaPgFiltrata: action.listaPgFiltrata,
                 filtroRazza: action.filtroRazza
+            }
+            break;
+        case 'ORDINA_PER_UTENTE_BY_NOMINATIVO':
+            state = {
+                listaPgFiltrata: action.listaPgFiltrata,
+                filtroUtente: action.filtroUtente
+            }
+            break;
+        case 'ORDINA_PER_UTENTE_BY_SESSO':
+            state = {
+                listaPgFiltrata: action.listaPgFiltrata,
+                filtroUtente: action.filtroUtente
+            }
+            break;
+        case 'ORDINA_PER_UTENTE_BY_RAZZA':
+            state = {
+                listaPgFiltrata: action.listaPgFiltrata,
+                filtroUtente: action.filtroUtente
+            }
+            break;
+        case 'ORDINA_PER_UTENTE_BY_ID':
+            state = {
+                listaPgFiltrata: action.listaPgFiltrata,
+                filtroUtente: action.filtroUtente
+            }
+            break;
+        case 'ORDINA_PER_UTENTE_BY_RANGO':
+            state = {
+                listaPgFiltrata: action.listaPgFiltrata,
+                filtroUtente: action.filtroUtente
+            }
+            break;
+        case 'ORDINA_PER_UTENTE_BY_DATA_CREAZIONE':
+            state = {
+                listaPgFiltrata: action.listaPgFiltrata,
+                filtroUtente: action.filtroUtente
             }
             break;
         case 'ORDINA_PER_RAZZA_E_STATO_ORDER_BY':

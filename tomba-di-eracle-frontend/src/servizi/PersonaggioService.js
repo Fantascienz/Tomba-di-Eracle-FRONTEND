@@ -110,6 +110,30 @@ class PersonaggioService {
         return axios.post(URL + 'getAllByRazzaAndStatoOrderByIdUtente', filtro)
     }
 
+    getAllByIdUtenteOrderByNominativo(filtro) {
+        return axios.post(URL + 'getAllByIdUtenteOrderByNominativo', filtro)
+    }
+
+    getAllByIdUtenteOrderBySesso(filtro) {
+        return axios.post(URL + 'getAllByIdUtenteOrderBySesso', filtro)
+    }
+
+    getAllByIdUtenteOrderByRazza(filtro) {
+        return axios.post(URL + 'getAllByIdUtenteOrderByRazza', filtro)
+    }
+
+    getAllByIdUtenteOrderById(filtro) {
+        return axios.post(URL + 'getAllByIdUtenteOrderById', filtro)
+    }
+
+    getAllByIdUtenteOrderByRango(filtro) {
+        return axios.post(URL + 'getAllByIdUtenteOrderByRango', filtro)
+    }
+
+    getAllByIdUtenteOrderByDataCreazione(filtro) {
+        return axios.post(URL + 'getAllByIdUtenteOrderByDataCreazione', filtro)
+    }
+
     validazioneFormPersonaggio(personaggio) {
         if (personaggio.nominativo === ''
             || personaggio.sesso === ''
