@@ -134,6 +134,22 @@ class PersonaggioService {
         return axios.post(URL + 'getAllByIdUtenteOrderByDataCreazione', filtro)
     }
 
+    getAllByIdUtenteAndRazza(filtro) {
+        return axios.post(URL + 'getAllByIdUtenteAndRazza', filtro)
+    }
+
+    getAllByIdUtenteAndRazzaOrderById(filtro) {
+        return axios.post(URL + 'getAllByIdUtenteAndRazzaOrderById', filtro)
+    }
+
+    getAllByIdUtenteAndRazzaOrderByNominativo(filtro) {
+        return axios.post(URL, 'getAllByIdUtenteAndRazzaOrderByNominativo', filtro)
+    }
+
+    getAllByIdUtenteAndRazzaOrderBySesso(filtro) {
+        return axios.post(URL + 'getAllByIdUtenteAndRazzaOrderBySesso', filtro)
+    }
+
     validazioneFormPersonaggio(personaggio) {
         if (personaggio.nominativo === ''
             || personaggio.sesso === ''

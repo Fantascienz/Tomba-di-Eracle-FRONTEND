@@ -181,6 +181,34 @@ const adminReducer = (state = initState, action) => {
                 filtroUtente: action.filtroUtente
             }
             break;
+        case 'ORDINA_PER_UTENTE_E_RAZZA':
+            state = {
+                listaPgFiltrata: action.listaPgFiltrata,
+                filtroUtente: action.filtroUtente,
+                filtroRazza: action.filtroRazza
+            }
+            break;
+        case 'ORDINA_PER_UTENTE_E_RAZZA_BY_ID':
+            state = {
+                listaPgFiltrata: action.listaPgFiltrata,
+                filtroUtente: action.filtroUtente,
+                filtroRazza: action.filtroRazza
+            }
+            break;
+        case 'ORDINA_PER_UTENTE_E_RAZZA_BY_NOMINATIVO':
+            state = {
+                listaPgFiltrata: action.listaPgFiltrata,
+                filtroUtente: action.filtroUtente,
+                filtroRazza: action.filtroRazza
+            }
+            break;
+        case 'ORDINA_PER_UTENTE_E_RAZZA_BY_SESSO':
+            state = {
+                listaPgFiltrata: action.listaPgFiltrata,
+                filtroUtente: action.filtroUtente,
+                filtroRazza: action.filtroRazza
+            }
+            break;
         case 'ORDINA_PER_RAZZA_E_STATO_ORDER_BY':
             state = {
                 listaPgFiltrata: action.listaPgFiltrata,

@@ -495,3 +495,58 @@ export const ordinaPerUtenteByDataCreazione = (filtro) => {
         })
     }
 }
+
+export const ordinaPerUtenteERazza = (filtro) => {
+    return (dispatch) => {
+        PersonaggioService.getAllByIdUtenteAndRazza(filtro).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_UTENTE_E_RAZZA',
+                listaPgFiltrata: res.data,
+                filtroUtente: filtro.utente.id,
+                filtroRazza: filtro.razza
+            })
+        })
+    }
+}
+
+export const ordinaPerUtenteERazzaById = (filtro) => {
+    return (dispatch) => {
+        PersonaggioService.getAllByIdUtenteAndRazzaOrderById(filtro).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_UTENTE_E_RAZZA_BY_ID',
+                listaPgFiltrata: res.data,
+                filtroUtente: filtro.utente.id,
+                filtroRazza: filtro.razza
+            })
+        })
+    }
+}
+
+export const ordinaPerUtenteERazzaByNominativo = (filtro) => {
+    return (dispatch) => {
+        PersonaggioService.getAllByIdUtenteAndRazzaOrderByNominativo(filtro).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_UTENTE_E_RAZZA_BY_NOMINATIVO',
+                listaPgFiltrata: res.data,
+                filtroUtente: filtro.utente.id,
+                filtroRazza: filtro.razza
+            })
+        })
+    }
+}
+export const ordinaPerUtenteERazzaBySesso = (filtro) => {
+    return (dispatch) => {
+        PersonaggioService.getAllByIdUtenteAndRazzaOrderBySesso(filtro).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_UTENTE_E_RAZZA_BY_SESSO',
+                listaPgFiltrata: res.data,
+                filtroUtente: filtro.utente.id,
+                filtroRazza: filtro.razza
+            })
+        })
+    }
+}
