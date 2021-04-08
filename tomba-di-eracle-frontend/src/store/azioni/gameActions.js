@@ -7,18 +7,12 @@ export const primoAccesso = (pg) => {
         GameService.getUltimaLocationPersonaggio(pg.id).then(res => {
             sessionStorage.setItem('pgAttivo', JSON.stringify(pg))
             sessionStorage.setItem('ultimaLocation', JSON.stringify(res.data))
-            console.log('location attuale',JSON.parse(sessionStorage.getItem('ultimaLocation')).id)
-            GameService.getDirezioniRelativeLocation(res.data.id).then(res => {
-                // sessionStorage.setItem('direzioniUltimaLocation', JSON.stringify(res.data))
-                JSON.parse(sessionStorage.getItem('stanze')).map(stanza => {
-                    if (stanza.location.id === JSON.parse(sessionStorage.getItem('ultimaLocation')).id) {
-                        stanze.push(stanza)
-                    }
-                    sessionStorage.setItem('stanzeLocation', JSON.stringify(stanze))
-                })
-            }
-
-            )
+            JSON.parse(sessionStorage.getItem('stanze')).map(stanza => {
+                if (stanza.location.id === JSON.parse(sessionStorage.getItem('ultimaLocation')).id) {
+                    stanze.push(stanza)
+                }
+                sessionStorage.setItem('stanzeLocation', JSON.stringify(stanze))
+            })
             dispatch({
                 type: 'PRIMO_ACCESSO',
                 pgAttivo: pg,
@@ -35,30 +29,20 @@ export const naviga = (location) => {
     return (dispatch) => {
         GameService.naviga(location).then(res => {
             sessionStorage.setItem('ultimaLocation', JSON.stringify(res.data))
-            console.log('location attuale',JSON.parse(sessionStorage.getItem('ultimaLocation')).id)
-            GameService.getDirezioniRelativeLocation(res.data.id).then(res => {
-                // sessionStorage.setItem('direzioniUltimaLocation', JSON.stringify(res.data))
-                dir = res.data
-                JSON.parse(sessionStorage.getItem('stanze')).map(stanza => {
-                    if (stanza.location.id === JSON.parse(sessionStorage.getItem('ultimaLocation')).id) {
-                        stanze.push(stanza)
-                    }
-                    sessionStorage.setItem('stanzeLocation', JSON.stringify(stanze))
-                    // console.log(stanze)
-                })
-                // alert('dir pre dispatch'+ dir.id)
-            }
-            ).then(go => {
-                // alert('dir dispatch' + dir.id)
-                dispatch({
-                    type: 'NAVIGA',
-                    pgAttivo: JSON.parse(sessionStorage.getItem('pgAttivo')),
-                    location: res.data,
-                    direzioniRelativeUltimaLocation: dir,
-                    stanzeLocation: stanze
-                })
-            }
-            )
-        })
+            JSON.parse(sessionStorage.getItem('stanze')).map(stanza => {
+                if (stanza.location.id === JSON.parse(sessionStorage.getItem('ultimaLocation')).id) {
+                    stanze.push(stanza)
+                }
+                sessionStorage.setItem('stanzeLocation', JSON.stringify(stanze))
+            })
+            dispatch({
+                type: 'NAVIGA',
+                pgAttivo: JSON.parse(sessionStorage.getItem('pgAttivo')),
+                location: res.data,
+                direzioniRelativeUltimaLocation: dir,
+                stanzeLocation: stanze
+            })
+        }
+        )
     }
 }

@@ -54,7 +54,6 @@ class Gamepage extends Component {
     logout = () => {
         sessionStorage.removeItem('pgAttivo')
         sessionStorage.removeItem('ultimaLocation')
-        // sessionStorage.removeItem('direzioniUltimaLocation')
         sessionStorage.removeItem('stanzeLocation')
         browserHistory.push('/paginaUtente')
         browserHistory.go()
@@ -169,7 +168,6 @@ class Gamepage extends Component {
                             </div>
                             :
                             <SuonoDirezione suono={passi}
-                                // funzione={{ onend: () => this.navigazione(JSON.parse(sessionStorage.getItem('direzioniUltimaLocation')).idLocationEst) }}
                                 funzione={{ onend: () => this.navigazione(JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.idLocationEst) }}
                                 title="Vai a Est"
                                 className="icona-freccia-larga"
