@@ -38,7 +38,6 @@ class Gamepage extends Component {
     navigazione = (location) => {
 
         if (location !== null) {
-            // sessionStorage.setItem('locationPrecedente',JSON.stringify(this.props.ultimaLocation))
             this.props.naviga(location)
         } else {
             withReactContent(Swal).fire({
@@ -63,13 +62,7 @@ class Gamepage extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props.stanzeLocation)
         this.props.primoAccesso(JSON.parse(sessionStorage.getItem('pgAttivo')))
-    }
-
-    componentDidUpdate() {
-        console.log(this.props.stanzeLocation)
-        // this.visualizzazioneStanze();
     }
 
     corniceNavigazione(tipoLocation) {
@@ -90,7 +83,7 @@ class Gamepage extends Component {
         var PG = JSON.parse(sessionStorage.getItem('pgAttivo'));
         var location = JSON.parse(sessionStorage.getItem('ultimaLocation'));
         var stanze = JSON.parse(sessionStorage.getItem('stanzeLocation'));
-        var direzioni = JSON.parse(sessionStorage.getItem('direzioniUltimaLocation'));
+        // var direzioni = JSON.parse(sessionStorage.getItem('direzioniUltimaLocation'));
 
 
         return (
@@ -139,7 +132,7 @@ class Gamepage extends Component {
                         {/* pulsante: specchio------------------------------------------------- */}
                         {PG.umbra ?
                             <SuonoDirezione suono={attraversaUmbra}
-                                funzione={{ onend: () => this.navigazione(JSON.parse(sessionStorage.getItem('direzioniUltimaLocation')).idLocationSpecchio) }}
+                                funzione={{ onend: () => this.navigazione(location.direzioni.idLocationSpecchio) }}
                                 title="Oltrepassa il Guanto"
                                 className="icona-larga"
                                 src={specchio}
@@ -158,7 +151,7 @@ class Gamepage extends Component {
 
                         {/* ------------PULSANTI MOVIMENTO------------ */}
                         {/* NORD */}
-                        {direzioni.idLocationNord == null ?
+                        {location.direzioni.idLocationNord == null ?
                             <div className="navigazione-link" title="Nessuna Location a Nord!" style={{ left: "44.05%", top: "8.73%", width: "11.25%", height: "8.56%", zIndex: "9999" }}>
                                 <img className="icona-freccia-alta-disabled" src={frecciaSU} />
                             </div>
@@ -172,7 +165,7 @@ class Gamepage extends Component {
                         }
 
                         {/* EST */}
-                        {direzioni.idLocationEst == null ?
+                        {location.direzioni.idLocationEst == null ?
                             <div className="navigazione-link" title="Nessuna Location ad Est!" style={{ left: "79.47%", top: "46.33%", width: "13.07%", height: "7.01%", zIndex: "9999" }}>
                                 <img className="icona-freccia-larga-disabled" src={frecciaDX} />
                             </div>
@@ -186,7 +179,7 @@ class Gamepage extends Component {
                         }
 
                         {/* SUD */}
-                        {direzioni.idLocationSud == null ?
+                        {location.direzioni.idLocationSud == null ?
                             <div className="navigazione-link" title="Nessuna Location a Sud!" style={{ left: "44%", top: "85.89%", width: "11.25%", height: "8.09%", zIndex: "9999" }}>
                                 <img className="icona-freccia-alta-disabled" src={frecciaGIU} />
                             </div>
@@ -200,7 +193,7 @@ class Gamepage extends Component {
                         }
 
                         {/* OVEST */}
-                        {direzioni.idLocationOvest == null ?
+                        {location.direzioni.idLocationOvest == null ?
                             <div className="navigazione-link" title="Nessuna Location ad Ovest!" style={{ left: "6.77%", top: "46.2%", width: "13.07%", height: "7.01%", zIndex: "9999" }}>
                                 <img className="icona-freccia-larga-disabled" src={frecciaSX} />
                             </div>

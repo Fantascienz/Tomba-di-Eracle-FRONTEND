@@ -17,7 +17,9 @@ class CreazioneLocation extends Component {
         chiave: '',
         urlImgGiornoUmbra: '',
         urlImgNotteUmbra: '',
-        urlAudioUmbra: ''
+        urlAudioUmbra: '',
+        locationIngresso: '',
+        direzioneIngresso: ''
     }
 
     handleChange = (event) => {
@@ -77,18 +79,19 @@ class CreazioneLocation extends Component {
                     <div className="row">
                         <div className="col-md-6 centrato">
                             <TitoloPagina titolo="Creazione Location Esterna" />
-
+{/* <h1>{this.state.locationIngresso}</h1>
+<button onClick={() => console.log(this.state.locationIngresso)}>log</button> */}
                             <br />
 
                             <form onSubmit={this.handleSubmit} style={{width:"50%"}}>
-                                <CreazioneLocationForm handleChange={this.handleChange} stanza={false} />
+                                <CreazioneLocationForm handleChange={this.handleChange} stanza={false} ingresso={this.state.locationIngresso} />
                                 <button className="btn btn-dark">Crea</button>
                             </form>
                         </div>
 
                         <div className="col-md-4 centrato">
                             <div style={{ marginTop: "10%" }}>
-                                <Macromappa pxDimensioniMappa="400" lenteDisplay="none" idLocation={parseInt(this.state.ingresso)} />
+                                <Macromappa pxDimensioniMappa="400" lenteDisplay="none" idLocation={parseInt(this.state.locationIngresso)} />
                             </div>
                         </div>
 
