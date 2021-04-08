@@ -5,19 +5,29 @@ const utente = JSON.parse(sessionStorage.getItem('utente'));
 class SelezionaLocationForm extends Component {
 
     renderLista = (elemento) => {
-        if (!this.props.stanza) {
+        if (this.props.allLocations) {
             if ((elemento.creatore !== null && utente.id === elemento.creatore.id) || utente.tipo === 'admin') {
                 if (elemento.tipo === 'Reame' || elemento.tipo === 'Stanza') {
                     return <option value={elemento.id} key={elemento.id}>{elemento.id}: {elemento.nome}</option>
                 } else {
-                    return <option value={elemento.id} key={elemento.id}> {elemento.id}: UMBRA {elemento.nome}  </option>
+                    return <option value={elemento.id} key={elemento.id}> {elemento.id}: (UMBRA) - {elemento.nome}  </option>
+                }
+            }
+        } else if (!this.props.stanza) {
+            if (elemento.mappa === 'Esterna' && elemento.tipo === 'Reame') {
+                if ((elemento.creatore !== null && utente.id === elemento.creatore.id) || utente.tipo === 'admin') {
+                    if (elemento.tipo === 'Reame' || elemento.tipo === 'Stanza') {
+                        return <option value={elemento.id} key={elemento.id}>{elemento.id}: {elemento.nome}</option>
+                    } else {
+                        return <option value={elemento.id} key={elemento.id}> {elemento.id}: (UMBRA) - {elemento.nome}  </option>
+                    }
                 }
             }
         } else {
             if ((elemento.subLocation.creatore !== null && utente.id === elemento.subLocation.creatore.id) || utente.tipo === 'admin') {
                 if (elemento.subLocation.tipo === 'Stanza' || elemento.subLocation.tipo === 'Stanza Umbra') {
                     return <option value={elemento.subLocation.id} key={elemento.subLocation.id}>
-                        {elemento.subLocation.id}{elemento.subLocation.tipo === 'Stanza Umbra' ? "(UMBRA)" : ""}: {elemento.subLocation.nome}</option>
+                        {elemento.subLocation.id}{elemento.subLocation.tipo === 'Stanza Umbra' ? "(UMBRA) - " : ""}: {elemento.subLocation.nome}</option>
                 }
             }
         }

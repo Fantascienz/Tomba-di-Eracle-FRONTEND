@@ -28,18 +28,8 @@ class CreazioneLocation extends Component {
         })
     }
 
-    estrapolaDirezione = (ingresso) => {
-        let direzione = ''
-        for (let i = 0; i < ingresso.length; i++) {
-            if (isNaN(ingresso.charAt(i))) {
-                direzione += ingresso.charAt(i)
-            }
-        }
-        return direzione;
-    }
-
     handleSubmit = (event) => {
-        if (LocationService.validaCampiCreazione(this.state,false)) {
+        if (LocationService.validaCampiCreazione(this.state, false)) {
             let locationCreata = {
                 location: {
                     nome: this.state.nome,
@@ -50,8 +40,8 @@ class CreazioneLocation extends Component {
                     chiave: this.state.chiave,
                     creatore: JSON.parse(sessionStorage.getItem('utente'))
                 },
-                idLocationIngresso: parseInt(this.state.ingresso, 10),
-                direzioneIngresso: this.estrapolaDirezione(this.state.ingresso),
+                idLocationIngresso: parseInt(this.state.locationIngresso, 10),
+                direzioneIngresso: this.state.direzioneIngresso,
                 ingresso: this.state.ingresso,
                 umbra: {
                     urlImgGiorno: this.state.urlImgGiornoUmbra,
@@ -68,7 +58,7 @@ class CreazioneLocation extends Component {
     }
 
     componentDidMount() {
-        LocationService.sessioneDirezioniLibere()
+       LocationService.sessioneAllLocation()
     }
 
     render() {
@@ -79,11 +69,8 @@ class CreazioneLocation extends Component {
                     <div className="row">
                         <div className="col-md-6 centrato">
                             <TitoloPagina titolo="Creazione Location Esterna" />
-{/* <h1>{this.state.locationIngresso}</h1>
-<button onClick={() => console.log(this.state.locationIngresso)}>log</button> */}
                             <br />
-
-                            <form onSubmit={this.handleSubmit} style={{width:"50%"}}>
+                            <form onSubmit={this.handleSubmit} style={{ width: "50%" }}>
                                 <CreazioneLocationForm handleChange={this.handleChange} stanza={false} ingresso={this.state.locationIngresso} />
                                 <button className="btn btn-dark">Crea</button>
                             </form>

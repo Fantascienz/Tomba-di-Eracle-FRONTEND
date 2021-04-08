@@ -5,67 +5,46 @@ class CreazioneLocationForm extends Component {
     isStanza = () => {
         if (!this.props.stanza) {
 
-            // let listaOrdinataNORD = JSON.parse(sessionStorage.getItem('locationsNordLibero')).sort(
-            //     (a, b) => (a.id < b.id ? -1 : Number(a.id > b.id))
-            // );
-
-            let listaOrdinata = JSON.parse(sessionStorage.getItem('listaMacroLocation')).sort(
+            let listaLocationOrdinata = JSON.parse(sessionStorage.getItem('allLocations')).sort(
                 (a, b) => (a.id < b.id ? -1 : Number(a.id > b.id))
             );
 
-            let listaOrdinataEST = JSON.parse(sessionStorage.getItem('locationsEstLibero')).sort(
-                (a, b) => (a.id < b.id ? -1 : Number(a.id > b.id))
-            );
-
-            let listaOrdinataSUD = JSON.parse(sessionStorage.getItem('locationsSudLibero')).sort(
-                (a, b) => (a.id < b.id ? -1 : Number(a.id > b.id))
-            );
-
-            let listaOrdinataOVEST = JSON.parse(sessionStorage.getItem('locationsOvestLibero')).sort(
-                (a, b) => (a.id < b.id ? -1 : Number(a.id > b.id))
-            );
-
-            const renderLista = (location) => {
-                if (location.tipo === 'Reame' && (location.direzioni.idLocationNord == null || location.direzioni.idLocationEst == null || location.direzioni.idLocationSud == null || location.direzioni.idLocationOvest == null)) {
-                    return <option value={location.id} key={location.id}>{location.nome} - (id: {location.id})</option>
+            const renderLista = (location, mappa) => {
+                if (location.tipo === 'Reame' && location.mappa === mappa && (location.direzioni.idLocationNord == null || location.direzioni.idLocationEst == null || location.direzioni.idLocationSud == null || location.direzioni.idLocationOvest == null)) {
+                    return <option value={location.id} key={location.id}>ID: {location.id} - {location.nome} </option>
                 }
+
             }
 
             var opzioni = []
 
             const renderDirezioni = (idIngresso) => {
 
-                let lista = JSON.parse(sessionStorage.getItem('listaMacroLocation'))
-                // // console.log(lista)
-                // console.log(idIngresso)
-                // console.log(lista[0].id === idIngresso)
-
-                // // console.log(lista[idIngresso])
+                let lista = JSON.parse(sessionStorage.getItem('allLocations'))
 
                 if (this.props.ingresso !== '') {
                     for (let i = 0; i < lista.length; i++) {
                         if (lista[i].id == idIngresso) {
                             if (lista[i].direzioni.idLocationNord == null && lista[i].tipo === 'Reame') {
                                 opzioni.push({
-                                    html: <option value=" nord" >NORD</option>
+                                    html: <option value="nord" >NORD</option>
                                 })
                             }
                             if (lista[i].direzioni.idLocationEst == null && lista[i].tipo === 'Reame') {
                                 opzioni.push({
-                                    html: <option value=" est" >EST</option>
+                                    html: <option value="est" >EST</option>
                                 })
                             }
                             if (lista[i].direzioni.idLocationSud == null && lista[i].tipo === 'Reame') {
                                 opzioni.push({
-                                    html: <option value=" sud" >SUD</option>
+                                    html: <option value="sud" >SUD</option>
                                 })
                             }
                             if (lista[i].direzioni.idLocationOvest == null && lista[i].tipo === 'Reame') {
                                 opzioni.push({
-                                    html: <option value=" ovest" >OVEST</option>
+                                    html: <option value="ovest" >OVEST</option>
                                 })
                             }
-                            console.log(<option value=" ovest" >OVEST</option>)
                             return (
                                 <select name="direzioneIngresso" id="direzioneIngresso" className="form-select" onChange={this.props.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)", marginBottom: "1%" }}>
                                     <option value="">Seleziona Direzione Ingresso</option>
@@ -82,45 +61,19 @@ class CreazioneLocationForm extends Component {
             return (
                 <React.Fragment>
                     <div className="input-group">
-                        {/* <select className="form-select" name="ingresso" id="ingresso" onChange={this.props.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)", marginBottom: "1%" }}>
-
-                            <option value="">Seleziona Ingresso</option>
-
-                            <option value="" style={{ fontWeight: 'bold' }}>-----NORD-----</option>
-
-                            {listaOrdinataNORD.map(location =>
-                                <option value={location.id + " nord"} key={location.id}>NORD di {location.nome} - (id: {location.id})</option>
-                            )}
-
-                            <option value="" style={{ fontWeight: 'bold' }}>-----EST-----</option>
-
-                            {listaOrdinataEST.map(location =>
-                                <option value={location.id + " est"} key={location.id}>EST di {location.nome} - (id: {location.id})</option>
-                            )}
-
-                            <option value="" style={{ fontWeight: 'bold' }}>-----SUD-----</option>
-
-                            {listaOrdinataSUD.map(location =>
-                                <option value={location.id + " sud"} key={location.id}>SUD di {location.nome} - (id: {location.id})</option>
-                            )}
-
-                            <option value="" style={{ fontWeight: 'bold' }}>-----OVEST-----</option>
-
-                            {listaOrdinataOVEST.map(location =>
-                                <option value={location.id + " ovest"} key={location.id}>OVEST di {location.nome} - (id: {location.id})</option>
-                            )}
-                        </select> */}
                         <select name="locationIngresso" id="locationIngresso" className="form-select" onChange={this.props.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)", marginBottom: "1%" }}>
                             <option value="">Seleziona Location Ingresso</option>
-                            {listaOrdinata.map(location =>
-                                renderLista(location)
+                            <option value="" style={{ fontWeight: 'bold' }}>--- Location Esterne ---</option>
+                            {listaLocationOrdinata.map(location =>
+                                renderLista(location, 'Esterna')
                             )}
-                        </select>
-                        {/* <select name="direzioneIngresso" id="direzioneIngresso" className="form-select" onChange={this.props.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)", marginBottom: "1%" }}> */}
-                            {/* <option value="">Seleziona Direzione Ingresso</option> */}
-                            {renderDirezioni(this.props.ingresso)}
-                        {/* </select> */}
+                            <option value="" style={{ fontWeight: 'bold' }}> --- Macro Locations --- </option>
+                            {listaLocationOrdinata.map(location =>
+                                renderLista(location, 'Macro')
+                            )}
 
+                        </select>
+                        {renderDirezioni(this.props.ingresso)}
                     </div>
                 </React.Fragment>
             )

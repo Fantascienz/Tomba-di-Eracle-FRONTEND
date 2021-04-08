@@ -73,6 +73,7 @@ class CreazioneStanza extends Component {
 
     componentDidMount() {
 
+
     }
 
     render() {
@@ -84,7 +85,7 @@ class CreazioneStanza extends Component {
                     <div className="row">
                         <div className="col-md-6 centrato">
                             <form onSubmit={this.handleSubmit} >
-                                <SelezionaLocationForm lista={JSON.parse(sessionStorage.getItem('allLocations'))} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
+                                <SelezionaLocationForm lista={JSON.parse(sessionStorage.getItem('allLocations'))} handleChange={this.handleChange} stanza={false} allLocations={true}/>
                                 <CreazioneLocationForm handleChange={this.handleChange} stanza={true} />
                                 <SelezionaUscitaForm location={this.state.loc} handleChange={this.handleChange}/>
                                 <button className="btn btn-dark">Crea</button>

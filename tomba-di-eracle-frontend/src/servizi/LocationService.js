@@ -54,32 +54,14 @@ class LocationService {
         )
     }
 
-    sessioneMappeEsterne() {
-        this.getEsterneReame().then(res =>
-            sessionStorage.setItem('listaEsterneReame', JSON.stringify(res.data))
-        )
-        this.getEsterneUmbra().then(res =>
-            sessionStorage.setItem('listaEsterneUmbra', JSON.stringify(res.data))
-        )
-    }
-
-    sessioneDirezioniLibere() {
-        this.getLocationByDirezioneLibera('nord').then(res => {
-            sessionStorage.setItem('locationsNordLibero', JSON.stringify(res.data))
-        }).then(
-            this.getLocationByDirezioneLibera('est').then(res => {
-                sessionStorage.setItem('locationsEstLibero', JSON.stringify(res.data))
-            })
-        ).then(
-            this.getLocationByDirezioneLibera('sud').then(res => {
-                sessionStorage.setItem('locationsSudLibero', JSON.stringify(res.data))
-            })
-        ).then(
-            this.getLocationByDirezioneLibera('ovest').then(res => {
-                sessionStorage.setItem('locationsOvestLibero', JSON.stringify(res.data))
-            })
-        )
-    }
+    // sessioneMappeEsterne() {
+    //     this.getEsterneReame().then(res =>
+    //         sessionStorage.setItem('listaEsterneReame', JSON.stringify(res.data))
+    //     )
+    //     this.getEsterneUmbra().then(res =>
+    //         sessionStorage.setItem('listaEsterneUmbra', JSON.stringify(res.data))
+    //     )
+    // }
 
     sessioneAllLocation() {
         this.getAll().then(res =>
@@ -103,7 +85,7 @@ class LocationService {
     validaCampiCreazione(location, isStanza) {
         if (!isStanza) {
             if (location.nome === '' || location.tipo === '' || location.ambiente === '' || location.urlImgGiorno === ''
-                || location.urlAudio === '' || location.ingresso === '' || location.urlImgGiornoUmbra === '' || location.urlAudioUmbra === '') {
+                || location.urlAudio === '' || location.locationIngresso === '' || location.direzioneIngresso === '' || location.urlImgGiornoUmbra === '' || location.urlAudioUmbra === '') {
                 withReactContent(Swal).fire({
                     title: <div>
                         <p>Nome,Ambiente,Ingresso</p>

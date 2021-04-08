@@ -132,7 +132,7 @@ class Gamepage extends Component {
                         {/* pulsante: specchio------------------------------------------------- */}
                         {PG.umbra ?
                             <SuonoDirezione suono={attraversaUmbra}
-                                funzione={{ onend: () => this.navigazione(location.direzioni.idLocationSpecchio) }}
+                                funzione={{ onend: () => this.navigazione(JSON.parse(sessionStorage.getItem('direzioniUltimaLocation')).idLocationSpecchio) }}
                                 title="Oltrepassa il Guanto"
                                 className="icona-larga"
                                 src={specchio}
