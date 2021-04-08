@@ -29,7 +29,6 @@ import passi from '../../suoni/suono_passi.mp3'
 import attraversaUmbra from '../../suoni/attraversa_guanto.mp3'
 import srotolaCarta from '../../suoni/flip_card.mp3'
 import { TabellaStanze } from '../tabelle/TabellaStanze'
-import Draggable from 'react-draggable';
 import { ChatRoom } from './Chat'
 
 
@@ -55,7 +54,7 @@ class Gamepage extends Component {
     logout = () => {
         sessionStorage.removeItem('pgAttivo')
         sessionStorage.removeItem('ultimaLocation')
-        sessionStorage.removeItem('direzioniUltimaLocation')
+        // sessionStorage.removeItem('direzioniUltimaLocation')
         sessionStorage.removeItem('stanzeLocation')
         browserHistory.push('/paginaUtente')
         browserHistory.go()
@@ -83,8 +82,7 @@ class Gamepage extends Component {
         var PG = JSON.parse(sessionStorage.getItem('pgAttivo'));
         var location = JSON.parse(sessionStorage.getItem('ultimaLocation'));
         var stanze = JSON.parse(sessionStorage.getItem('stanzeLocation'));
-        // var direzioni = JSON.parse(sessionStorage.getItem('direzioniUltimaLocation'));
-
+        var direzioni = JSON.parse(sessionStorage.getItem('direzioniUltimaLocation'));
 
         return (
             <div style={{ position: "absolute", top: "0", height: "100%", width: "100%", backgroundColor: "dimgray" }}>
@@ -132,7 +130,7 @@ class Gamepage extends Component {
                         {/* pulsante: specchio------------------------------------------------- */}
                         {PG.umbra ?
                             <SuonoDirezione suono={attraversaUmbra}
-                                funzione={{ onend: () => this.navigazione(JSON.parse(sessionStorage.getItem('direzioniUltimaLocation')).idLocationSpecchio) }}
+                                funzione={{ onend: () => this.navigazione(JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.idLocationSpecchio) }}
                                 title="Oltrepassa il Guanto"
                                 className="icona-larga"
                                 src={specchio}
@@ -151,13 +149,13 @@ class Gamepage extends Component {
 
                         {/* ------------PULSANTI MOVIMENTO------------ */}
                         {/* NORD */}
-                        {location.direzioni.idLocationNord == null ?
+                        {JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.idLocationNord == null ?
                             <div className="navigazione-link" title="Nessuna Location a Nord!" style={{ left: "44.05%", top: "8.73%", width: "11.25%", height: "8.56%", zIndex: "9999" }}>
                                 <img className="icona-freccia-alta-disabled" src={frecciaSU} />
                             </div>
                             :
                             <SuonoDirezione suono={passi}
-                                funzione={{ onend: () => this.navigazione(JSON.parse(sessionStorage.getItem('direzioniUltimaLocation')).idLocationNord) }}
+                                funzione={{ onend: () => this.navigazione(JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.idLocationNord) }}
                                 title="Vai a Nord"
                                 className="icona-freccia-alta"
                                 src={frecciaSU}
@@ -165,13 +163,14 @@ class Gamepage extends Component {
                         }
 
                         {/* EST */}
-                        {location.direzioni.idLocationEst == null ?
+                        {JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.idLocationEst == null ?
                             <div className="navigazione-link" title="Nessuna Location ad Est!" style={{ left: "79.47%", top: "46.33%", width: "13.07%", height: "7.01%", zIndex: "9999" }}>
                                 <img className="icona-freccia-larga-disabled" src={frecciaDX} />
                             </div>
                             :
                             <SuonoDirezione suono={passi}
-                                funzione={{ onend: () => this.navigazione(JSON.parse(sessionStorage.getItem('direzioniUltimaLocation')).idLocationEst) }}
+                                // funzione={{ onend: () => this.navigazione(JSON.parse(sessionStorage.getItem('direzioniUltimaLocation')).idLocationEst) }}
+                                funzione={{ onend: () => this.navigazione(JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.idLocationEst) }}
                                 title="Vai a Est"
                                 className="icona-freccia-larga"
                                 src={frecciaDX}
@@ -179,13 +178,13 @@ class Gamepage extends Component {
                         }
 
                         {/* SUD */}
-                        {location.direzioni.idLocationSud == null ?
+                        {JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.idLocationSud == null ?
                             <div className="navigazione-link" title="Nessuna Location a Sud!" style={{ left: "44%", top: "85.89%", width: "11.25%", height: "8.09%", zIndex: "9999" }}>
                                 <img className="icona-freccia-alta-disabled" src={frecciaGIU} />
                             </div>
                             :
                             <SuonoDirezione suono={passi}
-                                funzione={{ onend: () => this.navigazione(JSON.parse(sessionStorage.getItem('direzioniUltimaLocation')).idLocationSud) }}
+                                funzione={{ onend: () => this.navigazione(JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.idLocationSud) }}
                                 title="Vai a Sud"
                                 className="icona-freccia-alta"
                                 src={frecciaGIU}
@@ -193,13 +192,13 @@ class Gamepage extends Component {
                         }
 
                         {/* OVEST */}
-                        {location.direzioni.idLocationOvest == null ?
+                        {JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.idLocationOvest == null ?
                             <div className="navigazione-link" title="Nessuna Location ad Ovest!" style={{ left: "6.77%", top: "46.2%", width: "13.07%", height: "7.01%", zIndex: "9999" }}>
                                 <img className="icona-freccia-larga-disabled" src={frecciaSX} />
                             </div>
                             :
                             <SuonoDirezione suono={passi}
-                                funzione={{ onend: () => this.navigazione(JSON.parse(sessionStorage.getItem('direzioniUltimaLocation')).idLocationOvest) }}
+                                funzione={{ onend: () => this.navigazione(JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.idLocationOvest) }}
                                 title="Vai a Ovest"
                                 className="icona-freccia-larga"
                                 src={frecciaSX}
