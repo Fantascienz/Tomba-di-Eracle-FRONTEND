@@ -15,10 +15,6 @@ export const login = (utente) => {
                 PersonaggioService.getAllPersonaggi().then(res => {
                     sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
                 }).then(
-                    LocationService.getAllMacro().then(res => {
-                        sessionStorage.setItem('listaMacroLocation', JSON.stringify(res.data))
-                    })
-                ).then(
                     LocationService.sessioneStanze()
                 ).then(
                     PersonaggioService.getAllRazzeGroupBy().then(res => {

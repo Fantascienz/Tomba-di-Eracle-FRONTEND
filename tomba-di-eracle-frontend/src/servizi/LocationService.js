@@ -27,10 +27,6 @@ class LocationService {
         return axios.post(URL + "update", location)
     }
 
-    getAllMacro() {
-        return axios.get(URL + 'macro')
-    }
-
     getAllStanze() {
         return axios.get(URL + 'stanze')
     }
@@ -38,8 +34,7 @@ class LocationService {
     sessioneStanze() {
         this.getAllStanze().then(res => {
             sessionStorage.setItem('stanze', JSON.stringify(res.data))
-        }
-        )
+        })
     }
 
     sessioneUltimaLocationPersonaggio(id) {
@@ -48,38 +43,11 @@ class LocationService {
         )
     }
 
-    sessioneMappeMacro() {
-        this.getAllMacro().then(res =>
-            sessionStorage.setItem('listaMacroLocation', JSON.stringify(res.data))
-        )
-    }
-
-    // sessioneMappeEsterne() {
-    //     this.getEsterneReame().then(res =>
-    //         sessionStorage.setItem('listaEsterneReame', JSON.stringify(res.data))
-    //     )
-    //     this.getEsterneUmbra().then(res =>
-    //         sessionStorage.setItem('listaEsterneUmbra', JSON.stringify(res.data))
-    //     )
-    // }
-
     sessioneAllLocation() {
         this.getAll().then(res =>
             sessionStorage.setItem('allLocations', JSON.stringify(res.data))
         )
         return this.getAll()
-    }
-
-    getEsterneReame() {
-        return axios.get(URL + 'esterne/reame')
-    }
-
-    getEsterneUmbra() {
-        return axios.get(URL + 'esterne/umbra')
-    }
-
-    getLocationByDirezioneLibera(direzione) {
-        return axios.get(URL + direzione)
     }
 
     validaCampiCreazione(location, isStanza) {

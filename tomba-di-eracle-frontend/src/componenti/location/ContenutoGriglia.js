@@ -12,9 +12,6 @@ export const Puntatore = ({ display, idCella }) => {
     };
 
     return (
-        // <div className="centrato" style={{ position: "relative", marginLeft: "-50%", backgroundColor: "transparent", height: "100%", width: "200%" }}>
-        //     <img src={star} alt="..." style={{ height: "100%", width: "auto", display: `${attivaDisplay()}` }} />
-        // </div>
         <div className="centrato" style={{ position: "relative", backgroundColor: "transparent", height: "100%", width: "100%" }}>
             <img src={star} alt="..." style={{backgroundColor:"transparent", position: "absolute", height: "100%", width: "auto", display: `${attivaDisplay()}` }} />
         </div>

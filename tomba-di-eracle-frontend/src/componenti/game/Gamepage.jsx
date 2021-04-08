@@ -81,7 +81,6 @@ class Gamepage extends Component {
         var PG = JSON.parse(sessionStorage.getItem('pgAttivo'));
         var location = JSON.parse(sessionStorage.getItem('ultimaLocation'));
         var stanze = JSON.parse(sessionStorage.getItem('stanzeLocation'));
-        var direzioni = JSON.parse(sessionStorage.getItem('direzioniUltimaLocation'));
 
         return (
             <div style={{ position: "absolute", top: "0", height: "100%", width: "100%", backgroundColor: "dimgray" }}>

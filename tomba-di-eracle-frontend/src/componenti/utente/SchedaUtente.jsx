@@ -115,24 +115,8 @@ class SchedaUtente extends Component {
 
 
     creaLocation = () => {
-        LocationService.getLocationByDirezioneLibera('nord').then(res => {
-            sessionStorage.setItem('locationsNordLibero', JSON.stringify(res.data))
-        }).then(
-            LocationService.getLocationByDirezioneLibera('est').then(res => {
-                sessionStorage.setItem('locationsEstLibero', JSON.stringify(res.data))
-            })
-        ).then(
-            LocationService.getLocationByDirezioneLibera('sud').then(res => {
-                sessionStorage.setItem('locationsSudLibero', JSON.stringify(res.data))
-            })
-        ).then(
-            LocationService.getLocationByDirezioneLibera('ovest').then(res => {
-                sessionStorage.setItem('locationsOvestLibero', JSON.stringify(res.data))
-            })
-        ).then(
-            browserHistory.push('creazioneLocation'),
-            browserHistory.go()
-        )
+        browserHistory.push('creazioneLocation')
+        browserHistory.go()
 
     }
 
