@@ -17,7 +17,7 @@ class CreazioneStanza extends Component {
         urlImgGiorno: '',
         urlImgNotte: '',
         urlAudio: '',
-        chiave: '',
+        chiave: null,
         urlImgGiornoUmbra: '',
         urlImgNotteUmbra: '',
         urlAudioUmbra: '',

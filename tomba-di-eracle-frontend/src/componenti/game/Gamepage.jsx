@@ -30,6 +30,7 @@ import attraversaUmbra from '../../suoni/attraversa_guanto.mp3'
 import srotolaCarta from '../../suoni/flip_card.mp3'
 import { TabellaStanze } from '../tabelle/TabellaStanze'
 import Draggable from 'react-draggable';
+import { ChatRoom } from './Chat'
 
 
 class Gamepage extends Component {
@@ -56,6 +57,7 @@ class Gamepage extends Component {
         sessionStorage.removeItem('pgAttivo')
         sessionStorage.removeItem('ultimaLocation')
         sessionStorage.removeItem('direzioniUltimaLocation')
+        sessionStorage.removeItem('stanzeLocation')
         browserHistory.push('/paginaUtente')
         browserHistory.go()
     }
@@ -93,7 +95,6 @@ class Gamepage extends Component {
 
         return (
             <div style={{ position: "absolute", top: "0", height: "100%", width: "100%", backgroundColor: "dimgray" }}>
-
                 <div className="navigazione-sezione">
 
                     <div className="navigazione-area">
@@ -225,8 +226,8 @@ class Gamepage extends Component {
 
                 <div className="chat-sezione">
 
-                    <div style={{ backgroundColor: "yellow", position: "absolute", top: "10px", right: "10px", width: "400px", height: "400px" }}>
-
+                    <div style={{ backgroundColor: "yellow", position: "absolute", top: "10px", right: "10px", width: "600px", height: "400px" }}>
+                        <ChatRoom />
                     </div>
 
                     <div title={PG.nominativo} style={{ backgroundColor: "transparent", position: "absolute", bottom: "10px", right: "10px", width: "100px", height: "100px" }}>
