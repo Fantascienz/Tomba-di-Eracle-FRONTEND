@@ -47,7 +47,7 @@ class Gamepage extends Component {
 
     visualizzazioneStanze = () => {
         withReactContent(Swal).fire({
-            html: <TabellaStanze lista={this.props.stanzeLocation} entra={this.navigazione} />
+            html: <TabellaStanze lista={this.props.stanzeLocation} entra={this.navigazione} isKallios={this.isKallios} />
         })
     }
 
@@ -73,6 +73,13 @@ class Gamepage extends Component {
                 <img src={cardGame} style={{ position: "relative", zIndex: "1", width: "auto", height: "100%" }} />
             )
         }
+    }
+
+    isKallios = () => {
+        if (JSON.parse(sessionStorage.getItem('ultimaLocation')).id === 67 || JSON.parse(sessionStorage.getItem('ultimaLocation')).id === 68) {
+            return true;
+        }
+        return false;
     }
 
 
@@ -209,6 +216,7 @@ class Gamepage extends Component {
                         {/* ------------NOME LOCATION------------ */}
                         <div className="navigazione-link" title={"Id: " + location.id} style={{ left: "28.75%", top: "79.7%", width: "41.65%", height: "4.97%", zIndex: "9999", backgroundColor: "transparent" }}>
                             <b className="font-lombardia" style={{ fontSize: "1.5em", color: `${location.tipo == "Umbra" ? "blue" : "black"}` }} >{location.nome}</b>
+
                         </div>
                     </div>
                 </div>
