@@ -25,6 +25,10 @@ export const login = (utente) => {
                     AdminService.getListaUtenti().then(res => {
                         sessionStorage.setItem('listaUtenti', JSON.stringify(res.data))
                     })
+                ).then(
+                    UtenteService.findAllTipoUtente().then(res => {
+                        sessionStorage.setItem('listaTipoUtenti', JSON.stringify(res.data))
+                    })
                 )
                 .then(
                     LocationService.sessioneAllLocation()

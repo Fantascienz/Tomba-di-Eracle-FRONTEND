@@ -4,6 +4,8 @@ const initState = {
     listaPg: [],
     listaRazze: [],
     listaPgFiltrata: [],
+    listaUtentiFiltrata: [],
+    filtroTipoUtente: '',
     redirect: '',
     visualizzaPgAdmin: false,
     filtroRazza: '',
@@ -279,6 +281,12 @@ const adminReducer = (state = initState, action) => {
                 listaPgFiltrata: action.listaPgFiltrata,
                 filtroRazza: action.filtroRazza,
                 filtroStato: action.filtroStato
+            }
+            break;
+        case 'FILTRA_UTENTI_PER_TIPO':
+            state = {
+                listaUtentiFiltrata: action.listaUtentiFiltrata,
+                filtroTipoUtente: action.filtroTipoUtente
             }
             break;
         default:

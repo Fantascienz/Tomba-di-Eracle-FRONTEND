@@ -16,6 +16,14 @@ class UtenteService {
         return axios.post(URL + 'modifica',mod)
     }
 
+    findAllTipoUtente() {
+        return axios.get(URL + 'findAllTipoUtente')
+    }
+
+    findAllByTipoUtente(filtro) {
+        return axios.post(URL + 'findAllByTipoUtente', filtro)
+    }
+
     validaLogin(utente) {
         if (utente.email === '' || utente.psw === '') {
             return false

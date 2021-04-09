@@ -1,6 +1,17 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { filtraUtentiByTipo } from '../../store/azioni/adminActions';
 
 class TabellaUtenti extends Component {
+    
+    handleFiltroTipoUtente = (e) => {
+       alert('eee')
+        let filtro = {
+            tipo: e.target.value
+        }
+        this.props.filtraUtentiByTipo(filtro)
+    }
+    
     formModificaTipo = (utente) => {
         if (utente.id !== JSON.parse(sessionStorage.getItem('utente')).id) {
             return (
@@ -51,6 +62,19 @@ class TabellaUtenti extends Component {
             )
         }
     }
+
+    renderFiltroTipoUtente = () => {
+        return (
+            <React.Fragment>
+                <select class="form-select" onChange={this.handleFiltroTipoUtente} aria-label="Default select example">
+                    {JSON.parse(sessionStorage.getItem('listaTipoUtenti')).map(utente =>
+                        <option key={utente.id} value={utente}>{utente}</option>
+                    )}
+                </select>
+            </React.Fragment>
+        )
+    }
+
     render() {
         return (
             <div className="table-responsive ombra" style={{ width: "100%", backgroundColor: "white" }}>
@@ -61,7 +85,7 @@ class TabellaUtenti extends Component {
                             <th>ID</th>
                             <th>Nominativo</th>
                             <th>Email</th>
-                            <th>Tipo</th>
+                            <th>Tipo {this.renderFiltroTipoUtente()}</th>
                             <th>Personaggi</th>
                             <th colspan="3">Personaggi Creabili</th>
                             <th>Data di Registrazione</th>
@@ -112,4 +136,16 @@ class TabellaUtenti extends Component {
     }
 }
 
-export default TabellaUtenti;
+const mapStateToProps = (state) => {
+    return {
+        listaUtentiFiltrata: state.admin.listaUtentiFiltrata
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        filtraUtentiByTipo: (filtro) => dispatch(filtraUtentiByTipo(filtro))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps) (TabellaUtenti);

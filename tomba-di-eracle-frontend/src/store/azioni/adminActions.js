@@ -1,5 +1,6 @@
 import AdminService from "../../servizi/AdminService"
 import PersonaggioService from "../../servizi/PersonaggioService"
+import UtenteService from "../../servizi/UtenteService"
 
 
 export const getListaUtenti = () => {
@@ -604,6 +605,19 @@ export const getAllByIdUtenteAndStato = (filtro) => {
                 listaPgFiltrata: res.data,
                 filtroStato: filtro.stato,
                 filtroUtente: filtro.utente.id
+            })
+        })
+    }
+}
+
+export const filtraUtentiByTipo = (filtro) => {
+    return (dispatch) => {
+        UtenteService.findAllByTipoUtente(filtro).then(res => {
+            sessionStorage.setItem('listaUtenti', JSON.stringify(res.data))
+            dispatch({
+                type: 'FILTRA_UTENTI_PER_TIPO',
+                listaUtentiFiltrata: res.data,
+                filtroTipoUtente: filtro.tipo
             })
         })
     }
