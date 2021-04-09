@@ -654,7 +654,7 @@ const mapDispatchToProps = (dispatch) => {
         ordinaPerRazzaEStatoBySesso: (filtro) => dispatch(ordinaPerRazzaEStatoBySesso(filtro)),
         ordinaPerRazzaByRango: (razza) => dispatch(ordinaPerRazzaByRango(razza)),
         ordinaPerRazzaEStatoByRango: (filtro) => dispatch(ordinaPerRazzaEStatoByRango(filtro)),
-        ordinaPerRazzaEStatoByDataCreazione: (razza) => dispatch(ordinaPerRazzaByDataCreazione(razza)),
+        ordinaPerRazzaByDataCreazione: (razza) => dispatch(ordinaPerRazzaByDataCreazione(razza)),
         ordinaPerRazzaEStatoByDataCreazione: (filtro) => dispatch(ordinaPerRazzaEStatoByDataCreazione(filtro)),
         ordinaPerRazzaByIdUtente: (razza) => dispatch(ordinaPerRazzaByIdUtente(razza)),
         ordinaPerRazzaEStatoByIdUtente: (filtro) => dispatch(ordinaPerRazzaEStatoByIdUtente(filtro)),
