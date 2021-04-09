@@ -27,10 +27,6 @@ class LocationService {
         return axios.post(URL + "update", location)
     }
 
-    getAllMacro() {
-        return axios.get(URL + 'macro')
-    }
-
     getAllStanze() {
         return axios.get(URL + 'stanze')
     }
@@ -38,46 +34,12 @@ class LocationService {
     sessioneStanze() {
         this.getAllStanze().then(res => {
             sessionStorage.setItem('stanze', JSON.stringify(res.data))
-        }
-        )
+        })
     }
 
     sessioneUltimaLocationPersonaggio(id) {
         this.getUltimaLocationPersonaggio(id).then(res =>
             sessionStorage.setItem('ultimaLocation', JSON.stringify(res.data))
-        )
-    }
-
-    sessioneMappeMacro() {
-        this.getAllMacro().then(res =>
-            sessionStorage.setItem('listaMacroLocation', JSON.stringify(res.data))
-        )
-    }
-
-    sessioneMappeEsterne() {
-        this.getEsterneReame().then(res =>
-            sessionStorage.setItem('listaEsterneReame', JSON.stringify(res.data))
-        )
-        this.getEsterneUmbra().then(res =>
-            sessionStorage.setItem('listaEsterneUmbra', JSON.stringify(res.data))
-        )
-    }
-
-    sessioneDirezioniLibere() {
-        this.getLocationByDirezioneLibera('nord').then(res => {
-            sessionStorage.setItem('locationsNordLibero', JSON.stringify(res.data))
-        }).then(
-            this.getLocationByDirezioneLibera('est').then(res => {
-                sessionStorage.setItem('locationsEstLibero', JSON.stringify(res.data))
-            })
-        ).then(
-            this.getLocationByDirezioneLibera('sud').then(res => {
-                sessionStorage.setItem('locationsSudLibero', JSON.stringify(res.data))
-            })
-        ).then(
-            this.getLocationByDirezioneLibera('ovest').then(res => {
-                sessionStorage.setItem('locationsOvestLibero', JSON.stringify(res.data))
-            })
         )
     }
 
@@ -88,22 +50,10 @@ class LocationService {
         return this.getAll()
     }
 
-    getEsterneReame() {
-        return axios.get(URL + 'esterne/reame')
-    }
-
-    getEsterneUmbra() {
-        return axios.get(URL + 'esterne/umbra')
-    }
-
-    getLocationByDirezioneLibera(direzione) {
-        return axios.get(URL + direzione)
-    }
-
     validaCampiCreazione(location, isStanza) {
         if (!isStanza) {
             if (location.nome === '' || location.tipo === '' || location.ambiente === '' || location.urlImgGiorno === ''
-                || location.urlAudio === '' || location.ingresso === '' || location.urlImgGiornoUmbra === '' || location.urlAudioUmbra === '') {
+                || location.urlAudio === '' || location.locationIngresso === '' || location.direzioneIngresso === '' || location.urlImgGiornoUmbra === '' || location.urlAudioUmbra === '') {
                 withReactContent(Swal).fire({
                     title: <div>
                         <p>Nome,Ambiente,Ingresso</p>

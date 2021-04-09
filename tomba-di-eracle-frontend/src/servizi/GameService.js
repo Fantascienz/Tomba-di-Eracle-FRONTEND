@@ -8,10 +8,6 @@ class GameService {
         return axios.get(URL + 'ultimaLocation/' + id)
     }
 
-    getDirezioniRelativeLocation(id) {
-        return axios.get(URL + 'direzioniRelativeLocation/' + id)
-    }
-
     naviga(idLocation) {
         return axios.post(URL + 'naviga/' + idLocation,JSON.parse(sessionStorage.getItem('pgAttivo')))
     }

@@ -15,42 +15,20 @@ export const login = (utente) => {
                 PersonaggioService.getAllPersonaggi().then(res => {
                     sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
                 }).then(
-                    LocationService.getAllMacro().then(res => {
-                        sessionStorage.setItem('listaMacroLocation', JSON.stringify(res.data))
+                    LocationService.sessioneStanze()
+                ).then(
+                    PersonaggioService.getAllRazzeGroupBy().then(res => {
+                        sessionStorage.setItem('listaRazze', JSON.stringify(res.data))
                     })
                 ).then(
-                    LocationService.sessioneMappeEsterne()
+                    LocationService.sessioneAllLocation()
                 ).then(
-                    LocationService.sessioneStanze()
+                    dispatch({
+                        type: 'LOGIN_UTENTE',
+                        utente: utente,
+                        admin: utente.tipo === 'admin' ? true : false
+                    })
                 )
-                .then(
-                    LocationService.getLocationByDirezioneLibera('nord').then(res => {
-                        sessionStorage.setItem('locationsNordLibero', JSON.stringify(res.data))
-                    }).then(
-                        LocationService.getLocationByDirezioneLibera('est').then(res => {
-                            sessionStorage.setItem('locationsEstLibero', JSON.stringify(res.data))
-                        })
-                    ).then(
-                        LocationService.getLocationByDirezioneLibera('sud').then(res => {
-                            sessionStorage.setItem('locationsSudLibero', JSON.stringify(res.data))
-                        })
-                    ).then(
-                        LocationService.getLocationByDirezioneLibera('ovest').then(res => {
-                            sessionStorage.setItem('locationsOvestLibero', JSON.stringify(res.data))
-                        })
-                    ).then (
-                        PersonaggioService.getAllRazzeGroupBy().then(res => {
-                            sessionStorage.setItem('listaRazze', JSON.stringify(res.data))
-                        })
-                    )
-                )
-                    .then(
-                        dispatch({
-                            type: 'LOGIN_UTENTE',
-                            utente: utente,
-                            admin: utente.tipo === 'admin' ? true : false
-                        })
-                    )
             } else if (res.data.tipo === 'bannato') {
                 sessionStorage.removeItem('utente')
                 withReactContent(Swal).fire({
