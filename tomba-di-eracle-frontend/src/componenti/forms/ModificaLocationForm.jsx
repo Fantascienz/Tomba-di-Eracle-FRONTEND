@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 class ModificaLocationForm extends Component {
 
     renderListaModificaEsterne = (location) => {
+        console.log(location)
         if (JSON.parse(sessionStorage.getItem('utente')).id === location.creatore.id || JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin') {
             if (location.mappa === 'Esterna' && location.tipo === 'Reame') {
                 return <option value={location.id} key={location.id}>({location.id}) - {location.nome}</option>

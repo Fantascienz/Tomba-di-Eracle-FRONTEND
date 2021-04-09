@@ -10,6 +10,7 @@ class CreazioneLocation extends Component {
     state = {
         nome: '',
         ambiente: '',
+        meteo: 1,
         ingresso: '',
         urlImgGiorno: '',
         urlImgNotte: '',
@@ -29,6 +30,7 @@ class CreazioneLocation extends Component {
     }
 
     handleSubmit = (event) => {
+        // event.preventDefault()
         if (LocationService.validaCampiCreazione(this.state, false)) {
             let locationCreata = {
                 location: {
@@ -43,12 +45,15 @@ class CreazioneLocation extends Component {
                 idLocationIngresso: parseInt(this.state.locationIngresso, 10),
                 direzioneIngresso: this.state.direzioneIngresso,
                 ingresso: this.state.ingresso,
+                meteoGiorno: this.state.meteo,
+                meteoNotte: this.state.meteo,
                 umbra: {
                     urlImgGiorno: this.state.urlImgGiornoUmbra,
                     urlImgNotte: this.state.urlImgNotteUmbra,
                     urlAudio: this.state.urlAudioUmbra
                 }
             }
+            // alert(locationCreata.meteoGiorno)
             LocationService.creaLocation(locationCreata).then(
                 alert('Location creata con successo!')
             )
@@ -58,7 +63,7 @@ class CreazioneLocation extends Component {
     }
 
     componentDidMount() {
-       LocationService.sessioneAllLocation()
+        LocationService.sessioneAllLocation()
     }
 
     render() {
