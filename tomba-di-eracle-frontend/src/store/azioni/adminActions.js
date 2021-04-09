@@ -550,3 +550,61 @@ export const ordinaPerUtenteERazzaBySesso = (filtro) => {
         })
     }
 }
+
+export const ordinePerUtenteERazzaByRango = (filtro) => {
+    return (dispatch) => {
+        PersonaggioService.getAllByIdUtenteAndRazzaOrderByRango(filtro).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_UTENTE_E_RAZZA_BY_RANGO',
+                listaPgFiltrata: res.data,
+                filtroUtente: filtro.utente.id,
+                filtroRazza: filtro.razza
+            })
+        })
+    }
+}
+
+export const ordinePerUtenteERazzaByDataCreazione = (filtro) => {
+    return (dispatch) => {
+        PersonaggioService.getAllByIdUtenteAndRazzaOrderByDataCreazione(filtro).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_UTENTE_E_RAZZA_BY_DATA_CREAZIONE',
+                listaPgFiltrata: res.data,
+                filtroUtente: filtro.utente.id,
+                filtroRazza: filtro.razza
+            })
+        })
+    }
+}
+
+export const getAllByIdUtenteAndRazzaAndStato = (filtro) => {
+    return (dispatch) => {
+        PersonaggioService.getByIdUtenteAndRazzaAndStato(filtro).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'FILTRA_UTENTE_RAZZA_STATO',
+                listaPgFiltrata: res.data,
+                filtroRazza: filtro.razza,
+                filtroStato: filtro.stato,
+                filtroUtente: filtro.utente.id
+            })
+        })
+            
+    }
+}
+
+export const getAllByIdUtenteAndStato = (filtro) => {
+    return (dispatch) => {
+        PersonaggioService.getByIdUtenteAndStato(filtro).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'FILTRA_UTENTE_STATO',
+                listaPgFiltrata: res.data,
+                filtroStato: filtro.stato,
+                filtroUtente: filtro.utente.id
+            })
+        })
+    }
+}

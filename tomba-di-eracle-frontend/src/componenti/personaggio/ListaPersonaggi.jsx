@@ -3,7 +3,7 @@ import { ThemeProvider } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-import { filtraListaRazza, modificaPersonaggio, getListaPersonaggi, ordinaPerRazza, ordinaPerNominativo, ordinaPerSesso, ordinaPerRango, ordinaPerDataCreazione, filtraListaStato, getByRazzaAndStato, ordinaPerId, ordinaPerRazzaEStatoByNominativo, getAllByRazzaOrderByNominativo, ordinaPerRazzaById, ordinaPerRazzaEStatoById, ordinaPerRazzaBySesso, ordinaPerRazzaEStatoBySesso, ordinaPerRazzaByRango, ordinaPerRazzaEStatoByRango, ordinaPerRazzaEStatoByDataCreazione, ordinaPerRazzaByDataCreazione, ordinaPerRazzaByIdUtente, ordinaPerRazzaEStatoByIdUtente, ordinaPerIdUtente, filtraListaPgUtente, ordinaPerUtenteByNominativo, ordinaPerUtenteBySesso, ordinaPerUtenteByRazza, ordinaPerUtenteById, ordinaPerUtenteByRango, ordinaPerUtenteByDataCreazione, ordinaPerUtenteERazza, ordinaPerUtenteERazzaById, ordinaPerUtenteERazzaByNominativo, ordinaPerUtenteERazzaBySesso } from '../../store/azioni/adminActions';
+import { filtraListaRazza, modificaPersonaggio, getListaPersonaggi, ordinaPerRazza, ordinaPerNominativo, ordinaPerSesso, ordinaPerRango, ordinaPerDataCreazione, filtraListaStato, getByRazzaAndStato, ordinaPerId, ordinaPerRazzaEStatoByNominativo, getAllByRazzaOrderByNominativo, ordinaPerRazzaById, ordinaPerRazzaEStatoById, ordinaPerRazzaBySesso, ordinaPerRazzaEStatoBySesso, ordinaPerRazzaByRango, ordinaPerRazzaEStatoByRango, ordinaPerRazzaEStatoByDataCreazione, ordinaPerRazzaByDataCreazione, ordinaPerRazzaByIdUtente, ordinaPerRazzaEStatoByIdUtente, ordinaPerIdUtente, filtraListaPgUtente, ordinaPerUtenteByNominativo, ordinaPerUtenteBySesso, ordinaPerUtenteByRazza, ordinaPerUtenteById, ordinaPerUtenteByRango, ordinaPerUtenteByDataCreazione, ordinaPerUtenteERazza, ordinaPerUtenteERazzaById, ordinaPerUtenteERazzaByNominativo, ordinaPerUtenteERazzaBySesso, ordinePerUtenteERazzaByRango, ordinePerUtenteERazzaByDataCreazione, getAllByIdUtenteAndRazzaAndStato, getAllByIdUtenteAndStato } from '../../store/azioni/adminActions';
 
 class ListaPersonaggi extends Component {
 
@@ -196,14 +196,18 @@ class ListaPersonaggi extends Component {
 
 
     handleFilterRazza = (e) => {
-        if (this.props.filtroStato === 'Online') {
+        if (this.props.filtroUtente !== undefined && this.props.filtroStato !== undefined) {
             let filtro = {
+                utente: {
+                    id: this.props.filtroUtente
+                },
                 razza: e.target.value,
                 stato: this.props.filtroStato
             }
 
-            this.props.getByRazzaAndStato(filtro)
-        } else if (this.props.filtroStato === 'Offline') {
+            this.props.getAllByIdUtenteAndRazzaAndStato(filtro)
+        }
+        else if (this.props.filtroStato !== undefined) {
             let filtro = {
                 razza: e.target.value,
                 stato: this.props.filtroStato
@@ -215,12 +219,12 @@ class ListaPersonaggi extends Component {
                 utente: {
                     id: this.props.filtroUtente
                 },
-                
+
                 razza: e.target.value
             }
             this.props.ordinaPerUtenteERazza(filtro)
         }
-         else {
+        else {
 
             this.props.filtraListaRazza(e.target.value)
         }
@@ -231,13 +235,32 @@ class ListaPersonaggi extends Component {
 
     handleFilterStato = (e) => {
 
-        if (this.props.filtroRazza !== undefined) {
+        if (this.props.filtroUtente !== undefined && this.props.filtroRazza !== undefined) {
+            let filtro = {
+                utente: {
+                    id: this.props.filtroUtente
+                },
+                razza: this.props.filtroRazza,
+                stato: e.target.value
+            }
+            this.props.getAllByIdUtenteAndRazzaAndStato(filtro)
+        }
+        else if (this.props.filtroRazza !== undefined) {
             let filtro = {
                 razza: this.props.filtroRazza,
                 stato: e.target.value
             }
             this.props.getByRazzaAndStato(filtro)
+        } else if (this.props.filtroUtente !== undefined) {
+            let filtro = {
+                utente: {
+                    id: this.props.filtroUtente
+                },
+                stato: e.target.value
+            }
+            this.props.getAllByIdUtenteAndStato(filtro)
         }
+
         else {
             this.props.filtraListaStato(e.target.value)
         }
@@ -245,10 +268,21 @@ class ListaPersonaggi extends Component {
     }
 
     handleFilterUtente = (e) => {
-        let utente = {
-            id: e.target.value
+        if (this.props.filtroRazza !== undefined && this.props.filtroStato !== undefined) {
+            let filtro = {
+                utente: {
+                    id: e.target.value
+                },
+                razza: this.props.filtroRazza,
+                stato: this.props.filtroStato
+            }
+            this.props.getAllByIdUtenteAndRazzaAndStato(filtro)
+        } else {
+            let utente = {
+                id: e.target.value
+            }
+            this.props.filtraListaPgUtente(utente)
         }
-        this.props.filtraListaPgUtente(utente)
 
     }
 
@@ -315,7 +349,7 @@ class ListaPersonaggi extends Component {
             }
             this.props.ordinaPerRazzaEStatoBySesso(filtro)
         } else if (this.props.filtroUtente !== undefined && this.props.filtroRazza !== undefined) {
-            let filtro= {
+            let filtro = {
                 utente: {
                     id: this.props.filtroUtente
                 },
@@ -348,6 +382,15 @@ class ListaPersonaggi extends Component {
                 stato: this.props.filtroStato
             }
             this.props.ordinaPerRazzaEStatoByRango(filtro)
+        } else if (this.props.filtroUtente !== undefined && this.props.filtroRazza !== undefined) {
+            let filtro = {
+                utente: {
+                    id: this.props.filtroUtente
+                },
+                razza: this.props.filtroRazza
+            }
+
+            this.props.ordinePerUtenteERazzaByRango(filtro)
         }
         else if (this.props.filtroRazza !== undefined) {
             let filtro = {
@@ -374,6 +417,16 @@ class ListaPersonaggi extends Component {
                 stato: this.props.filtroStato
             }
             this.props.ordinaPerRazzaEStatoByDataCreazione(filtro)
+        } else if (this.props.filtroUtente !== undefined && this.props.filtroRazza !== undefined) {
+            let filtro = {
+                utente: {
+                    id: this.props.filtroUtente
+                },
+                razza: this.props.filtroRazza
+            }
+
+            this.props.ordinePerUtenteERazzaByDataCreazione(filtro)
+
         }
         else if (this.props.filtroRazza !== undefined) {
             let filtro = {
@@ -405,7 +458,7 @@ class ListaPersonaggi extends Component {
                 utente: {
                     id: this.props.filtroUtente
                 },
-                
+
                 razza: this.props.filtroRazza
             }
 
@@ -597,7 +650,11 @@ const mapDispatchToProps = (dispatch) => {
         ordinaPerUtenteERazza: (filtro) => dispatch(ordinaPerUtenteERazza(filtro)),
         ordinaPerUtenteERazzaById: (filtro) => dispatch(ordinaPerUtenteERazzaById(filtro)),
         ordinaPerUtenteERazzaByNominativo: (filtro) => dispatch(ordinaPerUtenteERazzaByNominativo(filtro)),
-        ordinaPerUtenteERazzaBySesso: (filtro) => dispatch(ordinaPerUtenteERazzaBySesso(filtro))
+        ordinaPerUtenteERazzaBySesso: (filtro) => dispatch(ordinaPerUtenteERazzaBySesso(filtro)),
+        ordinePerUtenteERazzaByRango: (filtro) => dispatch(ordinePerUtenteERazzaByRango(filtro)),
+        ordinePerUtenteERazzaByDataCreazione: (filtro) => dispatch(ordinePerUtenteERazzaByDataCreazione(filtro)),
+        getAllByIdUtenteAndRazzaAndStato: (filtro) => dispatch(getAllByIdUtenteAndRazzaAndStato(filtro)),
+        getAllByIdUtenteAndStato: (filtro) => dispatch(getAllByIdUtenteAndStato(filtro))
 
     }
 }

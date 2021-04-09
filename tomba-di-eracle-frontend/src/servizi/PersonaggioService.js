@@ -28,6 +28,13 @@ class PersonaggioService {
         return axios.get(URL + 'filtraStato/' + stato)
     }
 
+    getByIdUtenteAndStato(filtro) {
+        return axios.post(URL + 'getByIdUtenteAndStato', filtro)
+    }
+    getByIdUtenteAndRazzaAndStato(filtro) {
+        return axios.post(URL + 'getByIdUtenteAndRazzaAndStato', filtro)
+    }
+
     getAllOrderByRazza() {
         return axios.get(URL + 'orderRazza')
     }
@@ -148,6 +155,14 @@ class PersonaggioService {
 
     getAllByIdUtenteAndRazzaOrderBySesso(filtro) {
         return axios.post(URL + 'getAllByIdUtenteAndRazzaOrderBySesso', filtro)
+    }
+
+    getAllByIdUtenteAndRazzaOrderByRango(filtro) {
+        return axios.post(URL + 'getAllByIdUtenteAndRazzaOrderByRango', filtro)
+    }
+    
+    getAllByIdUtenteAndRazzaOrderByDataCreazione(filtro) {
+        return axios.post(URL + 'getAllByIdUtenteAndRazzaOrderByDataCreazione', filtro)
     }
 
     validazioneFormPersonaggio(personaggio) {

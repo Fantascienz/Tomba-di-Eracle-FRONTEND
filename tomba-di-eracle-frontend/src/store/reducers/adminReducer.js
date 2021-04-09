@@ -73,6 +73,21 @@ const adminReducer = (state = initState, action) => {
                 filtroStato: action.filtroStato
             }
             break;
+        case 'FILTRA_UTENTE_STATO':
+            state = {
+                listaPgFiltrata: action.listaPgFiltrata,
+                filtroStato: action.filtroStato,
+                filtroUtente: action.filtroUtente
+            }
+            break;
+        case 'FILTRA_UTENTE_RAZZA_STATO':
+            state = {
+                listaPgFiltrata: action.listaPgFiltrata,
+                filtroRazza: action.filtroRazza,
+                filtroStato: action.filtroStato,
+                filtroUtente: action.filtroUtente
+            }
+            break;
         case 'ORDINA_PER_RAZZA':
             state = {
                 listaPgFiltrata: action.listaPgFiltrata
@@ -203,6 +218,20 @@ const adminReducer = (state = initState, action) => {
             }
             break;
         case 'ORDINA_PER_UTENTE_E_RAZZA_BY_SESSO':
+            state = {
+                listaPgFiltrata: action.listaPgFiltrata,
+                filtroUtente: action.filtroUtente,
+                filtroRazza: action.filtroRazza
+            }
+            break;
+        case 'ORDINA_PER_UTENTE_E_RAZZA_BY_RANGO':
+            state = {
+                listaPgFiltrata: action.listaPgFiltrata,
+                filtroUtente: action.filtroUtente,
+                filtroRazza: action.filtroRazza
+            }
+            break;
+        case 'ORDINA_PER_UTENTE_E_RAZZA_BY_DATA_CREAZIONE':
             state = {
                 listaPgFiltrata: action.listaPgFiltrata,
                 filtroUtente: action.filtroUtente,
