@@ -4,6 +4,20 @@ class ModificaLocationForm extends Component {
 
     renderListaModificaEsterne = (location) => {
         if (JSON.parse(sessionStorage.getItem('utente')).id === location.creatore.id || JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin') {
+            if (location.mappa === 'Esterna' && location.tipo === 'Reame') {
+                return <option value={location.id} key={location.id}>({location.id}) - {location.nome}</option>
+            }
+        }
+    }
+
+    renderListaModificaMacro = (location) => {
+        if (location.mappa === 'Macro' && location.tipo !== 'Stanza' && location.tipo !== 'Stanza Umbra') {
+            return <option value={location.id} key={location.id}>({location.id}) {location.tipo === 'Umbra' ? "UMBRA" : ""} - {location.nome}</option>
+        }
+    }
+
+    renderListaModificaUmbra = (location) => {
+        if (location.tipo === 'Umbra' && location.mappa === 'Esterna') {
             return <option value={location.id} key={location.id}>({location.id}) - {location.nome}</option>
         }
     }
@@ -39,18 +53,9 @@ class ModificaLocationForm extends Component {
     }
     render() {
 
-        let listaOrdinataESTRNE = JSON.parse(sessionStorage.getItem('listaEsterneReame')).sort(
+        let listaOrdinataLocations = JSON.parse(sessionStorage.getItem('allLocations')).sort(
             (a, b) => (a.id < b.id ? -1 : Number(a.id > b.id))
         );
-
-        let listaOrdinataMACRO = JSON.parse(sessionStorage.getItem('listaMacroLocation')).sort(
-            (a, b) => (a.id < b.id ? -1 : Number(a.id > b.id))
-        );
-
-        let listaOrdinataUMBRA = JSON.parse(sessionStorage.getItem('listaEsterneUmbra')).sort(
-            (a, b) => (a.id < b.id ? -1 : Number(a.id > b.id))
-        );
-
 
         return (
             <div className="centrato">
@@ -58,23 +63,19 @@ class ModificaLocationForm extends Component {
                     <select className="form-select" name="locationMod" id="locationMod" onChange={this.props.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)", marginBottom: "1%" }}>
                         <option value="">Seleziona Location da Modificare</option>
                         <option value="" style={{ fontWeight: 'bold' }}>--- Location Esterne ---</option>
-                        {listaOrdinataESTRNE[0] == null ?
-                            <option value="">(Nessuna location Esterna creata)</option>
-                            :
-                            listaOrdinataESTRNE.map(location =>
+                        {
+                            listaOrdinataLocations.map(location =>
                                 this.renderListaModificaEsterne(location)
                             )
                         }
                         <option value="" style={{ fontWeight: 'bold' }}>--- Umbra Esterne ---</option>
-                        {listaOrdinataUMBRA[0] == null ?
-                            <option value="">(Nessuna location Esterna creata)</option>
-                            :
-                            listaOrdinataUMBRA.map(location =>
-                                <option value={location.id} key={location.id}>({location.id}) - {location.nome}</option>
+                        {
+                            listaOrdinataLocations.map(location =>
+                                this.renderListaModificaUmbra(location)
                             )}
                         <option value="" style={{ fontWeight: 'bold' }}>--- Macro Location ---</option>
-                        {listaOrdinataMACRO.map(location =>
-                            <option value={location.id} key={location.id}>({location.id}) {location.tipo === 'Umbra' ? "UMBRA" : ""} - {location.nome}</option>
+                        {listaOrdinataLocations.map(location =>
+                            this.renderListaModificaMacro(location)
                         )}
 
                     </select>

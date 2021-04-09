@@ -162,6 +162,14 @@ a:hover{
   cursor: no-drop;
 }
 
+.btn-immagine{
+  display: initial;
+}
+
+.btn-immagine:hover{
+  cursor: pointer;
+}
+
 div.centrato{
   display: flex;
   justify-content: center; 

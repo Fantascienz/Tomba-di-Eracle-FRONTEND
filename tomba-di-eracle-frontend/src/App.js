@@ -15,7 +15,7 @@ import CreazioneStanza from './componenti/location/CreazioneStanza';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
-import { ChatRoom } from './componenti/game/Chat';
+import Forecast from './componenti/game/Forecast';
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
@@ -53,7 +53,7 @@ function App() {
         </Switch>
       </Router>
       <Footer />
-      {/* <ChatRoom/> */}
+      <Forecast/>
     </div>
   );
 }

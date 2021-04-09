@@ -59,14 +59,13 @@ class ModificaLocation extends Component {
     }
 
     componentDidMount() {
-        LocationService.sessioneMappeEsterne()
-        LocationService.sessioneMappeMacro()
+        LocationService.sessioneAllLocation()
         LocationService.sessioneStanze()
     }
 
     render() {
 
-        let listaOrdinataESTERNE = JSON.parse(sessionStorage.getItem('listaEsterneReame')).sort(
+        let listaLocationOrdinata = JSON.parse(sessionStorage.getItem('allLocations')).sort(
             (a, b) => (a.id < b.id ? -1 : Number(a.id > b.id))
         );
 
@@ -94,7 +93,7 @@ class ModificaLocation extends Component {
                             <TitoloPagina titolo="Elimina Location" />
                             <div className="centrato">
                                 <form onSubmit={this.handleDelete}>
-                                    <SelezionaLocationForm lista={listaOrdinataESTERNE} stanza={false} handleChange={this.handleChange} />
+                                    <SelezionaLocationForm lista={listaLocationOrdinata} stanza={false} handleChange={this.handleChange} />
                                     <button className="btn btn-dark">Elimina</button>
                                 </form>
                             </div>

@@ -115,31 +115,17 @@ class SchedaUtente extends Component {
 
 
     creaLocation = () => {
-        LocationService.getLocationByDirezioneLibera('nord').then(res => {
-            sessionStorage.setItem('locationsNordLibero', JSON.stringify(res.data))
-        }).then(
-            LocationService.getLocationByDirezioneLibera('est').then(res => {
-                sessionStorage.setItem('locationsEstLibero', JSON.stringify(res.data))
-            })
-        ).then(
-            LocationService.getLocationByDirezioneLibera('sud').then(res => {
-                sessionStorage.setItem('locationsSudLibero', JSON.stringify(res.data))
-            })
-        ).then(
-            LocationService.getLocationByDirezioneLibera('ovest').then(res => {
-                sessionStorage.setItem('locationsOvestLibero', JSON.stringify(res.data))
-            })
-        ).then(
-            browserHistory.push('creazioneLocation'),
-            browserHistory.go()
-        )
+        browserHistory.push('creazioneLocation')
+        browserHistory.go()
 
     }
 
     modificaLocation = () => {
-        LocationService.sessioneMappeEsterne()
-        browserHistory.push('modificaLocation')
-        browserHistory.go()
+        LocationService.sessioneAllLocation().then(() => {
+            browserHistory.push('modificaLocation')
+            browserHistory.go()
+        })
+
     }
 
     creaStanza = () => {
@@ -153,8 +139,7 @@ class SchedaUtente extends Component {
 
     componentDidMount() {
         if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' || JSON.parse(sessionStorage.getItem('utente')).tipo === 'master') {
-            LocationService.sessioneMappeEsterne()
-            LocationService.sessioneMappeMacro()
+            LocationService.sessioneAllLocation()
             LocationService.sessioneStanze()
         }
 

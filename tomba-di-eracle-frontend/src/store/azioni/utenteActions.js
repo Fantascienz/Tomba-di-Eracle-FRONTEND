@@ -16,12 +16,15 @@ export const login = (utente) => {
                 PersonaggioService.getAllPersonaggi().then(res => {
                     sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
                 }).then(
-                    LocationService.getAllMacro().then(res => {
-                        sessionStorage.setItem('listaMacroLocation', JSON.stringify(res.data))
+                    LocationService.sessioneStanze()
+                ).then(
+                    PersonaggioService.getAllRazzeGroupBy().then(res => {
+                        sessionStorage.setItem('listaRazze', JSON.stringify(res.data))
                     })
                 ).then(
-                    LocationService.sessioneMappeEsterne()
+                    LocationService.sessioneAllLocation()
                 ).then(
+<<<<<<< HEAD
                     LocationService.sessioneStanze()
                 )
                     .then(
@@ -56,6 +59,14 @@ export const login = (utente) => {
                             admin: utente.tipo === 'admin' ? true : false
                         })
                     )
+=======
+                    dispatch({
+                        type: 'LOGIN_UTENTE',
+                        utente: utente,
+                        admin: utente.tipo === 'admin' ? true : false
+                    })
+                )
+>>>>>>> 2b3bbc093a46f6e9505ef3a50b556ca8353183d5
             } else if (res.data.tipo === 'bannato') {
                 sessionStorage.removeItem('utente')
                 withReactContent(Swal).fire({
