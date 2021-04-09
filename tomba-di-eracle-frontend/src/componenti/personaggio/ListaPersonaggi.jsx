@@ -277,7 +277,26 @@ class ListaPersonaggi extends Component {
                 stato: this.props.filtroStato
             }
             this.props.getAllByIdUtenteAndRazzaAndStato(filtro)
-        } else {
+        } else if (this.props.filtroRazza !== undefined) {
+            let filtro = {
+                utente: {
+                    id: e.target.value
+                },
+                razza: this.props.filtroRazza
+            }
+
+           this.props.ordinaPerUtenteERazza(filtro)
+        } else if (this.props.filtroStato !== undefined) {
+            let filtro = {
+                utente: {
+                    id:e.target.value
+                },
+                stato: this.props.filtroStato
+            }
+            this.props.getAllByIdUtenteAndStato(filtro)
+        }
+        
+        else {
             let utente = {
                 id: e.target.value
             }
