@@ -22,6 +22,11 @@ export const login = (utente) => {
                         sessionStorage.setItem('listaRazze', JSON.stringify(res.data))
                     })
                 ).then(
+                    AdminService.getListaUtenti().then(res => {
+                        sessionStorage.setItem('listaUtenti', JSON.stringify(res.data))
+                    })
+                )
+                .then(
                     LocationService.sessioneAllLocation()
                 ).then(
                     dispatch({
