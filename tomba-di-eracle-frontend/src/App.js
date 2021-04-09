@@ -15,8 +15,7 @@ import CreazioneStanza from './componenti/location/CreazioneStanza';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
-import { ChatRoom } from './componenti/game/Chat';
-import Meteo from './componenti/game/Meteo';
+import Forecast from './componenti/game/Forecast';
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
@@ -36,7 +35,7 @@ export const firestore = firebase.firestore();
 function App() {
   return (
     <div className="App">
-      {/* <Router>
+      <Router>
         <Switch>
           <Route path="/" exact component={Login}></Route>
           <Route path="/registrazione" component={Registrazione} />
@@ -53,9 +52,8 @@ function App() {
           <Route path="/macromappa" component ={ Macromappa }/>
         </Switch>
       </Router>
-      <Footer /> */}
-      {/* <ChatRoom/> */}
-      <Meteo/>
+      <Footer />
+      <Forecast/>
     </div>
   );
 }

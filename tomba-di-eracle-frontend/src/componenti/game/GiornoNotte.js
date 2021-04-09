@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import sole from '../../img/sole_icona.png'
-import luna from '../../img/4_lunaFalce_decrescente_icona.png'
 import arhoun from '../../img/1_lunaPiena_icona.png'
 import galliardCalante from '../../img/2_lunaGibbosa_decrescente_icona.png'
 import philodoxCalante from '../../img/3_lunaMezza_decrescente_icona.png'
@@ -9,13 +8,6 @@ import ragabash from '../../img/5_lunaNuova_icona.png'
 import teurgoCrescente from '../../img/6_lunaFalce_crescente_icona.png'
 import philodoxCrescente from '../../img/7_lunaMezza_crescente_icona.png'
 import galliardCrescente from '../../img/8_lunaGibbosa_crescente_icona.png'
-
-
-
-
-
-
-
 
 class GiornoNotte extends Component {
     constructor(props) {
@@ -52,7 +44,7 @@ class GiornoNotte extends Component {
 
         var resto = annoCorrente%19
 
-        if (resto == 0) {
+        if (resto === 0) {
             numeroOro = 19;
         } else {
             numeroOro = resto+1;
@@ -103,7 +95,7 @@ class GiornoNotte extends Component {
 
     faseLunare(){
         var giornoLunare = this.giornoLunare();
-        if (giornoLunare == 0 || giornoLunare > 27) {
+        if (giornoLunare === 0 || giornoLunare > 27) {
             return ragabash;
         } else if (giornoLunare > 0 && giornoLunare < 6){
             return teurgoCrescente;
@@ -125,10 +117,10 @@ class GiornoNotte extends Component {
 
     render() {
 
-        var giornoSettimana = this.state.date.toLocaleString(undefined, {weekday: 'long'});
-        var annoCorrente = this.state.date.toLocaleString(undefined, {year: 'numeric'});
-        var meseCorrente =  this.state.date.toLocaleString(undefined, {month: 'long'});
-        var giornoMese =  this.state.date.toLocaleString(undefined, {day: 'numeric'});
+        // var giornoSettimana = this.state.date.toLocaleString(undefined, {weekday: 'long'});
+        // var annoCorrente = this.state.date.toLocaleString(undefined, {year: 'numeric'});
+        // var meseCorrente =  this.state.date.toLocaleString(undefined, {month: 'long'});
+        // var giornoMese =  this.state.date.toLocaleString(undefined, {day: 'numeric'});
         var orario = parseInt(this.state.date.toLocaleTimeString());
 
         return (
@@ -136,13 +128,13 @@ class GiornoNotte extends Component {
                 {(orario <= 6 || orario >= 17) ?
 
                     <div className="navigazione-link" title="Giorno / Notte" style={{ left: "45.8%", top: "2.91%", width: "7.36%", height: "4.97%", zIndex: "9999" }}>
-                        <img src={this.faseLunare()} style={{ width: "100%" }} />
+                        <img src={this.faseLunare()} style={{ width: "100%" }} alt="..."/>
                     </div>
 
                     : 
                     
                     <div className="navigazione-link" title="Giorno / Notte" style={{ left: "45.8%", top: "2.91%", width: "7.36%", height: "4.97%", zIndex: "9999" }}>
-                        <img src={sole} style={{ width: "100%" }} />
+                        <img src={sole} style={{ width: "100%" }} alt="..."/>
                     </div>
                 }
 
