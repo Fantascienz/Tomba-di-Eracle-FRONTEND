@@ -285,17 +285,17 @@ class ListaPersonaggi extends Component {
                 razza: this.props.filtroRazza
             }
 
-           this.props.ordinaPerUtenteERazza(filtro)
+            this.props.ordinaPerUtenteERazza(filtro)
         } else if (this.props.filtroStato !== undefined) {
             let filtro = {
                 utente: {
-                    id:e.target.value
+                    id: e.target.value
                 },
                 stato: this.props.filtroStato
             }
             this.props.getAllByIdUtenteAndStato(filtro)
         }
-        
+
         else {
             let utente = {
                 id: e.target.value
@@ -535,15 +535,17 @@ class ListaPersonaggi extends Component {
     }
 
     renderFiltroUtente = () => {
-        return (
-            <React.Fragment>
-                <select class="form-select" onChange={this.handleFilterUtente} aria-label="Default select example">
-                    {JSON.parse(sessionStorage.getItem('listaUtenti')).map(utente =>
-                        <option key={utente.id} value={utente.id}>ID:{utente.id} {utente.nominativo}</option>
-                    )}
-                </select>
-            </React.Fragment>
-        )
+        if (JSON.parse(sessionStorage.getItem('listaUtenti')) != null) {
+            return (
+                <React.Fragment>
+                    <select class="form-select" onChange={this.handleFilterUtente} aria-label="Default select example">
+                        {JSON.parse(sessionStorage.getItem('listaUtenti')).map(utente =>
+                            <option key={utente.id} value={utente.id}>ID:{utente.id} {utente.nominativo}</option>
+                        )}
+                    </select>
+                </React.Fragment>
+            )
+        }
     }
 
     renderFiltroStato = () => {

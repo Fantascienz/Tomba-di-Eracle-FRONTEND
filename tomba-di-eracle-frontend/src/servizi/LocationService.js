@@ -53,12 +53,20 @@ class LocationService {
     validaCampiCreazione(location, isStanza) {
         if (!isStanza) {
             if (location.nome === '' || location.tipo === '' || location.ambiente === '' || location.urlImgGiorno === ''
-                || location.urlAudio === '' || location.locationIngresso === '' || location.direzioneIngresso === '' || location.urlImgGiornoUmbra === '' || location.urlAudioUmbra === '') {
+                || location.urlAudio === '' || location.locationIngresso === '' || location.urlImgGiornoUmbra === '' || location.urlAudioUmbra === '') {
                 withReactContent(Swal).fire({
                     title: <div>
                         <p>Nome,Ambiente,Ingresso</p>
                         <p>Immagine giorno e Audio</p>
                         <p>sono obbligatori!</p>
+                    </div>
+                })
+                return false;
+            }
+            if (location.direzioneIngresso === '') {
+                withReactContent(Swal).fire({
+                    title: <div>
+                        <p>Seleziona una direzione d'ingresso!</p>
                     </div>
                 })
                 return false;
