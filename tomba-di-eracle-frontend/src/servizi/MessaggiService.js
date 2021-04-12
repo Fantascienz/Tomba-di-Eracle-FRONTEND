@@ -11,6 +11,10 @@ class MessaggiService {
     getConversazione(idUtente) {
         return axios.get(URL + "/" + idUtente)
     }
+
+    getAllConversazioni() {
+        return axios.get(URL)
+    }
 }
 
 export default new MessaggiService();

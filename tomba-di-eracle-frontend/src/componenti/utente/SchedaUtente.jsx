@@ -32,8 +32,8 @@ class SchedaUtente extends Component {
 
     isVip = () => {
         if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'vip') {
-            
-            if(this.props.isGarou) {
+
+            if (this.props.isGarou) {
                 return (
                     <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
                         <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "50%", fontSize: "0.8vw" }} onClick={() => this.props.creazionePG()}>Crea Umano</button>
@@ -48,19 +48,19 @@ class SchedaUtente extends Component {
                     </div>
                 )
             }
-            
+
         }
     }
 
 
     isMasterCreazionePg = () => {
         if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'master') {
-            
-            if(this.props.isGarou) {
+
+            if (this.props.isGarou) {
                 return (
                     <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
                         <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "33.33%", fontSize: "0.8vw" }} onClick={() => this.props.creazionePG()}>Crea Umano</button>
-                        <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "33.33%", fontSize: "0.8vw" }} onClick={() => this.props.creazioneGarou()}  disabled>Crea Garou</button>
+                        <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "33.33%", fontSize: "0.8vw" }} onClick={() => this.props.creazioneGarou()} disabled>Crea Garou</button>
                         <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "33.33%", fontSize: "0.8vw", borderRadius: "0 5px 5px 0" }} onClick={() => this.props.creazionePng()} >Crea Png</button>
                     </div>
                 )
@@ -73,7 +73,7 @@ class SchedaUtente extends Component {
                     </div>
                 )
             }
-           
+
         }
     }
 
@@ -114,6 +114,7 @@ class SchedaUtente extends Component {
                     <React.Fragment>
                         <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%" }} onClick={() => this.visualizzaListaPg()}>Lista Personaggi</button>
                         <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%" }} onClick={() => this.visualizzaPgAdmin()}>I Tuoi Personaggi</button>
+                        <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%" }} onClick={() => this.messaggi()}>Messaggi Utenti</button>
                     </React.Fragment>
                 )
             } else {
@@ -167,8 +168,13 @@ class SchedaUtente extends Component {
     }
 
     messaggi = () => {
-        browserHistory.push('contattaAdmin')
-        browserHistory.go()
+        if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin') {
+            browserHistory.push('messaggiUtenti')
+            browserHistory.go()
+        } else {
+            browserHistory.push('contattaAdmin')
+            browserHistory.go()
+        }
     }
 
     componentDidMount() {
