@@ -18,9 +18,14 @@ class SchedaUtente extends Component {
     isStandard = () => {
         if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'standard') {
             return (
-                <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
-                    <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%" }} onClick={() => this.props.creazionePG()}>Crea Personaggio</button>
-                </div>
+                <React.Fragment>
+                    <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
+                        <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%" }} onClick={() => this.props.creazionePG()}>Crea Personaggio</button>
+                    </div>
+                    <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
+                        <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%" }} onClick={() => this.messaggi()}>Contatta un Admin</button>
+                    </div>
+                </React.Fragment>
             )
         }
     }
@@ -159,6 +164,11 @@ class SchedaUtente extends Component {
         }
         )
 
+    }
+
+    messaggi = () => {
+        browserHistory.push('contattaAdmin')
+        browserHistory.go()
     }
 
     componentDidMount() {
