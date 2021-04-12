@@ -5,7 +5,7 @@ import { SuonoModal } from './SuonoSuImmagine';
 
 export const ModalComponente = ({ bottone, contenuto, suono, size }) => {
     const [show, setShow] = useState(false);
-    
+    // eslint-disable-next-line
     var taglia = size == undefined ? 'xl' : size;
 
     return (

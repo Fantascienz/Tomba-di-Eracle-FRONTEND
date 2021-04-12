@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import cardFrame from '../../img/cardFrame.png';
-import noPg from '../../img/no-pg.jpg';
 import { toModificaPersonaggio } from '../../store/azioni/personaggioActions';
 import { toGioco } from '../../store/azioni/utenteActions';
 

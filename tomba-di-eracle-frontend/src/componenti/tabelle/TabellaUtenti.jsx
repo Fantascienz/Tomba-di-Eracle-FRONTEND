@@ -44,9 +44,9 @@ class TabellaUtenti extends Component {
     formModificaTipo = (utente) => {
         if (utente.id !== JSON.parse(sessionStorage.getItem('utente')).id) {
             return (
-                <div style={{ display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
-                    <select name="nuovoTipo" id="nuovoTipo" onChange={this.props.handleChange} style={{ width: "100px" }}>
-                        <option selected="selected" value="standard">Standard</option>
+                <div style={{display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center"}}>
+                    <select name="nuovoTipo" id="nuovoTipo" onChange={this.props.handleChange} style={{width:"100px"}}>
+                        <option value="standard">Standard</option>
                         <option value="vip">VIP</option>
                         <option value="master">Master</option>
                         <option value="admin">Admin</option>
@@ -125,10 +125,10 @@ class TabellaUtenti extends Component {
                             <th>Email</th>
                             <th>Tipo {this.renderFiltroTipoUtente()}</th>
                             <th>Personaggi</th>
-                            <th colspan="3">Personaggi Creabili</th>
+                            <th colSpan="3">Personaggi Creabili</th>
                             <th>Data di Registrazione</th>
                             <th>Modifica Tipo</th>
-                            <th colspan="3">Modifica Personaggi Creabili</th>
+                            <th colSpan="3">Modifica Personaggi Creabili</th>
                             <th>Ban</th>
                         </tr>
                         <tr style={{ color: "#eeaa44" }}>

@@ -37,7 +37,7 @@ const Macromappa = ({ idLocation, pxDimensioniMappa }) => {
                     <Draggable>
                         <div className="centrato" style={{ position: "absolute", bottom: "0%", right: "-10%", zIndex: "9999", backgroundColor: "transparent" }}>
                             <div className="col-sm-1" title="Pulsante #1" style={{ height: `${pxDimensioniCella}px`, width: `${pxDimensioniCella}px` }}>
-                                <img className="btn" title={showIngrandimento?'Riduci' : 'Ingrandisci'} src={lente} style={{width:"150%"}} onClick={() => setShowIngrandimento(!showIngrandimento)}/>
+                                <img className="btn" title={showIngrandimento?'Riduci' : 'Ingrandisci'} src={lente} style={{width:"150%"}} onClick={() => setShowIngrandimento(!showIngrandimento)} alt=""/>
                             </div>
                         </div>
                     </Draggable>

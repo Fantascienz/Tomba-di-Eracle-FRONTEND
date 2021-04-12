@@ -1,5 +1,4 @@
-import macromappa from '../../img/macromappa.jpg'
-import { ContenutoCella, RigaGriglia } from '../location/ContenutoGriglia'
+import { ContenutoCella} from '../location/ContenutoGriglia'
 import { Magnifier } from 'react-image-magnifiers'
 
 

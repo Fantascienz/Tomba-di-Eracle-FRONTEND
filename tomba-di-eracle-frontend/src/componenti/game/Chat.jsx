@@ -1,5 +1,5 @@
 import { firestore } from "../../App";
-import React, { useEffect, useRef, useState } from 'react';
+import React, {useRef, useState } from 'react';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import firebase from 'firebase/app';
 
@@ -69,7 +69,7 @@ function MessaggioChat(props) {
   return (<>
     <div className={`message ${messageClass}`}>
       {/*se non c'è un immagine,mette l'immagine di default corrispondente all'url*/}
-      <img src={immagine || 'https://myasw.org/wp-content/uploads/2020/05/mr-anonymous.png'} />
+      <img src={immagine || 'https://myasw.org/wp-content/uploads/2020/05/mr-anonymous.png'} alt="" />
       <p>{testo}</p>
     </div>
   </>)

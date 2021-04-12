@@ -30,15 +30,15 @@ export const login = (utente) => {
                         sessionStorage.setItem('listaTipoUtenti', JSON.stringify(res.data))
                     })
                 )
-                .then(
-                    LocationService.sessioneAllLocation()
-                ).then(
-                    dispatch({
-                        type: 'LOGIN_UTENTE',
-                        utente: utente,
-                        admin: utente.tipo === 'admin' ? true : false
-                    })
-                )
+                    .then(
+                        LocationService.sessioneAllLocation()
+                    ).then(
+                        dispatch({
+                            type: 'LOGIN_UTENTE',
+                            utente: utente,
+                            admin: utente.tipo === 'admin' ? true : false
+                        })
+                    )
             } else if (res.data.tipo === 'bannato') {
                 sessionStorage.removeItem('utente')
                 withReactContent(Swal).fire({
@@ -80,17 +80,23 @@ export const login = (utente) => {
 
 export const registrazione = (utente) => {
     return (dispatch) => {
-        UtenteService.registrazione(utente).then(
+        UtenteService.registrazione(utente).then(() => {
+            withReactContent(Swal).fire({
+                title: <div>
+                    <p>Registrazione completata!</p>
+                    <p>Accedi per iniziare a giocare!</p>
+                </div>
+            })
             dispatch({
                 type: 'REGISTRAZIONE_UTENTE'
             })
+        }
         ).catch(err => {
             withReactContent(Swal).fire({
                 title: <div>
                     <p>Errore {err.response.status}</p>
                     <p>Email già registrata!</p>
                 </div>
-
             })
         })
     }

@@ -25,6 +25,7 @@ class CreazioneLocationForm extends Component {
 
                 if (this.props.ingresso !== '') {
                     for (let i = 0; i < lista.length; i++) {
+                        // eslint-disable-next-line
                         if (lista[i].id == idIngresso) {
                             if (lista[i].direzioni.idLocationNord == null && lista[i].tipo === 'Reame') {
                                 opzioni.push({

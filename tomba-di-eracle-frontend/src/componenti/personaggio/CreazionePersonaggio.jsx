@@ -367,7 +367,7 @@ class CreazionePersonaggio extends Component {
     showImmaginePG() {
         return (
             <React.Fragment>
-                {this.state.urlImmagine == '' ?
+                {this.state.urlImmagine === '' ?
                     <div style={{
                         backgroundColor: "grey", width: "150px", height: "150px", borderRadius: "100px",
                         display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center"
@@ -390,7 +390,7 @@ class CreazionePersonaggio extends Component {
             <React.Fragment>
                 <br />
 
-                {this.state.urlCrinos == '' ?
+                {this.state.urlCrinos === '' ?
                     <div style={{
                         backgroundColor: "grey", width: "150px", height: "150px", borderRadius: "100px",
                         display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center"
@@ -407,7 +407,7 @@ class CreazionePersonaggio extends Component {
 
                 <br />
 
-                {this.state.urlLupo == '' ?
+                {this.state.urlLupo === '' ?
                     <div style={{
                         backgroundColor: "grey", width: "150px", height: "150px", borderRadius: "100px",
                         display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center"
