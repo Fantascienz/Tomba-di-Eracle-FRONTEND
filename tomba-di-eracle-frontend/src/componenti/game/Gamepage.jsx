@@ -30,6 +30,7 @@ import attraversaUmbra from '../../suoni/attraversa_guanto.mp3'
 import srotolaCarta from '../../suoni/flip_card.mp3'
 import { TabellaStanze } from '../tabelle/TabellaStanze'
 import { ChatRoom } from './Chat'
+import ModificaMeteoGamepage from '../forms/ModificaMeteoGamepage'
 
 
 class Gamepage extends Component {
@@ -210,8 +211,9 @@ class Gamepage extends Component {
                         }
 
                         {/* ------------SOLE/LUNA------------ */}
-                        <GiornoNotte />
-
+                        <div onClick={() => withReactContent(Swal).fire({html: <ModificaMeteoGamepage ultimaLocation={JSON.parse(sessionStorage.getItem('ultimaLocation'))}/>})}>
+                            <GiornoNotte />
+                        </div>
 
                         {/* ------------NOME LOCATION------------ */}
                         <div className="navigazione-link" title={"Id: " + location.id} style={{ left: "28.75%", top: "79.7%", width: "41.65%", height: "4.97%", zIndex: "9999", backgroundColor: "transparent" }}>
@@ -239,7 +241,7 @@ class Gamepage extends Component {
                                         <img src={Scroll} style={{ height: "800px", transform: "rotate(90deg)" }} />
                                     </div>
 
-                                    
+
                                     <div className="centrato" style={{ position: "relative", backgroundColor: "transparent", height: "100%", width: "100%" }}>
                                         {/* MUSICA di BACKGROUND--------------------- */}
                                         <iframe width="420" height="35" style={{ display: "" }} src={location.urlAudio} allow="autoplay"></iframe>
