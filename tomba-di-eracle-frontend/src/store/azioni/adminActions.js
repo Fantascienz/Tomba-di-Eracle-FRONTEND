@@ -622,3 +622,30 @@ export const filtraUtentiByTipo = (filtro) => {
         })
     }
 }
+
+export const cercaNominativo = (nominativo) => {
+    return (dispatch) => {
+        UtenteService.findByNominativo(nominativo).then(res => {
+            sessionStorage.setItem('listaUtenti', JSON.stringify(res.data))
+            dispatch({
+                type: 'FILTRA_UTENTI_PER_NOMINATIVO',
+                listaUtentiFiltrata: res.data,
+                filtroNominativo: nominativo.nominativo
+            })
+        })
+    }
+}
+
+export const cercaPerNominativoETipo = (filtro) => {
+    return (dispatch) => {
+        UtenteService.findByNominativoAndTipo(filtro).then(res => {
+            sessionStorage.setItem('listaUtenti', JSON.stringify(res.data))
+            dispatch({
+                type: 'FILTRA_UTENTI_PER_NOMINATIVO_E_TIPO',
+                listaUtentiFiltrata: res.data,
+                filtroTipoUtente: filtro.tipo,
+                filtroNominativo: filtro.nominativo
+            })
+        })
+    }
+}

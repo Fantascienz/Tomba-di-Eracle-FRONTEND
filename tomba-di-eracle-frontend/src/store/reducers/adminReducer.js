@@ -5,12 +5,13 @@ const initState = {
     listaRazze: [],
     listaPgFiltrata: [],
     listaUtentiFiltrata: [],
-    filtroTipoUtente: '',
     redirect: '',
     visualizzaPgAdmin: false,
     filtroRazza: '',
     filtroStato: '',
-    filtroUtente: ''
+    filtroUtente: '',
+    filtroTipoUtente: '',
+    filtroNominativo: ''
 }
 
 const adminReducer = (state = initState, action) => {
@@ -287,6 +288,20 @@ const adminReducer = (state = initState, action) => {
             state = {
                 listaUtentiFiltrata: action.listaUtentiFiltrata,
                 filtroTipoUtente: action.filtroTipoUtente
+            }
+            break;
+        case 'FILTRA_UTENTI_PER_NOMINATIVO':
+        state = {
+                listaUtentiFiltrata: action.listaUtentiFiltrata,
+                filtroNominativo: action.filtroNominativo
+            }
+            break;
+        case 'FILTRA_UTENTI_PER_NOMINATIVO_E_TIPO':
+            
+            state = {
+                listaUtentiFiltrata: action.listaUtentiFiltrata,
+                filtroTipoUtente: action.filtroTipoUtente,
+                filtroNominativo: action.filtroNominativo
             }
             break;
         default:

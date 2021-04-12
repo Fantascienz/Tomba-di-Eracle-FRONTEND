@@ -119,7 +119,6 @@ class CreazionePersonaggio extends Component {
             }
 
         } else if (this.state.tipo === 'png') {
-            alert(this.state.umbra)
             if (PersonaggioService.validazioneFormPersonaggio(this.state)) {
                 this.props.creaPersonaggio(this.state)
             } else {
