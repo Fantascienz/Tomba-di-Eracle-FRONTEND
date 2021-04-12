@@ -1,17 +1,55 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { cercaNominativo, cercaPerNominativoETipo, filtraUtentiByTipo, getListaUtenti } from '../../store/azioni/adminActions';
 
 class TabellaUtenti extends Component {
+
+    handleFiltroTipoUtente = (e) => {
+        if(this.props.filtroNominativo !== undefined) {
+            let filtro = {
+                nominativo: this.props.filtroNominativo,
+                tipo: e.target.value
+            }
+
+            this.props.cercaPerNominativoETipo(filtro)
+        } else {
+            let filtro = {
+                tipo: e.target.value
+            }
+            this.props.filtraUtentiByTipo(filtro)
+        }
+    }
+
+    handleCerca = (e) => {
+
+        if(this.props.filtroTipoUtente !== undefined) {
+            let filtro = {
+                nominativo: e.target.value,
+                tipo: this.props.filtroTipoUtente
+            }
+            this.props.cercaPerNominativoETipo(filtro)
+        } else {
+            let nominativo = {
+                nominativo: e.target.value
+            }
+            this.props.cercaNominativo(nominativo)
+        }
+        
+    }
+
+
+
     formModificaTipo = (utente) => {
         if (utente.id !== JSON.parse(sessionStorage.getItem('utente')).id) {
             return (
                 <div style={{display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center"}}>
                     <select name="nuovoTipo" id="nuovoTipo" onChange={this.props.handleChange} style={{width:"100px"}}>
-                        <option selected="selected" value="standard">Standard</option>
+                        <option value="standard">Standard</option>
                         <option value="vip">VIP</option>
                         <option value="master">Master</option>
                         <option value="admin">Admin</option>
                     </select>
-                    <button className="btn btn-secondary btn-sm" onClick={() => this.props.modificaTipo(utente)} style={{width:"100px"}}>Modifica</button>
+                    <button className="btn btn-secondary btn-sm" onClick={() => this.props.modificaTipo(utente)} style={{ width: "100px" }}>Modifica</button>
                 </div>
             )
         }
@@ -20,8 +58,8 @@ class TabellaUtenti extends Component {
     formModificaUmani = (utente) => {
         return (
             <React.Fragment>
-                <input type="number" placeholder="Umani" min="0" id="nuovoMaxUmani" onChange={this.props.handleChange} style={{width:"100px"}}/>
-                <button className="btn btn-secondary btn-sm" onClick={() => this.props.modificaUmani(utente)} style={{width:"100px"}}>Modifica</button>
+                <input type="number" placeholder="Umani" min="0" id="nuovoMaxUmani" onChange={this.props.handleChange} style={{ width: "100px" }} />
+                <button className="btn btn-secondary btn-sm" onClick={() => this.props.modificaUmani(utente)} style={{ width: "100px" }}>Modifica</button>
             </React.Fragment>
         )
     }
@@ -29,8 +67,8 @@ class TabellaUtenti extends Component {
     formModificaGarou = (utente) => {
         return (
             <React.Fragment>
-                <input type="number" placeholder="Garou" min="0" id="nuovoMaxGarou" onChange={this.props.handleChange} style={{width:"100px"}}/>
-                <button className="btn btn-secondary btn-sm" onClick={() => this.props.modificaGarou(utente)} style={{width:"100px"}}>Modifica</button>
+                <input type="number" placeholder="Garou" min="0" id="nuovoMaxGarou" onChange={this.props.handleChange} style={{ width: "100px" }} />
+                <button className="btn btn-secondary btn-sm" onClick={() => this.props.modificaGarou(utente)} style={{ width: "100px" }}>Modifica</button>
             </React.Fragment>
         )
     }
@@ -38,8 +76,8 @@ class TabellaUtenti extends Component {
     formModificaPng = (utente) => {
         return (
             <React.Fragment>
-                <input type="number" placeholder="PNG" min="0" id="nuovoMaxPng" onChange={this.props.handleChange} style={{width:"100px"}}/>
-                <button className="btn btn-secondary btn-sm" onClick={() => this.props.modificaPng(utente)} style={{width:"100px"}}>Modifica</button>
+                <input type="number" placeholder="PNG" min="0" id="nuovoMaxPng" onChange={this.props.handleChange} style={{ width: "100px" }} />
+                <button className="btn btn-secondary btn-sm" onClick={() => this.props.modificaPng(utente)} style={{ width: "100px" }}>Modifica</button>
             </React.Fragment>
         )
     }
@@ -51,22 +89,44 @@ class TabellaUtenti extends Component {
             )
         }
     }
+
+    renderFiltroTipoUtente = () => {
+        return (
+            <React.Fragment>
+                <select class="form-select" onChange={this.handleFiltroTipoUtente} aria-label="Default select example">
+                    {JSON.parse(sessionStorage.getItem('listaTipoUtenti')).map(utente =>
+                        <option key={utente.id} value={utente}>{utente}</option>
+                    )}
+                </select>
+            </React.Fragment>
+        )
+    }
+
+    renderCercaUtente = () => {
+        return (
+            <React.Fragment>
+                    <input class="form-control me-2" id="nominativo"  type="search" onChange={this.handleCerca} placeholder="Cerca" aria-label="Search" />
+
+            </React.Fragment>
+        )
+    }
+
     render() {
         return (
             <div className="table-responsive ombra" style={{ width: "100%", backgroundColor: "white" }}>
                 <table className="table align-middle table-hover table-sm caption-top">
-                    <caption>Lista Utenti</caption>
+                    <caption>Lista Utenti <button className="btn btn-primary" onClick={() => this.props.aggiornaLista()}>Reset Filtro</button></caption>
                     <thead className="table-dark align-middle" align="center">
                         <tr style={{ color: "#eeaa44" }}>
                             <th>ID</th>
-                            <th>Nominativo</th>
+                            <th>Nominativo {this.renderCercaUtente()}</th>
                             <th>Email</th>
-                            <th>Tipo</th>
+                            <th>Tipo {this.renderFiltroTipoUtente()}</th>
                             <th>Personaggi</th>
-                            <th colspan="3">Personaggi Creabili</th>
+                            <th colSpan="3">Personaggi Creabili</th>
                             <th>Data di Registrazione</th>
                             <th>Modifica Tipo</th>
-                            <th colspan="3">Modifica Personaggi Creabili</th>
+                            <th colSpan="3">Modifica Personaggi Creabili</th>
                             <th>Ban</th>
                         </tr>
                         <tr style={{ color: "#eeaa44" }}>
@@ -112,4 +172,22 @@ class TabellaUtenti extends Component {
     }
 }
 
-export default TabellaUtenti;
+const mapStateToProps = (state) => {
+    return {
+        listaUtentiFiltrata: state.admin.listaUtentiFiltrata,
+        listaUtenti: state.admin.listaUtenti,
+        filtroTipoUtente: state.admin.filtroTipoUtente,
+        filtroNominativo: state.admin.filtroNominativo
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        filtraUtentiByTipo: (filtro) => dispatch(filtraUtentiByTipo(filtro)),
+        aggiornaLista: () => dispatch(getListaUtenti()),
+        cercaNominativo: (nominativo) => dispatch(cercaNominativo(nominativo)),
+        cercaPerNominativoETipo: (filtro) => dispatch(cercaPerNominativoETipo(filtro))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TabellaUtenti);

@@ -21,7 +21,7 @@ export function SuonoDirezione({ suono, funzione, title, className, src, style }
   const [play] = useSound(suono, funzione);
   return (
     <div className="navigazione-link" title={title} onClick={play} style={style}>
-      <img className={className} src={src} />
+      <img className={className} src={src} alt=""/>
     </div>
   )
 }

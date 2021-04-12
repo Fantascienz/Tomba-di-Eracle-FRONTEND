@@ -28,6 +28,13 @@ class PersonaggioService {
         return axios.get(URL + 'filtraStato/' + stato)
     }
 
+    getByIdUtenteAndStato(filtro) {
+        return axios.post(URL + 'getByIdUtenteAndStato', filtro)
+    }
+    getByIdUtenteAndRazzaAndStato(filtro) {
+        return axios.post(URL + 'getByIdUtenteAndRazzaAndStato', filtro)
+    }
+
     getAllOrderByRazza() {
         return axios.get(URL + 'orderRazza')
     }
@@ -52,12 +59,110 @@ class PersonaggioService {
         return axios.get(URL + 'orderId')
     }
 
+    getAllOrderByIdUtente() {
+        return axios.get(URL + 'getAllOrderByIdUtente')
+    }
+
     getByRazzaAndStato(filtro) {
         return axios.post(URL + 'razzaAndStato', filtro)
     }
 
     getAllRazzeGroupBy() {
         return axios.get(URL + '/getAllRazze')
+    }
+
+    getAllByRazzeOrderByNominativo(razza) {
+        return axios.post(URL + 'getAllRazzeOrderBy', razza)
+    }
+    getAllByRazzaAndStatoOrderByNominativo(filtro) {
+        return axios.post(URL + 'getAllByRazzaAndStatoOrderBy', filtro)
+    }
+
+    getAllByRazzaOrderById(razza) {
+        return axios.post(URL + 'getAllByRazzaOrderById', razza)
+    }
+
+    getAllByRazzaAndStatoOrderById(filtro) {
+        return axios.post(URL + 'getAllByRazzaAndStatoOrderById', filtro)
+    }
+    getAllByRazzaOrderBySesso(razza) {
+        return axios.post(URL + 'getAllByRazzaOrderBySesso', razza)
+    }
+
+    getAllByRazzaAndStatoOrderBySesso(filtro) {
+        return axios.post(URL + 'getAllByRazzaAndStatoOrderBySesso', filtro)
+    }
+
+    getAllByRazzaOrderByRango(razza) {
+        return axios.post(URL + 'getAllByRazzaOrderByRango', razza)
+    }
+
+    getAllByRazzaAndStatoOrderByRango(filtro) {
+        return axios.post(URL + 'getAllByRazzaAndStatoOrderByRango', filtro)
+    }
+
+    getAllByRazzaOrderByDataCreazione(razza) {
+        return axios.post(URL + 'getAllByRazzaOrderByDataCreazione', razza)
+    }
+
+    getAllByRazzaAndStatoOrderByDataCreazione(filtro) {
+        return axios.post(URL + 'getAllByRazzaAndStatoOrderByDataCreazione', filtro)
+    }
+
+    getAllByRazzaOrderByIdUtente(razza) {
+        return axios.post(URL + 'getAllByRazzaOrderByIdUtente', razza)
+    }
+
+    getAllByRazzaAndStatoOrderByIdUtente(filtro) {
+        return axios.post(URL + 'getAllByRazzaAndStatoOrderByIdUtente', filtro)
+    }
+
+    getAllByIdUtenteOrderByNominativo(filtro) {
+        return axios.post(URL + 'getAllByIdUtenteOrderByNominativo', filtro)
+    }
+
+    getAllByIdUtenteOrderBySesso(filtro) {
+        return axios.post(URL + 'getAllByIdUtenteOrderBySesso', filtro)
+    }
+
+    getAllByIdUtenteOrderByRazza(filtro) {
+        return axios.post(URL + 'getAllByIdUtenteOrderByRazza', filtro)
+    }
+
+    getAllByIdUtenteOrderById(filtro) {
+        return axios.post(URL + 'getAllByIdUtenteOrderById', filtro)
+    }
+
+    getAllByIdUtenteOrderByRango(filtro) {
+        return axios.post(URL + 'getAllByIdUtenteOrderByRango', filtro)
+    }
+
+    getAllByIdUtenteOrderByDataCreazione(filtro) {
+        return axios.post(URL + 'getAllByIdUtenteOrderByDataCreazione', filtro)
+    }
+
+    getAllByIdUtenteAndRazza(filtro) {
+        return axios.post(URL + 'getAllByIdUtenteAndRazza', filtro)
+    }
+
+    getAllByIdUtenteAndRazzaOrderById(filtro) {
+        return axios.post(URL + 'getAllByIdUtenteAndRazzaOrderById', filtro)
+    }
+
+    getAllByIdUtenteAndRazzaOrderByNominativo(filtro) {
+        return axios.post(URL, 'getAllByIdUtenteAndRazzaOrderByNominativo', filtro)
+    }
+
+    getAllByIdUtenteAndRazzaOrderBySesso(filtro) {
+        return axios.post(URL + 'getAllByIdUtenteAndRazzaOrderBySesso', filtro)
+    }
+
+    getAllByIdUtenteAndRazzaOrderByRango(filtro) {
+        return axios.post(URL + 'getAllByIdUtenteAndRazzaOrderByRango', filtro)
+    }
+    
+    getAllByIdUtenteAndRazzaOrderByDataCreazione(filtro) {
+        return axios.post(URL + 'getAllByIdUtenteAndRazzaOrderByDataCreazione', filtro)
     }
 
     validazioneFormPersonaggio(personaggio) {

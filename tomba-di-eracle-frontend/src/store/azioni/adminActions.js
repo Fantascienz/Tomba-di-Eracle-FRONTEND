@@ -1,5 +1,6 @@
 import AdminService from "../../servizi/AdminService"
 import PersonaggioService from "../../servizi/PersonaggioService"
+import UtenteService from "../../servizi/UtenteService"
 
 
 export const getListaUtenti = () => {
@@ -132,6 +133,19 @@ export const filtraListaStato = (stato) => {
     }
 }
 
+export const filtraListaPgUtente = (utente) => {
+    return (dispatch) => {
+        PersonaggioService.getPersonaggiUtente(utente).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'FILTRA_UTENTE',
+                listaPgFiltrata: res.data,
+                filtroUtente: utente.id
+            })
+        })
+    }
+}
+
 export const ordinaPerRazza = () => {
     return (dispatch) => {
         PersonaggioService.getAllOrderByRazza().then(res => {
@@ -204,6 +218,18 @@ export const ordinaPerId = () => {
     }
 }
 
+export const ordinaPerIdUtente = () => {
+    return (dispatch) => {
+        PersonaggioService.getAllOrderByIdUtente().then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_ID_UTENTE',
+                listaPgFiltrata: res.data
+            })
+        })
+    }
+}
+
 export const getByRazzaAndStato = (filtro) => {
     return (dispatch) => {
         if (filtro.stato === 'Online') {
@@ -228,5 +254,398 @@ export const getByRazzaAndStato = (filtro) => {
             })
         }
 
+    }
+}
+
+export const getAllByRazzaOrderByNominativo = (razza) => {
+    return (dispatch) => {
+        PersonaggioService.getAllByRazzeOrderByNominativo(razza).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                    type: 'ORDINA_PER_RAZZA_ORDER_BY_NOMINATIVO',
+                    listaPgFiltrata: res.data,
+                    filtroRazza: razza.razza
+                })
+        })
+    }
+}
+
+export const ordinaPerRazzaEStatoByNominativo = (filtro) => {
+    return (dispatch) => {
+        PersonaggioService.getAllByRazzaAndStatoOrderByNominativo(filtro).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_RAZZA_E_STATO_ORDER_BY',
+                listaPgFiltrata: res.data,
+                filtroRazza: filtro.razza,
+                filtroStato: filtro.stato
+            })
+        })
+    }
+}
+
+export const ordinaPerRazzaById = (razza) => {
+    return (dispatch) => {
+        PersonaggioService.getAllByRazzaOrderById(razza).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_RAZZA_ORDER_BY_ID',
+                listaPgFiltrata: res.data,
+                filtroRazza: razza.razza
+            })
+        })
+    }
+}
+
+export const ordinaPerRazzaEStatoById = (filtro) => {
+    return (dispatch) => {
+        PersonaggioService.getAllByRazzaAndStatoOrderById(filtro).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_RAZZA_E_STATO_ORDER_BY_ID',
+                listaPgFiltrata: res.data,
+                filtroRazza: filtro.razza,
+                filtroStato: filtro.stato
+            })
+        })
+    }
+}
+
+export const ordinaPerRazzaBySesso = (razza) => {
+    return (dispatch) => {
+        PersonaggioService.getAllByRazzaOrderBySesso(razza).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_RAZZA_ORDER_BY_SESSO',
+                listaPgFiltrata: res.data,
+                filtroRazza: razza.razza
+            })
+        })
+    }
+}
+
+export const ordinaPerRazzaEStatoBySesso = (filtro) => {
+    return (dispatch) => {
+        PersonaggioService.getAllByRazzaAndStatoOrderBySesso(filtro).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_RAZZA_E_STATO_ORDER_BY_SESSO',
+                listaPgFiltrata: res.data,
+                filtroRazza: filtro.razza,
+                filtroStato: filtro.stato
+            })
+        })
+    }
+}
+
+export const ordinaPerRazzaByRango = (razza) => {
+    return (dispatch) => {
+        PersonaggioService.getAllByRazzaOrderByRango(razza).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_RAZZA_ORDER_BY_RANGO',
+                listaPgFiltrata: res.data,
+                filtroRazza: razza.razza
+            })
+        })
+    }
+}
+
+export const ordinaPerRazzaEStatoByRango = (filtro) => {
+    return (dispatch) => {
+        PersonaggioService.getAllByRazzaAndStatoOrderByRango(filtro).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_RAZZA_E_STATO_ORDER_BY_RANGO',
+                listaPgFiltrata: res.data,
+                filtroRazza: filtro.razza,
+                filtroStato: filtro.stato
+            })
+        })
+    }
+}
+
+export const ordinaPerRazzaByDataCreazione = (razza) => {
+    return (dispatch) => {
+        PersonaggioService.getAllByRazzaOrderByDataCreazione(razza).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_RAZZA_ORDER_BY_DATA_CREAZIONE',
+                listaPgFiltrata: res.data,
+                filtroRazza: razza.razza
+            })
+        })
+    }
+}
+
+export const ordinaPerRazzaEStatoByDataCreazione = (filtro) => {
+    return (dispatch) => {
+        PersonaggioService.getAllByRazzaAndStatoOrderByDataCreazione(filtro).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_RAZZA_E_STATO_ORDER_BY_DATA_CREAZIONE',
+                listaPgFiltrata: res.data,
+                filtroRazza: filtro.razza,
+                filtroStato: filtro.stato
+            })
+        })
+    }
+}
+
+export const ordinaPerRazzaByIdUtente = (razza) => {
+    return (dispatch) => {
+        PersonaggioService.getAllByRazzaOrderByIdUtente(razza).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_RAZZA_ORDER_BY_ID_UTENTE',
+                listaPgFiltrata: res.data,
+                filtroRazza: razza.razza
+            })
+        })
+    }
+}
+
+export const ordinaPerRazzaEStatoByIdUtente = (filtro) => {
+    return (dispatch) => {
+        PersonaggioService.getAllByRazzaAndStatoOrderByIdUtente(filtro).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_RAZZA_E_STATO_ORDER_BY_ID_UTENTE',
+                listaPgFiltrata: res.data,
+                filtroRazza: filtro.razza,
+                filtroStato: filtro.stato
+            })
+        })
+    }
+}
+
+export const ordinaPerUtenteByNominativo = (filtro) => {
+    return (dispatch) => {
+        PersonaggioService.getAllByIdUtenteOrderByNominativo(filtro).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_UTENTE_BY_NOMINATIVO',
+                listaPgFiltrata: res.data,
+                filtroUtente: filtro.id
+            })
+        })
+    }
+}
+
+export const ordinaPerUtenteBySesso = (filtro) => {
+    return (dispatch) => {
+        PersonaggioService.getAllByIdUtenteOrderBySesso(filtro).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_UTENTE_BY_SESSO',
+                listaPgFiltrata: res.data,
+                filtroUtente: filtro.id
+            })
+        })
+    }
+}
+
+export const ordinaPerUtenteByRazza = (filtro) => {
+    return (dispatch) => {
+        PersonaggioService.getAllByIdUtenteOrderByRazza(filtro).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_UTENTE_BY_RAZZA',
+                listaPgFiltrata: res.data,
+                filtroUtente: filtro.id
+            })
+        })
+    }
+}
+
+export const ordinaPerUtenteById = (filtro) => {
+    return (dispatch) => {
+        PersonaggioService.getAllByIdUtenteOrderById(filtro).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_UTENTE_BY_ID',
+                listaPgFiltrata: res.data,
+                filtroUtente: filtro.id
+            })
+        })
+    }
+}
+
+export const ordinaPerUtenteByRango = (filtro) => {
+    return (dispatch) => {
+        PersonaggioService.getAllByIdUtenteOrderByRango(filtro).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_UTENTE_BY_RANGO',
+                listaPgFiltrata: res.data,
+                filtroUtente: filtro.id
+            })
+        })
+    }
+}
+
+export const ordinaPerUtenteByDataCreazione = (filtro) => {
+    return (dispatch) => {
+        PersonaggioService.getAllByIdUtenteOrderByDataCreazione(filtro).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_UTENTE_BY_DATA_CREAZIONE',
+                listaPgFiltrata: res.data,
+                filtroUtente: filtro.id
+            })
+        })
+    }
+}
+
+export const ordinaPerUtenteERazza = (filtro) => {
+    return (dispatch) => {
+        PersonaggioService.getAllByIdUtenteAndRazza(filtro).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_UTENTE_E_RAZZA',
+                listaPgFiltrata: res.data,
+                filtroUtente: filtro.utente.id,
+                filtroRazza: filtro.razza
+            })
+        })
+    }
+}
+
+export const ordinaPerUtenteERazzaById = (filtro) => {
+    return (dispatch) => {
+        PersonaggioService.getAllByIdUtenteAndRazzaOrderById(filtro).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_UTENTE_E_RAZZA_BY_ID',
+                listaPgFiltrata: res.data,
+                filtroUtente: filtro.utente.id,
+                filtroRazza: filtro.razza
+            })
+        })
+    }
+}
+
+export const ordinaPerUtenteERazzaByNominativo = (filtro) => {
+    return (dispatch) => {
+        PersonaggioService.getAllByIdUtenteAndRazzaOrderByNominativo(filtro).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_UTENTE_E_RAZZA_BY_NOMINATIVO',
+                listaPgFiltrata: res.data,
+                filtroUtente: filtro.utente.id,
+                filtroRazza: filtro.razza
+            })
+        })
+    }
+}
+export const ordinaPerUtenteERazzaBySesso = (filtro) => {
+    return (dispatch) => {
+        PersonaggioService.getAllByIdUtenteAndRazzaOrderBySesso(filtro).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_UTENTE_E_RAZZA_BY_SESSO',
+                listaPgFiltrata: res.data,
+                filtroUtente: filtro.utente.id,
+                filtroRazza: filtro.razza
+            })
+        })
+    }
+}
+
+export const ordinePerUtenteERazzaByRango = (filtro) => {
+    return (dispatch) => {
+        PersonaggioService.getAllByIdUtenteAndRazzaOrderByRango(filtro).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_UTENTE_E_RAZZA_BY_RANGO',
+                listaPgFiltrata: res.data,
+                filtroUtente: filtro.utente.id,
+                filtroRazza: filtro.razza
+            })
+        })
+    }
+}
+
+export const ordinePerUtenteERazzaByDataCreazione = (filtro) => {
+    return (dispatch) => {
+        PersonaggioService.getAllByIdUtenteAndRazzaOrderByDataCreazione(filtro).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'ORDINA_PER_UTENTE_E_RAZZA_BY_DATA_CREAZIONE',
+                listaPgFiltrata: res.data,
+                filtroUtente: filtro.utente.id,
+                filtroRazza: filtro.razza
+            })
+        })
+    }
+}
+
+export const getAllByIdUtenteAndRazzaAndStato = (filtro) => {
+    return (dispatch) => {
+        PersonaggioService.getByIdUtenteAndRazzaAndStato(filtro).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'FILTRA_UTENTE_RAZZA_STATO',
+                listaPgFiltrata: res.data,
+                filtroRazza: filtro.razza,
+                filtroStato: filtro.stato,
+                filtroUtente: filtro.utente.id
+            })
+        })
+            
+    }
+}
+
+export const getAllByIdUtenteAndStato = (filtro) => {
+    return (dispatch) => {
+        PersonaggioService.getByIdUtenteAndStato(filtro).then(res => {
+            sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
+            dispatch({
+                type: 'FILTRA_UTENTE_STATO',
+                listaPgFiltrata: res.data,
+                filtroStato: filtro.stato,
+                filtroUtente: filtro.utente.id
+            })
+        })
+    }
+}
+
+export const filtraUtentiByTipo = (filtro) => {
+    return (dispatch) => {
+        UtenteService.findAllByTipoUtente(filtro).then(res => {
+            sessionStorage.setItem('listaUtenti', JSON.stringify(res.data))
+            dispatch({
+                type: 'FILTRA_UTENTI_PER_TIPO',
+                listaUtentiFiltrata: res.data,
+                filtroTipoUtente: filtro.tipo
+            })
+        })
+    }
+}
+
+export const cercaNominativo = (nominativo) => {
+    return (dispatch) => {
+        UtenteService.findByNominativo(nominativo).then(res => {
+            sessionStorage.setItem('listaUtenti', JSON.stringify(res.data))
+            dispatch({
+                type: 'FILTRA_UTENTI_PER_NOMINATIVO',
+                listaUtentiFiltrata: res.data,
+                filtroNominativo: nominativo.nominativo
+            })
+        })
+    }
+}
+
+export const cercaPerNominativoETipo = (filtro) => {
+    return (dispatch) => {
+        UtenteService.findByNominativoAndTipo(filtro).then(res => {
+            sessionStorage.setItem('listaUtenti', JSON.stringify(res.data))
+            dispatch({
+                type: 'FILTRA_UTENTI_PER_NOMINATIVO_E_TIPO',
+                listaUtentiFiltrata: res.data,
+                filtroTipoUtente: filtro.tipo,
+                filtroNominativo: filtro.nominativo
+            })
+        })
     }
 }

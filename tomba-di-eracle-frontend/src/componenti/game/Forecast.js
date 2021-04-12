@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import MeteoService from '../../servizi/MeteoService';
 
 const Forecast = () => {
@@ -26,6 +26,7 @@ const Forecast = () => {
         var mVerifica = parseInt(dataDB.substring(5, 7))
         var aVerifica = parseInt(dataDB.substring(0, 4))
         var dataVerifica = gVerifica + "/" + mVerifica + "/" + aVerifica
+        // eslint-disable-next-line
         if (dataAttuale == dataVerifica) {
             return true
         }
@@ -45,7 +46,7 @@ const Forecast = () => {
     function creaNuovoMeteo() {
         var climaAPI = JSON.parse(sessionStorage.getItem('nuovoMeteo'));
 
-        if (climaAPI == "Mist" || climaAPI == "Smoke" || climaAPI == "Haze" || climaAPI == "Dust" || climaAPI == "Sand" || climaAPI == "Ash" || climaAPI == "Squall" || climaAPI == "Tornado") {
+        if (climaAPI === "Mist" || climaAPI === "Smoke" || climaAPI === "Haze" || climaAPI === "Dust" || climaAPI === "Sand" || climaAPI === "Ash" || climaAPI === "Squall" || climaAPI === "Tornado") {
             climaAPI = "Fog"
         }
 

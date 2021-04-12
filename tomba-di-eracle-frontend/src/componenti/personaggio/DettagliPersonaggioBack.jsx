@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import cardFrame from '../../img/cardFrame.png';
-import noPg from '../../img/no-pg.jpg';
 import LocationService from '../../servizi/LocationService';
 import { primoAccesso } from '../../store/azioni/gameActions';
 import { toModificaPersonaggio } from '../../store/azioni/personaggioActions';
 import { browserHistory } from '../../'
-import GameService from '../../servizi/GameService';
 
 
 class DettagliPersonaggioBack extends Component {

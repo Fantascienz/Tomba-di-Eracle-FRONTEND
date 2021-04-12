@@ -5,6 +5,7 @@ import UtenteService from "../../servizi/UtenteService"
 import bashImpact from "../../suoni/bash_impact.mp3"
 import brokenShield from "../../img/broken_shield.png"
 import LocationService from "../../servizi/LocationService"
+import AdminService from "../../servizi/AdminService"
 
 export const login = (utente) => {
     return (dispatch) => {
@@ -21,14 +22,23 @@ export const login = (utente) => {
                         sessionStorage.setItem('listaRazze', JSON.stringify(res.data))
                     })
                 ).then(
-                    LocationService.sessioneAllLocation()
+                    AdminService.getListaUtenti().then(res => {
+                        sessionStorage.setItem('listaUtenti', JSON.stringify(res.data))
+                    })
                 ).then(
-                    dispatch({
-                        type: 'LOGIN_UTENTE',
-                        utente: utente,
-                        admin: utente.tipo === 'admin' ? true : false
+                    UtenteService.findAllTipoUtente().then(res => {
+                        sessionStorage.setItem('listaTipoUtenti', JSON.stringify(res.data))
                     })
                 )
+                    .then(
+                        LocationService.sessioneAllLocation()
+                    ).then(
+                        dispatch({
+                            type: 'LOGIN_UTENTE',
+                            utente: utente,
+                            admin: utente.tipo === 'admin' ? true : false
+                        })
+                    )
             } else if (res.data.tipo === 'bannato') {
                 sessionStorage.removeItem('utente')
                 withReactContent(Swal).fire({
@@ -70,17 +80,23 @@ export const login = (utente) => {
 
 export const registrazione = (utente) => {
     return (dispatch) => {
-        UtenteService.registrazione(utente).then(
+        UtenteService.registrazione(utente).then(() => {
+            withReactContent(Swal).fire({
+                title: <div>
+                    <p>Registrazione completata!</p>
+                    <p>Accedi per iniziare a giocare!</p>
+                </div>
+            })
             dispatch({
                 type: 'REGISTRAZIONE_UTENTE'
             })
+        }
         ).catch(err => {
             withReactContent(Swal).fire({
                 title: <div>
                     <p>Errore {err.response.status}</p>
                     <p>Email già registrata!</p>
                 </div>
-
             })
         })
     }

@@ -13,7 +13,8 @@ class ModificaLocation extends Component {
         loc: '',
         locationMod: '',
         fasciaOraria: '',
-        meteo: '',
+        meteoGiorno: 0,
+        meteoNotte: 0,
         data: '',
         nomeMod: '',
         chiave: '',
@@ -38,22 +39,27 @@ class ModificaLocation extends Component {
     }
 
     handleUpdate = (event) => {
-        let location = {
-            id: this.state.locationMod,
-            nome: this.state.nomeMod,
-            chiave: this.state.chiave,
-            urlImgGiorno: this.state.urlImgGiorno,
-            urlImgNotte: this.state.urlImgNotte,
-            urlMinimappa: this.state.urlMinimappa,
-            urlAudio: this.state.urlMinimappa,
-            fasciaOraria: this.state.fasciaOraria,
-            meteo: this.state.meteo,
-            data: this.state.data,
+        let locationMod = {
+            location: {
+                id: this.state.locationMod,
+                nome: this.state.nomeMod,
+                chiave: this.state.chiave,
+                urlImgGiorno: this.state.urlImgGiorno,
+                urlImgNotte: this.state.urlImgNotte,
+                urlMinimappa: this.state.urlMinimappa,
+                urlAudio: this.state.urlMinimappa,
+                fasciaOraria: this.state.fasciaOraria,
+                data: this.state.data,
+            },
+            meteoGiorno: this.state.meteoGiorno,
+            meteoNotte: this.state.meteoNotte
         }
-        if (LocationService.validaCampiModifica(location)) {
-            LocationService.update(location).then(
+        if (LocationService.validaCampiModifica(locationMod.location)) {
+            LocationService.update(locationMod).then(
                 alert('Location modificata con successo!')
             )
+        } else {
+            event.preventDefault();
         }
 
     }

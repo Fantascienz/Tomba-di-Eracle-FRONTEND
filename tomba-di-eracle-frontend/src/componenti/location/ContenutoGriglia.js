@@ -4,6 +4,7 @@ import star from '../../img/red_star.png'
 export const Puntatore = ({ display, idCella }) => {
 
     function attivaDisplay() {
+        // eslint-disable-next-line
         if (display == idCella) {
             return ('')
         } else {

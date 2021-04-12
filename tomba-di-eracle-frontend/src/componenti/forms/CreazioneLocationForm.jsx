@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { SelezionaMeteo } from './SelezionaMeteo';
 
 class CreazioneLocationForm extends Component {
 
@@ -24,6 +25,7 @@ class CreazioneLocationForm extends Component {
 
                 if (this.props.ingresso !== '') {
                     for (let i = 0; i < lista.length; i++) {
+                        // eslint-disable-next-line
                         if (lista[i].id == idIngresso) {
                             if (lista[i].direzioni.idLocationNord == null && lista[i].tipo === 'Reame') {
                                 opzioni.push({
@@ -50,7 +52,6 @@ class CreazioneLocationForm extends Component {
                                     <option value="">Seleziona Direzione Ingresso</option>
                                     {opzioni.map(opz => opz.html)}
                                 </select>
-
                             )
                         }
 
@@ -75,6 +76,7 @@ class CreazioneLocationForm extends Component {
                         </select>
                         {renderDirezioni(this.props.ingresso)}
                     </div>
+                    <SelezionaMeteo idSelect="meteo" handleChange={this.props.handleChange} />
                 </React.Fragment>
             )
         }
@@ -87,9 +89,20 @@ class CreazioneLocationForm extends Component {
                     <input type="text" className="form-control" id="nome" placeholder="Nome" onChange={this.props.handleChange} style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} /> <br />
                 </div>
 
-                <div className="input-group">
-                    <input type="text" className="form-control" id="ambiente" placeholder="Ambiente" onChange={this.props.handleChange} style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} /> <br />
-                </div>
+                {this.props.stanza ?
+                    <div className="input-group">
+                        <select name="ambiente" id="ambiente" className="form-select" onChange={this.props.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)", marginBottom: "1%" }}>
+                            <option value="">Seleziona un ambiente</option>
+                            <option value="Aperto">Aperto</option>
+                            <option value="Chiuso">Chiuso</option>
+                        </select>
+                        <br />
+                    </div>
+                    :
+                    <div className="input-group">
+                        <input type="text" className="form-control" id="ambiente" placeholder="Ambiente" onChange={this.props.handleChange} style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} /> <br />
+                    </div>
+                }
 
                 <div className="input-group">
                     <input type="text" className="form-control" id="urlImgGiorno" placeholder="URL Immagine Giorno" onChange={this.props.handleChange} style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} /> <br />

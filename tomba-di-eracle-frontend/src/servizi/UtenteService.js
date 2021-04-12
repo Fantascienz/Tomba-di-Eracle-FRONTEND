@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { post } from 'jquery';
 
 const URL = "http://localhost:8080/utenti/";
 
@@ -14,6 +15,23 @@ class UtenteService {
 
     modifica(mod) {
         return axios.post(URL + 'modifica',mod)
+    }
+
+    findAllTipoUtente() {
+        return axios.get(URL + 'findAllTipoUtente')
+    }
+
+    findAllByTipoUtente(filtro) {
+        return axios.post(URL + 'findAllByTipoUtente', filtro)
+    }
+
+    findByNominativo(nominativo) {
+        return axios.post(URL + 'findByNominativo', nominativo)
+
+    }
+    
+    findByNominativoAndTipo(filtro) {
+        return axios.post(URL + 'findByNominativoAndTipo', filtro)
     }
 
     validaLogin(utente) {

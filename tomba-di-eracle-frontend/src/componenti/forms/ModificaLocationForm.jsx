@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { SelezionaMeteo } from './SelezionaMeteo';
 
 class ModificaLocationForm extends Component {
 
     renderListaModificaEsterne = (location) => {
+        console.log(location)
         if (JSON.parse(sessionStorage.getItem('utente')).id === location.creatore.id || JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin') {
             if (location.mappa === 'Esterna' && location.tipo === 'Reame') {
                 return <option value={location.id} key={location.id}>({location.id}) - {location.nome}</option>
@@ -32,18 +34,8 @@ class ModificaLocationForm extends Component {
                         <option value="Notte">Notte</option>
                         <option value="Ripristina reale">---Ripristina Reale---</option>
                     </select>
-
-                    <select className="form-select" name="meteo" id="meteo" onChange={this.props.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)", marginBottom: "1%" }}>
-                        <option value="">Seleziona Meteo</option>
-                        <option value="Sereno"> Sereno </option>
-                        <option value="Nuvoloso">Nuvoloso</option>
-                        <option value="Nebbia">Nebbia</option>
-                        <option value="Pioggia">Pioggia</option>
-                        <option value="Tempesta">Tempesta</option>
-                        <option value="Neve">Neve</option>
-                        <option value="Ripristina reale">---Ripristina Reale---</option>
-                    </select>
-
+                    <SelezionaMeteo idSelect="meteoGiorno" orario="Giorno" handleChange={this.props.handleChange} />
+                    <SelezionaMeteo idSelect="meteoNotte" orario="Notte" handleChange={this.props.handleChange} />
                     <div className="input-group">
                         <input className="form-control" type="date" id="data" onChange={this.props.handleChange} style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} />
                     </div>

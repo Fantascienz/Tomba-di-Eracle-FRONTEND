@@ -7,6 +7,7 @@ export const primoAccesso = (pg) => {
         GameService.getUltimaLocationPersonaggio(pg.id).then(res => {
             sessionStorage.setItem('pgAttivo', JSON.stringify(pg))
             sessionStorage.setItem('ultimaLocation', JSON.stringify(res.data))
+            // eslint-disable-next-line
             JSON.parse(sessionStorage.getItem('stanze')).map(stanza => {
                 if (stanza.location.id === JSON.parse(sessionStorage.getItem('ultimaLocation')).id) {
                     stanze.push(stanza)
@@ -29,6 +30,7 @@ export const naviga = (location) => {
     return (dispatch) => {
         GameService.naviga(location).then(res => {
             sessionStorage.setItem('ultimaLocation', JSON.stringify(res.data))
+            // eslint-disable-next-line
             JSON.parse(sessionStorage.getItem('stanze')).map(stanza => {
                 if (stanza.location.id === JSON.parse(sessionStorage.getItem('ultimaLocation')).id) {
                     stanze.push(stanza)

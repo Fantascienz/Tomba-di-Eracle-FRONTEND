@@ -34,7 +34,7 @@ class Footer extends Component {
                     </div>
 
                     <div className="col-sm-2" style={{paddingTop:"0.5%"}}>
-                        {(JSON.parse(sessionStorage.getItem('utente')) != null && JSON.parse(sessionStorage.getItem('utente')).tipo == 'admin') ?
+                        {(JSON.parse(sessionStorage.getItem('utente')) != null && JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin') ?
                             <ModalComponente
                                 bottone={<a href="#"><b>Opzioni Master</b></a>}
                                 size='sm'

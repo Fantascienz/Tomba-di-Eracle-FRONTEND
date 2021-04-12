@@ -29,6 +29,7 @@ const gameReducer = (state = initState, action) => {
             }
             // alert('state ' + state.direzioniRelativeUltimaLocation.id)
             break;
+        default:
     }
     return state;
 }

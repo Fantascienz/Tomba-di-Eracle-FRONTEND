@@ -15,6 +15,8 @@ import GiornoNotte from './GiornoNotte'
 import { TabellaStanze } from '../tabelle/TabellaStanze'
 import { ChatRoom } from './Chat'
 import Meteo from './Meteo'
+import MeteoGif from './MeteoGif'
+import ModificaMeteoGamepage from '../forms/ModificaMeteoGamepage'
 //IMPORT IMMAGINI------------------------------------
 import cardGame from '../../img/gameCard.png';
 import cardGameUmbra from '../../img/gameCard_umbra.png'
@@ -33,12 +35,10 @@ import pioggiaLeggera from '../../img/pioggia_leggera_gif.gif'
 import neve from '../../img/neve_gif.gif'
 import tempesta from '../../img/tempesta_gif.gif'
 import nebbia from '../../img/nebbia_gif.gif'
-
 //IMPORT SUONI------------------------------------
 import passi from '../../suoni/suono_passi.mp3'
 import attraversaUmbra from '../../suoni/attraversa_guanto.mp3'
 import srotolaCarta from '../../suoni/flip_card.mp3'
-import MeteoGif from './MeteoGif'
 
 
 
@@ -76,11 +76,11 @@ class Gamepage extends Component {
     corniceNavigazione(tipoLocation) {
         if (tipoLocation === "Umbra" || tipoLocation === "Stanza Umbra") {
             return (
-                <img src={cardGameUmbra} style={{ position: "relative", zIndex: "1", width: "auto", height: "100%" }} />
+                <img src={cardGameUmbra} style={{ position: "relative", zIndex: "1", width: "auto", height: "100%" }} alt="" />
             )
         } else {
             return (
-                <img src={cardGame} style={{ position: "relative", zIndex: "1", width: "auto", height: "100%" }} />
+                <img src={cardGame} style={{ position: "relative", zIndex: "1", width: "auto", height: "100%" }} alt="" />
             )
         }
     }
@@ -109,7 +109,7 @@ class Gamepage extends Component {
                         <div className="navigazione-immagine" style={{ backgroundImage: `url('${location.urlImgGiorno}')` }}></div>
 
                         {/* ---Layer CLIMA--- */}
-                        <MeteoGif clima={location.meteoGiorno.clima}/>
+                        <MeteoGif clima={location.meteoGiorno.clima} />
 
                         {/* ---Layer CORNICE--- */}
                         {this.corniceNavigazione(location.tipo)}
@@ -120,16 +120,16 @@ class Gamepage extends Component {
                         <div className="navigazione-link" title="Apri la Minimappa" style={{ left: "6.99%", top: "4.47%", width: "14.67%", height: "9.2%", zIndex: "9999" }}>
                             <ModalComponente
                                 suono={srotolaCarta}
-                                bottone={<img className="icona-alta" src={mappa} />}
+                                bottone={<img className="icona-alta" src={mappa} alt="" />}
                                 size='sm'
                                 contenuto={
                                     <div className="centrato" >
                                         <div className="centrato" style={{ position: "fixed", backgroundColor: "none" }}>
-                                            <img src={Scroll} style={{ height: "800px", transform: "rotate(90deg)" }} />
+                                            <img src={Scroll} style={{ height: "800px", transform: "rotate(90deg)" }} alt="" />
                                         </div>
 
                                         <div className="centrato" style={{ position: "fixed", backgroundColor: "transparent", height: "500px", width: "500px" }}>
-                                            {location.tipo != "Stanza" ?
+                                            {location.tipo !== "Stanza" ?
                                                 <Macromappa idLocation={location.id} pxDimensioniMappa="500" />
                                                 :
                                                 <MinimappaRegolabile idLocation="" pxDimensioniMappa="500" lenteDisplay="none" cellePerRiga="2" immagineMinimappa={location.urlMinimappa} />}
@@ -141,9 +141,9 @@ class Gamepage extends Component {
                         {/* pulsante: porta */}
                         <div className="navigazione-link" style={{ left: "77.65%", top: "4.43%", width: "14.67%", height: "9.2%", zIndex: "9999" }}>
                             {stanze == null || stanze[0] == null ?
-                                <img className="icona-larga-disabled" title="Non ci sono Stanze nella Location" src={porta} />
+                                <img className="icona-larga-disabled" title="Non ci sono Stanze nella Location" src={porta} alt="" />
                                 :
-                                <img className="icona-larga" title="Accedi ad una Stanza della Location" src={porta} onClick={() => this.visualizzazioneStanze()} />
+                                <img className="icona-larga" title="Accedi ad una Stanza della Location" src={porta} onClick={() => this.visualizzazioneStanze()} alt="" />
                             }
                         </div>
 
@@ -162,7 +162,7 @@ class Gamepage extends Component {
                         {/* pulsante: chirottero------------------------------------------------- */}
                         {PG.chirottero ?
                             <div className="navigazione-link" title="Invia un Chirottero" style={{ left: "14.93%", top: "82.23%", width: "11.25%", height: "7.04%", zIndex: "9999" }}>
-                                <img className="icona-alta" src={chirottero} />
+                                <img className="icona-alta" src={chirottero} alt="" />
                             </div>
                             : null}
 
@@ -172,7 +172,7 @@ class Gamepage extends Component {
                         {/* NORD */}
                         {JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.idLocationNord == null ?
                             <div className="navigazione-link" title="Nessuna Location a Nord!" style={{ left: "44.05%", top: "8.73%", width: "11.25%", height: "8.56%", zIndex: "9999" }}>
-                                <img className="icona-freccia-alta-disabled" src={frecciaSU} />
+                                <img className="icona-freccia-alta-disabled" src={frecciaSU} alt="" />
                             </div>
                             :
                             <SuonoDirezione suono={passi}
@@ -186,7 +186,7 @@ class Gamepage extends Component {
                         {/* EST */}
                         {JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.idLocationEst == null ?
                             <div className="navigazione-link" title="Nessuna Location ad Est!" style={{ left: "79.47%", top: "46.33%", width: "13.07%", height: "7.01%", zIndex: "9999" }}>
-                                <img className="icona-freccia-larga-disabled" src={frecciaDX} />
+                                <img className="icona-freccia-larga-disabled" src={frecciaDX} alt="" />
                             </div>
                             :
                             <SuonoDirezione suono={passi}
@@ -200,7 +200,7 @@ class Gamepage extends Component {
                         {/* SUD */}
                         {JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.idLocationSud == null ?
                             <div className="navigazione-link" title="Nessuna Location a Sud!" style={{ left: "44%", top: "85.89%", width: "11.25%", height: "8.09%", zIndex: "9999" }}>
-                                <img className="icona-freccia-alta-disabled" src={frecciaGIU} />
+                                <img className="icona-freccia-alta-disabled" src={frecciaGIU} alt="" />
                             </div>
                             :
                             <SuonoDirezione suono={passi}
@@ -214,7 +214,7 @@ class Gamepage extends Component {
                         {/* OVEST */}
                         {JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.idLocationOvest == null ?
                             <div className="navigazione-link" title="Nessuna Location ad Ovest!" style={{ left: "6.77%", top: "46.2%", width: "13.07%", height: "7.01%", zIndex: "9999" }}>
-                                <img className="icona-freccia-larga-disabled" src={frecciaSX} />
+                                <img className="icona-freccia-larga-disabled" src={frecciaSX} alt="" />
                             </div>
                             :
                             <SuonoDirezione suono={passi}
@@ -226,8 +226,13 @@ class Gamepage extends Component {
                         }
 
                         {/* ------------SOLE/LUNA------------ */}
-                        <GiornoNotte />
-                        
+                        {(JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' || JSON.parse(sessionStorage.getItem('utente')).tipo === 'master') ?
+                            <div onClick={() => withReactContent(Swal).fire({ html: <ModificaMeteoGamepage ultimaLocation={JSON.parse(sessionStorage.getItem('ultimaLocation'))} /> })}>
+                                <GiornoNotte />
+                            </div>
+                            : <GiornoNotte />
+                        }
+
 
                         {/* ------------METEO------------ */}
                         <Meteo clima={location.meteoGiorno.clima} />
@@ -255,7 +260,7 @@ class Gamepage extends Component {
                                 <div className="centrato" >
                                     {/* SFONDO MODAL----------------------- */}
                                     <div className="centrato" style={{ position: "fixed", backgroundColor: "none" }}>
-                                        <img src={Scroll} style={{ height: "800px", transform: "rotate(90deg)" }} />
+                                        <img src={Scroll} style={{ height: "800px", transform: "rotate(90deg)" }} alt="" />
                                     </div>
 
 

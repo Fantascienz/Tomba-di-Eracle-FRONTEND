@@ -25,13 +25,13 @@ class CarouselPersonaggi extends Component {
     caroselloPersonaggi() {
         return (
             <Carousel interval={null}
-                prevIcon={<img src={frecciaDX} style={{ opacity: "none", marginLeft: "550px" }} height="55px" />} prevLabel={null}
-                nextIcon={<img src={frecciaSX} style={{ opacity: "none", marginRight: "550px" }} height="55px" />} nextLabel={null}
+                prevIcon={<img src={frecciaDX} style={{ opacity: "none", marginLeft: "550px" }} height="55px" alt="" />} prevLabel={null}
+                nextIcon={<img src={frecciaSX} style={{ opacity: "none", marginRight: "550px" }} height="55px" alt="" />} nextLabel={null}
                 style={{ position: "relative", backgroundColor: "transparent", width: "250px", height: "auto" }}
             >
                 {this.props.personaggiUtente && this.props.personaggiUtente.map(personaggio => {
                     return (
-                        <Carousel.Item >
+                        <Carousel.Item key={personaggio.id} >
                             <div className="flip-box" >
 
                                 <div className="flip-box-inner" >

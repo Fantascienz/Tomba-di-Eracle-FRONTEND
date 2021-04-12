@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Header from '../../componenti/layout/Header'
-import { toCreazioneGarou, toCreazionePersonaggio } from '../../store/azioni/personaggioActions';
+import { toCreazionePersonaggio } from '../../store/azioni/personaggioActions';
 import { toModificaUtente } from '../../store/azioni/utenteActions';
 import SchedaUtente from './SchedaUtente';
 
