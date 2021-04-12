@@ -3,7 +3,8 @@
 const initState = {
     personaggio: {},
     personaggiUtente: [],
-    redirect: ''
+    redirect: '',
+    isGarou: ''
 }
 
 const personaggioReducer = (state = initState, action) => {
@@ -21,7 +22,8 @@ const personaggioReducer = (state = initState, action) => {
             break;
         case 'LISTA_PERSONAGGI_UTENTE':
             state = {
-                personaggiUtente: action.personaggiUtente
+                personaggiUtente: action.personaggiUtente,
+                isGarou: action.isGarou
             }
             break;
         case 'TO_MODIFICA_PERSONAGGIO':
