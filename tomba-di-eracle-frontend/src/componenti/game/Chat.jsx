@@ -2,6 +2,8 @@ import { firestore } from "../../App";
 import React, { useEffect, useRef, useState } from 'react';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import firebase from 'firebase/app';
+import divisore from '../../img/divisore.png'
+import penna from '../../img/quill.png'
 
 
 export const ChatRoom = () => {
@@ -24,8 +26,10 @@ export const ChatRoom = () => {
 
     await dbMessaggi.add({ //add fa l'insert del documento nella raccolta,è un JSON
       testo: formValue,
-      inviatoAlle: firebase.firestore.FieldValue.serverTimestamp(),
+      // inviatoAlle: firebase.firestore.FieldValue.serverTimestamp(),
+      inviatoAlle: new Date(),
       idPersonaggio: personaggio.id,
+      nomePersonaggio: personaggio.nominativo,
       idLocation: location.id,
       immagine: personaggio.urlImmagine
     })
@@ -38,29 +42,33 @@ export const ChatRoom = () => {
     {/* NEL TAG MAIN VENGONO VISUALIZZATI I MESSAGGI */}
     <div className="chat">
       <main>
+          {messaggi && messaggi.map(msg =>
+            msg.idLocation === location.id ?
+              <MessaggioChat key={msg.id} messaggio={msg} />
+              :
+              "")}
 
-        {messaggi && messaggi.map(msg =>
-          msg.idLocation === location.id ?
-            <MessaggioChat key={msg.id} messaggio={msg} />
-            :
-            "")}
-
-        <span ref={dummy}></span>
-
+          <span ref={dummy}></span>
       </main>
 
       <form onSubmit={inviaMessaggio}>
 
-        <textarea name="areaMsg" id="areaMsg" cols="30" rows="10" value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="Scrivi messaggio..."></textarea>
+        <textarea className="font-lombardia" name="areaMsg" id="areaMsg" cols="30" rows="5" value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="Scrivi messaggio..."></textarea>
 
-        <button type="submit" disabled={!formValue}>🕊️</button>
+        <button type="submit" disabled={!formValue} title={!formValue ? 'Inserisci un testo' : 'Scrivi'}>
+          <img src={penna} alt='...' style={{width:"auto", height:"80%"}}/>
+        </button>
 
       </form>
     </div>
   </>)
 }
+
+
+
+
 function MessaggioChat(props) {
-  const { testo, idPersonaggio, immagine } = props.messaggio;
+  const { testo, idPersonaggio, immagine, nomePersonaggio, inviatoAlle } = props.messaggio;
 
   const personaggioAttivo = JSON.parse(sessionStorage.getItem('pgAttivo'));
 
@@ -68,9 +76,34 @@ function MessaggioChat(props) {
 
   return (<>
     <div className={`message ${messageClass}`}>
-      {/*se non c'è un immagine,mette l'immagine di default corrispondente all'url*/}
-      <img src={immagine || 'https://myasw.org/wp-content/uploads/2020/05/mr-anonymous.png'} />
-      <p>{testo}</p>
+      <table style={{ width: "100%" }}>
+        <tr>
+          {messageClass === 'sent' ?
+            <td align='right'>
+              <span className="font-lombardia" >{nomePersonaggio} </span>
+              {/*se non c'è un immagine,mette l'immagine di default corrispondente all'url*/}
+              <img src={immagine || 'https://myasw.org/wp-content/uploads/2020/05/mr-anonymous.png'} atl="..." />
+            </td>
+            :
+            <td align='left'>
+              {/*se non c'è un immagine,mette l'immagine di default corrispondente all'url*/}
+              <img src={immagine || 'https://myasw.org/wp-content/uploads/2020/05/mr-anonymous.png'} atl="..." />
+              {nomePersonaggio}
+            </td>
+          }
+        </tr>
+
+        <tr>
+          <td align={messageClass === 'sent' ? 'right' : 'left'}>
+            <p className="font-lombardia" style={{ fontSize: "1.8em" }}>{testo}</p>
+          </td>
+        </tr>
+        <tr>
+          <td align="center">
+            <img src={divisore} atl="..." style={{ width: "100%" }} />
+          </td>
+        </tr>
+      </table>
     </div>
   </>)
 }

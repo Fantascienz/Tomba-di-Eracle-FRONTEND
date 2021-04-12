@@ -12,6 +12,9 @@ import DettagliPersonaggio from '../personaggio/DettagliPersonaggio'
 import { SuonoDirezione } from '../utils/SuonoSuImmagine'
 import MinimappaRegolabile from '../location/MinimappaReagolabile'
 import GiornoNotte from './GiornoNotte'
+import { TabellaStanze } from '../tabelle/TabellaStanze'
+import { ChatRoom } from './Chat'
+import Meteo from './Meteo'
 //IMPORT IMMAGINI------------------------------------
 import cardGame from '../../img/gameCard.png';
 import cardGameUmbra from '../../img/gameCard_umbra.png'
@@ -24,12 +27,19 @@ import frecciaDX from '../../img/freccia_dx.png'
 import frecciaSU from '../../img/freccia_su.png'
 import frecciaGIU from '../../img/freccia_giu.png'
 import Scroll from '../../img/scroll.png'
+//IMPORT GIF------------------------------------
+import pioggia from '../../img/pioggia_gif.gif'
+import pioggiaLeggera from '../../img/pioggia_leggera_gif.gif'
+import neve from '../../img/neve_gif.gif'
+import tempesta from '../../img/tempesta_gif.gif'
+import nebbia from '../../img/nebbia_gif.gif'
+
 //IMPORT SUONI------------------------------------
 import passi from '../../suoni/suono_passi.mp3'
 import attraversaUmbra from '../../suoni/attraversa_guanto.mp3'
 import srotolaCarta from '../../suoni/flip_card.mp3'
-import { TabellaStanze } from '../tabelle/TabellaStanze'
-import { ChatRoom } from './Chat'
+import MeteoGif from './MeteoGif'
+
 
 
 class Gamepage extends Component {
@@ -95,9 +105,15 @@ class Gamepage extends Component {
 
                     <div className="navigazione-area">
 
+                        {/* ---Layer IMMAGINE SFONDO--- */}
                         <div className="navigazione-immagine" style={{ backgroundImage: `url('${location.urlImgGiorno}')` }}></div>
 
+                        {/* ---Layer CLIMA--- */}
+                        <MeteoGif clima={location.meteoGiorno.clima}/>
+
+                        {/* ---Layer CORNICE--- */}
                         {this.corniceNavigazione(location.tipo)}
+
 
                         {/* ------------PULSANTI AZIONI------------ */}
                         {/* pulsante: mappa------------------------------------------------- */}
@@ -211,7 +227,10 @@ class Gamepage extends Component {
 
                         {/* ------------SOLE/LUNA------------ */}
                         <GiornoNotte />
+                        
 
+                        {/* ------------METEO------------ */}
+                        <Meteo clima={location.meteoGiorno.clima} />
 
                         {/* ------------NOME LOCATION------------ */}
                         <div className="navigazione-link" title={"Id: " + location.id} style={{ left: "28.75%", top: "79.7%", width: "41.65%", height: "4.97%", zIndex: "9999", backgroundColor: "transparent" }}>
@@ -223,11 +242,11 @@ class Gamepage extends Component {
 
                 <div className="chat-sezione">
 
-                    <div style={{ backgroundColor: "yellow", position: "absolute", top: "10px", right: "10px", width: "600px", height: "400px" }}>
+                    <div style={{ backgroundColor: "transparent", position: "absolute", top: "0", left: "0", width: "100%", height: "100%" }}>
                         <ChatRoom />
                     </div>
 
-                    <div title={PG.nominativo} style={{ backgroundColor: "transparent", position: "absolute", bottom: "10px", right: "10px", width: "100px", height: "100px" }}>
+                    <div title={PG.nominativo} style={{ backgroundColor: "transparent", position: "absolute", top: "5%", right: "5%", width: "100px", height: "100px" }}>
                         <ModalComponente
                             suono={srotolaCarta}
                             bottone={<div className="btn-immagine"><DettagliPersonaggio personaggio={PG} altezza="100px" larghezza="auto" immagine={PG.urlImmagine} dimImmagine="100px auto" /></div>}
@@ -239,7 +258,7 @@ class Gamepage extends Component {
                                         <img src={Scroll} style={{ height: "800px", transform: "rotate(90deg)" }} />
                                     </div>
 
-                                    
+
                                     <div className="centrato" style={{ position: "relative", backgroundColor: "transparent", height: "100%", width: "100%" }}>
                                         {/* MUSICA di BACKGROUND--------------------- */}
                                         <iframe width="420" height="35" style={{ display: "" }} src={location.urlAudio} allow="autoplay"></iframe>
