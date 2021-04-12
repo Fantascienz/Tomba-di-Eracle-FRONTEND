@@ -211,9 +211,12 @@ class Gamepage extends Component {
                         }
 
                         {/* ------------SOLE/LUNA------------ */}
-                        <div onClick={() => withReactContent(Swal).fire({html: <ModificaMeteoGamepage ultimaLocation={JSON.parse(sessionStorage.getItem('ultimaLocation'))}/>})}>
-                            <GiornoNotte />
-                        </div>
+                        {(JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' || JSON.parse(sessionStorage.getItem('utente')).tipo === 'master') ?
+                            <div onClick={() => withReactContent(Swal).fire({ html: <ModificaMeteoGamepage ultimaLocation={JSON.parse(sessionStorage.getItem('ultimaLocation'))} /> })}>
+                                <GiornoNotte />
+                            </div>
+                            : <GiornoNotte />
+                        }
 
                         {/* ------------NOME LOCATION------------ */}
                         <div className="navigazione-link" title={"Id: " + location.id} style={{ left: "28.75%", top: "79.7%", width: "41.65%", height: "4.97%", zIndex: "9999", backgroundColor: "transparent" }}>

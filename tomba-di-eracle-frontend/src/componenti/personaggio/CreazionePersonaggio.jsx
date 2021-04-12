@@ -47,7 +47,6 @@ class CreazionePersonaggio extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-
         if (this.state.tipo === 'normale') {
             if (PersonaggioService.validazioneFormPersonaggio(this.state)) {
                 let umano = {
@@ -69,35 +68,35 @@ class CreazionePersonaggio extends Component {
                 })
             }
 
-        } else if (this.state.tipo === 'garou' &&  (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' || JSON.parse(sessionStorage.getItem('utente')).tipo === 'master')) {
+        } else if (this.state.tipo === 'garou' && (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' || JSON.parse(sessionStorage.getItem('utente')).tipo === 'master')) {
 
-                if (PersonaggioService.validazioneFormGarouAdminMaster(this.state)) {
-                    let garou = {
-                        nominativo: this.state.nominativo,
-                        sesso: this.state.sesso,
-                        rango: this.state.rango,
-                        razza: this.state.razza,
-                        branco: this.state.brancoInput + " " + this.state.ruolo,
-                        sept: this.state.septInput + " " + this.state.ruoloSept,
-                        urlImmagine: this.state.urlImmagine,
-                        urlCrinos: this.state.urlCrinos,
-                        urlLupo: this.state.urlLupo,
-                        utente: this.state.utente,
-                        crinos: true,
-                        umbra: true,
-                        tribu: this.state.tribu
+            if (PersonaggioService.validazioneFormGarouAdminMaster(this.state)) {
+                let garou = {
+                    nominativo: this.state.nominativo,
+                    sesso: this.state.sesso,
+                    rango: this.state.rango,
+                    razza: this.state.razza,
+                    branco: this.state.brancoInput + " " + this.state.ruolo,
+                    sept: this.state.septInput + " " + this.state.ruoloSept,
+                    urlImmagine: this.state.urlImmagine,
+                    urlCrinos: this.state.urlCrinos,
+                    urlLupo: this.state.urlLupo,
+                    utente: this.state.utente,
+                    crinos: true,
+                    umbra: true,
+                    tribu: this.state.tribu
 
-                    }
-
-                    this.props.creaPersonaggio(garou)
-                } else {
-                    withReactContent(Swal).fire({
-                        title: <p>Tutti i campi sono obbligatori!</p>
-                    })
                 }
 
-        } else if (this.state.tipo === 'garou' &&  JSON.parse(sessionStorage.getItem('utente')).tipo === 'vip')  {
-           
+                this.props.creaPersonaggio(garou)
+            } else {
+                withReactContent(Swal).fire({
+                    title: <p>Tutti i campi sono obbligatori!</p>
+                })
+            }
+
+        } else if (this.state.tipo === 'garou' && JSON.parse(sessionStorage.getItem('utente')).tipo === 'vip') {
+
             if (PersonaggioService.validazioneFormGarouVip(this.state)) {
                 let garou = {
                     nominativo: this.state.nominativo,
@@ -251,36 +250,36 @@ class CreazionePersonaggio extends Component {
     }
 
     isGarouBranco = () => {
-        if (this.state.tipo === 'garou' &&  (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' || JSON.parse(sessionStorage.getItem('utente')).tipo === 'master')) {
-                return (
-                    <React.Fragment>
-                        <div className="input-group">
-                            <span className="input-group-text" style={{ width: "30%" }}>Branco</span>
-                            <input className="form-control" type="text" id="brancoInput" onChange={this.handleChange} value={this.state.brancoInput} />
-                        </div>
-                    </React.Fragment>
-                )
-            
+        if (this.state.tipo === 'garou' && (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' || JSON.parse(sessionStorage.getItem('utente')).tipo === 'master')) {
+            return (
+                <React.Fragment>
+                    <div className="input-group">
+                        <span className="input-group-text" style={{ width: "30%" }}>Branco</span>
+                        <input className="form-control" type="text" id="brancoInput" onChange={this.handleChange} value={this.state.brancoInput} />
+                    </div>
+                </React.Fragment>
+            )
+
         }
-        
+
     }
 
     isGarouRuolo = () => {
-        if (this.state.tipo === 'garou' &&  (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' || JSON.parse(sessionStorage.getItem('utente')).tipo === 'master')) {
-                return (
-                    <React.Fragment>
-                        <div className="input-group">
-                            <span className="input-group-text" style={{ width: "30%" }}>Ruolo nel Branco</span>
-                            <input className="form-control" type="text" id="ruolo" onChange={this.handleChange} value={this.state.ruolo} />
-                        </div>
-                    </React.Fragment>
-                )
-            
+        if (this.state.tipo === 'garou' && (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' || JSON.parse(sessionStorage.getItem('utente')).tipo === 'master')) {
+            return (
+                <React.Fragment>
+                    <div className="input-group">
+                        <span className="input-group-text" style={{ width: "30%" }}>Ruolo nel Branco</span>
+                        <input className="form-control" type="text" id="ruolo" onChange={this.handleChange} value={this.state.ruolo} />
+                    </div>
+                </React.Fragment>
+            )
+
         }
     }
 
     isGarouSept = () => {
-        if (this.state.tipo === 'garou' &&  (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' || JSON.parse(sessionStorage.getItem('utente')).tipo === 'master')) {
+        if (this.state.tipo === 'garou' && (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' || JSON.parse(sessionStorage.getItem('utente')).tipo === 'master')) {
             return (
                 <React.Fragment>
                     <div className="input-group">
@@ -293,7 +292,7 @@ class CreazionePersonaggio extends Component {
     }
 
     isGarouRuoloSept = () => {
-        if (this.state.tipo === 'garou' &&  (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' || JSON.parse(sessionStorage.getItem('utente')).tipo === 'master')) {
+        if (this.state.tipo === 'garou' && (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' || JSON.parse(sessionStorage.getItem('utente')).tipo === 'master')) {
             return (
                 <React.Fragment>
                     <div className="input-group">
@@ -336,7 +335,7 @@ class CreazionePersonaggio extends Component {
         if (this.state.tipo === 'png') {
             return (
                 <React.Fragment>
-                     <div className="input-group">
+                    <div className="input-group">
                         <span className="input-group-text" style={{ width: "30%" }}>Può attraversare il Guanto?</span>
                         <select className="form-select" id="umbra" value={this.state.umbra} onChange={this.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)" }}>
                             <option defaultValue="">Scegli se il png può attraversare il Guanto</option>
@@ -353,7 +352,7 @@ class CreazionePersonaggio extends Component {
         if (this.state.tipo === 'png') {
             return (
                 <React.Fragment>
-                     <div className="input-group">
+                    <div className="input-group">
                         <span className="input-group-text" style={{ width: "30%" }}>Può inviare un Chirottero?</span>
                         <select className="form-select" id="crinos" value={this.state.crinos} onChange={this.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)" }}>
                             <option defaultValue="">Scegli se il png può inviare un Chirottero</option>
