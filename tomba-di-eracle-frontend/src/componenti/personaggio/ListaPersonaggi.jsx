@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { ThemeProvider } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
@@ -92,7 +91,7 @@ class ListaPersonaggi extends Component {
 
     modificaNomeGarou = (pg) => {
         if (this.state.nuovoNomeGarou !== '') {
-            if (pg.auspicio !== null) {
+            if (pg.umbra === true) {
                 pg.nomeGarou = this.state.nuovoNomeGarou
                 this.modificaPersonaggio(pg)
             } else {
@@ -175,7 +174,7 @@ class ListaPersonaggi extends Component {
         if (pg.utente.id === 0) {
             return "10"
         }
-        if (pg.nomeGarou !== null) {
+        if (pg.umbra === true) {
             return "6"
         }
         return "4"
@@ -602,11 +601,11 @@ class ListaPersonaggi extends Component {
                                     <td>{pg.sesso}</td>
                                     <td>{pg.razza}</td>
                                     <td>{pg.rango}</td>
-                                    <td>{pg.nomeGarou !== null ? pg.nomeGarou : '/---/'}</td>
-                                    <td>{pg.auspicio !== null ? pg.auspicio : '/---/'}</td>
+                                    <td>{pg.nomeGarou != null ? pg.nomeGarou : '/---/'}</td>
+                                    <td>{pg.auspicio != null ? pg.auspicio : '/---/'}</td>
                                     <td>{pg.tribu}</td>
-                                    <td>{pg.branco !== null ? pg.branco : '/---/'}</td>
-                                    <td>{pg.sept !== null ? pg.sept : '/---/'}</td>
+                                    <td>{pg.branco != null ? pg.branco : '/---/'}</td>
+                                    <td>{pg.sept != null ? pg.sept : '/---/'}</td>
                                     <td><p>ID: {pg.utente.id}</p> <p>{pg.utente.nominativo}</p> <p>{pg.utente.email}</p></td>
                                     <td>{pg.dataCreazione}</td>
                                     <td>{pg.stato}</td>

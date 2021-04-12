@@ -18,8 +18,6 @@ class TabellaUtenti extends Component {
             }
             this.props.filtraUtentiByTipo(filtro)
         }
-        
-        
     }
 
     handleCerca = (e) => {
