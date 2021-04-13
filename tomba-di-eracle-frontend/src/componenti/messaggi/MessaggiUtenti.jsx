@@ -22,8 +22,6 @@ class MessaggiUtenti extends Component {
 
     render() {
         let listaOrdinata = []
-        // alert('blocco')
-        console.log(this.props.conversazioni)
         if (this.props.conversazioni !== '') {
             listaOrdinata = this.props.conversazioni.sort(
                 (a, b) => (a.id > b.id ? -1 : Number(a.id < b.id))
