@@ -38,37 +38,37 @@ class Meteo extends Component {
     }
 
     iconaMeteoGIORNO() {
-        if (this.props.clima == "Thunderstorm") {
+        if (this.props.location.meteoGiorno.clima == "Thunderstorm") {
             return (
                 <>
                 <img src={thunderstormD} style={{ width: "100%" }} alt="..." title="Tempesta"/>
                 </>
             )
-        } else if (this.props.clima == "Clouds") {
+        } else if (this.props.location.meteoGiorno.clima == "Clouds") {
             return (
                 <>
                 <img src={cloudsD} style={{ width: "100%" }} alt="..." title="Nuvolo"/>
                 </>
             )
-        } else if (this.props.clima == "Drizzle") {
+        } else if (this.props.location.meteoGiorno.clima == "Drizzle") {
             return (
                 <>
                 <img src={drizzleD} style={{ width: "100%" }} alt="..." title="Pioggia Leggera"/>
                 </>
             )
-        } else if (this.props.clima == "Fog") {
+        } else if (this.props.location.meteoGiorno.clima == "Fog") {
             return (
                 <>
                 <img src={fogD} style={{ width: "100%" }} alt="..." title="Nebbioso"/>
                 </>
             )
-        } else if (this.props.clima == "Rain") {
+        } else if (this.props.location.meteoGiorno.clima == "Rain") {
             return (
                 <>
                 <img src={rainD} style={{ width: "100%" }} alt="..." title="Pioggia Forte"/>
                 </>
             )
-        } else if (this.props.clima == "Snow") {
+        } else if (this.props.location.meteoGiorno.clima == "Snow") {
             return (
                 <>
                 <img src={snowD} style={{ width: "100%" }} alt="..." title="Nevoso"/>
@@ -84,37 +84,37 @@ class Meteo extends Component {
     }
 
     iconaMeteoNOTTE() {
-        if (this.props.clima == "Thunderstorm") {
+        if (this.props.location.meteoNotte.clima == "Thunderstorm") {
             return (
                 <>
                 <img src={thunderstormN} style={{ width: "100%" }} alt="..." title="Tempesta"/>
                 </>
             )
-        } else if (this.props.clima == "Clouds") {
+        } else if (this.props.location.meteoNotte.clima == "Clouds") {
             return (
                 <>
                 <img src={cloudsN} style={{ width: "100%" }} alt="..." title="Nuvolo"/>
                 </>
             )
-        } else if (this.props.clima == "Drizzle") {
+        } else if (this.props.location.meteoNotte.clima == "Drizzle") {
             return (
                 <>
                 <img src={drizzleN} style={{ width: "100%" }} alt="..." title="Pioggia Leggera"/>
                 </>
             )
-        } else if (this.props.clima == "Fog") {
+        } else if (this.props.location.meteoNotte.clima == "Fog") {
             return (
                 <>
                 <img src={fogN} style={{ width: "100%" }} alt="..." title="Nebbioso"/>
                 </>
             )
-        } else if (this.props.clima == "Rain") {
+        } else if (this.props.location.meteoNotte.clima == "Rain") {
             return (
                 <>
                 <img src={rainN} style={{ width: "100%" }} alt="..." title="Pioggia Forte"/>
                 </>
             )
-        } else if (this.props.clima == "Snow") {
+        } else if (this.props.location.meteoNotte.clima == "Snow") {
             return (
                 <>
                 <img src={snowN} style={{ width: "100%" }} alt="..." title="Nevoso"/>

@@ -53,11 +53,6 @@ class Footer extends Component {
                     </div>
 
                     <div className="col-sm-2">
-                        {(JSON.parse(sessionStorage.getItem('ultimaLocation')) != null) ?
-                            <iframe width="420" height="35" style={{ display: "" }} src={JSON.parse(sessionStorage.getItem('ultimaLocation')).urlAudio} allow="autoplay"></iframe>
-                        :
-                            null
-                        }
                     </div>
 
                     <div className="col-sm-2" align="right" style={{paddingTop:"0.5%"}}>

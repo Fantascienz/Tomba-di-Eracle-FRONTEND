@@ -52,9 +52,9 @@ export const ChatRoom = () => {
       </main>
 
       <form onSubmit={inviaMessaggio}>
-
+            
         <textarea className="font-lombardia" name="areaMsg" id="areaMsg" cols="30" rows="5" value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="Scrivi messaggio..."></textarea>
-
+        
         <button type="submit" disabled={!formValue} title={!formValue ? 'Inserisci un testo' : 'Scrivi'}>
           <img src={penna} alt='...' style={{width:"auto", height:"80%"}}/>
         </button>

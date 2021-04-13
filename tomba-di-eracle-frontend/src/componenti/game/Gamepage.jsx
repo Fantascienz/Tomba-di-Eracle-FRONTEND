@@ -109,7 +109,7 @@ class Gamepage extends Component {
                         <div className="navigazione-immagine" style={{ backgroundImage: `url('${location.urlImgGiorno}')` }}></div>
 
                         {/* ---Layer CLIMA--- */}
-                        <MeteoGif clima={location.meteoGiorno.clima} />
+                        <MeteoGif location={location} />
 
                         {/* ---Layer CORNICE--- */}
                         {this.corniceNavigazione(location.tipo)}
@@ -235,7 +235,7 @@ class Gamepage extends Component {
 
 
                         {/* ------------METEO------------ */}
-                        <Meteo clima={location.meteoGiorno.clima} />
+                        <Meteo location={location} />
 
                         {/* ------------NOME LOCATION------------ */}
                         <div className="navigazione-link" title={"Id: " + location.id} style={{ left: "28.75%", top: "79.7%", width: "41.65%", height: "4.97%", zIndex: "9999", backgroundColor: "transparent" }}>
