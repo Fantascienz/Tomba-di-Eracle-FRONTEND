@@ -1,7 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
 import { getConversazione, inviaMessaggio } from "../../store/azioni/messaggiActions"
-import Header from "../layout/Header";
 
 class ChatAdmin extends React.Component {
 
@@ -35,7 +34,9 @@ class ChatAdmin extends React.Component {
             <>
                 <div className={`message ${messageClass}`}>
                     <p>{messaggio.testo}</p>
+
                 </div>
+                <hr />
             </>)
     }
 
@@ -43,20 +44,18 @@ class ChatAdmin extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <Header />
-                <div className="corpoComponente">
-                    <br /><br /><br />
-                    <div className="chat">
-                        <main>
-                            {this.props.messaggi && this.props.messaggi.map(msg =>
-                                this.renderMessaggi(msg))}
-                        </main>
+                <div className="chat-admin row">
+                    <main className="col-6">
+                        {this.props.messaggi && this.props.messaggi.map(msg =>
+                            this.renderMessaggi(msg))}
+                    </main>
 
-                        <form onSubmit={() => this.handleSubmit()}>
-                            <textarea name="testo" id="testo" cols="30" rows="10" placeholder="Scrivi messaggio..." onChange={this.handleChange}></textarea>
-                            <button type="submit" disabled={this.state.testo === '' ? true : false}>🕊️</button>
-                        </form>
-                    </div>
+                    <div className="col-1"></div>
+
+                    <form className="col-5" onSubmit={() => this.handleSubmit()}>
+                        <textarea name="testo" id="testo" cols="30" rows="10" placeholder="Scrivi messaggio..." onChange={this.handleChange}></textarea>
+                        <button type="submit" disabled={this.state.testo === '' ? true : false}>🕊️</button>
+                    </form>
                 </div>
             </React.Fragment>
         )

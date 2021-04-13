@@ -622,3 +622,84 @@ button:disabled {
 	color:red;
   font-size: 2em
 }
+
+/* CHAT ADMIN -------------------------------------------------------------------------*/
+.chat-admin {
+  background-color: transparent;
+  /* text-align: center; */
+  width: 100%;
+  height: 90%;
+  margin: 0 auto;
+  background-image: url('./img/libro.png');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  padding-top:5%
+}
+
+.chat-admin main {
+  padding: 5%;
+  top: 5%;
+  height: 93%;
+  width: 50%;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  background-color: transaprent;
+}
+
+.chat-admin form {
+  height: 80%;
+  position: relative;
+  top: 5%;
+  right:3%;
+  width: 40%;
+  display: flex;
+  font-size: 1rem;
+  align-items: flex-end;
+}
+
+.chat-admin form button {
+  width: 50%;
+  height: 25%;
+  position: relative;
+}
+
+
+.chat-admin textarea {
+  line-height: 1;
+  width: 100%;
+  height: 100%;
+  font-size: 1.5rem;
+  background-color: transparent;
+  color: black;
+  outline: none;
+  border: 1px solid rgba(0,0,0,0.2);
+  padding: 0 2%;
+}
+
+
+.chat-admin button {
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  font-size: 1.25rem;
+  background-color: transparent;
+}
+
+.chat-admin ul, li {
+  text-align: left;
+  list-style: none;
+}
+
+.chat-admin p {
+  max-width: 500px;
+  margin-bottom: 12px;
+  line-height: 24px;
+  padding: 10px 20px;
+  border-radius: 0px;
+  position: relative;
+  color: black;
+}

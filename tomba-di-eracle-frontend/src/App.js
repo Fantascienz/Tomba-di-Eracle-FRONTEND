@@ -18,6 +18,7 @@ import 'firebase/auth';
 import Forecast from './componenti/game/Forecast';
 import ChatAdmin from './componenti/messaggi/ChatAdmin';
 import MessaggiUtenti from './componenti/messaggi/MessaggiUtenti';
+import MessaggiAdmin from './componenti/messaggi/MessaggiAdmin';
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
@@ -52,7 +53,7 @@ function App() {
           <Route path="/modificaLocation" component={ModificaLocation} />
           <Route path="/creazioneStanza" component={CreazioneStanza} />
           <Route path="/macromappa" component={Macromappa} />
-          <Route path="/contattaAdmin" component={ChatAdmin} />
+          <Route path="/contattaAdmin" component={MessaggiAdmin} />
           <Route path="/messaggiUtenti" component={MessaggiUtenti }/>
         </Switch>
       </Router>
