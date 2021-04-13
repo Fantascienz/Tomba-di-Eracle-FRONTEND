@@ -43,9 +43,16 @@ export const getPersonaggiUtente = (utente) => {
     return (dispatch) => {
         PersonaggioService.getPersonaggiUtente(utente).then(res => {
             sessionStorage.setItem('personaggi', JSON.stringify(res.data));
+            let garou =  false
+            JSON.parse(sessionStorage.getItem('personaggi')).forEach(element => {
+                if(element.umbra === true) {
+                    garou = true
+                }
+            });
             dispatch({
                 type: 'LISTA_PERSONAGGI_UTENTE',
-                personaggiUtente: res.data
+                personaggiUtente: res.data,
+                isGarou: garou
             })
         });
     }
