@@ -8,6 +8,10 @@ class MessaggiService {
         return axios.post(URL, messaggio)
     }
 
+    eliminaMessaggio(idUtente) {
+        return axios.delete(URL + '/' + idUtente)
+    }
+
     getConversazione(idUtente) {
         return axios.get(URL + "/" + idUtente)
     }

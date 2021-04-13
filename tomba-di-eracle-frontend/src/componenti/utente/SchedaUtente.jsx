@@ -122,6 +122,7 @@ class SchedaUtente extends Component {
                     <React.Fragment>
                         <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%" }} onClick={() => this.visualizzaListaUtenti()}>Lista Utenti</button>
                         <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%" }} onClick={() => this.visualizzaPgAdmin()}>I Tuoi Personaggi</button>
+                        <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%" }} onClick={() => this.messaggi()}>Messaggi Utenti</button>
                     </React.Fragment>
                 )
             }

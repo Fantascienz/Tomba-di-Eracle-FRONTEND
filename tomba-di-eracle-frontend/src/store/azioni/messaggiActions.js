@@ -63,3 +63,14 @@ export const getAllConversazioni = () => {
         )
     }
 }
+
+export const eliminaConversazione = (utente) => {
+    return (dispatch) => {
+        MessaggiService.eliminaMessaggio(utente.id).then(res =>
+            dispatch({
+                type: "GET_CONVERSAZIONI_ATTIVE",
+                conversazioni: res.data
+            })
+        )
+    }
+}

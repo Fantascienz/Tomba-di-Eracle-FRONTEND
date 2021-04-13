@@ -492,7 +492,7 @@ div.centrato{
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
-  background-color: transaprent;
+  background-color: transparent;
 }
 
 main::-webkit-scrollbar {
