@@ -27,8 +27,7 @@ export const getConversazione = () => {
             messaggi = res.data
             MessaggiService.getAllConversazioni().then(res =>
                 dispatch({
-                    type: "GET_CONVERSAZIONE",
-                    messaggi: messaggi,
+                    type: "GET_CONVERSAZIONI_ATTIVE",
                     conversazioni: res.data
                 }))
         }
@@ -65,11 +64,18 @@ export const getAllConversazioni = () => {
 }
 
 export const eliminaConversazione = (utente) => {
+    let messaggi;
     return (dispatch) => {
         MessaggiService.eliminaMessaggio(utente.id).then(res =>
-            dispatch({
-                type: "GET_CONVERSAZIONI_ATTIVE",
-                conversazioni: res.data
+            MessaggiService.getConversazione(utente.id).then(res => {
+                messaggi = res.data
+                MessaggiService.getAllConversazioni().then(res => {
+                    dispatch({
+                        type: "GET_CONVERSAZIONE",
+                        messaggi: messaggi,
+                        conversazioni: res.data,
+                    })
+                })
             })
         )
     }
