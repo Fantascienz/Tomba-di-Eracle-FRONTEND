@@ -601,6 +601,7 @@ button:disabled {
   background: transparent;
   align-self: flex-end;
 }
+
 .received p {
   background: transparent;
   color: black;

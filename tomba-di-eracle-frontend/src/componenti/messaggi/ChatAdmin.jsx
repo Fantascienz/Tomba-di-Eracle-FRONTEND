@@ -16,9 +16,9 @@ class ChatAdmin extends React.Component {
 
     handleSubmit = (e) => {
         let messaggio = {
-            utente: JSON.parse(sessionStorage.getItem('utente')),
+            utente: JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' ? this.props.utente : JSON.parse(sessionStorage.getItem('utente')),
             testo: this.state.testo,
-            inviatoDa: "Utente"
+            inviatoDa: JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' ? 'Admin' : 'Utente'
         }
         this.props.inviaMessaggio(messaggio)
     }
@@ -28,7 +28,12 @@ class ChatAdmin extends React.Component {
     }
 
     renderMessaggi = (messaggio) => {
-        const messageClass = JSON.parse(sessionStorage.getItem('utente')).id === messaggio.utente.id ? 'sent' : 'received';
+        let messageClass;
+        if (JSON.parse(sessionStorage.getItem('utente')).tipo != 'admin') {
+            messageClass = messaggio.inviatoDa === 'Utente' ? 'sent' : 'received';
+        } else {
+            messageClass = messaggio.inviatoDa === 'Admin' ? 'sent' : 'received';
+        }
 
         return (
             <>

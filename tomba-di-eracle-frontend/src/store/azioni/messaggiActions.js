@@ -11,7 +11,7 @@ export const inviaMessaggio = (messaggio) => {
                     dispatch({
                         type: "GET_CONVERSAZIONE",
                         messaggi: messaggi,
-                        conversazioni: res.data
+                        conversazioni: res.data,
                     })
                 })
             }
@@ -30,6 +30,23 @@ export const getConversazione = () => {
                     type: "GET_CONVERSAZIONE",
                     messaggi: messaggi,
                     conversazioni: res.data
+                }))
+        }
+        )
+    }
+}
+
+export const getConversazioneUtente = (utente) => {
+    let messaggi;
+    return (dispatch) => {
+        MessaggiService.getConversazione(utente.id).then(res => {
+            messaggi = res.data
+            MessaggiService.getAllConversazioni().then(res =>
+                dispatch({
+                    type: "GET_CONVERSAZIONE",
+                    messaggi: messaggi,
+                    conversazioni: res.data,
+                    utente: utente
                 }))
         }
         )

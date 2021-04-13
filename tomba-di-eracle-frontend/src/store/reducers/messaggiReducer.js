@@ -1,7 +1,8 @@
 
 const initState = {
     messaggi: [],
-    conversazioni: []
+    conversazioni: [],
+    utente: 0
 }
 
 const messaggiReducer = (state = initState, action) => {
@@ -10,7 +11,8 @@ const messaggiReducer = (state = initState, action) => {
         case "GET_CONVERSAZIONE":
             state = {
                 messaggi: action.messaggi,
-                conversazioni: action.conversazioni
+                conversazioni: action.conversazioni,
+                utente: action.utente
             }
             break;
         case "GET_CONVERSAZIONI_ATTIVE":
