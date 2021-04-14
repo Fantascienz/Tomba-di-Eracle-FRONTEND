@@ -60,7 +60,6 @@ class CreazioneStanza extends Component {
                 },
                 superLocation: this.state.loc,
                 direzioneUscita: this.state.uscita
-
             }
             LocationService.creaStanza(stanza).then(
                 alert('Stanza creata con successo!')
@@ -69,11 +68,6 @@ class CreazioneStanza extends Component {
         } else {
             event.preventDefault();
         }
-    }
-
-    componentDidMount() {
-
-
     }
 
     render() {
