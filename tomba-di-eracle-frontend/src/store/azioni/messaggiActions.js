@@ -27,8 +27,9 @@ export const getConversazione = () => {
             messaggi = res.data
             MessaggiService.getAllConversazioni().then(res =>
                 dispatch({
-                    type: "GET_CONVERSAZIONI_ATTIVE",
-                    conversazioni: res.data
+                    type: "GET_CONVERSAZIONE",
+                    messaggi: messaggi,
+                    conversazioni: res.data,
                 }))
         }
         )

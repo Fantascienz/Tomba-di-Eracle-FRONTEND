@@ -18,6 +18,7 @@ class ChatAdmin extends React.Component {
     handleSubmit = (e) => {
         let messaggio = {
             utente: JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' ? this.props.utente : JSON.parse(sessionStorage.getItem('utente')),
+            admin: JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' ? JSON.parse(sessionStorage.getItem('utente')) : null,
             testo: this.state.testo,
             inviatoDa: JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' ? 'Admin' : 'Utente'
         }
@@ -40,7 +41,7 @@ class ChatAdmin extends React.Component {
         }
         let srcImmagine;
         if (messaggio.inviatoDa === 'Utente') {
-            srcImmagine =  avatarEracle ;
+            srcImmagine = avatarEracle;
         } else {
             srcImmagine = 'https://cdn.dribbble.com/users/295073/screenshots/5081089/hacker_logo_v1.0.jpg?compress=1&resize=400x300';
         }
@@ -48,10 +49,20 @@ class ChatAdmin extends React.Component {
             <>
                 <div className={`message ${messageClass}`} key={messaggio.id}>
                     <img src={srcImmagine} style={{ height: '50px', width: '50px' }} className="tombaJPG rounded-circle"></img>
-                    <p className="font-lombardia" style={{ fontSize: '2em' }}>{messaggio.testo}</p>
+                    <p className="font-lombardia" style={{ fontSize: '2em' }}
+                   title={this.renderTitle(messaggio)} >{messaggio.testo}</p>
                 </div>
                 <hr />
             </>)
+    }
+
+    renderTitle = (messaggio) => {
+        if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin') {
+            if (messaggio.inviatoDa === 'Admin') {
+                return messaggio.admin.nominativo;
+            }
+        }
+        return ""
     }
 
 

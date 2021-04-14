@@ -32,7 +32,7 @@ class MessaggiUtenti extends Component {
             <React.Fragment>
                 <Header />
                 <div className="corpoComponente" style={{ width: "100%", height: "100%" }}>
-                    <div className="row" style={{ width: "100%", height: "100%", marginTop: '1%' }}>
+                    <div className="row" style={{ width: "100%", height: "100%", marginTop: '1%', marginLeft: '1%' }}>
                         <div className="col-md-5">
                             <h1 className="font-lombardia-yellow bg-dark">Conversazioni Attive</h1>
                             {this.props.conversazioni.length == 0 ? <p className="font-lombardia-yellow bg-dark" style={{ fontSize: '2em' }}>Non ci sono conversazioni attive</p> :
