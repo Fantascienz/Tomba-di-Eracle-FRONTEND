@@ -14,11 +14,11 @@ class CreazioneLocation extends Component {
         ingresso: '',
         urlImgGiorno: '',
         urlImgNotte: '',
-        urlAudio: '',
+        urlAudio: null,
         chiave: '',
         urlImgGiornoUmbra: '',
         urlImgNotteUmbra: '',
-        urlAudioUmbra: '',
+        urlAudioUmbra: null,
         locationIngresso: '',
         direzioneIngresso: ''
     }
