@@ -23,7 +23,6 @@ export const ChatRoom = () => {
     e.preventDefault();
 
 
-
     await dbMessaggi.add({ //add fa l'insert del documento nella raccolta,è un JSON
       testo: formValue,
       // inviatoAlle: firebase.firestore.FieldValue.serverTimestamp(),
