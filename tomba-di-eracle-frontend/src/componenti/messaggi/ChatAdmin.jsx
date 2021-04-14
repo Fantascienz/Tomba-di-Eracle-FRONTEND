@@ -20,7 +20,8 @@ class ChatAdmin extends React.Component {
             utente: JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' ? this.props.utente : JSON.parse(sessionStorage.getItem('utente')),
             admin: JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' ? JSON.parse(sessionStorage.getItem('utente')) : null,
             testo: this.state.testo,
-            inviatoDa: JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' ? 'Admin' : 'Utente'
+            inviatoDa: JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' ? 'Admin' : 'Utente',
+            inviatoAlle: new Date()
         }
         if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin') {
             alert('Risposta inviata a ' + this.props.utente.nominativo)
