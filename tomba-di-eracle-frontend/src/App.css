@@ -495,15 +495,15 @@ div.centrato{
   background-color: transparent;
 }
 
-main::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: 0.25rem;
 }
 
-main::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
   background: #1e1e24;
 }
 
-main::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
   background: #eeaa44;
 }
 

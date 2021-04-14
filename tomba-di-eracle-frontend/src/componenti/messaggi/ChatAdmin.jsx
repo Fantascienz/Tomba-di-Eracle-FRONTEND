@@ -2,6 +2,7 @@ import React from "react"
 import { connect } from "react-redux"
 import { getConversazione, inviaMessaggio } from "../../store/azioni/messaggiActions"
 import avatarEracle from '../../img/eracleCapovolto.png';
+import penna from '../../img/quill.png'
 
 class ChatAdmin extends React.Component {
 
@@ -51,7 +52,7 @@ class ChatAdmin extends React.Component {
                 <div className={`message ${messageClass}`} key={messaggio.id}>
                     <img src={srcImmagine} style={{ height: '50px', width: '50px' }} className="tombaJPG rounded-circle"></img>
                     <p className="font-lombardia" style={{ fontSize: '2em' }}
-                   title={this.renderTitle(messaggio)} >{messaggio.testo}</p>
+                        title={this.renderTitle(messaggio)} >{messaggio.testo}</p>
                 </div>
                 <hr />
             </>)
@@ -65,7 +66,6 @@ class ChatAdmin extends React.Component {
         }
         return ""
     }
-
 
     render() {
 
@@ -88,7 +88,9 @@ class ChatAdmin extends React.Component {
 
                     <form className="col-5" onSubmit={() => this.handleSubmit()}>
                         <textarea name="testo" id="testo" cols="30" rows="10" placeholder="Scrivi messaggio..." onChange={this.handleChange} className="font-lombardia" style={{ fontSize: '2em' }}></textarea>
-                        <button type="submit" disabled={this.state.testo === '' ? true : false}>🕊️</button>
+                        <button type="submit" disabled={this.state.testo === '' ? true : false}>
+                            <img src={penna} alt=""/>
+                        </button>
                     </form>
                 </div>
             </React.Fragment>
