@@ -5,6 +5,7 @@ import adminReducer from './adminReducer'
 import masterReducer from './masterReducer';
 import gameReducer from './gameReducer';
 import messaggiReducer from './messaggiReducer';
+import chirotteriReducer from './chirotteriReducer';
 
 const rootReducer = combineReducers({
     utente: utenteReducer,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
     admin: adminReducer,
     master: masterReducer,
     game: gameReducer,
-    messaggi: messaggiReducer
+    messaggi: messaggiReducer,
+    chirotteri: chirotteriReducer
 })
 
 export default rootReducer;

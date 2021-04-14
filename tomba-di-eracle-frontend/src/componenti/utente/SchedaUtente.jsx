@@ -108,8 +108,6 @@ class SchedaUtente extends Component {
                     <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "33.33%", fontSize: "0.8vw", borderRadius: "0 5px 5px 0" }} onClick={() => this.props.creazionePng()} >Crea Png</button>
                 </div>
             )
-
-
         }
     }
 
