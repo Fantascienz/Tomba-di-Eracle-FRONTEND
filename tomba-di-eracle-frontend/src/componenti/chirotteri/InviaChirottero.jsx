@@ -1,5 +1,6 @@
 import { useState } from "react"
 import chirottero from '../../img/chirottero_icona.png'
+import ChirotteriService from "../../servizi/ChirotteriService"
 
 
 export const InviaChirottero = ({ abilitati }) => {
@@ -9,10 +10,12 @@ export const InviaChirottero = ({ abilitati }) => {
 
     return (
         <>
-            <form onSubmit={() => inviaChirottero()}>
+            <form onSubmit={() => inviaChirottero(testo, destinatario)}>
                 <select name="destinatario" id="destinatario" className="form-select" style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)", marginBottom: "1%" }} onChange={(e) => setDestinatario(e.target.value)}>
+                    <option value={0}>Seleziona destinatario..</option>
                     {abilitati.map(personaggio =>
-                        <option value={personaggio.id} key={personaggio.id}>{personaggio.id}: {personaggio.nominativo}</option>
+                        JSON.parse(sessionStorage.getItem('pgAttivo')).id === personaggio.id ? '' :
+                            <option value={personaggio.id} key={personaggio.id}>{personaggio.id}: {personaggio.nominativo}</option>
                     )}
                 </select>
                 <textarea name="testo" id="testo" rows="8" placeholder="Scrivi messaggio..." onChange={(e) => setTesto(e.target.value)}
@@ -27,11 +30,13 @@ export const InviaChirottero = ({ abilitati }) => {
 
 const inviaChirottero = (testo, destinatario) => {
     let chirottero = {
-        mittente: JSON.parse(sessionStorage.getItem('utente')),
+        mittente: JSON.parse(sessionStorage.getItem('pgAttivo')),
         destinatario: {
             id: destinatario
         },
         testo: testo
     }
-
+    ChirotteriService.invia(chirottero).then(
+        alert('Chirottero inviato!')
+    )
 }

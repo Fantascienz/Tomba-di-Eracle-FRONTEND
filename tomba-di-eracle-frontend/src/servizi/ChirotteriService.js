@@ -4,8 +4,12 @@ const URL = 'http://localhost:8080/chirotteri/'
 
 class ChirotteriService {
 
-    getAllAbilitati () {
+    getAllAbilitati() {
         return axios.get(URL + '/abilitati')
+    }
+
+    invia(chirottero) {
+        return axios.post(URL, chirottero)
     }
 }
 
