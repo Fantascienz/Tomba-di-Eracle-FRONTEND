@@ -129,10 +129,11 @@ class Gamepage extends Component {
                                         </div>
 
                                         <div className="centrato" style={{ position: "fixed", backgroundColor: "transparent", height: "500px", width: "500px" }}>
-                                            {location.tipo !== "Stanza" ?
-                                                <Macromappa idLocation={location.id} pxDimensioniMappa="500" />
+                                            {location.tipo.includes("Stanza") && location.urlMinimappa != null ?
+                                                <MinimappaRegolabile idLocation="" pxDimensioniMappa="500" lenteDisplay="none" cellePerRiga="2" immagineMinimappa={location.urlMinimappa} />
                                                 :
-                                                <MinimappaRegolabile idLocation="" pxDimensioniMappa="500" lenteDisplay="none" cellePerRiga="2" immagineMinimappa={location.urlMinimappa} />}
+                                                <Macromappa idLocation={location.id} pxDimensioniMappa="500" />
+                                            }
                                         </div>
                                     </div>
                                 } />
@@ -177,7 +178,7 @@ class Gamepage extends Component {
                             :
                             <SuonoDirezione suono={passi}
                                 funzione={{ onend: () => this.navigazione(JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.idLocationNord) }}
-                                title={"vai a " + JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.nomeLocationNord}
+                                title={(JSON.parse(sessionStorage.getItem('ultimaLocation')).tipo.includes("Stanza") ? "Torna" : "Vai") + " a " + JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.nomeLocationNord}
                                 className="icona-freccia-alta"
                                 src={frecciaSU}
                                 style={{ left: "44.05%", top: "8.73%", width: "11.25%", height: "8.56%", zIndex: "9999" }} />
@@ -191,7 +192,7 @@ class Gamepage extends Component {
                             :
                             <SuonoDirezione suono={passi}
                                 funzione={{ onend: () => this.navigazione(JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.idLocationEst) }}
-                                title={"vai a " + JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.nomeLocationEst}
+                                title={(JSON.parse(sessionStorage.getItem('ultimaLocation')).tipo.includes("Stanza") ? "Torna" : "Vai") + " a " + JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.nomeLocationEst}
                                 className="icona-freccia-larga"
                                 src={frecciaDX}
                                 style={{ left: "79.47%", top: "46.33%", width: "13.07%", height: "7.01%", zIndex: "9999" }} />
@@ -205,7 +206,7 @@ class Gamepage extends Component {
                             :
                             <SuonoDirezione suono={passi}
                                 funzione={{ onend: () => this.navigazione(JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.idLocationSud) }}
-                                title={"vai a " + JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.nomeLocationSud}
+                                title={(JSON.parse(sessionStorage.getItem('ultimaLocation')).tipo.includes("Stanza") ? "Torna" : "Vai") + " a " + JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.nomeLocationSud}
                                 className="icona-freccia-alta"
                                 src={frecciaGIU}
                                 style={{ left: "44%", top: "85.89%", width: "11.25%", height: "8.09%", zIndex: "9999" }} />
@@ -219,7 +220,7 @@ class Gamepage extends Component {
                             :
                             <SuonoDirezione suono={passi}
                                 funzione={{ onend: () => this.navigazione(JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.idLocationOvest) }}
-                                title={"vai a " + JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.nomeLocationOvest}
+                                title={(JSON.parse(sessionStorage.getItem('ultimaLocation')).tipo.includes("Stanza") ? "Torna" : "Vai") + " a " + JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.nomeLocationOvest}
                                 className="icona-freccia-larga"
                                 src={frecciaSX}
                                 style={{ left: "6.77%", top: "46.2%", width: "13.07%", height: "7.01%", zIndex: "9999" }} />

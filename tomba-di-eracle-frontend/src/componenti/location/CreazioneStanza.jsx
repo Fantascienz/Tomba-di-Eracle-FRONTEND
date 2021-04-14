@@ -71,9 +71,23 @@ class CreazioneStanza extends Component {
         }
     }
 
+
+    tipoLocation() {
+        var allLocation = JSON.parse(sessionStorage.getItem('allLocations'))
+
+        for (let i = 0; i < allLocation.length; i++) {
+            if (allLocation[i].id == this.state.loc) {
+                if (allLocation[i].tipo.includes('Umbra')) {
+                    return 'Umbra'
+                }
+                return 'Normale'
+            }
+        }
+    }
+
+
+
     componentDidMount() {
-
-
     }
 
     render() {
@@ -87,14 +101,15 @@ class CreazioneStanza extends Component {
                             <form onSubmit={this.handleSubmit} style={{ width: "75%" }}>
                                 <SelezionaLocationForm lista={JSON.parse(sessionStorage.getItem('allLocations'))} handleChange={this.handleChange} stanza={false} allLocations={true} />
                                 <CreazioneLocationForm handleChange={this.handleChange} stanza={true} anteprimaGiorno={this.state.urlImgGiorno} anteprimaNotte={this.state.urlImgNotte}
-                                    anteprimaGiornoUmbra={this.state.urlImgGiornoUmbra} anteprimaNotteUmbra={this.state.urlImgNotteUmbra} />
+                                    anteprimaGiornoUmbra={this.state.urlImgGiornoUmbra} anteprimaNotteUmbra={this.state.urlImgNotteUmbra} 
+                                    idLocation={this.state.loc}/>
                                 <SelezionaUscitaForm location={this.state.loc} handleChange={this.handleChange} />
                                 <button className="btn btn-dark">Crea</button>
                             </form>
                         </div>
 
                         <div className="col-md-6 centrato" >
-                            <Macromappa pxDimensioniMappa="400" lenteDisplay="none" idLocation={parseInt(this.state.loc)} mostraStanze="true" />
+                            <Macromappa pxDimensioniMappa="400" lenteDisplay="none" idLocation={parseInt(this.state.loc)} mostraStanze="true" tipoLocation={this.tipoLocation()}/>
                         </div>
                     </div>
                 </div>

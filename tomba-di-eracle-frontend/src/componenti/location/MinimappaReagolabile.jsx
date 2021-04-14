@@ -16,7 +16,6 @@ const MinimappaRegolabile = ({ idLocation, pxDimensioniMappa, lenteDisplay, cell
         for (let i = 1 ; i<= colonnePerRiga*colonnePerRiga; i++){
             quantitaCelle.push(
                 <div title={i} className="col griglia-macromappa"> 
-                    <ContenutoCella idLocation={idLocation} idCella={i}/>
                 </div>
             )
         }

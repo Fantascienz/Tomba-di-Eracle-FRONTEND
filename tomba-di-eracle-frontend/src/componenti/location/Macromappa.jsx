@@ -1,4 +1,5 @@
 import macromappa from '../../img/macromappa.jpg'
+import macromappaUmbra from '../../img/eracleCapovolto.png'
 import { RigaGriglia } from '../location/ContenutoGriglia'
 import { Magnifier, GlassMagnifier } from 'react-image-magnifiers'
 import Draggable from 'react-draggable';
@@ -8,7 +9,7 @@ import porta from '../../img/porta_icona.png'
 
 
 
-const Macromappa = ({ idLocation, pxDimensioniMappa, mostraStanze }) => {
+const Macromappa = ({ idLocation, pxDimensioniMappa, mostraStanze, tipoLocation }) => {
 
     const [showIngrandimento, setShowIngrandimento] = useState(false);
     const [showStanze, setShowStanze] = useState(false);
@@ -18,6 +19,13 @@ const Macromappa = ({ idLocation, pxDimensioniMappa, mostraStanze }) => {
     // lenteDisplay = "none"
     var pxDimensioniCella = (pxDimensioniMappa / 12);
 
+    function immagineMacromappa() {
+        if (!tipoLocation || tipoLocation != 'Umbra') {
+            return macromappa;
+        }
+        return macromappaUmbra;
+    }
+
 
     return (
         <>
@@ -26,18 +34,22 @@ const Macromappa = ({ idLocation, pxDimensioniMappa, mostraStanze }) => {
 
                     {/* MAPPA------------------- */}
                     <div style={{ position: "absolute", zIndex: "1", height: "100%", width: "100%" }}>
-                        <img id="giovanni" src={macromappa} alt="..." style={{ height: "100%", width: "100%" }} />
+                        <img id="giovanni" src={immagineMacromappa()} alt="..." style={{ height: "100%", width: "100%" }} />
                     </div>
 
                     {/* SEGNAPOSTO------------- */}
                     <div style={{ position: "relative", zIndex: "2", height: "100%", width: "100%" }}>
-                        <RigaGriglia inizio="1" fine="144" idLocation={idLocation} pxDimensioniMappa={pxDimensioniMappa} allLocation={showStanze ? JSON.parse(sessionStorage.getItem('allLocations')) : null} />
+                        {tipoLocation == 'Umbra' ?
+                            <RigaGriglia inizio="145" fine="288" idLocation={idLocation} pxDimensioniMappa={pxDimensioniMappa} allLocation={showStanze ? JSON.parse(sessionStorage.getItem('allLocations')) : null} />
+                            :
+                            <RigaGriglia inizio="1" fine="144" idLocation={idLocation} pxDimensioniMappa={pxDimensioniMappa} allLocation={showStanze ? JSON.parse(sessionStorage.getItem('allLocations')) : null} />
+                        }
                     </div>
 
                     {/* INGRANDIMENTO---------- */}
                     <div style={{ position: "absolute", top: "0", zIndex: "3", height: "100%", width: "100%", display: `${showIngrandimento ? '' : 'none'}` }}>
                         {/* <GlassMagnifier imageSrc={macromappa} magnifierSize="80%" allowOverflow="false"/> */}
-                        <Magnifier imageSrc={macromappa} magnifierSize="80%" />
+                        <Magnifier imageSrc={immagineMacromappa()} magnifierSize="80%" />
                     </div>
 
 
