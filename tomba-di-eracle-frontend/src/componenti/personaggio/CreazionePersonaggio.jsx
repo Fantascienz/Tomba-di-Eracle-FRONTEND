@@ -157,9 +157,9 @@ class CreazionePersonaggio extends Component {
                         <span className="input-group-text" style={{ width: "30%" }}>Razza</span>
                         <select className="form-select" id="razza" value={this.state.razza} onChange={this.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)" }}>
                             <option defaultValue="" >Razza</option>
-                            <option value="Umano">Homid</option>
-                            <option value="Lupo">Lupus</option>
-                            <option value="Meticcio">Metis</option>
+                            <option value="Homid">Homid</option>
+                            <option value="Lupus">Lupus</option>
+                            <option value="Metis">Metis</option>
                         </select>
                     </div>
 

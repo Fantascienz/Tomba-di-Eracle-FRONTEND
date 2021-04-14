@@ -6,6 +6,7 @@ import PersonaggioService from "../../servizi/PersonaggioService"
 export const creaPersonaggio = (personaggio) => {
     return (dispatch) => {
         PersonaggioService.creaPersonaggio(personaggio).then(res => {
+            sessionStorage.setItem('utente', JSON.stringify(res.data))
             dispatch({
                 type: 'CREA_PERSONAGGIO',
                 personaggio: res.data
@@ -43,16 +44,9 @@ export const getPersonaggiUtente = (utente) => {
     return (dispatch) => {
         PersonaggioService.getPersonaggiUtente(utente).then(res => {
             sessionStorage.setItem('personaggi', JSON.stringify(res.data));
-            let garou =  false
-            JSON.parse(sessionStorage.getItem('personaggi')).forEach(element => {
-                if(element.umbra === true) {
-                    garou = true
-                }
-            });
             dispatch({
                 type: 'LISTA_PERSONAGGI_UTENTE',
                 personaggiUtente: res.data,
-                isGarou: garou
             })
         });
     }

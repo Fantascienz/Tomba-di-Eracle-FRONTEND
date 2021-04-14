@@ -11,7 +11,7 @@ const initState = {
     filtroStato: '',
     filtroUtente: '',
     filtroTipoUtente: '',
-    filtroNominativo: ''
+    filtroNominativo: '',
 }
 
 const adminReducer = (state = initState, action) => {
@@ -291,13 +291,13 @@ const adminReducer = (state = initState, action) => {
             }
             break;
         case 'FILTRA_UTENTI_PER_NOMINATIVO':
-        state = {
+            state = {
                 listaUtentiFiltrata: action.listaUtentiFiltrata,
                 filtroNominativo: action.filtroNominativo
             }
             break;
         case 'FILTRA_UTENTI_PER_NOMINATIVO_E_TIPO':
-            
+
             state = {
                 listaUtentiFiltrata: action.listaUtentiFiltrata,
                 filtroTipoUtente: action.filtroTipoUtente,

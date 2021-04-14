@@ -127,8 +127,8 @@ export const filtraListaStato = (stato) => {
                     filtroStato: stato
                 })
             })
-        } 
-        
+        }
+
 
     }
 }
@@ -262,10 +262,10 @@ export const getAllByRazzaOrderByNominativo = (razza) => {
         PersonaggioService.getAllByRazzeOrderByNominativo(razza).then(res => {
             sessionStorage.setItem('listaPersonaggi', JSON.stringify(res.data))
             dispatch({
-                    type: 'ORDINA_PER_RAZZA_ORDER_BY_NOMINATIVO',
-                    listaPgFiltrata: res.data,
-                    filtroRazza: razza.razza
-                })
+                type: 'ORDINA_PER_RAZZA_ORDER_BY_NOMINATIVO',
+                listaPgFiltrata: res.data,
+                filtroRazza: razza.razza
+            })
         })
     }
 }
@@ -592,7 +592,7 @@ export const getAllByIdUtenteAndRazzaAndStato = (filtro) => {
                 filtroUtente: filtro.utente.id
             })
         })
-            
+
     }
 }
 
@@ -645,6 +645,50 @@ export const cercaPerNominativoETipo = (filtro) => {
                 listaUtentiFiltrata: res.data,
                 filtroTipoUtente: filtro.tipo,
                 filtroNominativo: filtro.nominativo
+            })
+        })
+    }
+}
+
+export const countUmanoByUtente = (utente) => {
+    return (dispatch) => {
+        PersonaggioService.countUmanoByUtente(utente).then(res => {
+            dispatch({
+                type: 'COUNT_UMANO',
+                countUmano: res.data
+            })
+        })
+    }
+}
+
+export const countHomidByUtente = (utente) => {
+    return (dispatch) => {
+        PersonaggioService.countHomidByUtente(utente).then(res => {
+            dispatch({
+                type: 'COUNT_HOMID',
+                countHomid: res.data
+            })
+        })
+    }
+}
+
+export const countLupusByUtente = (utente) => {
+    return (dispatch) => {
+        PersonaggioService.countLupusByUtente(utente).then(res => {
+            dispatch({
+                type: 'COUNT_LUPUS',
+                countLupus: res.data
+            })
+        })
+    }
+}
+
+export const countMethisByUtente = (utente) => {
+    return (dispatch) => {
+        PersonaggioService.countMethisByUtente(utente).then(res => {
+            dispatch({
+                type: 'COUNT_METHIS',
+                countMethis: res.data
             })
         })
     }
