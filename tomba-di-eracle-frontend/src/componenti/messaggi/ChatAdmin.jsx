@@ -90,8 +90,8 @@ class ChatAdmin extends React.Component {
         return (
             <React.Fragment>
                 <div className="chat-admin row">
-                    <main className="col-6">
-                        <p className="font-lombardia bg-dark rounded" style={{ fontSize: '2em',color: "#eeaa44" }}>{this.renderDestinatario()}</p>
+                    <main className="col-6" style={{padding:'2.9%'}}>
+                        <p className="font-lombardia bg-dark rounded" style={{ fontSize: '2em',color: "#eeaa44",marginLeft: '6%'}}>{this.renderDestinatario()}</p>
                         {listaOrdinata && listaOrdinata.map(msg =>
                             this.renderMessaggi(msg))}
                     </main>
