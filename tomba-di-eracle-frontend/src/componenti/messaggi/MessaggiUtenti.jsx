@@ -13,11 +13,15 @@ class MessaggiUtenti extends Component {
     renderVisualizzaConversazione = (utente) => {
         return (
             <>
-                <button className="btn btn-secondary" onClick={() => this.props.getConversazioneUtente(utente)} style={{width: '49%' }}>{utente.nominativo}</button>
-                <button className="btn btn-danger" onClick={() => this.props.eliminaConversazione(utente)} style={{ marginLeft: '2%',width: '49%' }}>Elimina Conversazione</button>
+                <button className="btn btn-secondary" onClick={() => this.props.getConversazioneUtente(utente)} style={{ width: '49%' }}>{utente.nominativo}</button>
+                <button className="btn btn-danger" onClick={() => this.props.eliminaConversazione(utente)} style={{ marginLeft: '2%', width: '49%' }}>Elimina Conversazione</button>
                 <hr />
             </>
         )
+    }
+
+    renderTastoUtente = (utente) => {
+        return "Scrivi a (" + (utente.tipo === 'admin' ? 'Admin' : utente.id) + "): " + utente.nominativo;
     }
 
     render() {
@@ -39,9 +43,9 @@ class MessaggiUtenti extends Component {
                 <div className="corpoComponente" style={{ width: "100%", height: "100%" }}>
                     <div className="row" style={{ width: "100%", height: "100%", marginTop: '1%', marginLeft: '1%' }}>
                         <div className="col-md-3">
-                            <h1 className="font-lombardia-yellow bg-dark">Conversazioni Attive: {this.props.conversazioni.length}</h1>
+                            <h1 className="font-lombardia-yellow bg-dark rounded">Conversazioni Attive: {this.props.conversazioni.length}</h1>
                             <div style={{ overflowY: this.props.conversazioni.length == 0 ? '' : 'scroll', height: '70%' }}>
-                                {this.props.conversazioni.length == 0 ? <p className="font-lombardia-yellow bg-dark" style={{ fontSize: '2em' }}>Non ci sono conversazioni attive</p> :
+                                {this.props.conversazioni.length == 0 ? <p className="font-lombardia-yellow bg-dark rounded" style={{ fontSize: '2em' }}>Non ci sono conversazioni attive</p> :
                                     listaOrdinata.map(utente =>
                                         this.renderVisualizzaConversazione(utente)
                                     )
@@ -49,14 +53,15 @@ class MessaggiUtenti extends Component {
                             </div>
                         </div>
                         <div className="col-md-2">
-                            <h1 className="font-lombardia-yellow bg-dark">Utenti</h1>
+                            <h1 className="font-lombardia-yellow bg-dark rounded">Utenti</h1>
                             <div style={{ overflowY: 'scroll', height: '70%' }}>
                                 {
                                     listaUtenti.map(utente =>
-                                        <>
-                                            <button className="btn btn-secondary" style={{ width: "100%" }} onClick={() => this.props.getConversazioneUtente(utente)}>Scrivi a ({utente.id}): {utente.nominativo}</button>
-                                            <hr />
-                                        </>
+                                        JSON.parse(sessionStorage.getItem('utente')).id === utente.id ? '' :
+                                            <>
+                                                <button className="btn btn-secondary" style={{ width: "100%" }} onClick={() => this.props.getConversazioneUtente(utente)}>{this.renderTastoUtente(utente)}</button>
+                                                <hr />
+                                            </>
                                     )
                                 }
                             </div>

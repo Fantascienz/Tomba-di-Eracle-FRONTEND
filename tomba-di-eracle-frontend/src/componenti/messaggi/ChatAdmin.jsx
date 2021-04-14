@@ -3,6 +3,7 @@ import { connect } from "react-redux"
 import { getConversazione, inviaMessaggio } from "../../store/azioni/messaggiActions"
 import avatarEracle from '../../img/eracleCapovolto.png';
 import penna from '../../img/quill.png'
+import { withRouter } from "react-router";
 
 class ChatAdmin extends React.Component {
 
@@ -67,6 +68,16 @@ class ChatAdmin extends React.Component {
         return ""
     }
 
+    renderDestinatario = () => {
+        if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin') {
+            if (this.props.utente != undefined) {
+                return "Destinatario: " + this.props.utente.nominativo
+            }
+            return "Destinatario: Nessuno"
+        }
+        return "Destinatario: Admin"
+    }
+
     render() {
 
         let listaOrdinata;
@@ -80,6 +91,7 @@ class ChatAdmin extends React.Component {
             <React.Fragment>
                 <div className="chat-admin row">
                     <main className="col-6">
+                        <p className="font-lombardia bg-dark rounded" style={{ fontSize: '2em',color: "#eeaa44" }}>{this.renderDestinatario()}</p>
                         {listaOrdinata && listaOrdinata.map(msg =>
                             this.renderMessaggi(msg))}
                     </main>
@@ -89,7 +101,7 @@ class ChatAdmin extends React.Component {
                     <form className="col-5" onSubmit={() => this.handleSubmit()}>
                         <textarea name="testo" id="testo" cols="30" rows="10" placeholder="Scrivi messaggio..." onChange={this.handleChange} className="font-lombardia" style={{ fontSize: '2em' }}></textarea>
                         <button type="submit" disabled={this.state.testo === '' ? true : false}>
-                            <img src={penna} alt=""/>
+                            <img src={penna} alt="" />
                         </button>
                     </form>
                 </div>
