@@ -1,5 +1,5 @@
 import macromappa from '../../img/macromappa.jpg'
-import macromappaUmbra from '../../img/eracleCapovolto.png'
+import macromappaUmbra from '../../img/macromappa_umbra.jpg'
 import { RigaGriglia } from '../location/ContenutoGriglia'
 import { Magnifier, GlassMagnifier } from 'react-image-magnifiers'
 import Draggable from 'react-draggable';

@@ -20,12 +20,17 @@ class MeteoService {
         var options = {
             method: 'GET',
             url: 'https://community-open-weather-map.p.rapidapi.com/weather',
-            params: {q: 'Larissa,GR', lang: 'null'},
+            params: {
+                q: 'Ossa,GR',
+                lat: '39.7969444',
+                lon: '22.6810615', 
+                lang: 'null'
+            },
             headers: {
-              'x-rapidapi-key': '795aeec374mshbd6b72a1ae860e5p1e983djsn86f58d2e1ecc',
-              'x-rapidapi-host': 'community-open-weather-map.p.rapidapi.com'
+                'x-rapidapi-key': '795aeec374mshbd6b72a1ae860e5p1e983djsn86f58d2e1ecc',
+                'x-rapidapi-host': 'community-open-weather-map.p.rapidapi.com'
             }
-          };
+        };
         return axios.request(options)
     }
 
