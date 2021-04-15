@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getAbilitati } from '../../store/azioni/chirotteriActions';
+import { getAbilitati, switchVisualizzaInvia } from '../../store/azioni/chirotteriActions';
 import { InviaChirottero } from './InviaChirottero';
+import LeggiChirotteri from './LeggiChirotteri';
 
 class Chirottero extends Component {
 
@@ -9,21 +10,18 @@ class Chirottero extends Component {
         if (this.props.abilitati.length == 0) {
             this.props.getAbilitati()
         }
-        console.log(this.props.abilitati)
     }
 
     render() {
         return (
             <>
                 <div align='center'>
-                    <InviaChirottero abilitati={this.props.abilitati} />
+                    {!this.props.visualizzaRicevuti ? <InviaChirottero abilitati={this.props.abilitati} />
+                        : <LeggiChirotteri ricevuti={this.props.chirotteriRicevuti}/>}
                 </div>
                 <div className="row" style={{ bottom: '0%', marginLeft: '13%', position: 'absolute', width: '104%' }}>
                     <div className="col-md-6">
-                        <button className="btn btn-dark">Ricevi {this.props.abilitati.length}</button>
-                    </div>
-                    <div className="col-md-6">
-                        <button className="btn btn-dark">Invia</button>
+                        <button className="btn btn-dark" onClick={() => this.props.switchVisualizzaInvia(this.props.visualizzaRicevuti)}>{!this.props.visualizzaRicevuti ? 'Ricevi' : 'Invia'}</button>
                     </div>
                 </div>
             </>
@@ -34,12 +32,15 @@ class Chirottero extends Component {
 const mapStateToProps = (state) => {
     return {
         abilitati: state.chirotteri.listaAbilitati,
+        visualizzaRicevuti: state.chirotteri.visualizzaRicevuti,
+        chirotteriRicevuti: state.chirotteri.chirotteriRicevuti
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getAbilitati: () => dispatch(getAbilitati())
+        getAbilitati: () => dispatch(getAbilitati()),
+        switchVisualizzaInvia: (flag) => dispatch(switchVisualizzaInvia(flag))
     }
 }
 
