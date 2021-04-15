@@ -39,6 +39,7 @@ import nebbia from '../../img/nebbia_gif.gif'
 import passi from '../../suoni/suono_passi.mp3'
 import attraversaUmbra from '../../suoni/attraversa_guanto.mp3'
 import srotolaCarta from '../../suoni/flip_card.mp3'
+import Chirottero from '../chirotteri/Chirottero'
 
 
 
@@ -163,7 +164,21 @@ class Gamepage extends Component {
                         {/* pulsante: chirottero------------------------------------------------- */}
                         {PG.chirottero ?
                             <div className="navigazione-link" title="Invia un Chirottero" style={{ left: "14.93%", top: "82.23%", width: "11.25%", height: "7.04%", zIndex: "9999" }}>
-                                <img className="icona-alta" src={chirottero} alt="" />
+                                <ModalComponente
+                                    suono={srotolaCarta}
+                                    bottone={<img className="icona-alta" src={chirottero} alt="" />}
+                                    size='sm'
+                                    contenuto={
+                                        <div className="centrato" >
+                                            <div className="centrato" style={{ position: "fixed", backgroundColor: "none" }}>
+                                                <img src={Scroll} style={{ height: "800px", transform: "rotate(90deg)" }} alt="" />
+                                            </div>
+
+                                            <div style={{ position: "fixed", backgroundColor: "transparent", height: "500px", width: "600px"}}>
+                                                <Chirottero />
+                                            </div>
+                                        </div>
+                                    } />
                             </div>
                             : null}
 
