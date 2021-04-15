@@ -11,6 +11,10 @@ class ChirotteriService {
     invia(chirottero) {
         return axios.post(URL, chirottero)
     }
+
+    getChirotteri(idPersonaggio) {
+        return axios.get(URL + '/ricevuti/' + idPersonaggio)
+    }
 }
 
 export default new ChirotteriService();
