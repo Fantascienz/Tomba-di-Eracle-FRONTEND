@@ -79,7 +79,7 @@ function MessaggioChat(props) {
         <tr>
           {messageClass === 'sent' ?
             <td align='right'>
-              <span className="font-lombardia" >{nomePersonaggio} </span>
+              <span className="font-lombardia" style={{fontSize:"1.3em"}}>{nomePersonaggio} </span>
               {/*se non c'è un immagine,mette l'immagine di default corrispondente all'url*/}
               <img src={immagine || 'https://myasw.org/wp-content/uploads/2020/05/mr-anonymous.png'} atl="..." />
             </td>
@@ -87,7 +87,7 @@ function MessaggioChat(props) {
             <td align='left'>
               {/*se non c'è un immagine,mette l'immagine di default corrispondente all'url*/}
               <img src={immagine || 'https://myasw.org/wp-content/uploads/2020/05/mr-anonymous.png'} atl="..." />
-              {nomePersonaggio}
+              <span className="font-lombardia" style={{fontSize:"1.3em"}}>{nomePersonaggio} </span>
             </td>
           }
         </tr>

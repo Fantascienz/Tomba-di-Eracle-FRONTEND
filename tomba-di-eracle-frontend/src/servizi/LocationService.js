@@ -50,13 +50,13 @@ class LocationService {
         return this.getAll()
     }
 
-    validaCampiCreazione(location, isStanza) {
+    validaCampiCreazione(location, isStanza, umbra) {
         if (!isStanza) {
             if (location.nome === '' || location.tipo === '' || location.ambiente === '' || location.urlImgGiorno === ''
                 || location.locationIngresso === '' || location.urlImgGiornoUmbra === '') {
                 withReactContent(Swal).fire({
                     title: <div>
-                        <p>Nome,Ambiente,Ingresso</p>
+                        <p>Nome, Ambiente, Ingresso</p>
                         <p>Immagine giorno</p>
                         <p>sono obbligatori!</p>
                     </div>
@@ -72,18 +72,52 @@ class LocationService {
                 return false;
             }
             return true;
+            // } else {
+            //     if (location.loc === '') {
+            //         withReactContent(Swal).fire({
+            //             title: <p>Indica una Location per la Stanza!</p>
+            //         })
+            //         return false;
+            //     } else {
+            //         if (location.nome === '' || location.ambiente === '' || location.urlImgGiorno === '' || location.urlImgGiornoUmbra === '') {
+            //             withReactContent(Swal).fire({
+            //                 title: <div>
+            //                     <p>Nome,Ambiente,Ingresso</p>
+            //                     <p>Immagine giorno</p>
+            //                     <p>sono obbligatori!</p>
+            //                 </div>
+            //             })
+            //             return false;
+            //         }
+            //         return true;
+            //     }
+            // }
         } else {
             if (location.loc === '') {
                 withReactContent(Swal).fire({
                     title: <p>Indica una Location per la Stanza!</p>
                 })
                 return false;
+            } 
+            
+            if(umbra){
+                if (location.nome === '' || location.ambiente === '' || location.urlImgGiornoUmbra === '') {
+                    withReactContent(Swal).fire({
+                        title: <div>
+                            <p>Nome, Ambiente, Ingresso</p>
+                            <p>Immagine Umbra Giorno</p>
+                            <p>sono obbligatori!</p>
+                        </div>
+                    })
+                    return false;
+                }
+                return true;
             } else {
                 if (location.nome === '' || location.ambiente === '' || location.urlImgGiorno === '' || location.urlImgGiornoUmbra === '') {
                     withReactContent(Swal).fire({
                         title: <div>
-                            <p>Nome,Ambiente,Ingresso</p>
-                            <p>Immagine giorno</p>
+                            <p>Nome, Ambiente, Ingresso</p>
+                            <p>Immagine giorno e Immagine Umbra Giorno</p>
                             <p>sono obbligatori!</p>
                         </div>
                     })

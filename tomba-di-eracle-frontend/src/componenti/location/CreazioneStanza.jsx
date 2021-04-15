@@ -41,7 +41,10 @@ class CreazioneStanza extends Component {
     }
 
     handleSubmit = (event) => {
-        if (LocationService.validaCampiCreazione(this.state, true)) {
+
+        var tipoValidazione = this.tipoLocation() == 'Umbra' ? true : false;
+
+        if (LocationService.validaCampiCreazione(this.state, true, tipoValidazione)) {
             let stanza = {
                 location: {
                     nome: this.state.nome,

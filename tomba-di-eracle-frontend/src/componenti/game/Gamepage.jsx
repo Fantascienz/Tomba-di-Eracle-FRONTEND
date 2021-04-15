@@ -97,6 +97,7 @@ class Gamepage extends Component {
     render() {
 
         var PG = JSON.parse(sessionStorage.getItem('pgAttivo'));
+        var utente = JSON.parse(sessionStorage.getItem('utente'));
         var location = JSON.parse(sessionStorage.getItem('ultimaLocation'));
         var stanze = JSON.parse(sessionStorage.getItem('stanzeLocation'));
 
@@ -106,11 +107,14 @@ class Gamepage extends Component {
 
                     <div className="navigazione-area">
 
+
                         {/* ---Layer IMMAGINE SFONDO--- */}
                         <div className="navigazione-immagine" style={{ backgroundImage: `url('${location.urlImgGiorno}')` }}></div>
 
+
                         {/* ---Layer CLIMA--- */}
                         <MeteoGif location={location} />
+
 
                         {/* ---Layer CORNICE--- */}
                         {this.corniceNavigazione(location.tipo)}
@@ -174,7 +178,7 @@ class Gamepage extends Component {
                                                 <img src={Scroll} style={{ height: "800px", transform: "rotate(90deg)" }} alt="" />
                                             </div>
 
-                                            <div style={{ position: "fixed", backgroundColor: "transparent", height: "500px", width: "600px"}}>
+                                            <div style={{ position: "fixed", backgroundColor: "transparent", height: "500px", width: "600px" }}>
                                                 <Chirottero />
                                             </div>
                                         </div>
@@ -241,17 +245,20 @@ class Gamepage extends Component {
                                 style={{ left: "6.77%", top: "46.2%", width: "13.07%", height: "7.01%", zIndex: "9999" }} />
                         }
 
+
                         {/* ------------SOLE/LUNA------------ */}
                         {(JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' || JSON.parse(sessionStorage.getItem('utente')).tipo === 'master') ?
                             <div onClick={() => withReactContent(Swal).fire({ html: <ModificaMeteoGamepage ultimaLocation={JSON.parse(sessionStorage.getItem('ultimaLocation'))} /> })}>
                                 <GiornoNotte />
                             </div>
-                            : <GiornoNotte />
+                            :
+                            <GiornoNotte />
                         }
 
 
                         {/* ------------METEO------------ */}
-                        <Meteo location={location} />
+                        <Meteo location={location} utente={utente} />
+
 
                         {/* ------------NOME LOCATION------------ */}
                         <div className="navigazione-link" title={"Id: " + location.id} style={{ left: "28.75%", top: "79.7%", width: "41.65%", height: "4.97%", zIndex: "9999", backgroundColor: "transparent" }}>
