@@ -15,6 +15,14 @@ class ChirotteriService {
     getChirotteri(idPersonaggio) {
         return axios.get(URL + '/ricevuti/' + idPersonaggio)
     }
+
+    segnaComeLetto(idChirottero) {
+        return axios.patch(URL + '/' + idChirottero)
+    }
+
+    eliminaChirotteri () {
+        return axios.delete(URL)
+    }
 }
 
 export default new ChirotteriService();
