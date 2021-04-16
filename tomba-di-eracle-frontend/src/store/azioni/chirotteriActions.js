@@ -16,6 +16,7 @@ export const switchVisualizzaInvia = (flag) => {
     return (dispatch) => {
         if (!flag) {
             ChirotteriService.getChirotteri(JSON.parse(sessionStorage.getItem('pgAttivo')).id).then(res => {
+                ChirotteriService.eliminaChirotteri()
                 dispatch({
                     type: "GET_CHIROTTERI",
                     chirotteri: res.data

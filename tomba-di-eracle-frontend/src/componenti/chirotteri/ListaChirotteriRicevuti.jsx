@@ -1,13 +1,15 @@
-import { useState } from "react"
+import ChirotteriService from "../../servizi/ChirotteriService"
 
 
-const ListaChirotteriRicevuti = ({ lista,scelta,sceltaMittente }) => {
+const ListaChirotteriRicevuti = ({ lista,scelta,sceltaMittente,dataInvio }) => {
 
     const renderLista = () => {
 
         const sceltaChirottero = (chirottero) => {
+            ChirotteriService.segnaComeLetto(chirottero.id)
             scelta(chirottero.testo)
             sceltaMittente(chirottero.mittente.nominativo)
+            dataInvio(chirottero.dataInvio)
         }
 
         return ( 
