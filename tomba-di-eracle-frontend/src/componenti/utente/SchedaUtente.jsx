@@ -210,6 +210,9 @@ class SchedaUtente extends Component {
 
     messaggi = () => {
         if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin') {
+            // AdminService.getListaUtenti().then(res => {
+            //     sessionStorage.setItem('listaUtenti', JSON.stringify(res.data))
+            // })
             browserHistory.push('messaggiUtenti')
             browserHistory.go()
         } else {

@@ -21,7 +21,7 @@ class Chirottero extends Component {
                 </div>
                 <div className="row" style={{ bottom: '0%', marginLeft: '13%', position: 'absolute', width: '104%' }}>
                     <div className="col-md-6">
-                        <button className="btn btn-dark" onClick={() => this.props.switchVisualizzaInvia(this.props.visualizzaRicevuti)}>{!this.props.visualizzaRicevuti ? 'Ricevi' : 'Invia'}</button>
+                        <button className="btn btn-dark" onClick={() => this.props.switchVisualizzaInvia(this.props.visualizzaRicevuti)}>{!this.props.visualizzaRicevuti ? 'Ricevuti' : 'Invia'}</button>
                     </div>
                 </div>
             </>
