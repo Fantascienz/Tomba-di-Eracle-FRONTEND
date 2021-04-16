@@ -1,7 +1,13 @@
 import macromappa from '../../img/macromappa.jpg'
 import macromappaUmbra from '../../img/macromappa_umbra.jpg'
 import { RigaGriglia } from '../location/ContenutoGriglia'
-import { Magnifier, GlassMagnifier } from 'react-image-magnifiers'
+import { Magnifier,
+    GlassMagnifier,
+    SideBySideMagnifier,
+    PictureInPictureMagnifier,
+    MOUSE_ACTIVATION,
+    TOUCH_ACTIVATION
+   } from 'react-image-magnifiers'
 import Draggable from 'react-draggable';
 import React, { useState } from 'react';
 import lente from '../../img/lente.png'
@@ -48,8 +54,8 @@ const Macromappa = ({ idLocation, pxDimensioniMappa, mostraStanze, tipoLocation 
 
                     {/* INGRANDIMENTO---------- */}
                     <div style={{ position: "absolute", top: "0", zIndex: "3", height: "100%", width: "100%", display: `${showIngrandimento ? '' : 'none'}` }}>
-                        {/* <GlassMagnifier imageSrc={macromappa} magnifierSize="80%" allowOverflow="false"/> */}
-                        <Magnifier imageSrc={immagineMacromappa()} magnifierSize="80%" />
+                         {/* <Magnifier imageSrc={immagineMacromappa()} dragToMove={false} /> */}
+                         <GlassMagnifier imageSrc={immagineMacromappa()} magnifierOffsetX={-170} magnifierOffsetY={170} magnifierSize="400px" allowOverflow={true} cursorStyle="crosshair"/>
                     </div>
 
 
