@@ -6,9 +6,10 @@ const MessaggioChirottero = ({ chirottero, mittente, data }) => {
             { mittente !== '' ?
                 <>
                     <h1 className="font-lombardia-yellow bg-dark rounded">Chirottero di {mittente}</h1>
-                    <p className="font-lombardia" style={{ fontSize: '2em' }}>{chirottero} {data}</p>
+                    <p className="font-lombardia" style={{ fontSize: '2em' }}>{chirottero}</p>
+                    <p className="font-lombardia" style={{ fontSize: '2em' }}>Ricevuto: {data}</p>
                 </>
-                : 
+                :
                 <h1 className="font-lombardia-yellow bg-dark rounded">Scegli Chirottero</h1>
             }
         </>
