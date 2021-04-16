@@ -9,12 +9,17 @@ class AdminService {
         return axios.get(URL_UTENTI)
     }
 
+    async sessioneListaUtenti() {
+        const res = await this.getListaUtenti();
+        return sessionStorage.setItem('listaUtenti', JSON.stringify(res.data));
+    }
+
     modificaTipo(utente) {
-        return axios.post(URL_ADMIN + 'modificaTipo',utente)
+        return axios.post(URL_ADMIN + 'modificaTipo', utente)
     }
 
     modificaMassimali(utente) {
-        return axios.post(URL_UTENTI + "massimali",utente)
+        return axios.post(URL_UTENTI + "massimali", utente)
     }
 }
 

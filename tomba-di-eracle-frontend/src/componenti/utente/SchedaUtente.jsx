@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {  getListaUtenti, visualizzaPgAdmin } from '../../store/azioni/adminActions';
+import { getListaUtenti, visualizzaPgAdmin } from '../../store/azioni/adminActions';
 import CarouselPersonaggi from '../personaggio/CarouselPersonaggi';
 import ListaPersonaggi from '../personaggio/ListaPersonaggi';
 import ListaUtenti from './ListaUtenti';
@@ -13,6 +13,7 @@ import LocationService from '../../servizi/LocationService';
 import { TitoloPagina } from '../layout/TitoloPagina';
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import AdminService from '../../servizi/AdminService';
 
 
 class SchedaUtente extends Component {
@@ -32,13 +33,13 @@ class SchedaUtente extends Component {
         if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'standard') {
             return (
                 <React.Fragment>
-                    
-                    
+
+
                     {
                         JSON.parse(sessionStorage.getItem('utente')).contatoreUmani === JSON.parse(sessionStorage.getItem('utente')).maxUmani
                             ?
                             <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
-                                <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%" }} onClick={() =>  withReactContent(Swal).fire({title: <p>Numero massimo di Umani raggiunto!</p>})} >Crea Personaggio</button>
+                                <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%" }} onClick={() => withReactContent(Swal).fire({ title: <p>Numero massimo di Umani raggiunto!</p> })} >Crea Personaggio</button>
                             </div>
                             :
                             <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
@@ -62,7 +63,7 @@ class SchedaUtente extends Component {
                     {JSON.parse(sessionStorage.getItem('utente')).contatoreUmani < JSON.parse(sessionStorage.getItem('utente')).maxUmani ?
                         <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "50%", fontSize: "0.8vw" }} onClick={() => this.props.creazionePG()}>Crea Umano</button>
                         :
-                        <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "50%", fontSize: "0.8vw" }} onClick={() => withReactContent(Swal).fire({title: <p>Numero massimo di Umani raggiunto!</p>})} >Crea Umano</button>
+                        <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "50%", fontSize: "0.8vw" }} onClick={() => withReactContent(Swal).fire({ title: <p>Numero massimo di Umani raggiunto!</p> })} >Crea Umano</button>
                     }
 
                     {(JSON.parse(sessionStorage.getItem('utente')).contatoreLupus === JSON.parse(sessionStorage.getItem('utente')).maxGarou ||
@@ -70,7 +71,7 @@ class SchedaUtente extends Component {
                         JSON.parse(sessionStorage.getItem('utente')).contatoreMetis === JSON.parse(sessionStorage.getItem('utente')).maxGarou
 
                         ?
-                        <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "50%", fontSize: "0.8vw", borderRadius: "0 5px 5px 0" }} onClick={() => withReactContent(Swal).fire({title: <p>Numero massimo di Garou raggiunto!</p>})}  >Crea Garou</button>
+                        <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "50%", fontSize: "0.8vw", borderRadius: "0 5px 5px 0" }} onClick={() => withReactContent(Swal).fire({ title: <p>Numero massimo di Garou raggiunto!</p> })}  >Crea Garou</button>
                         :
                         <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "50%", fontSize: "0.8vw", borderRadius: "0 5px 5px 0" }} onClick={() => this.props.creazioneGarou()}  >Crea Garou</button>
                     }
@@ -91,7 +92,7 @@ class SchedaUtente extends Component {
                     {
                         JSON.parse(sessionStorage.getItem('utente')).contatoreUmani === JSON.parse(sessionStorage.getItem('utente')).maxUmani
                             ?
-                            <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "33.33%", fontSize: "0.8vw" }} onClick={() => withReactContent(Swal).fire({title: <p>Numero massimo di Umani raggiunto!</p>})} >Crea Umano</button>
+                            <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "33.33%", fontSize: "0.8vw" }} onClick={() => withReactContent(Swal).fire({ title: <p>Numero massimo di Umani raggiunto!</p> })} >Crea Umano</button>
                             :
                             <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "33.33%", fontSize: "0.8vw" }} onClick={() => this.props.creazionePG()}>Crea Umano</button>
                     }
@@ -101,7 +102,7 @@ class SchedaUtente extends Component {
                             JSON.parse(sessionStorage.getItem('utente')).contatoreHomid === JSON.parse(sessionStorage.getItem('utente')).maxGarou ||
                             JSON.parse(sessionStorage.getItem('utente')).contatoreMetis === JSON.parse(sessionStorage.getItem('utente')).maxGarou)
                             ?
-                            <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "33.33%", fontSize: "0.8vw" }} onClick={() => withReactContent(Swal).fire({title: <p>Numero massimo di Garou raggiunto!</p>})} >Crea Garou</button>
+                            <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "33.33%", fontSize: "0.8vw" }} onClick={() => withReactContent(Swal).fire({ title: <p>Numero massimo di Garou raggiunto!</p> })} >Crea Garou</button>
                             :
                             <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "33.33%", fontSize: "0.8vw" }} onClick={() => this.props.creazioneGarou()} >Crea Garou</button>
                     }
@@ -210,11 +211,16 @@ class SchedaUtente extends Component {
 
     messaggi = () => {
         if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin') {
-            // AdminService.getListaUtenti().then(res => {
-            //     sessionStorage.setItem('listaUtenti', JSON.stringify(res.data))
-            // })
-            browserHistory.push('messaggiUtenti')
-            browserHistory.go()
+            if (JSON.parse(sessionStorage.getItem('listaUtenti')) == null) {
+                AdminService.sessioneListaUtenti().then(() => {
+                    browserHistory.push('messaggiUtenti')
+                    browserHistory.go()
+                }
+                )
+            } else {
+                browserHistory.push('messaggiUtenti')
+                browserHistory.go()
+            }
         } else {
             browserHistory.push('contattaAdmin')
             browserHistory.go()
