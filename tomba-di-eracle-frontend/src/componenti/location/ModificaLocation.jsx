@@ -12,6 +12,7 @@ class ModificaLocation extends Component {
     state = {
         loc: '',
         locationMod: '',
+        ambiente: '',
         fasciaOraria: '',
         meteoGiorno: 0,
         meteoNotte: 0,
@@ -43,6 +44,7 @@ class ModificaLocation extends Component {
             location: {
                 id: this.state.locationMod,
                 nome: this.state.nomeMod,
+                ambiente: this.state.ambiente,
                 chiave: this.state.chiave,
                 urlImgGiorno: this.state.urlImgGiorno,
                 urlImgNotte: this.state.urlImgNotte,

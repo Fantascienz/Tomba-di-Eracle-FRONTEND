@@ -29,6 +29,12 @@ class ModificaStanzaForm extends Component {
                         <input className="form-control" type="text" id="nomeMod" onChange={this.props.handleChange} placeholder="Nome" style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} />
                     </div>
 
+                    <select className="form-select" name="ambiente" id="ambiente" onChange={this.props.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)", marginBottom: "1%" }}>
+                        <option value="">Seleziona Ambiente</option>
+                        <option value="Aperto">Aperto</option>
+                        <option value="Chiuso">Chiuso</option>
+                    </select>
+
                     <div className="input-group">
                         <input className="form-control" type="text" id="chiave" onChange={this.props.handleChange} maxlength="5" placeholder="Chiave" style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} />
                     </div>
