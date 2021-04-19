@@ -101,14 +101,14 @@ class ModificaLocation extends Component {
                             <TitoloPagina titolo="Elimina Location" />
                             <div className="centrato">
                                 <form onSubmit={this.handleDelete}>
-                                    <SelezionaLocationForm lista={listaLocationOrdinata} stanza={false} handleChange={this.handleChange} />
+                                    <SelezionaLocationForm lista={listaLocationOrdinata} stanza={false} id="loc" handleChange={this.handleChange} />
                                     <button className="btn btn-dark">Elimina</button>
                                 </form>
                             </div>
                             <TitoloPagina titolo="Elimina Stanza" />
                             <div className="centrato">
                                 <form onSubmit={this.handleDelete}>
-                                    <SelezionaLocationForm lista={stanze} stanza={true} handleChange={this.handleChange} />
+                                    <SelezionaLocationForm lista={stanze} stanza={true} id="loc" handleChange={this.handleChange} />
                                     <button className="btn btn-dark">Elimina</button>
                                 </form>
                             </div>

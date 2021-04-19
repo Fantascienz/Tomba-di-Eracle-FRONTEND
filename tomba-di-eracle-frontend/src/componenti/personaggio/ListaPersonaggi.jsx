@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { filtraListaRazza, modificaPersonaggio, getListaPersonaggi, ordinaPerRazza, ordinaPerNominativo, ordinaPerSesso, ordinaPerRango, ordinaPerDataCreazione, filtraListaStato, getByRazzaAndStato, ordinaPerId, ordinaPerRazzaEStatoByNominativo, getAllByRazzaOrderByNominativo, ordinaPerRazzaById, ordinaPerRazzaEStatoById, ordinaPerRazzaBySesso, ordinaPerRazzaEStatoBySesso, ordinaPerRazzaByRango, ordinaPerRazzaEStatoByRango, ordinaPerRazzaEStatoByDataCreazione, ordinaPerRazzaByDataCreazione, ordinaPerRazzaByIdUtente, ordinaPerRazzaEStatoByIdUtente, ordinaPerIdUtente, filtraListaPgUtente, ordinaPerUtenteByNominativo, ordinaPerUtenteBySesso, ordinaPerUtenteByRazza, ordinaPerUtenteById, ordinaPerUtenteByRango, ordinaPerUtenteByDataCreazione, ordinaPerUtenteERazza, ordinaPerUtenteERazzaById, ordinaPerUtenteERazzaByNominativo, ordinaPerUtenteERazzaBySesso, ordinePerUtenteERazzaByRango, ordinePerUtenteERazzaByDataCreazione, getAllByIdUtenteAndRazzaAndStato, getAllByIdUtenteAndStato } from '../../store/azioni/adminActions';
+import SelezionaLocationForm from '../forms/SelezionaLocationForm';
 
 class ListaPersonaggi extends Component {
 
@@ -16,7 +17,7 @@ class ListaPersonaggi extends Component {
             nuovoBranco: '',
             nuovoRuoloSept: '',
             nuovoSept: '',
-
+            nuovaUltimaLocation: ''
         }
 
     }
@@ -150,6 +151,13 @@ class ListaPersonaggi extends Component {
         }
     }
 
+    modificaLocation = (pg) => {
+        if(this.state.nuovaUltimaLocation !== '') {
+            pg.ultimaLocation = this.state.nuovaUltimaLocation;
+            this.modificaPersonaggio(pg)
+        }
+    }
+
     modificaPersonaggio = (pg) => {
         this.props.modificaPg(pg)
         this.setState({
@@ -169,6 +177,8 @@ class ListaPersonaggi extends Component {
         })
         this.props.aggiornaLista()
     }
+
+   
 
     maxRango = (pg) => {
         if (pg.utente.id === 0) {
@@ -563,6 +573,7 @@ class ListaPersonaggi extends Component {
 
 
     render() {
+
         return (
             <React.Fragment>
                 <div className="table-responsive ombra" style={{ width: "100%", backgroundColor: "white" }}>
@@ -583,13 +594,15 @@ class ListaPersonaggi extends Component {
                                 <th>Branco</th>
                                 <th>Sept</th>
                                 <th><a href="#" onClick={() => this.ordinaPerIdUtente()}>Proprietario</a> {this.renderFiltroUtente()}</th>
-                                <th><a href="#" onClick={() => this.ordinaPerDataCreazione()}>Data Creazione</a></th>
+                                <th>Ultima Location</th>
                                 <th>Stato {this.renderFiltroStato()} </th>
                                 <th>Modifica Rango</th>
                                 <th>Modifica Nome Garou</th>
+                                <th>Modifica ultima Location</th>
                                 <th>Modifica Tribù</th>
                                 <th>Modifica Branco</th>
                                 <th>Modifica Sept</th>
+                                <th><a href="#" onClick={() => this.ordinaPerDataCreazione()}>Data Creazione</a></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -607,13 +620,20 @@ class ListaPersonaggi extends Component {
                                     <td>{pg.branco != null ? pg.branco : '/---/'}</td>
                                     <td>{pg.sept != null ? pg.sept : '/---/'}</td>
                                     <td><p>ID: {pg.utente.id}</p> <p>{pg.utente.nominativo}</p> <p>{pg.utente.email}</p></td>
-                                    <td>{pg.dataCreazione}</td>
+                                    <td>{pg.ultimaLocation}</td>
                                     <td>{pg.stato}</td>
                                     <td>{this.formModificaRango(pg)}</td>
                                     <td>{this.formModificaNomeGarou(pg)}</td>
+                                    <td>
+                                        <form onSubmit={() => this.modificaLocation(pg)}>
+                                            <SelezionaLocationForm lista={JSON.parse(sessionStorage.getItem('allLocations'))} stanza={true} id="nuovaUltimaLocation" handleChange={this.handleChange} allLocations={true} />
+                                            <button className="btn btn-secondary">Modifica</button>
+                                        </form>
+                                    </td>
                                     <td>{this.formModificaTribu(pg)}</td>
                                     <td>{this.formModificaBranco(pg)}</td>
                                     <td>{this.formModificaSept(pg)}</td>
+                                    <td>{pg.dataCreazione}</td>
                                 </tr>
                             )}
                         </tbody>
