@@ -60,8 +60,6 @@ class CreazioneLocation extends Component {
                 alert('Location creata con successo!')
                 
             )
-            console.log(locationCreata)
-            event.preventDefault()
         } else {
             event.preventDefault()
         }

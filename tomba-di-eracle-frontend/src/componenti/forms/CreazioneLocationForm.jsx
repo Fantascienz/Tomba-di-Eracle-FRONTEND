@@ -108,20 +108,14 @@ class CreazioneLocationForm extends Component {
                     <div className="input-group">
                         <input type="text" className="form-control" id="nome" placeholder="Nome" onChange={this.props.handleChange} style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} /> <br />
                     </div>
-                    {this.props.stanza ?
-                        <div className="input-group">
-                            <select name="ambiente" id="ambiente" className="form-select" onChange={this.props.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)", marginBottom: "1%" }}>
-                                <option value="">Seleziona un ambiente</option>
-                                <option value="Aperto">Aperto</option>
-                                <option value="Chiuso">Chiuso</option>
-                            </select>
-                            <br />
-                        </div>
-                        :
-                        <div className="input-group">
-                            <input type="text" className="form-control" id="ambiente" placeholder="Ambiente" onChange={this.props.handleChange} style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} /> <br />
-                        </div>
-                    }
+                    <div className="input-group">
+                        <select name="ambiente" id="ambiente" className="form-select" onChange={this.props.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)", marginBottom: "1%" }}>
+                            <option value="">Seleziona un ambiente</option>
+                            <option value="Aperto">Aperto</option>
+                            <option value="Chiuso">Chiuso</option>
+                        </select>
+                        <br />
+                    </div>
 
                     {this.tipoLocation() == 'Umbra' ?
                         null
