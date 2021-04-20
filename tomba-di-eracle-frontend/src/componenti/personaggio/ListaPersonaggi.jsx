@@ -594,6 +594,7 @@ class ListaPersonaggi extends Component {
                                 <th>Branco</th>
                                 <th>Sept</th>
                                 <th><a href="#" onClick={() => this.ordinaPerIdUtente()}>Proprietario</a> {this.renderFiltroUtente()}</th>
+                                <th><a href="#" onClick={() => this.ordinaPerDataCreazione()}>Data Creazione</a></th>
                                 <th>Ultima Location</th>
                                 <th>Stato {this.renderFiltroStato()} </th>
                                 <th>Modifica Rango</th>
@@ -602,7 +603,7 @@ class ListaPersonaggi extends Component {
                                 <th>Modifica Tribù</th>
                                 <th>Modifica Branco</th>
                                 <th>Modifica Sept</th>
-                                <th><a href="#" onClick={() => this.ordinaPerDataCreazione()}>Data Creazione</a></th>
+                                
                             </tr>
                         </thead>
                         <tbody>
@@ -620,6 +621,7 @@ class ListaPersonaggi extends Component {
                                     <td>{pg.branco != null ? pg.branco : '/---/'}</td>
                                     <td>{pg.sept != null ? pg.sept : '/---/'}</td>
                                     <td><p>ID: {pg.utente.id}</p> <p>{pg.utente.nominativo}</p> <p>{pg.utente.email}</p></td>
+                                    <td>{pg.dataCreazione}</td>
                                     <td>{pg.ultimaLocation}</td>
                                     <td>{pg.stato}</td>
                                     <td>{this.formModificaRango(pg)}</td>
@@ -627,13 +629,13 @@ class ListaPersonaggi extends Component {
                                     <td>
                                         <form onSubmit={() => this.modificaLocation(pg)}>
                                             <SelezionaLocationForm lista={JSON.parse(sessionStorage.getItem('allLocations'))} stanza={true} id="nuovaUltimaLocation" handleChange={this.handleChange} allLocations={true} />
-                                            <button className="btn btn-secondary">Modifica</button>
+                                            <button className="btn btn-secondary btn-sm">Modifica</button>
                                         </form>
                                     </td>
                                     <td>{this.formModificaTribu(pg)}</td>
                                     <td>{this.formModificaBranco(pg)}</td>
                                     <td>{this.formModificaSept(pg)}</td>
-                                    <td>{pg.dataCreazione}</td>
+                                    
                                 </tr>
                             )}
                         </tbody>

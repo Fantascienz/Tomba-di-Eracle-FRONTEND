@@ -151,7 +151,7 @@ class SchedaUtente extends Component {
                     <React.Fragment>
                         <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%" }} onClick={() => this.visualizzaListaPg()}>Lista Personaggi</button>
                         <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%" }} onClick={() => this.visualizzaPgAdmin()}>I Tuoi Personaggi</button>
-                        <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%" }} onClick={() => this.messaggi()}>Messaggi Utenti</button>
+                        {this.props.messaggiUtenti == "no" ? null : <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%" }} onClick={() => this.messaggi()}>Messaggi Utenti</button>}
                     </React.Fragment>
                 )
             } else {
@@ -159,7 +159,7 @@ class SchedaUtente extends Component {
                     <React.Fragment>
                         <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%" }} onClick={() => this.visualizzaListaUtenti()}>Lista Utenti</button>
                         <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%" }} onClick={() => this.visualizzaPgAdmin()}>I Tuoi Personaggi</button>
-                        <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%" }} onClick={() => this.messaggi()}>Messaggi Utenti</button>
+                        {this.props.messaggiUtenti == "no" ? null : <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%" }} onClick={() => this.messaggi()}>Messaggi Utenti</button>}
                     </React.Fragment>
                 )
             }
@@ -280,52 +280,54 @@ class SchedaUtente extends Component {
     render() {
 
         return (
-            <div className="corpoComponente">
-                <TitoloPagina titolo={'Salute ' + JSON.parse(sessionStorage.getItem('utente')).nominativo} />
+            <div className="corpoComponente" style={this.props.style}>
+                {this.props.titoloPagina == "no" ? <TitoloPagina titolo="" /> : <TitoloPagina titolo={'Salute ' + JSON.parse(sessionStorage.getItem('utente')).nominativo} />}
                 <div style={{ position: "absolute", left: "2%", height: "80%", width: "23%" }}>
                     <div style={{ height: "100%", display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
 
                         {/* -------------FLIP BOX------------------ */}
-                        <div className="square-box" style={{ backgroundColor: "transparent", width: "75%" }}>
-                            <div className="flip-box square-content">
-                                <div className="flip-box-inner" >
+                        {this.props.flipBox == "no" ? null :
+                            <div className="square-box" style={{ backgroundColor: "transparent", width: "75%" }}>
+                                <div className="flip-box square-content">
+                                    <div className="flip-box-inner" >
 
-                                    <div className="flip-box-front rounded-circle">
-                                        <div style={{ width: "auto", height: "100%" }}>
+                                        <div className="flip-box-front rounded-circle">
+                                            <div style={{ width: "auto", height: "100%" }}>
 
-                                            <SoundDiv suono={coinFlip}
-                                                contenuto={
-                                                    <img className="tombaJPG rounded-circle" src={avatarEracle} alt="Paris" style={{ width: "auto", height: "100%" }} />
-                                                }
-                                            />
+                                                <SoundDiv suono={coinFlip}
+                                                    contenuto={
+                                                        <img className="tombaJPG rounded-circle" src={avatarEracle} alt="Paris" style={{ width: "auto", height: "100%" }} />
+                                                    }
+                                                />
 
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div className="flip-box-back rounded-circle" style={{ display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
+                                        <div className="flip-box-back rounded-circle" style={{ display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
 
-                                        <div style={{ width: "80%", height: "auto" }}>
-                                            <u style={{ fontSize: "1.2vw" }}>{JSON.parse(sessionStorage.getItem('utente')).nominativo}</u>
-                                            <br /> <br />
-                                            <p style={{ fontSize: "1vw" }}>{JSON.parse(sessionStorage.getItem('utente')).email}</p>
-                                            <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%", fontSize: "1vw" }} onClick={() => this.props.modificaUtente()}>Modifica Account</button>
+                                            <div style={{ width: "80%", height: "auto" }}>
+                                                <u style={{ fontSize: "1.2vw" }}>{JSON.parse(sessionStorage.getItem('utente')).nominativo}</u>
+                                                <br /> <br />
+                                                <p style={{ fontSize: "1vw" }}>{JSON.parse(sessionStorage.getItem('utente')).email}</p>
+                                                <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%", fontSize: "1vw" }} onClick={() => this.props.modificaUtente()}>Modifica Account</button>
+                                            </div>
                                         </div>
+
+
                                     </div>
-
-
                                 </div>
                             </div>
-                        </div>
+                        }
                         {/* --------------------------------------- */}
 
                         <div style={{ width: "100%" }}>
-                            {this.isAdminCreazionePg()}
+                            {this.props.creazionePersonaggio == "no" ? null : this.isAdminCreazionePg()}
                             {this.isAdmin()}
                             {this.isStandard()}
                             {this.isVip()}
-                            {this.isMasterCreazionePg()}
+                            {this.props.creazionePersonaggio == "no" ? null : this.isMasterCreazionePg()}
                             {this.isMasterListe()}
-                            {this.creazioneLocation()}
+                            {this.props.gestioneLocation == "no" ? null : this.creazioneLocation()}
                         </div>
                     </div>
                 </div>
