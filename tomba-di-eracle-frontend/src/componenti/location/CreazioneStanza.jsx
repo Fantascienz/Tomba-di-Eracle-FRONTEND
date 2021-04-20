@@ -101,7 +101,7 @@ class CreazioneStanza extends Component {
                     <div className="row">
                         <div className="col-md-6 centrato">
                             <form onSubmit={this.handleSubmit} style={{ width: "75%" }}>
-                                <SelezionaLocationForm lista={JSON.parse(sessionStorage.getItem('allLocations'))} handleChange={this.handleChange} stanza={false} allLocations={true} />
+                                <SelezionaLocationForm lista={JSON.parse(sessionStorage.getItem('allLocations'))} handleChange={this.handleChange} stanza={false} allLocations={true} id="loc" />
                                 <CreazioneLocationForm handleChange={this.handleChange} stanza={true} anteprimaGiorno={this.state.urlImgGiorno} anteprimaNotte={this.state.urlImgNotte}
                                     anteprimaGiornoUmbra={this.state.urlImgGiornoUmbra} anteprimaNotteUmbra={this.state.urlImgNotteUmbra}
                                     idLocation={this.state.loc} />

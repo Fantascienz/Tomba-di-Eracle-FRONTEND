@@ -7,78 +7,79 @@ import cardGameUmbra from '../../img/gameCard_umbra.png'
 
 class CreazioneLocationForm extends Component {
 
+    getListaOrdinata = () => {
+        return JSON.parse(sessionStorage.getItem('allLocations')).sort(
+            (a, b) => (a.id < b.id ? -1 : Number(a.id > b.id))
+        );
+    }
+
     isStanza = () => {
         if (!this.props.stanza) {
 
-            let listaLocationOrdinata = JSON.parse(sessionStorage.getItem('allLocations')).sort(
-                (a, b) => (a.id < b.id ? -1 : Number(a.id > b.id))
-            );
+            // let listaLocationOrdinata = JSON.parse(sessionStorage.getItem('allLocations')).sort(
+            //     (a, b) => (a.id < b.id ? -1 : Number(a.id > b.id))
+            // );
 
-            const renderLista = (location, mappa) => {
-                if (location.tipo === 'Reame' && location.mappa === mappa && (location.direzioni.idLocationNord == null || location.direzioni.idLocationEst == null || location.direzioni.idLocationSud == null || location.direzioni.idLocationOvest == null)) {
-                    return <option value={location.id} key={location.id}>ID: {location.id} - {location.nome} </option>
-                }
+            // const renderLista = (location, mappa) => {
+            //     if (location.tipo === 'Reame' && location.mappa === mappa && (location.direzioni.idLocationNord == null || location.direzioni.idLocationEst == null || location.direzioni.idLocationSud == null || location.direzioni.idLocationOvest == null)) {
+            //         return <option value={location.id} key={location.id}>ID: {location.id} - {location.nome} </option>
+            //     }
 
-            }
+            // }
 
-            var opzioni = []
+            // var opzioni = []
 
-            const renderDirezioni = (idIngresso) => {
+            // const renderDirezioni = (idIngresso) => {
 
-                let lista = JSON.parse(sessionStorage.getItem('allLocations'))
+            //     let lista = JSON.parse(sessionStorage.getItem('allLocations'))
 
-                if (this.props.ingresso !== '') {
-                    for (let i = 0; i < lista.length; i++) {
-                        // eslint-disable-next-line
-                        if (lista[i].id == idIngresso) {
-                            if (lista[i].direzioni.idLocationNord == null && lista[i].tipo === 'Reame') {
-                                opzioni.push({
-                                    html: <option value="nord" >NORD</option>
-                                })
-                            }
-                            if (lista[i].direzioni.idLocationEst == null && lista[i].tipo === 'Reame') {
-                                opzioni.push({
-                                    html: <option value="est" >EST</option>
-                                })
-                            }
-                            if (lista[i].direzioni.idLocationSud == null && lista[i].tipo === 'Reame') {
-                                opzioni.push({
-                                    html: <option value="sud" >SUD</option>
-                                })
-                            }
-                            if (lista[i].direzioni.idLocationOvest == null && lista[i].tipo === 'Reame') {
-                                opzioni.push({
-                                    html: <option value="ovest" >OVEST</option>
-                                })
-                            }
-                            return (
-                                <select name="direzioneIngresso" id="direzioneIngresso" className="form-select" onChange={this.props.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)", marginBottom: "1%" }}>
-                                    <option value="">Seleziona Direzione Ingresso</option>
-                                    {opzioni.map(opz => opz.html)}
-                                </select>
-                            )
-                        }
+            //     if (this.props.ingresso !== '') {
+            //         for (let i = 0; i < lista.length; i++) {
+            //             // eslint-disable-next-line
+            //             if (lista[i].id == idIngresso) {
+            //                 if (lista[i].direzioni.idLocationNord == null && lista[i].tipo === 'Reame') {
+            //                     opzioni.push({
+            //                         html: <option value="nord" >NORD</option>
+            //                     })
+            //                 }
+            //                 if (lista[i].direzioni.idLocationEst == null && lista[i].tipo === 'Reame') {
+            //                     opzioni.push({
+            //                         html: <option value="est" >EST</option>
+            //                     })
+            //                 }
+            //                 if (lista[i].direzioni.idLocationSud == null && lista[i].tipo === 'Reame') {
+            //                     opzioni.push({
+            //                         html: <option value="sud" >SUD</option>
+            //                     })
+            //                 }
+            //                 if (lista[i].direzioni.idLocationOvest == null && lista[i].tipo === 'Reame') {
+            //                     opzioni.push({
+            //                         html: <option value="ovest" >OVEST</option>
+            //                     })
+            //                 }
+            //                 return (
+            //                     <select name="direzioneIngresso" id="direzioneIngresso" className="form-select" onChange={this.props.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)", marginBottom: "1%" }}>
+            //                         <option value="">Seleziona Direzione Ingresso</option>
+            //                         {opzioni.map(opz => opz.html)}
+            //                     </select>
+            //                 )
+            //             }
 
-                    }
-                }
-            }
+            //         }
+            //     }
+            // }
 
             return (
                 <React.Fragment>
                     <div className="input-group">
-                        <select name="locationIngresso" id="locationIngresso" className="form-select" onChange={this.props.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)", marginBottom: "1%" }}>
-                            <option value="">Seleziona Location Ingresso</option>
-                            <option value="" style={{ fontWeight: 'bold' }}>--- Location Esterne ---</option>
-                            {listaLocationOrdinata.map(location =>
-                                renderLista(location, 'Esterna')
+                        <select name="locationId" id="locationId" className="form-select" onChange={this.props.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)", marginBottom: "1%" }}>
+                            <option value={999}>Seleziona Posizione Location</option>
+                            {this.getListaOrdinata().map(loc =>
+                                (loc.nome === '/' && loc.tipo === 'Reame') ?
+                                    <option value={loc.id} key={loc.id}>{loc.id}</option>
+                                    : null
                             )}
-                            <option value="" style={{ fontWeight: 'bold' }}> --- Macro Locations --- </option>
-                            {listaLocationOrdinata.map(location =>
-                                renderLista(location, 'Macro')
-                            )}
-
                         </select>
-                        {renderDirezioni(this.props.ingresso)}
                     </div>
                     <SelezionaMeteo idSelect="meteo" handleChange={this.props.handleChange} />
                 </React.Fragment>
@@ -87,7 +88,7 @@ class CreazioneLocationForm extends Component {
     }
 
     tipoLocation() {
-        var allLocation = JSON.parse(sessionStorage.getItem('allLocations'))
+        var allLocation = this.getListaOrdinata();
 
         for (let i = 0; i < allLocation.length; i++) {
             if (allLocation[i].id == this.props.idLocation) {
@@ -155,6 +156,7 @@ class CreazioneLocationForm extends Component {
                         <input type="text" className="form-control" id="urlAudioUmbra" placeholder="URL Audio Umbra" onChange={this.props.handleChange} style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} /> <br />
                     </div>
                     {this.isStanza()}
+                    {/* {this.slotLocation()} */}
                 </div>
 
 

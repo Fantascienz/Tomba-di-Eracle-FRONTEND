@@ -23,10 +23,6 @@ class SchedaUtente extends Component {
             LocationService.sessioneAllLocation()
             LocationService.sessioneStanze()
         }
-
-
-
-
     }
 
     isStandard = () => {

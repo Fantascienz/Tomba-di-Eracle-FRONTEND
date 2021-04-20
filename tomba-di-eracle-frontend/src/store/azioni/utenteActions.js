@@ -30,7 +30,6 @@ export const login = (utente) => {
                         sessionStorage.setItem('listaTipoUtenti', JSON.stringify(res.data))
                     })
                 )
-                
                     .then(
                         LocationService.sessioneAllLocation()
                     ).then(

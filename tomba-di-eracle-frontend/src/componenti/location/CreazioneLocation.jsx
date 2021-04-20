@@ -8,6 +8,7 @@ import Macromappa from './Macromappa';
 class CreazioneLocation extends Component {
 
     state = {
+        locationId: 999,
         nome: '',
         ambiente: '',
         meteo: 1,
@@ -19,8 +20,8 @@ class CreazioneLocation extends Component {
         urlImgGiornoUmbra: '',
         urlImgNotteUmbra: '',
         urlAudioUmbra: null,
-        locationIngresso: '',
-        direzioneIngresso: ''
+        // locationIngresso: '',
+        // direzioneIngresso: ''
     }
 
     handleChange = (event) => {
@@ -30,10 +31,11 @@ class CreazioneLocation extends Component {
     }
 
     handleSubmit = (event) => {
-        // event.preventDefault()
+        
         if (LocationService.validaCampiCreazione(this.state, false)) {
             let locationCreata = {
                 location: {
+                    id: this.state.locationId,
                     nome: this.state.nome,
                     ambiente: this.state.ambiente,
                     urlImgGiorno: this.state.urlImgGiorno,
@@ -43,7 +45,7 @@ class CreazioneLocation extends Component {
                     creatore: JSON.parse(sessionStorage.getItem('utente'))
                 },
                 idLocationIngresso: parseInt(this.state.locationIngresso, 10),
-                direzioneIngresso: this.state.direzioneIngresso,
+                // direzioneIngresso: this.state.direzioneIngresso,
                 ingresso: this.state.ingresso,
                 meteoGiorno: this.state.meteo,
                 meteoNotte: this.state.meteo,
@@ -56,7 +58,10 @@ class CreazioneLocation extends Component {
             // alert(locationCreata.meteoGiorno)
             LocationService.creaLocation(locationCreata).then(
                 alert('Location creata con successo!')
+                
             )
+            console.log(locationCreata)
+            event.preventDefault()
         } else {
             event.preventDefault()
         }
