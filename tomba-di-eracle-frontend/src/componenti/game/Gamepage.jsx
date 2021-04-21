@@ -288,8 +288,6 @@ class Gamepage extends Component {
 
 
                                     <div className="centrato" style={{ position: "relative", backgroundColor: "transparent", height: "100%", width: "100%" }}>
-                                        {/* MUSICA di BACKGROUND--------------------- */}
-                                        <iframe width="420" height="35" style={{ display: "" }} src={location.urlAudio} allow="autoplay"></iframe>
                                         {/* LOGOUT PERSONAGGIO----------------------- */}
                                         <button className="btn btn-gold" onClick={() => this.logout()} style={{ width: "100%", fontSize: "1.5em" }}><b className="font-lombardia">E S C I</b></button>
                                     </div>
@@ -309,8 +307,7 @@ const mapStateToProps = (state) => {
         pgAttivo: state.game.pgAttivo,
         ultimaLocation: state.game.ultimaLocation,
         direzioniLocation: state.game.direzioniRelativeUltimaLocation,
-        stanzeLocation: state.game.stanzeLocation
-
+        stanzeLocation: state.game.stanzeLocation,
     })
 }
 

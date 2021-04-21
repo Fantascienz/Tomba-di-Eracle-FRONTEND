@@ -1,5 +1,5 @@
 import { firestore } from "../../App";
-import React, {useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import divisore from '../../img/divisore.png'
 import penna from '../../img/quill.png'
@@ -36,27 +36,37 @@ export const ChatRoom = () => {
     dummy.current.scrollIntoView({ behavior: 'smooth' });
   }
 
+
+  function contaParole(maxParole) {
+    var c = formValue.length;
+    return maxParole - c;
+  }
+
+
   return (<>
     {/* NEL TAG MAIN VENGONO VISUALIZZATI I MESSAGGI */}
     <div className="chat">
       <main>
-          {messaggi && messaggi.map(msg =>
-            msg.idLocation === location.id ?
-              <MessaggioChat key={msg.id} messaggio={msg} />
-              :
-              "")}
+        {messaggi && messaggi.map(msg =>
+          msg.idLocation === location.id ?
+            <MessaggioChat key={msg.id} messaggio={msg} />
+            :
+            "")}
 
-          <span ref={dummy}></span>
+        <span ref={dummy}></span>
       </main>
 
       <form onSubmit={inviaMessaggio}>
-            
-        <textarea className="font-lombardia" name="areaMsg" id="areaMsg" cols="30" rows="5" value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="Scrivi messaggio..."></textarea>
-        
-        <button type="submit" disabled={!formValue} title={!formValue ? 'Inserisci un testo' : 'Scrivi'}>
-          <img src={penna} alt='...' style={{width:"auto", height:"80%"}}/>
-        </button>
 
+        <textarea className="font-lombardia" name="areaMsg" id="areaMsg" cols="30" rows="5" value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="Scrivi messaggio..."></textarea>
+
+        <div style={{right: "5%" }} align="center">
+          <p style={{ fontSize: "1vh" }}>Caratteri rimanenti: <span>{contaParole(5000)}</span></p>
+
+          <button type="submit" disabled={!formValue} title={!formValue ? 'Inserisci un testo' : 'Scrivi'} style={{width:"100%"}}>
+            <img src={penna} alt='...' style={{width: "auto", height: "80%" }} />
+          </button>
+        </div>
       </form>
     </div>
   </>)
@@ -78,7 +88,7 @@ function MessaggioChat(props) {
         <tr>
           {messageClass === 'sent' ?
             <td align='right'>
-              <span className="font-lombardia" style={{fontSize:"1.3em"}}>{nomePersonaggio} </span>
+              <span className="font-lombardia" style={{ fontSize: "1.3em" }}>{nomePersonaggio} </span>
               {/*se non c'è un immagine,mette l'immagine di default corrispondente all'url*/}
               <img src={immagine || 'https://myasw.org/wp-content/uploads/2020/05/mr-anonymous.png'} atl="..." />
             </td>
@@ -86,7 +96,7 @@ function MessaggioChat(props) {
             <td align='left'>
               {/*se non c'è un immagine,mette l'immagine di default corrispondente all'url*/}
               <img src={immagine || 'https://myasw.org/wp-content/uploads/2020/05/mr-anonymous.png'} atl="..." />
-              <span className="font-lombardia" style={{fontSize:"1.3em"}}>{nomePersonaggio} </span>
+              <span className="font-lombardia" style={{ fontSize: "1.3em" }}>{nomePersonaggio} </span>
             </td>
           }
         </tr>
