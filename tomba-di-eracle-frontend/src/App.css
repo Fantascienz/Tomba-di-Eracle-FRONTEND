@@ -137,7 +137,9 @@ a:hover{
   background-position: center center;
   background-repeat: no-repeat;
   background-color: transparent;
-  height: 50px;
+  height: 2em;
+  width: 10em;
+  font-size: 1.5em;
   border: none
 }
 
@@ -703,4 +705,14 @@ button:disabled {
   border-radius: 0px;
   position: relative;
   color: black;
+}
+
+/* PROVA--------------------------------------------- */
+
+.nomeCitta{
+  color:transparent
+}
+
+.nomeCitta:hover{
+  color:red
 }

@@ -40,7 +40,7 @@ class Footer extends Component {
                                 size='sm'
                                 contenuto={
                                     <div className="centrato" style={{ position: "fixed", backgroundColor: "transparent", height: "500px", width: "500px" }}>
-                                        <SchedaUtente style={{ width: "80%" }} titoloPagina="no" flipBox="no" gestioneLocation="no" creazionePersonaggio="no" messaggiUtenti="no"/>
+                                        <SchedaUtente style={{ width: "70%", height: "60%" }} titoloPagina="no" flipBox="no" gestioneLocation="no" creazionePersonaggio="no" messaggiUtenti="no"/>
                                     </div>}
                             />
                             :

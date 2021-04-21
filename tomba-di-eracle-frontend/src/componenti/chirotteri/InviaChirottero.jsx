@@ -8,6 +8,12 @@ export const InviaChirottero = ({ abilitati }) => {
     const [testo, setTesto] = useState('')
     const [destinatario, setDestinatario] = useState(0)
 
+
+    function contaParole(maxParole) {
+        var c = testo.length;
+        return maxParole - c;
+    }
+
     return (
         <>
             <form onSubmit={() => inviaChirottero(testo, destinatario)}>
@@ -15,13 +21,16 @@ export const InviaChirottero = ({ abilitati }) => {
                     <option value={0}>Seleziona destinatario..</option>
                     {abilitati.map(personaggio =>
                         JSON.parse(sessionStorage.getItem('pgAttivo')).id === personaggio.id ? '' :
-                            <option value={personaggio.id} key={personaggio.id}>{personaggio.id}: {personaggio.nominativo}</option>
+                            <option value={personaggio.id} key={personaggio.id}>{personaggio.nominativo}</option>
                     )}
                 </select>
-                <textarea name="testo" id="testo" rows="8" placeholder="Scrivi messaggio..." onChange={(e) => setTesto(e.target.value)}
+                <textarea name="testo" id="testo" rows="8" maxLength="300" placeholder="Scrivi messaggio..." onChange={(e) => setTesto(e.target.value)}
                     className="font-lombardia" style={{ fontSize: '2em', backgroundColor: 'transparent', borderTop: 'none', borderRight: 'none', borderBottom: 'none', width: '100%', lineHeight: 1 }}></textarea>
-                <button type="submit" disabled={testo === '' ? true : false} style={{ backgroundColor: 'transparent', border: 'none' }}>
-                    <img src={chirottero} alt="" style={{ width: '45%' }} />
+                
+                <p>Caratteri rimanenti: <span>{contaParole(300)}</span></p>
+
+                <button type="submit"  disabled={testo === '' || destinatario == 0 ? true : false} style={{ backgroundColor: 'transparent', border: 'none' }}>
+                    <img src={chirottero} alt="" style={{ width: '45%' }} title={testo === '' || destinatario == 0 ? "Scegli un Destinatario e Scrivi" : "Invia"}/>
                 </button>
             </form>
         </>
