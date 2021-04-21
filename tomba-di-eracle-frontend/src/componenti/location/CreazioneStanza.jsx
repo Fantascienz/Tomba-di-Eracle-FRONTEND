@@ -86,12 +86,6 @@ class CreazioneStanza extends Component {
             }
         }
     }
-
-
-
-    componentDidMount() {
-    }
-
     render() {
         return (
             <React.Fragment>
