@@ -40,7 +40,6 @@ import Chirottero from '../chirotteri/Chirottero'
 class Gamepage extends Component {
 
     navigazione = (location) => {
-
         if (location !== null) {
             this.props.naviga(location)
         } else {
