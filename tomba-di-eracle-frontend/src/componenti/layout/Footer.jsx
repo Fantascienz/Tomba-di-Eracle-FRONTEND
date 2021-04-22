@@ -9,7 +9,6 @@ import SchedaUtente from '../utente/SchedaUtente';
 class Footer extends Component {
 
     visualizzaAutori = () => {
-        console.log('entro')
         withReactContent(Swal).fire({
             title:
                 <div>
@@ -23,17 +22,35 @@ class Footer extends Component {
         })
     }
 
+    visualizzaRegolamento = () => {
+        withReactContent(Swal).fire({
+            title:
+                <div>
+                    DA IMPLEMENTARE
+                </div>
+        })
+    }
+
+    visualizzaCommunity = () => {
+        withReactContent(Swal).fire({
+            title:
+                <div>
+                    DA IMPLEMENTARE
+                </div>
+        })
+    }
+
 
     render() {
         return (
             <div className="bg-dark" style={{ position: "fixed", bottom: "0px", width: "100%", height: "5%", color: "#b30000" }}>
                 <div className="row">
 
-                    <div className="col-sm-2" style={{paddingTop:"0.5%"}}>
-                        <b>SOCIAL</b>
+                    <div className="col-sm-2 footer-setting" >
+                    <a href="#" onClick={this.visualizzaCommunity}><b>COMMUNITY</b></a>
                     </div>
 
-                    <div className="col-sm-2" style={{paddingTop:"0.5%"}}>
+                    <div className="col-sm-2 footer-setting" >
                         {(JSON.parse(sessionStorage.getItem('utente')) != null && JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin') ?
                             <ModalComponente
                                 bottone={<a href="#"><b>Opzioni Master</b></a>}
@@ -48,14 +65,15 @@ class Footer extends Component {
                         }
                     </div>
 
-                    <div className="col-sm-4" style={{paddingTop:"0.5%"}}>
+                    <div className="col-sm-4 footer-setting">
                         <a href="#" onClick={this.visualizzaAutori}><b>CREDITS</b></a>
                     </div>
 
-                    <div className="col-sm-2">
+                    <div className="col-sm-2 footer-setting">
+                        <a href="#" onClick={this.visualizzaRegolamento}><b>REGOLAMENTO</b></a>
                     </div>
 
-                    <div className="col-sm-2" align="right" style={{paddingTop:"0.5%"}}>
+                    <div className="col-sm-2 footer-setting" align="right">
                         <Orologio />
                     </div>
                 </div>
