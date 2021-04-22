@@ -707,12 +707,8 @@ button:disabled {
   color: black;
 }
 
-/* PROVA--------------------------------------------- */
+/* FOOTER--------------------------------------------- */
 
-.nomeCitta{
-  color:transparent
-}
-
-.nomeCitta:hover{
-  color:red
+.footer-setting{
+  padding-top:0.5%
 }
