@@ -7,7 +7,7 @@ import Header from '../layout/Header';
 import { TitoloPagina } from '../layout/TitoloPagina';
 import Macromappa from './Macromappa';
 import MinimappaRegolabile from './MinimappaReagolabile';
-import { coefficienteId } from './room/impostazioniDirezioni';
+import { coefficienteId, setDirezioniX3 } from './room/impostazioniDirezioni';
 
 const CreazioneStanza = (props) => {
 
@@ -25,9 +25,10 @@ const CreazioneStanza = (props) => {
     const changeHandler = [setNome, setAmbiente, setUrlImgGiorno, setUrlImgNotte, setUrlAudio, setChiave, setUrlImgGiornoUmbra, setUrlImgNotteUmbra, setUrlAudioUmbra]
 
     const aggiungiLocation = () => {
+        let id = props.id * coefficienteId(props.cellePerRiga) + parseInt(props.superLoc,10)
         let sublocation = {
             location: {
-                id: props.id * coefficienteId(props.cellePerRiga) + parseInt(props.superLoc,10),
+                id: id,
                 nome: nome,
                 ambiente: ambiente,
                 urlImgGiorno: urlImgGiorno,
@@ -40,8 +41,7 @@ const CreazioneStanza = (props) => {
             },
             idSuperLocation: props.id
         }
-
-        alert(sublocation.location.id)
+        console.log(setDirezioniX3(props.superLoc,id))
 
     }
 
