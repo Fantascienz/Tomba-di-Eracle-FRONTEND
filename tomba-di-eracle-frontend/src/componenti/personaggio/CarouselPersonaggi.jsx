@@ -25,8 +25,8 @@ class CarouselPersonaggi extends Component {
     caroselloPersonaggi() {
         return (
             <Carousel interval={null}
-                prevIcon={<img src={frecciaDX} style={{ opacity: "none", marginLeft: "550px" }} height="55px" alt="" />} prevLabel={null}
-                nextIcon={<img src={frecciaSX} style={{ opacity: "none", marginRight: "550px" }} height="55px" alt="" />} nextLabel={null}
+                prevIcon={<img src={frecciaDX} style={{ opacity: "none", marginLeft: "530px" }} height="56px" alt="" />} prevLabel={null}
+                nextIcon={<img src={frecciaSX} style={{ opacity: "none", marginRight: "530px" }} height="56px" alt="" />} nextLabel={null}
                 style={{ position: "relative", backgroundColor: "transparent", width: "250px", height: "auto" }}
             >
                 {this.props.personaggiUtente && this.props.personaggiUtente.map(personaggio => {
@@ -96,7 +96,7 @@ class CarouselPersonaggi extends Component {
     render() {
         return (
             <div>
-                <div style={{ width: "350px" }}>
+                <div style={{ width: "300px" }}>
 
                     {this.props.personaggiUtente == 0 ? this.cardPersonaggioVuoto() : this.caroselloPersonaggi()}
 

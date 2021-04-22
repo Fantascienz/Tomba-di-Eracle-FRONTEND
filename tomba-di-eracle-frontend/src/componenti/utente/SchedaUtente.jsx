@@ -50,28 +50,34 @@ class SchedaUtente extends Component {
         }
     }
 
-    isVip = () => {
 
+    isVip = () => {
         if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'vip') {
             return (
-                <div className="btn-group" role="group" aria-label="Basic example" style={{ }}>
-                    {JSON.parse(sessionStorage.getItem('utente')).contatoreUmani < JSON.parse(sessionStorage.getItem('utente')).maxUmani ?
-                        <button className="btn btn-dark btn-utente-50" onClick={() => this.props.creazionePG()}><p>Crea Umano</p></button>
-                        :
-                        <button className="btn btn-dark btn-utente-50" onClick={() => withReactContent(Swal).fire({ title: <p>Numero massimo di Umani raggiunto!</p> })} ><p>Crea Umano</p></button>
-                    }
+                <>
+                    <button className="btn btn-dark btn-dark-disabilitato" style={{ color: "#eeaa44", width: "80%", height: "9%", fontSize: "1vh", borderRadius: "5px 5px 0 0" }} disabled>Crea personaggio...</button>
+                    <div className="btn-group" role="group" aria-label="Basic example" style={{}}>
+                        {JSON.parse(sessionStorage.getItem('utente')).contatoreUmani < JSON.parse(sessionStorage.getItem('utente')).maxUmani ?
+                            <button className="btn btn-dark btn-utente-50" style={{ borderRadius: "0 0 0 5px" }} onClick={() => this.props.creazionePG()}><p>...Umano</p></button>
+                            :
+                            <button className="btn btn-dark btn-utente-50" style={{ borderRadius: "0 0 0 5px" }} onClick={() => withReactContent(Swal).fire({ title: <p>Numero massimo di Umani raggiunto!</p> })} ><p>...Umano</p></button>
+                        }
 
-                    {(JSON.parse(sessionStorage.getItem('utente')).contatoreLupus === JSON.parse(sessionStorage.getItem('utente')).maxGarou ||
-                        JSON.parse(sessionStorage.getItem('utente')).contatoreHomid === JSON.parse(sessionStorage.getItem('utente')).maxGarou) ||
-                        JSON.parse(sessionStorage.getItem('utente')).contatoreMetis === JSON.parse(sessionStorage.getItem('utente')).maxGarou
+                        {(JSON.parse(sessionStorage.getItem('utente')).contatoreLupus === JSON.parse(sessionStorage.getItem('utente')).maxGarou ||
+                            JSON.parse(sessionStorage.getItem('utente')).contatoreHomid === JSON.parse(sessionStorage.getItem('utente')).maxGarou) ||
+                            JSON.parse(sessionStorage.getItem('utente')).contatoreMetis === JSON.parse(sessionStorage.getItem('utente')).maxGarou
 
-                        ?
-                        <button className="btn btn-dark btn-utente-50" style={{ borderRadius: "0 5px 5px 0" }} onClick={() => withReactContent(Swal).fire({ title: <p>Numero massimo di Garou raggiunto!</p> })}  >Crea Garou</button>
-                        :
-                        <button className="btn btn-dark btn-utente-50" style={{ borderRadius: "0 5px 5px 0" }} onClick={() => this.props.creazioneGarou()}  ><p>Crea Garou</p></button>
-                    }
+                            ?
+                            <button className="btn btn-dark btn-utente-50" style={{ borderRadius: "0 0 5px 0" }} onClick={() => withReactContent(Swal).fire({ title: <p>Numero massimo di Garou raggiunto!</p> })}  ><p>...Garou</p></button>
+                            :
+                            <button className="btn btn-dark btn-utente-50" style={{ borderRadius: "0 0 5px 0" }} onClick={() => this.props.creazioneGarou()}  ><p>...Garou</p></button>
+                        }
 
-                </div>
+                    </div>
+                    <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
+                        <button className="btn btn-dark btn-utente" onClick={() => this.messaggi()}><p>Contatta un Admin</p></button>
+                    </div>
+                </>
             )
         }
     }
@@ -81,26 +87,29 @@ class SchedaUtente extends Component {
         if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'master') {
 
             return (
-                <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
-                    {
-                        JSON.parse(sessionStorage.getItem('utente')).contatoreUmani === JSON.parse(sessionStorage.getItem('utente')).maxUmani
-                            ?
-                            <button className="btn btn-dark btn-utente-33" onClick={() => withReactContent(Swal).fire({ title: <p>Numero massimo di Umani raggiunto!</p> })} ><p>Crea Umano</p></button>
-                            :
-                            <button className="btn btn-dark btn-utente-33" onClick={() => this.props.creazionePG()}><p>Crea Umano</p></button>
-                    }
+                <>
+                    <button className="btn btn-dark btn-dark-disabilitato" style={{ color: "#eeaa44", width: "80%", height: "9%", fontSize: "1vh", borderRadius: "5px 5px 0 0" }} disabled>Crea personaggio...</button>
+                    <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
+                        {
+                            JSON.parse(sessionStorage.getItem('utente')).contatoreUmani === JSON.parse(sessionStorage.getItem('utente')).maxUmani
+                                ?
+                                <button className="btn btn-dark btn-utente-33" style={{ borderRadius: "0 0 0 5px" }} onClick={() => withReactContent(Swal).fire({ title: <p>Numero massimo di Umani raggiunto!</p> })} ><p>...Umano</p></button>
+                                :
+                                <button className="btn btn-dark btn-utente-33" style={{ borderRadius: "0 0 0 5px" }} onClick={() => this.props.creazionePG()}><p>...Umano</p></button>
+                        }
 
-                    {
-                        (JSON.parse(sessionStorage.getItem('utente')).contatoreLupus === JSON.parse(sessionStorage.getItem('utente')).maxGarou ||
-                            JSON.parse(sessionStorage.getItem('utente')).contatoreHomid === JSON.parse(sessionStorage.getItem('utente')).maxGarou ||
-                            JSON.parse(sessionStorage.getItem('utente')).contatoreMetis === JSON.parse(sessionStorage.getItem('utente')).maxGarou)
-                            ?
-                            <button className="btn btn-dark btn-utente-33" onClick={() => withReactContent(Swal).fire({ title: <p>Numero massimo di Garou raggiunto!</p> })} ><p>Crea Garou</p></button>
-                            :
-                            <button className="btn btn-dark btn-utente-33" onClick={() => this.props.creazioneGarou()} ><p>Crea Garou</p></button>
-                    }
-                    <button className="btn btn-dark btn-utente-33" style={{ borderRadius: "0 5px 5px 0" }} onClick={() => this.props.creazionePng()} ><p>Crea PNG</p></button>
-                </div>
+                        {
+                            (JSON.parse(sessionStorage.getItem('utente')).contatoreLupus === JSON.parse(sessionStorage.getItem('utente')).maxGarou ||
+                                JSON.parse(sessionStorage.getItem('utente')).contatoreHomid === JSON.parse(sessionStorage.getItem('utente')).maxGarou ||
+                                JSON.parse(sessionStorage.getItem('utente')).contatoreMetis === JSON.parse(sessionStorage.getItem('utente')).maxGarou)
+                                ?
+                                <button className="btn btn-dark btn-utente-33" onClick={() => withReactContent(Swal).fire({ title: <p>Numero massimo di Garou raggiunto!</p> })} ><p>...Garou</p></button>
+                                :
+                                <button className="btn btn-dark btn-utente-33" onClick={() => this.props.creazioneGarou()} ><p>...Garou</p></button>
+                        }
+                        <button className="btn btn-dark btn-utente-33" style={{ borderRadius: "0 0 5px 0" }} onClick={() => this.props.creazionePng()} ><p>...PNG</p></button>
+                    </div>
+                </>
             )
         }
     }
@@ -110,16 +119,16 @@ class SchedaUtente extends Component {
             if (this.props.visualizzaPg) {
                 return (
                     <React.Fragment>
-                        <button className="btn btn-dark btn-utente" onClick={() => this.visualizzaPgMaster()}><p>I Tuoi Personaggi</p></button> <br />
+                        <button className="btn btn-dark btn-utente" onClick={() => this.visualizzaPgMaster()}><p>I Tuoi Personaggi</p></button>
                         <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
-                            <button className="btn btn-dark btn-utente"  onClick={() => this.messaggi()}><p>Contatta un Admin</p></button>
+                            <button className="btn btn-dark btn-utente" onClick={() => this.messaggi()}><p>Contatta un Admin</p></button>
                         </div>
                     </React.Fragment>
                 )
             } else {
                 return (
                     <React.Fragment>
-                        <button className="btn btn-dark btn-utente" onClick={() => this.visualizzaListMaster()}><p>Lista Personaggi</p></button> <br />
+                        <button className="btn btn-dark btn-utente" onClick={() => this.visualizzaListMaster()}><p>Lista Personaggi</p></button>
                         <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
                             <button className="btn btn-dark btn-utente" onClick={() => this.messaggi()}><p>Contatta un Admin</p></button>
                         </div>
@@ -132,11 +141,14 @@ class SchedaUtente extends Component {
     isAdminCreazionePg = () => {
         if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin') {
             return (
-                <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
-                    <button className="btn btn-dark btn-utente-33" onClick={() => this.props.creazionePG()}><p>Crea Umano</p></button>
-                    <button className="btn btn-dark btn-utente-33" onClick={() => this.props.creazioneGarou()} ><p>Crea Garou</p></button>
-                    <button className="btn btn-dark btn-utente-33" style={{ borderRadius: "0 5px 5px 0" }} onClick={() => this.props.creazionePng()} ><p>Crea PNG</p></button>
-                </div>
+                <>
+                    <button className="btn btn-dark btn-dark-disabilitato" style={{ color: "#eeaa44", width: "80%", height: "9%", fontSize: "1vh", borderRadius: "5px 5px 0 0" }} disabled>Crea personaggio...</button>
+                    <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
+                        <button className="btn btn-dark btn-utente-33" style={{ borderRadius: "0 0px 0 5px" }} onClick={() => this.props.creazionePG()}><p>...Umano</p></button>
+                        <button className="btn btn-dark btn-utente-33" onClick={() => this.props.creazioneGarou()} ><p>...Garou</p></button>
+                        <button className="btn btn-dark btn-utente-33" style={{ borderRadius: "0 0px 5px 0" }} onClick={() => this.props.creazionePng()} ><p>...PNG</p></button>
+                    </div>
+                </>
             )
         }
     }
@@ -167,13 +179,17 @@ class SchedaUtente extends Component {
     creazioneLocation = () => {
         if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' || JSON.parse(sessionStorage.getItem('utente')).tipo === 'master') {
             return (
-                <React.Fragment>
-                    <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
-                        <button className="btn btn-dark btn-utente-33" onClick={() => this.creaLocation()}><p>Crea Location</p></button>
-                        <button className="btn btn-dark btn-utente-33" onClick={() => this.creaStanza()}><p>Crea Stanza</p></button>
-                        <button className="btn btn-dark btn-utente-33" onClick={() => this.modificaLocation()}><p>Modifica Location</p></button>
+                <>
+                    <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%", height:"9%" }}>
+                        <button className="btn btn-dark btn-dark-disabilitato" style={{ color: "#eeaa44", width: "66%", height: "100%", fontSize: "1vh", borderRadius: "5px 5px 0 0", marginRight:"1%" }} disabled>Location...</button>
+                        <button className="btn btn-dark btn-dark-disabilitato" style={{ color: "#eeaa44", width: "33%", height: "100%", fontSize: "1vh", borderRadius: "5px 5px 0 0" }} disabled>Stanza...</button>
                     </div>
-                </React.Fragment>
+                    <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
+                        <button className="btn btn-dark btn-utente-33" style={{ width: "33%", borderRadius: "0 0 0 5px" }} onClick={() => this.creaLocation()}><p>...Crea</p></button>
+                        <button className="btn btn-dark btn-utente-33" style={{ width: "33%", borderRadius: "0 0 5px 0", marginRight:"1%" }} onClick={() => this.modificaLocation()}><p>...Modifica</p></button>
+                        <button className="btn btn-dark btn-utente-33" style={{ width: "33%", borderRadius: "0 0 5px 5px" }}onClick={() => this.creaStanza()}><p>...Crea</p></button>
+                    </div>
+                </>
             )
         }
     }
@@ -282,7 +298,7 @@ class SchedaUtente extends Component {
         return (
             <div className="corpoComponente" style={this.props.style}>
                 {this.props.titoloPagina == "no" ? <TitoloPagina titolo="" /> : <TitoloPagina titolo={"Ciao " + (nome)} />}
-                
+
                 <div className="pulsantiera-utente centrato">
 
                     {/* -------------FLIP BOX------------------ */}
@@ -297,9 +313,9 @@ class SchedaUtente extends Component {
                                     </div>
 
                                     <div className="flip-box-back rounded-circle centrato flip-box-back-interlinea">
-                                            <u className="flip-box-back-u">{JSON.parse(sessionStorage.getItem('utente')).nominativo}</u>
-                                            <span className="flip-box-back-span">{JSON.parse(sessionStorage.getItem('utente')).email}</span>
-                                            <button className="btn btn-dark btn-flip-box-back" onClick={() => this.props.modificaUtente()}>Modifica Account</button>
+                                        <u className="flip-box-back-u">{JSON.parse(sessionStorage.getItem('utente')).nominativo}</u>
+                                        <span className="flip-box-back-span">{JSON.parse(sessionStorage.getItem('utente')).email}</span>
+                                        <button className="btn btn-dark btn-flip-box-back" onClick={() => this.props.modificaUtente()}>Modifica Account</button>
                                     </div>
                                 </div>
                             </div>

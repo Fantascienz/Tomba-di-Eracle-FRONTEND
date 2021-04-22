@@ -12,7 +12,7 @@ class Header extends Component {
             return(
                 <div className="row no-gutters" style={{height:"30%", position:"absolute", left:"0%", bottom:"0%", width:"103%"}}>
                     <div className="col header-link">
-                        <a href="/paginaUtente"><b>PAGINA UTENTE</b></a>
+                        <a href="/paginaUtente"><b>Home</b></a>
                     </div>
 
                     <div className="col">
@@ -20,22 +20,22 @@ class Header extends Component {
 
 
                     <div className="col header-link">
-                        <a href="/" onClick={() => this.eseguiLogout()}><b>LOGOUT</b></a>
+                        <a href="/" onClick={() => this.eseguiLogout()}><b>Logout</b></a>
                     </div>
                 </div>
             )
         } else {
             return (
-                <div className="row no-gutters" style={{height:"30%", position:"absolute", left:"0%", bottom:"0%", width:"103%"}}>
+                <div className="header-links-row row no-gutters" style={{}}>
                     <div className="col header-link">
-                        <a href="/"><b>LOGIN</b></a>
+                        <a href="/"><b>Login</b></a>
                     </div>
 
                     <div className="col">
                     </div>
 
                     <div className="col header-link">
-                        <a href="/registrazione"><b>REGISTRAZIONE</b></a>
+                        <a href="/registrazione"><b>Registrazione</b></a>
                     </div>
                 </div>
             )
@@ -46,8 +46,7 @@ class Header extends Component {
         return (
             <div className="bg-dark" style={{ position:"fixed", top:"0%", color:"#b30000", height:"10%", width:"100%" }}>
                 {this.visualizzaLinkHeader()}
-                <div style={{ position:"absolute", width:"100%", height:"70%", backgroundImage:`url('${titolo}')`, backgroundSize:"auto 6.5vmin", backgroundPosition:"center center", backgroundRepeat: "no-repeat"}}>
-                </div>
+                <div id="titolo-home"></div>
             </div>
         );
     }

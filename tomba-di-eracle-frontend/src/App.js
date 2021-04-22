@@ -16,7 +16,6 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 import Forecast from './componenti/game/Forecast';
-import ChatAdmin from './componenti/messaggi/ChatAdmin';
 import MessaggiUtenti from './componenti/messaggi/MessaggiUtenti';
 import MessaggiAdmin from './componenti/messaggi/MessaggiAdmin';
 import CreazioneRoom from './componenti/location//room/CreazioneRoom';

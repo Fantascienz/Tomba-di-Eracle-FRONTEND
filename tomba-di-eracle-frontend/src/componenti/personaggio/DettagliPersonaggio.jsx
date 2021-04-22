@@ -25,7 +25,7 @@ class DettagliPersonaggio extends Component {
                         <div className="card-posizione-pulsanti">
 
                             <div className="centrato" style={{ position: "absolute", bottom: "0%", backgroundColor: "transparent", width: "100%", height: "auto" }}>
-                                <div className="banner-gold" style={{ width: "80%", height: "10%" }} ><b className="font-lombardia" style={{ fontSize: "1.5vw" }}>{singleCharacter.nominativo}</b></div>
+                                <div className="banner-gold centrato" style={{ width: "80%", height: "10%" }} ><b className="font-lombardia" style={{ fontSize: "2.5vh" }}>{singleCharacter.nominativo}</b></div>
                             </div>
 
                         </div>

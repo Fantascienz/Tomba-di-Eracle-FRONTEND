@@ -76,7 +76,7 @@ export const ChatRoom = () => {
 
 
 function MessaggioChat(props) {
-  const { testo, idPersonaggio, immagine, nomePersonaggio, inviatoAlle } = props.messaggio;
+  const { testo, idPersonaggio, immagine, nomePersonaggio } = props.messaggio;
 
   const personaggioAttivo = JSON.parse(sessionStorage.getItem('pgAttivo'));
 
@@ -90,12 +90,12 @@ function MessaggioChat(props) {
             <td align='right'>
               <span className="font-lombardia" style={{ fontSize: "1.3em" }}>{nomePersonaggio} </span>
               {/*se non c'è un immagine,mette l'immagine di default corrispondente all'url*/}
-              <img src={immagine || 'https://myasw.org/wp-content/uploads/2020/05/mr-anonymous.png'} atl="..." />
+              <img src={immagine || 'https://myasw.org/wp-content/uploads/2020/05/mr-anonymous.png'} alt="..." />
             </td>
             :
             <td align='left'>
               {/*se non c'è un immagine,mette l'immagine di default corrispondente all'url*/}
-              <img src={immagine || 'https://myasw.org/wp-content/uploads/2020/05/mr-anonymous.png'} atl="..." />
+              <img src={immagine || 'https://myasw.org/wp-content/uploads/2020/05/mr-anonymous.png'} alt="..." />
               <span className="font-lombardia" style={{ fontSize: "1.3em" }}>{nomePersonaggio} </span>
             </td>
           }
@@ -108,7 +108,7 @@ function MessaggioChat(props) {
         </tr>
         <tr>
           <td align="center">
-            <img src={divisore} atl="..." style={{ width: "100%" }} />
+            <img src={divisore} alt="..." style={{ width: "100%" }} />
           </td>
         </tr>
       </table>

@@ -25,9 +25,9 @@ class Orologio extends Component {
 
   render() {
     return (
-      <div style={{marginRight:"5%" }}>
-        <p>{this.state.date.toLocaleTimeString()}</p>
-      </div>
+      <>
+        {this.state.date.toLocaleTimeString()}
+      </>
     );
   }
 }
