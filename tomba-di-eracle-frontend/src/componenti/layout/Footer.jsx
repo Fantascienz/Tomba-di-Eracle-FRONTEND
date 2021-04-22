@@ -44,20 +44,20 @@ class Footer extends Component {
     render() {
         return (
             <div className="bg-dark" style={{ position: "fixed", bottom: "0px", width: "100%", height: "5%", color: "#b30000" }}>
-                <div className="row">
+                <div className="row" style={{height:"100%"}}>
 
-                    <div className="col footer-setting" >
-                    <a href="#" onClick={this.visualizzaCommunity}><b>COMMUNITY</b></a>
+                    <div className="col footer-setting centrato" >
+                        <a href="#" onClick={this.visualizzaCommunity}><b>Community</b></a>
                     </div>
 
-                    <div className="col footer-setting" >
+                    <div className="col footer-setting centrato" >
                         {(JSON.parse(sessionStorage.getItem('utente')) != null && JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin') ?
                             <ModalComponente
-                                bottone={<a href="#"><b>Opzioni Master</b></a>}
+                                bottone={<a href="#" ><b id="opzioni-master">Opt. Master</b></a>}
                                 size='sm'
                                 contenuto={
                                     <div className="centrato" style={{ position: "fixed", backgroundColor: "transparent", height: "500px", width: "500px" }}>
-                                        <SchedaUtente style={{ width: "70%", height: "60%" }} titoloPagina="no" flipBox="no" gestioneLocation="no" creazionePersonaggio="no" messaggiUtenti="no"/>
+                                        <SchedaUtente style={{ width: "70%", height: "60%" }} titoloPagina="no" flipBox="no" gestioneLocation="no" creazionePersonaggio="no" messaggiUtenti="no" />
                                     </div>}
                             />
                             :
@@ -65,16 +65,17 @@ class Footer extends Component {
                         }
                     </div>
 
-                    <div className="col footer-setting">
-                        <a href="#" onClick={this.visualizzaAutori}><b>CREDITS</b></a>
+                    <div className="col footer-setting centrato">
+                        <b><Orologio /></b>
+
                     </div>
 
-                    <div className="col footer-setting">
-                        <a href="#" onClick={this.visualizzaRegolamento}><b>REGOLAMENTO</b></a>
+                    <div className="col footer-setting centrato">
+                        <a href="#" onClick={this.visualizzaRegolamento}><b>Regolamento</b></a>
                     </div>
 
-                    <div className="col footer-setting" align="right">
-                        <Orologio />
+                    <div className="col footer-setting centrato">
+                        <a href="#" onClick={this.visualizzaAutori}><b>Credits</b></a>
                     </div>
                 </div>
             </div>

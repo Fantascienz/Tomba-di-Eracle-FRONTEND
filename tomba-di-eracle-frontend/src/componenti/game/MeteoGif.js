@@ -284,7 +284,6 @@ class MeteoGif extends Component {
                 )
             }
         } else {
-            var orario = parseInt(this.state.date.toLocaleTimeString());
             return (
                 <>
                     <audio autoPlay loop>

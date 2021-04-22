@@ -710,17 +710,41 @@ button:disabled {
 /* FOOTER--------------------------------------------- */
 
 .footer-setting{
-  padding-top:0.2vh;
- 
+  border: none;
 }
 
 .footer-setting b {
   font-size: 2vmin
 }
 
+.footer-setting p {
+  font-size: 2vmin
+}
+
 /* HEADER---------------------------------------------- */
 .header-link{
-  font-size: 2vh
+  font-size: 2vh;
+  z-index: 999;
+}
+
+.header-links-row{
+    z-index: 999;
+    height: 30%;
+    position: absolute;
+    left: 0%;
+    bottom: 0%;
+    width: 10% 
+}
+
+#titolo-home{
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background-image: url('../src/img/titolo.png');
+  background-size: auto 8vh;
+  background-position: center center;
+  background-repeat: no-repeat
 }
 
 /* SCHEDA UTENTE---------------------------------------------- */
@@ -750,11 +774,16 @@ button:disabled {
   position: absolute;
   right: 5%;
   height: 80%;
-  width: 70%
+  width: 70%;
+  border: 1px solid red ;
+}
+
+.btn-dark-disabilitato:disabled{
+  opacity: 100%;
 }
 
 .btn-utente{
-  margin-top: 5px;
+  margin-bottom: 5px;
   color: #eeaa44;
   width: 80%;
   height: 30px;
@@ -765,25 +794,25 @@ button:disabled {
 }
 
 .btn-utente-33{
-  margin-top: 5px;
+  margin-bottom: 5px;
   color: #eeaa44;
   width: 33.33%;
   height: 30px;
 }
 
 .btn-utente-33 p{
-  font-size: 1.1vh
+  font-size: 1vw
 }
 
 .btn-utente-50{
-  margin-top: 5px;
+  margin-bottom: 5px;
   color: #eeaa44;
   width: 50%;
   height: 30px;
 }
 
 .btn-utente-50 p{
-  font-size: 0.8vh
+  font-size: 1vw
 }
 
 .flip-box-coin {
@@ -816,17 +845,38 @@ button:disabled {
   font-size: 1vw
 }
 
+.btn-group{
+  width: 80%;
+}
+
 /* MEDIA QUERIES------------------------------------------------------------------------------ */
 @media screen and (max-width: 576px) {
+
+  /* HEADER - MEDIA QUERIES ---------------------------------------------- */
+  #titolo-home{
+  background-size: auto 9vw;
+  }
+
+  /* SCHEDA UTENTE - MEDIA QUERIES ---------------------------------------------- */
   .pulsantiera-utente{
     left: 2%;
-    height: 30%;
-    width: 96%
+    height: 34%;
+    width: 96%;
+    display: flex;
+    justify-content: center; 
+    flex-direction: initial; 
+    align-items: center
   }
 
   .pulsantiera-utente-tasti{
-    height: 30%;
-    overflow-y:auto
+    height: 100%;
+    width: 225px;
+    overflow-y:auto;
+    float: right;
+    display: flex;
+    justify-content: center; 
+    flex-direction: column; 
+    align-items: center
   }
 
   .liste-master{
@@ -834,39 +884,46 @@ button:disabled {
     bottom: 0%;
     left: 2%;
     height: 400px;
-    width: 96%
+    width: 96%;
   }
 
   .btn-utente{
-    margin-top: 5px;
+    margin-bottom: 5px;
     color: #eeaa44;
     width: 80%;
     font-size: 2vh
   }
   
   .btn-utente-33{
-    margin-top: 5px;
+    margin-bottom: 5px;
     color: #eeaa44;
     width: 33.33%;
-    font-size: 1.2vh
+  }
+
+  .btn-utente-33 p{
+    font-size: 9px;
   }
   
   .btn-utente-50{
-    margin-top: 5px;
+    margin-bottom: 5px;
     color: #eeaa44;
     width: 50%;
-    font-size: 1.2vh
+  }
+
+  .btn-utente-50 p{
+    font-size: 1.5vh
   }
   
   .flip-box-coin {
-    width: 100%;
-    height: 100%;
+    width: 140px;
+    height: 140px;
     perspective: 1000px; /* Remove this if you don't want the 3D effect */
   }
 
   .square-box-coin{
     width: 150px;
     height: 150px;
+    float: left;
   }
 
   .btn-flip-box-back{
@@ -890,17 +947,16 @@ button:disabled {
   }
 
   .btn-group{
-    width: 300px;
+    width: 80%;
   }
 
-  /* FOOTER - MEDIA QUERIES--------------------------------------------- */
+/* FOOTER - MEDIA QUERIES--------------------------------------------- */
+  .footer-setting b {
+    font-size: 3vw
+  }
 
-.footer-setting{
-  padding-top:0.5%;
- 
-}
+  #opzioni-master{
+    font-size: 2.3vw
+  }
 
-.footer-setting b {
-  font-size: 2vw
-}
 }

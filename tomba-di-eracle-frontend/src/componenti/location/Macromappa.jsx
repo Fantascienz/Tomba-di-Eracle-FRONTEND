@@ -1,13 +1,7 @@
 import macromappa from '../../img/macromappa.jpg'
 import macromappaUmbra from '../../img/macromappa_umbra.jpg'
 import { RigaGriglia } from '../location/ContenutoGriglia'
-import { Magnifier,
-    GlassMagnifier,
-    SideBySideMagnifier,
-    PictureInPictureMagnifier,
-    MOUSE_ACTIVATION,
-    TOUCH_ACTIVATION
-   } from 'react-image-magnifiers'
+import { GlassMagnifier } from 'react-image-magnifiers'
 import Draggable from 'react-draggable';
 import React, { useState } from 'react';
 import lente from '../../img/lente.png'

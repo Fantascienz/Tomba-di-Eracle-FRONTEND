@@ -29,12 +29,6 @@ import frecciaDX from '../../img/freccia_dx.png'
 import frecciaSU from '../../img/freccia_su.png'
 import frecciaGIU from '../../img/freccia_giu.png'
 import Scroll from '../../img/scroll.png'
-//IMPORT GIF------------------------------------
-import pioggia from '../../img/pioggia_gif.gif'
-import pioggiaLeggera from '../../img/pioggia_leggera_gif.gif'
-import neve from '../../img/neve_gif.gif'
-import tempesta from '../../img/tempesta_gif.gif'
-import nebbia from '../../img/nebbia_gif.gif'
 //IMPORT SUONI------------------------------------
 import passi from '../../suoni/suono_passi.mp3'
 import attraversaUmbra from '../../suoni/attraversa_guanto.mp3'
