@@ -58,7 +58,7 @@ class CreazioneLocationForm extends Component {
             //                     })
             //                 }
             //                 return (
-            //                     <select name="direzioneIngresso" id="direzioneIngresso" className="form-select" onChange={this.props.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)", marginBottom: "1%" }}>
+            //                     <select name="direzioneIngresso" id="direzioneIngresso" className="form-select" style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)", marginBottom: "1%" }}>
             //                         <option value="">Seleziona Direzione Ingresso</option>
             //                         {opzioni.map(opz => opz.html)}
             //                     </select>
@@ -72,7 +72,7 @@ class CreazioneLocationForm extends Component {
             return (
                 <React.Fragment>
                     <div className="input-group">
-                        <select name="locationId" id="locationId" className="form-select" onChange={this.props.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)", marginBottom: "1%" }}>
+                        <select name="locationId" id="locationId" className="form-select" style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)", marginBottom: "1%" }}>
                             <option value={999}>Seleziona Posizione Location</option>
                             {this.getListaOrdinata().map(loc =>
                                 (loc.nome === '/' && loc.tipo === 'Reame') ?
@@ -106,10 +106,10 @@ class CreazioneLocationForm extends Component {
             <div className="row" style={{ backgroundColor: "transparent" }}>
                 <div className="centrato col-6" >
                     <div className="input-group">
-                        <input type="text" className="form-control" id="nome" placeholder="Nome" onChange={this.props.handleChange} style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} /> <br />
+                        <input type="text" className="form-control" id="nome" placeholder="Nome" onChange={(e) => this.props.changeHandler[0](e.target.value)} style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} /> <br />
                     </div>
                     <div className="input-group">
-                        <select name="ambiente" id="ambiente" className="form-select" onChange={this.props.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)", marginBottom: "1%" }}>
+                        <select name="ambiente" id="ambiente" className="form-select" onChange={(e) => this.props.changeHandler[1](e.target.value)} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)", marginBottom: "1%" }}>
                             <option value="">Seleziona un ambiente</option>
                             <option value="Aperto">Aperto</option>
                             <option value="Chiuso">Chiuso</option>
@@ -122,32 +122,32 @@ class CreazioneLocationForm extends Component {
                         :
                         <>
                             <div className="input-group">
-                                <input type="text" className="form-control" id="urlImgGiorno" placeholder="URL Immagine Giorno" onChange={this.props.handleChange} style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} /> <br />
+                                <input type="text" className="form-control" id="urlImgGiorno" onChange={(e) => this.props.changeHandler[2](e.target.value)} placeholder="URL Immagine Giorno" style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} /> <br />
                             </div>
 
                             <div className="input-group">
-                                <input type="text" className="form-control" id="urlImgNotte" placeholder="URL Immagine Notte" onChange={this.props.handleChange} style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} /> <br />
+                                <input type="text" className="form-control" id="urlImgNotte" onChange={(e) => this.props.changeHandler[3](e.target.value)} placeholder="URL Immagine Notte" style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} /> <br />
                             </div>
 
                             <div className="input-group">
-                                <input type="text" className="form-control" id="urlAudio" placeholder="URL Audio" onChange={this.props.handleChange} style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} /> <br />
+                                <input type="text" className="form-control" id="urlAudio" onChange={(e) => this.props.changeHandler[4](e.target.value)} placeholder="URL Audio" style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} /> <br />
                             </div>
 
                             <div className="input-group">
-                                <input type="text" className="form-control" id="chiave" placeholder="Chiave d'accesso" onChange={this.props.handleChange} maxlength="5" style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} /> <br />
+                                <input type="text" className="form-control" id="chiave" onChange={(e) => this.props.changeHandler[5](e.target.value)} placeholder="Chiave d'accesso" maxlength="5" style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} /> <br />
                             </div>
                         </>
                     }
                     <div className="input-group">
-                        <input type="text" className="form-control" id="urlImgGiornoUmbra" placeholder="URL Immagine Giorno Umbra" onChange={this.props.handleChange} style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} /> <br />
+                        <input type="text" className="form-control" id="urlImgGiornoUmbra" onChange={(e) => this.props.changeHandler[6](e.target.value)} placeholder="URL Immagine Giorno Umbra" style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} /> <br />
                     </div>
 
                     <div className="input-group">
-                        <input type="text" className="form-control" id="urlImgNotteUmbra" placeholder="URL Immagine Notte Umbra" onChange={this.props.handleChange} style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} /> <br />
+                        <input type="text" className="form-control" id="urlImgNotteUmbra" onChange={(e) => this.props.changeHandler[7](e.target.value)} placeholder="URL Immagine Notte Umbra" style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} /> <br />
                     </div>
 
                     <div className="input-group">
-                        <input type="text" className="form-control" id="urlAudioUmbra" placeholder="URL Audio Umbra" onChange={this.props.handleChange} style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} /> <br />
+                        <input type="text" className="form-control" id="urlAudioUmbra" onChange={(e) => this.props.changeHandler[8](e.target.value)} placeholder="URL Audio Umbra" style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} /> <br />
                     </div>
                     {this.isStanza()}
                     {/* {this.slotLocation()} */}

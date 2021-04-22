@@ -12,6 +12,7 @@ const RiempimentoRoom = () => {
     var subLoc = [];
 
     const [locations, setLocations] = useState([])
+    const [locationSelezionata, setLocationSelezionata] = useState(0)
 
     const renderSelect = () => {
         for (let i = 1; i <= numeroSubLocation; i++) {
@@ -32,13 +33,13 @@ const RiempimentoRoom = () => {
             <div className="corpoComponente">
                 <div className="row no-gutters">
                     <TitoloPagina titolo="Riempimento Room" />
-                    <select className="form-select" style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)",width: '50%',alignSelf: 'center' }}>
+                    <select className="form-select" onChange={(e) => setLocationSelezionata(e.target.value)} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)", width: '50%', alignSelf: 'center' }}>
                         <option value={0}>Seleziona location</option>
                         {renderSelect()}
                     </select>
                 </div>
                 <div className="row no-gutters">
-                    <CreazioneStanza cellePerRiga={template.colonne} immagineMinimappa={template.mappaReame}/>
+                    <CreazioneStanza id={locationSelezionata} superLoc={template.superLocation} cellePerRiga={template.colonne} immagineMinimappa={template.mappaReame} aggiungiMappa={setLocations} />
                 </div>
             </div>
         </>
