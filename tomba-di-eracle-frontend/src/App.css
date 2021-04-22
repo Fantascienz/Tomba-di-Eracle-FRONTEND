@@ -328,8 +328,8 @@ div.centrato{
 /* The flip box container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
 .flip-box {
   background-color: transparent;
-  width: 100%;
-  height: 100%;
+  width: 17vmax;
+  height: 17vmax;
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
 }
 
@@ -711,4 +711,47 @@ button:disabled {
 
 .footer-setting{
   padding-top:0.5%
+}
+
+/* SCHEDA UTENTE---------------------------------------------- */
+.eracle-bg{
+  background-image: url('../src/img/eracleCapovolto.png');
+  background-position: center center; 
+  background-repeat: no-repeat;
+  background-size: 101% auto
+}
+
+.pulsantiera-utente{
+  position: absolute;
+  left: 2%;
+   height: 80%;
+    width: 23%
+}
+
+.liste-master{
+  z-index: 999;
+  position: absolute;
+  right: 5%;
+  height: 80%;
+  width: 70%
+}
+
+.btn-utente{
+  margin-top: 5px;
+  color: #eeaa44;
+  width: 80%
+}
+
+.btn-utente-33{
+  margin-top: 5px;
+  color: #eeaa44;
+  width: 33.33%;
+  font-size: 0.8vw
+}
+
+.btn-utente-50{
+  margin-top: 5px;
+  color: #eeaa44;
+  width: 50%;
+  font-size: 0.8vw
 }

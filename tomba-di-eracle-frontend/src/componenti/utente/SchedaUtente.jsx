@@ -39,16 +39,16 @@ class SchedaUtente extends Component {
                         JSON.parse(sessionStorage.getItem('utente')).contatoreUmani === JSON.parse(sessionStorage.getItem('utente')).maxUmani
                             ?
                             <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
-                                <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%" }} onClick={() => withReactContent(Swal).fire({ title: <p>Numero massimo di Umani raggiunto!</p> })} >Crea Personaggio</button>
+                                <button className="btn btn-dark btn-utente" onClick={() => withReactContent(Swal).fire({ title: <p>Numero massimo di Umani raggiunto!</p> })} >Crea Personaggio</button>
                             </div>
                             :
                             <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
-                                <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%" }} onClick={() => this.props.creazionePG()}>Crea Personaggio</button>
+                                <button className="btn btn-dark btn-utente" onClick={() => this.props.creazionePG()}>Crea Personaggio</button>
                             </div>
                     }
 
                     <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
-                        <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%" }} onClick={() => this.messaggi()}>Contatta un Admin</button>
+                        <button className="btn btn-dark btn-utente" onClick={() => this.messaggi()}>Contatta un Admin</button>
                     </div>
                 </React.Fragment>
             )
@@ -61,9 +61,9 @@ class SchedaUtente extends Component {
             return (
                 <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
                     {JSON.parse(sessionStorage.getItem('utente')).contatoreUmani < JSON.parse(sessionStorage.getItem('utente')).maxUmani ?
-                        <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "50%", fontSize: "0.8vw" }} onClick={() => this.props.creazionePG()}>Crea Umano</button>
+                        <button className="btn btn-dark btn-utente-50" onClick={() => this.props.creazionePG()}>Crea Umano</button>
                         :
-                        <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "50%", fontSize: "0.8vw" }} onClick={() => withReactContent(Swal).fire({ title: <p>Numero massimo di Umani raggiunto!</p> })} >Crea Umano</button>
+                        <button className="btn btn-dark btn-utente-50" onClick={() => withReactContent(Swal).fire({ title: <p>Numero massimo di Umani raggiunto!</p> })} >Crea Umano</button>
                     }
 
                     {(JSON.parse(sessionStorage.getItem('utente')).contatoreLupus === JSON.parse(sessionStorage.getItem('utente')).maxGarou ||
@@ -71,9 +71,9 @@ class SchedaUtente extends Component {
                         JSON.parse(sessionStorage.getItem('utente')).contatoreMetis === JSON.parse(sessionStorage.getItem('utente')).maxGarou
 
                         ?
-                        <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "50%", fontSize: "0.8vw", borderRadius: "0 5px 5px 0" }} onClick={() => withReactContent(Swal).fire({ title: <p>Numero massimo di Garou raggiunto!</p> })}  >Crea Garou</button>
+                        <button className="btn btn-dark btn-utente-50" style={{ borderRadius: "0 5px 5px 0" }} onClick={() => withReactContent(Swal).fire({ title: <p>Numero massimo di Garou raggiunto!</p> })}  >Crea Garou</button>
                         :
-                        <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "50%", fontSize: "0.8vw", borderRadius: "0 5px 5px 0" }} onClick={() => this.props.creazioneGarou()}  >Crea Garou</button>
+                        <button className="btn btn-dark btn-utente-50" style={{ borderRadius: "0 5px 5px 0" }} onClick={() => this.props.creazioneGarou()}  >Crea Garou</button>
                     }
 
 
@@ -92,9 +92,9 @@ class SchedaUtente extends Component {
                     {
                         JSON.parse(sessionStorage.getItem('utente')).contatoreUmani === JSON.parse(sessionStorage.getItem('utente')).maxUmani
                             ?
-                            <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "33.33%", fontSize: "0.8vw" }} onClick={() => withReactContent(Swal).fire({ title: <p>Numero massimo di Umani raggiunto!</p> })} >Crea Umano</button>
+                            <button className="btn btn-dark btn-utente-33" onClick={() => withReactContent(Swal).fire({ title: <p>Numero massimo di Umani raggiunto!</p> })} >Crea Umano</button>
                             :
-                            <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "33.33%", fontSize: "0.8vw" }} onClick={() => this.props.creazionePG()}>Crea Umano</button>
+                            <button className="btn btn-dark btn-utente-33" onClick={() => this.props.creazionePG()}>Crea Umano</button>
                     }
 
                     {
@@ -102,11 +102,11 @@ class SchedaUtente extends Component {
                             JSON.parse(sessionStorage.getItem('utente')).contatoreHomid === JSON.parse(sessionStorage.getItem('utente')).maxGarou ||
                             JSON.parse(sessionStorage.getItem('utente')).contatoreMetis === JSON.parse(sessionStorage.getItem('utente')).maxGarou)
                             ?
-                            <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "33.33%", fontSize: "0.8vw" }} onClick={() => withReactContent(Swal).fire({ title: <p>Numero massimo di Garou raggiunto!</p> })} >Crea Garou</button>
+                            <button className="btn btn-dark btn-utente-33" onClick={() => withReactContent(Swal).fire({ title: <p>Numero massimo di Garou raggiunto!</p> })} >Crea Garou</button>
                             :
-                            <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "33.33%", fontSize: "0.8vw" }} onClick={() => this.props.creazioneGarou()} >Crea Garou</button>
+                            <button className="btn btn-dark btn-utente-33" onClick={() => this.props.creazioneGarou()} >Crea Garou</button>
                     }
-                    <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "33.33%", fontSize: "0.8vw", borderRadius: "0 5px 5px 0" }} onClick={() => this.props.creazionePng()} >Crea Png</button>
+                    <button className="btn btn-dark btn-utente-33" style={{ borderRadius: "0 5px 5px 0" }} onClick={() => this.props.creazionePng()} >Crea Png</button>
                 </div>
             )
         }
@@ -117,18 +117,18 @@ class SchedaUtente extends Component {
             if (this.props.visualizzaPg) {
                 return (
                     <React.Fragment>
-                        <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%" }} onClick={() => this.visualizzaPgMaster()}>I Tuoi Personaggi</button> <br />
+                        <button className="btn btn-dark btn-utente" onClick={() => this.visualizzaPgMaster()}>I Tuoi Personaggi</button> <br />
                         <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
-                            <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%" }} onClick={() => this.messaggi()}>Contatta un Admin</button>
+                            <button className="btn btn-dark btn-utente"  onClick={() => this.messaggi()}>Contatta un Admin</button>
                         </div>
                     </React.Fragment>
                 )
             } else {
                 return (
                     <React.Fragment>
-                        <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%" }} onClick={() => this.visualizzaListMaster()}>Lista Personaggi</button> <br />
+                        <button className="btn btn-dark btn-utente" onClick={() => this.visualizzaListMaster()}>Lista Personaggi</button> <br />
                         <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
-                            <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%" }} onClick={() => this.messaggi()}>Contatta un Admin</button>
+                            <button className="btn btn-dark btn-utente" onClick={() => this.messaggi()}>Contatta un Admin</button>
                         </div>
                     </React.Fragment>
                 )
@@ -140,9 +140,9 @@ class SchedaUtente extends Component {
         if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin') {
             return (
                 <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
-                    <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "33.33%", fontSize: "0.8vw" }} onClick={() => this.props.creazionePG()}>Crea Umano</button>
-                    <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "33.33%", fontSize: "0.8vw" }} onClick={() => this.props.creazioneGarou()} >Crea Garou</button>
-                    <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "33.33%", fontSize: "0.8vw", borderRadius: "0 5px 5px 0" }} onClick={() => this.props.creazionePng()} >Crea Png</button>
+                    <button className="btn btn-dark btn-utente-33" onClick={() => this.props.creazionePG()}>Crea Umano</button>
+                    <button className="btn btn-dark btn-utente-33" onClick={() => this.props.creazioneGarou()} >Crea Garou</button>
+                    <button className="btn btn-dark btn-utente-33" style={{ borderRadius: "0 5px 5px 0" }} onClick={() => this.props.creazionePng()} >Crea Png</button>
                 </div>
             )
         }
@@ -153,17 +153,17 @@ class SchedaUtente extends Component {
             if (JSON.parse(sessionStorage.getItem('listaUtenti')) !== null) {
                 return (
                     <React.Fragment>
-                        <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%" }} onClick={() => this.visualizzaListaPg()}>Lista Personaggi</button>
-                        <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%" }} onClick={() => this.visualizzaPgAdmin()}>I Tuoi Personaggi</button>
-                        {this.props.messaggiUtenti == "no" ? null : <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%" }} onClick={() => this.messaggi()}>Messaggi Utenti</button>}
+                        <button className="btn btn-dark btn-utente" onClick={() => this.visualizzaListaPg()}>Lista Personaggi</button>
+                        <button className="btn btn-dark btn-utente" onClick={() => this.visualizzaPgAdmin()}>I Tuoi Personaggi</button>
+                        {this.props.messaggiUtenti == "no" ? null : <button className="btn btn-dark btn-utente" onClick={() => this.messaggi()}>Messaggi Utenti</button>}
                     </React.Fragment>
                 )
             } else {
                 return (
                     <React.Fragment>
-                        <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%" }} onClick={() => this.visualizzaListaUtenti()}>Lista Utenti</button>
-                        <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%" }} onClick={() => this.visualizzaPgAdmin()}>I Tuoi Personaggi</button>
-                        {this.props.messaggiUtenti == "no" ? null : <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%" }} onClick={() => this.messaggi()}>Messaggi Utenti</button>}
+                        <button className="btn btn-dark btn-utente" onClick={() => this.visualizzaListaUtenti()}>Lista Utenti</button>
+                        <button className="btn btn-dark btn-utente" onClick={() => this.visualizzaPgAdmin()}>I Tuoi Personaggi</button>
+                        {this.props.messaggiUtenti == "no" ? null : <button className="btn btn-dark btn-utente" onClick={() => this.messaggi()}>Messaggi Utenti</button>}
                     </React.Fragment>
                 )
             }
@@ -176,9 +176,9 @@ class SchedaUtente extends Component {
             return (
                 <React.Fragment>
                     <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
-                        <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%", fontSize: "0.6vw" }} onClick={() => this.creaLocation()}>Crea Location</button>
-                        <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%", fontSize: "0.6vw" }} onClick={() => this.creaStanza()}>Crea Stanza</button>
-                        <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%", fontSize: "0.6vw" }} onClick={() => this.modificaLocation()}>Modifica Location</button>
+                        <button className="btn btn-dark btn-utente" style={{ fontSize: "0.6vw" }} onClick={() => this.creaLocation()}>Crea Location</button>
+                        <button className="btn btn-dark btn-utente" style={{ fontSize: "0.6vw" }} onClick={() => this.creaStanza()}>Crea Stanza</button>
+                        <button className="btn btn-dark btn-utente" style={{ fontSize: "0.6vw" }} onClick={() => this.modificaLocation()}>Modifica Location</button>
                     </div>
                 </React.Fragment>
             )
@@ -286,57 +286,47 @@ class SchedaUtente extends Component {
         return (
             <div className="corpoComponente" style={this.props.style}>
                 {this.props.titoloPagina == "no" ? <TitoloPagina titolo="" /> : <TitoloPagina titolo={'Salute ' + JSON.parse(sessionStorage.getItem('utente')).nominativo} />}
-                <div style={{ position: "absolute", left: "2%", height: "80%", width: "23%" }}>
-                    <div style={{ height: "100%", display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
+                
+                <div className="pulsantiera-utente centrato">
 
-                        {/* -------------FLIP BOX------------------ */}
-                        {this.props.flipBox == "no" ? null :
-                            <div className="square-box" style={{ backgroundColor: "transparent", width: "75%" }}>
-                                <div className="flip-box square-content">
-                                    <div className="flip-box-inner" >
-
-                                        <div className="flip-box-front rounded-circle">
-                                            <div style={{ width: "auto", height: "100%" }}>
-
-                                                <SoundDiv suono={coinFlip}
-                                                    contenuto={
-                                                        <img className="tombaJPG rounded-circle" src={avatarEracle} alt="Paris" style={{ width: "auto", height: "100%" }} />
-                                                    }
-                                                />
-
-                                            </div>
+                    {/* -------------FLIP BOX------------------ */}
+                    {this.props.flipBox == "no" ? null :
+                        <div className="square-box" style={{ width: "75%" }}>
+                            <div className="flip-box square-content">
+                                <div className="flip-box-inner" >
+                                    <div className="flip-box-front rounded-circle eracle-bg">
+                                        <div style={{ width: "auto", height: "100%" }}>
+                                            <SoundDiv suono={coinFlip} />
                                         </div>
+                                    </div>
 
-                                        <div className="flip-box-back rounded-circle" style={{ display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
+                                    <div className="flip-box-back rounded-circle centrato">
 
-                                            <div style={{ width: "80%", height: "auto" }}>
-                                                <u style={{ fontSize: "1.2vw" }}>{JSON.parse(sessionStorage.getItem('utente')).nominativo}</u>
-                                                <br /> <br />
-                                                <p style={{ fontSize: "1vw" }}>{JSON.parse(sessionStorage.getItem('utente')).email}</p>
-                                                <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%", fontSize: "1vw" }} onClick={() => this.props.modificaUtente()}>Modifica Account</button>
-                                            </div>
+                                        <div style={{ width: "80%", height: "auto" }}>
+                                            <u style={{ fontSize: "1.2vw" }}>{JSON.parse(sessionStorage.getItem('utente')).nominativo}</u>
+                                            <br /> <br />
+                                            <p style={{ fontSize: "1vw" }}>{JSON.parse(sessionStorage.getItem('utente')).email}</p>
+                                            <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%", fontSize: "1vw" }} onClick={() => this.props.modificaUtente()}>Modifica Account</button>
                                         </div>
-
-
                                     </div>
                                 </div>
                             </div>
-                        }
-                        {/* --------------------------------------- */}
-
-                        <div style={{ width: "100%" }}>
-                            {this.props.creazionePersonaggio == "no" ? null : this.isAdminCreazionePg()}
-                            {this.isAdmin()}
-                            {this.isStandard()}
-                            {this.isVip()}
-                            {this.props.creazionePersonaggio == "no" ? null : this.isMasterCreazionePg()}
-                            {this.isMasterListe()}
-                            {this.props.gestioneLocation == "no" ? null : this.creazioneLocation()}
                         </div>
+                    }
+                    {/* --------------------------------------- */}
+
+                    <div>
+                        {this.props.creazionePersonaggio == "no" ? null : this.isAdminCreazionePg()}
+                        {this.isAdmin()}
+                        {this.isStandard()}
+                        {this.isVip()}
+                        {this.props.creazionePersonaggio == "no" ? null : this.isMasterCreazionePg()}
+                        {this.isMasterListe()}
+                        {this.props.gestioneLocation == "no" ? null : this.creazioneLocation()}
                     </div>
                 </div>
 
-                <div style={{ zIndex: "999", position: "absolute", right: "5%", height: "80%", width: "70%", backgroundColor: "transparent", display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }} align="center">
+                <div className="liste-master centrato" align="center">
                     {this.renderListe()}
                 </div>
             </div>
