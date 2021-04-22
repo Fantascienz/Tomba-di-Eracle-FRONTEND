@@ -173,7 +173,7 @@ class SchedaUtente extends Component {
                 <React.Fragment>
                     <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
                         <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%", fontSize: "0.6vw" }} onClick={() => this.creaLocation()}>Crea Location</button>
-                        <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%", fontSize: "0.6vw" }} onClick={() => this.creaStanza()}>Crea Stanza</button>
+                        <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%", fontSize: "0.6vw" }} onClick={() => this.creaStanza()}>Crea Room</button>
                         <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%", fontSize: "0.6vw" }} onClick={() => this.modificaLocation()}>Modifica Location</button>
                     </div>
                 </React.Fragment>
@@ -198,7 +198,7 @@ class SchedaUtente extends Component {
 
     creaStanza = () => {
         LocationService.sessioneAllLocation().then(() => {
-            browserHistory.push('creazioneStanza')
+            browserHistory.push('creazioneRoom')
             browserHistory.go()
         }
         )

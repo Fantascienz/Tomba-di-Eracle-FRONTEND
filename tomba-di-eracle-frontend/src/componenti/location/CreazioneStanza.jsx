@@ -6,6 +6,7 @@ import { SelezionaUscitaForm } from '../forms/SelezionaUscitaForm';
 import Header from '../layout/Header';
 import { TitoloPagina } from '../layout/TitoloPagina';
 import Macromappa from './Macromappa';
+import MinimappaRegolabile from './MinimappaReagolabile';
 
 class CreazioneStanza extends Component {
 
@@ -89,24 +90,20 @@ class CreazioneStanza extends Component {
     render() {
         return (
             <React.Fragment>
-                <Header />
-                <div className="corpoComponente">
-                    <TitoloPagina titolo="Creazione Stanza" />
-                    <div className="row">
-                        <div className="col-md-6 centrato">
-                            <form onSubmit={this.handleSubmit} style={{ width: "75%" }}>
-                                <SelezionaLocationForm lista={JSON.parse(sessionStorage.getItem('allLocations'))} handleChange={this.handleChange} stanza={false} allLocations={true} id="loc" />
-                                <CreazioneLocationForm handleChange={this.handleChange} stanza={true} anteprimaGiorno={this.state.urlImgGiorno} anteprimaNotte={this.state.urlImgNotte}
-                                    anteprimaGiornoUmbra={this.state.urlImgGiornoUmbra} anteprimaNotteUmbra={this.state.urlImgNotteUmbra}
-                                    idLocation={this.state.loc} />
-                                <SelezionaUscitaForm location={this.state.loc} handleChange={this.handleChange} />
-                                <button className="btn btn-dark">Crea</button>
-                            </form>
-                        </div>
+                <div className="row">
+                    <div className="col-md-6 centrato">
+                        <form onSubmit={this.handleSubmit} style={{ width: "75%" }}>
+                            <CreazioneLocationForm handleChange={this.handleChange} stanza={true} anteprimaGiorno={this.state.urlImgGiorno} anteprimaNotte={this.state.urlImgNotte}
+                                anteprimaGiornoUmbra={this.state.urlImgGiornoUmbra} anteprimaNotteUmbra={this.state.urlImgNotteUmbra}
+                                idLocation={this.state.loc} />
+                            <SelezionaUscitaForm location={this.state.loc} handleChange={this.handleChange} />
+                            <button className="btn btn-dark">Crea</button>
+                        </form>
+                    </div>
 
-                        <div className="col-md-6 centrato" >
-                            <Macromappa pxDimensioniMappa="400" lenteDisplay="none" idLocation={parseInt(this.state.loc)} mostraStanze="true" tipoLocation={this.tipoLocation()} />
-                        </div>
+                    <div className="col-md-6 centrato" >
+                        {/* <Macromappa pxDimensioniMappa="400" lenteDisplay="none" idLocation={parseInt(this.state.loc)} mostraStanze="true" tipoLocation={this.tipoLocation()} /> */}
+                        <MinimappaRegolabile pxDimensioniMappa="400" immagineMinimappa={this.props.immagineMinimappa} cellePerRiga={this.props.cellePerRiga} lenteDisplay="none" />
                     </div>
                 </div>
             </React.Fragment>

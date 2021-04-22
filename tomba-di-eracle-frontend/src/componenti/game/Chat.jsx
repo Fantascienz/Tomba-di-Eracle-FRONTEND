@@ -1,7 +1,6 @@
 import { firestore } from "../../App";
 import React, {useRef, useState } from 'react';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
-import firebase from 'firebase/app';
 import divisore from '../../img/divisore.png'
 import penna from '../../img/quill.png'
 
