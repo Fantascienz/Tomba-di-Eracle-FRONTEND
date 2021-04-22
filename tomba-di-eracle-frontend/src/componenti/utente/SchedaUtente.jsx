@@ -14,6 +14,7 @@ import { TitoloPagina } from '../layout/TitoloPagina';
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import AdminService from '../../servizi/AdminService';
+import { estraiNome } from '../utils/Utilities';
 
 
 class SchedaUtente extends Component {
@@ -29,22 +30,20 @@ class SchedaUtente extends Component {
         if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'standard') {
             return (
                 <React.Fragment>
-
-
                     {
                         JSON.parse(sessionStorage.getItem('utente')).contatoreUmani === JSON.parse(sessionStorage.getItem('utente')).maxUmani
                             ?
                             <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
-                                <button className="btn btn-dark btn-utente" onClick={() => withReactContent(Swal).fire({ title: <p>Numero massimo di Umani raggiunto!</p> })} >Crea Personaggio</button>
+                                <button className="btn btn-dark btn-utente" onClick={() => withReactContent(Swal).fire({ title: <p>Numero massimo di Umani raggiunto!</p> })} ><p>Crea Personaggio</p></button>
                             </div>
                             :
                             <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
-                                <button className="btn btn-dark btn-utente" onClick={() => this.props.creazionePG()}>Crea Personaggio</button>
+                                <button className="btn btn-dark btn-utente" onClick={() => this.props.creazionePG()}><p>Crea Personaggio</p></button>
                             </div>
                     }
 
                     <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
-                        <button className="btn btn-dark btn-utente" onClick={() => this.messaggi()}>Contatta un Admin</button>
+                        <button className="btn btn-dark btn-utente" onClick={() => this.messaggi()}><p>Contatta un Admin</p></button>
                     </div>
                 </React.Fragment>
             )
@@ -55,11 +54,11 @@ class SchedaUtente extends Component {
 
         if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'vip') {
             return (
-                <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
+                <div className="btn-group" role="group" aria-label="Basic example" style={{ }}>
                     {JSON.parse(sessionStorage.getItem('utente')).contatoreUmani < JSON.parse(sessionStorage.getItem('utente')).maxUmani ?
-                        <button className="btn btn-dark btn-utente-50" onClick={() => this.props.creazionePG()}>Crea Umano</button>
+                        <button className="btn btn-dark btn-utente-50" onClick={() => this.props.creazionePG()}><p>Crea Umano</p></button>
                         :
-                        <button className="btn btn-dark btn-utente-50" onClick={() => withReactContent(Swal).fire({ title: <p>Numero massimo di Umani raggiunto!</p> })} >Crea Umano</button>
+                        <button className="btn btn-dark btn-utente-50" onClick={() => withReactContent(Swal).fire({ title: <p>Numero massimo di Umani raggiunto!</p> })} ><p>Crea Umano</p></button>
                     }
 
                     {(JSON.parse(sessionStorage.getItem('utente')).contatoreLupus === JSON.parse(sessionStorage.getItem('utente')).maxGarou ||
@@ -69,13 +68,11 @@ class SchedaUtente extends Component {
                         ?
                         <button className="btn btn-dark btn-utente-50" style={{ borderRadius: "0 5px 5px 0" }} onClick={() => withReactContent(Swal).fire({ title: <p>Numero massimo di Garou raggiunto!</p> })}  >Crea Garou</button>
                         :
-                        <button className="btn btn-dark btn-utente-50" style={{ borderRadius: "0 5px 5px 0" }} onClick={() => this.props.creazioneGarou()}  >Crea Garou</button>
+                        <button className="btn btn-dark btn-utente-50" style={{ borderRadius: "0 5px 5px 0" }} onClick={() => this.props.creazioneGarou()}  ><p>Crea Garou</p></button>
                     }
-
 
                 </div>
             )
-
         }
     }
 
@@ -88,9 +85,9 @@ class SchedaUtente extends Component {
                     {
                         JSON.parse(sessionStorage.getItem('utente')).contatoreUmani === JSON.parse(sessionStorage.getItem('utente')).maxUmani
                             ?
-                            <button className="btn btn-dark btn-utente-33" onClick={() => withReactContent(Swal).fire({ title: <p>Numero massimo di Umani raggiunto!</p> })} >Crea Umano</button>
+                            <button className="btn btn-dark btn-utente-33" onClick={() => withReactContent(Swal).fire({ title: <p>Numero massimo di Umani raggiunto!</p> })} ><p>Crea Umano</p></button>
                             :
-                            <button className="btn btn-dark btn-utente-33" onClick={() => this.props.creazionePG()}>Crea Umano</button>
+                            <button className="btn btn-dark btn-utente-33" onClick={() => this.props.creazionePG()}><p>Crea Umano</p></button>
                     }
 
                     {
@@ -98,11 +95,11 @@ class SchedaUtente extends Component {
                             JSON.parse(sessionStorage.getItem('utente')).contatoreHomid === JSON.parse(sessionStorage.getItem('utente')).maxGarou ||
                             JSON.parse(sessionStorage.getItem('utente')).contatoreMetis === JSON.parse(sessionStorage.getItem('utente')).maxGarou)
                             ?
-                            <button className="btn btn-dark btn-utente-33" onClick={() => withReactContent(Swal).fire({ title: <p>Numero massimo di Garou raggiunto!</p> })} >Crea Garou</button>
+                            <button className="btn btn-dark btn-utente-33" onClick={() => withReactContent(Swal).fire({ title: <p>Numero massimo di Garou raggiunto!</p> })} ><p>Crea Garou</p></button>
                             :
-                            <button className="btn btn-dark btn-utente-33" onClick={() => this.props.creazioneGarou()} >Crea Garou</button>
+                            <button className="btn btn-dark btn-utente-33" onClick={() => this.props.creazioneGarou()} ><p>Crea Garou</p></button>
                     }
-                    <button className="btn btn-dark btn-utente-33" style={{ borderRadius: "0 5px 5px 0" }} onClick={() => this.props.creazionePng()} >Crea Png</button>
+                    <button className="btn btn-dark btn-utente-33" style={{ borderRadius: "0 5px 5px 0" }} onClick={() => this.props.creazionePng()} ><p>Crea PNG</p></button>
                 </div>
             )
         }
@@ -113,18 +110,18 @@ class SchedaUtente extends Component {
             if (this.props.visualizzaPg) {
                 return (
                     <React.Fragment>
-                        <button className="btn btn-dark btn-utente" onClick={() => this.visualizzaPgMaster()}>I Tuoi Personaggi</button> <br />
+                        <button className="btn btn-dark btn-utente" onClick={() => this.visualizzaPgMaster()}><p>I Tuoi Personaggi</p></button> <br />
                         <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
-                            <button className="btn btn-dark btn-utente"  onClick={() => this.messaggi()}>Contatta un Admin</button>
+                            <button className="btn btn-dark btn-utente"  onClick={() => this.messaggi()}><p>Contatta un Admin</p></button>
                         </div>
                     </React.Fragment>
                 )
             } else {
                 return (
                     <React.Fragment>
-                        <button className="btn btn-dark btn-utente" onClick={() => this.visualizzaListMaster()}>Lista Personaggi</button> <br />
+                        <button className="btn btn-dark btn-utente" onClick={() => this.visualizzaListMaster()}><p>Lista Personaggi</p></button> <br />
                         <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
-                            <button className="btn btn-dark btn-utente" onClick={() => this.messaggi()}>Contatta un Admin</button>
+                            <button className="btn btn-dark btn-utente" onClick={() => this.messaggi()}><p>Contatta un Admin</p></button>
                         </div>
                     </React.Fragment>
                 )
@@ -136,9 +133,9 @@ class SchedaUtente extends Component {
         if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin') {
             return (
                 <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
-                    <button className="btn btn-dark btn-utente-33" onClick={() => this.props.creazionePG()}>Crea Umano</button>
-                    <button className="btn btn-dark btn-utente-33" onClick={() => this.props.creazioneGarou()} >Crea Garou</button>
-                    <button className="btn btn-dark btn-utente-33" style={{ borderRadius: "0 5px 5px 0" }} onClick={() => this.props.creazionePng()} >Crea Png</button>
+                    <button className="btn btn-dark btn-utente-33" onClick={() => this.props.creazionePG()}><p>Crea Umano</p></button>
+                    <button className="btn btn-dark btn-utente-33" onClick={() => this.props.creazioneGarou()} ><p>Crea Garou</p></button>
+                    <button className="btn btn-dark btn-utente-33" style={{ borderRadius: "0 5px 5px 0" }} onClick={() => this.props.creazionePng()} ><p>Crea PNG</p></button>
                 </div>
             )
         }
@@ -149,17 +146,17 @@ class SchedaUtente extends Component {
             if (JSON.parse(sessionStorage.getItem('listaUtenti')) !== null) {
                 return (
                     <React.Fragment>
-                        <button className="btn btn-dark btn-utente" onClick={() => this.visualizzaListaPg()}>Lista Personaggi</button>
-                        <button className="btn btn-dark btn-utente" onClick={() => this.visualizzaPgAdmin()}>I Tuoi Personaggi</button>
-                        {this.props.messaggiUtenti == "no" ? null : <button className="btn btn-dark btn-utente" onClick={() => this.messaggi()}>Messaggi Utenti</button>}
+                        <button className="btn btn-dark btn-utente" onClick={() => this.visualizzaListaPg()}><p>Lista Personaggi</p></button>
+                        <button className="btn btn-dark btn-utente" onClick={() => this.visualizzaPgAdmin()}><p>I Tuoi Personaggi</p></button>
+                        {this.props.messaggiUtenti == "no" ? null : <button className="btn btn-dark btn-utente" onClick={() => this.messaggi()}><p>Messaggi Utenti</p></button>}
                     </React.Fragment>
                 )
             } else {
                 return (
                     <React.Fragment>
-                        <button className="btn btn-dark btn-utente" onClick={() => this.visualizzaListaUtenti()}>Lista Utenti</button>
-                        <button className="btn btn-dark btn-utente" onClick={() => this.visualizzaPgAdmin()}>I Tuoi Personaggi</button>
-                        {this.props.messaggiUtenti == "no" ? null : <button className="btn btn-dark btn-utente" onClick={() => this.messaggi()}>Messaggi Utenti</button>}
+                        <button className="btn btn-dark btn-utente" onClick={() => this.visualizzaListaUtenti()}><p>Lista Utenti</p></button>
+                        <button className="btn btn-dark btn-utente" onClick={() => this.visualizzaPgAdmin()}><p>I Tuoi Personaggi</p></button>
+                        {this.props.messaggiUtenti == "no" ? null : <button className="btn btn-dark btn-utente" onClick={() => this.messaggi()}><p>Messaggi Utenti</p></button>}
                     </React.Fragment>
                 )
             }
@@ -172,9 +169,9 @@ class SchedaUtente extends Component {
             return (
                 <React.Fragment>
                     <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
-                        <button className="btn btn-dark btn-utente" style={{ fontSize: "0.6vw" }} onClick={() => this.creaLocation()}>Crea Location</button>
-                        <button className="btn btn-dark btn-utente" style={{ fontSize: "0.6vw" }} onClick={() => this.creaStanza()}>Crea Stanza</button>
-                        <button className="btn btn-dark btn-utente" style={{ fontSize: "0.6vw" }} onClick={() => this.modificaLocation()}>Modifica Location</button>
+                        <button className="btn btn-dark btn-utente-33" onClick={() => this.creaLocation()}><p>Crea Location</p></button>
+                        <button className="btn btn-dark btn-utente-33" onClick={() => this.creaStanza()}><p>Crea Stanza</p></button>
+                        <button className="btn btn-dark btn-utente-33" onClick={() => this.modificaLocation()}><p>Modifica Location</p></button>
                     </div>
                 </React.Fragment>
             )
@@ -279,31 +276,30 @@ class SchedaUtente extends Component {
 
     render() {
 
+        var nominativo = JSON.parse(sessionStorage.getItem('utente')).nominativo
+        var nome = estraiNome(nominativo)
+
         return (
             <div className="corpoComponente" style={this.props.style}>
-                {this.props.titoloPagina == "no" ? <TitoloPagina titolo="" /> : <TitoloPagina titolo={'Salute ' + JSON.parse(sessionStorage.getItem('utente')).nominativo} />}
+                {this.props.titoloPagina == "no" ? <TitoloPagina titolo="" /> : <TitoloPagina titolo={"Ciao " + (nome)} />}
                 
                 <div className="pulsantiera-utente centrato">
 
                     {/* -------------FLIP BOX------------------ */}
                     {this.props.flipBox == "no" ? null :
-                        <div className="square-box" style={{ width: "75%" }}>
-                            <div className="flip-box square-content">
-                                <div className="flip-box-inner" >
+                        <div className="square-box square-box-coin">
+                            <div className="flip-box flip-box-coin square-content">
+                                <div className="flip-box-inner">
                                     <div className="flip-box-front rounded-circle eracle-bg">
                                         <div style={{ width: "auto", height: "100%" }}>
                                             <SoundDiv suono={coinFlip} />
                                         </div>
                                     </div>
 
-                                    <div className="flip-box-back rounded-circle centrato">
-
-                                        <div style={{ width: "80%", height: "auto" }}>
-                                            <u style={{ fontSize: "1.2vw" }}>{JSON.parse(sessionStorage.getItem('utente')).nominativo}</u>
-                                            <br /> <br />
-                                            <p style={{ fontSize: "1vw" }}>{JSON.parse(sessionStorage.getItem('utente')).email}</p>
-                                            <button className="btn btn-dark" style={{ marginTop: "5px", color: "#eeaa44", width: "80%", fontSize: "1vw" }} onClick={() => this.props.modificaUtente()}>Modifica Account</button>
-                                        </div>
+                                    <div className="flip-box-back rounded-circle centrato flip-box-back-interlinea">
+                                            <u className="flip-box-back-u">{JSON.parse(sessionStorage.getItem('utente')).nominativo}</u>
+                                            <span className="flip-box-back-span">{JSON.parse(sessionStorage.getItem('utente')).email}</span>
+                                            <button className="btn btn-dark btn-flip-box-back" onClick={() => this.props.modificaUtente()}>Modifica Account</button>
                                     </div>
                                 </div>
                             </div>
@@ -311,7 +307,7 @@ class SchedaUtente extends Component {
                     }
                     {/* --------------------------------------- */}
 
-                    <div>
+                    <div className="pulsantiera-utente-tasti">
                         {this.props.creazionePersonaggio == "no" ? null : this.isAdminCreazionePg()}
                         {this.isAdmin()}
                         {this.isStandard()}
