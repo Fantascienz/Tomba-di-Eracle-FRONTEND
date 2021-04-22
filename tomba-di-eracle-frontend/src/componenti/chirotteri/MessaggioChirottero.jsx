@@ -1,4 +1,5 @@
 import FasciaOraria from "../utils/FasciaOrario";
+import { estraiNome } from "../utils/Utilities";
 
 
 const MessaggioChirottero = ({ chirottero, mittente, data }) => {
@@ -28,18 +29,6 @@ const MessaggioChirottero = ({ chirottero, mittente, data }) => {
         }
     }
 
-    function nomeMittente(){
-        var soloNome = ""
-        for (var i = 0; i<mittente.length-1; i++){
-            if(mittente.charAt(i) != " "){
-                soloNome+=mittente.charAt(i);
-            } else {
-                break;
-            }
-        }
-        return <b>{soloNome}</b>;
-    }
-
     return (
         <>
             { mittente !== '' ?
@@ -47,7 +36,7 @@ const MessaggioChirottero = ({ chirottero, mittente, data }) => {
                     {/* <h1 className="font-lombardia-yellow bg-dark rounded">Chirottero di {mittente}</h1> */}
                     <i className="font-lombardia" style={{ fontSize: '1.5em', lineHeight: "1" }}>{provaData.toLocaleDateString(undefined, {day: 'numeric'})} {provaData.toLocaleDateString(undefined, {month: 'long'}).charAt(0).toUpperCase()+provaData.toLocaleDateString(undefined, {month: 'long'}).slice(1)} {provaData.toLocaleDateString(undefined, {year: 'numeric'})-810},</i>
                     <br/>
-                    <i className="font-lombardia" style={{ fontSize: '1.5em', lineHeight: "1" }}>{fasciaOraria()} una piccola creatura atterra sulla tua spalla. Affannata, arranca fino al tuo orecchio e, aprendo la bocca, la voce di {nomeMittente()} proferisce queste parole:</i>
+                    <i className="font-lombardia" style={{ fontSize: '1.5em', lineHeight: "1" }}>{fasciaOraria()} una piccola creatura atterra sulla tua spalla. Affannata, arranca fino al tuo orecchio e, aprendo la bocca, la voce di <b>{estraiNome(mittente)}</b> proferisce queste parole:</i>
                     <br/>
                     <p className="font-lombardia" style={{ fontSize: '1.5em', lineHeight: "1" }}>"{chirottero}"</p>
                     <i className="font-lombardia" style={{ fontSize: '1.5em', lineHeight: "1" }}>Poi, appena la voce cessa di parlare, con un secco stridio la creatura collassa in un mucchietto di cenere e polvere.</i>

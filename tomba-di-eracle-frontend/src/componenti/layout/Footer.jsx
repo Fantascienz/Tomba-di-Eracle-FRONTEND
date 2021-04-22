@@ -46,11 +46,11 @@ class Footer extends Component {
             <div className="bg-dark" style={{ position: "fixed", bottom: "0px", width: "100%", height: "5%", color: "#b30000" }}>
                 <div className="row">
 
-                    <div className="col-sm-2 footer-setting" >
+                    <div className="col footer-setting" >
                     <a href="#" onClick={this.visualizzaCommunity}><b>COMMUNITY</b></a>
                     </div>
 
-                    <div className="col-sm-2 footer-setting" >
+                    <div className="col footer-setting" >
                         {(JSON.parse(sessionStorage.getItem('utente')) != null && JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin') ?
                             <ModalComponente
                                 bottone={<a href="#"><b>Opzioni Master</b></a>}
@@ -65,15 +65,15 @@ class Footer extends Component {
                         }
                     </div>
 
-                    <div className="col-sm-4 footer-setting">
+                    <div className="col footer-setting">
                         <a href="#" onClick={this.visualizzaAutori}><b>CREDITS</b></a>
                     </div>
 
-                    <div className="col-sm-2 footer-setting">
+                    <div className="col footer-setting">
                         <a href="#" onClick={this.visualizzaRegolamento}><b>REGOLAMENTO</b></a>
                     </div>
 
-                    <div className="col-sm-2 footer-setting" align="right">
+                    <div className="col footer-setting" align="right">
                         <Orologio />
                     </div>
                 </div>

@@ -172,7 +172,7 @@ a:hover{
   cursor: pointer;
 }
 
-div.centrato{
+.centrato{
   display: flex;
   justify-content: center; 
   flex-direction: column; 
@@ -328,8 +328,8 @@ div.centrato{
 /* The flip box container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
 .flip-box {
   background-color: transparent;
-  width: 17vmax;
-  height: 17vmax;
+  width: 100%;
+  height: 100%;
   perspective: 1000px; /* Remove this if you don't want the 3D effect */
 }
 
@@ -710,7 +710,17 @@ button:disabled {
 /* FOOTER--------------------------------------------- */
 
 .footer-setting{
-  padding-top:0.5%
+  padding-top:0.2vh;
+ 
+}
+
+.footer-setting b {
+  font-size: 2vmin
+}
+
+/* HEADER---------------------------------------------- */
+.header-link{
+  font-size: 2vh
 }
 
 /* SCHEDA UTENTE---------------------------------------------- */
@@ -724,8 +734,15 @@ button:disabled {
 .pulsantiera-utente{
   position: absolute;
   left: 2%;
-   height: 80%;
-    width: 23%
+  height: 80%;
+  width: 23%;
+}
+
+.pulsantiera-utente-tasti{
+  position: relative;
+  overflow-y: auto;
+  height: 40%;
+  bottom: 0%;
 }
 
 .liste-master{
@@ -739,19 +756,151 @@ button:disabled {
 .btn-utente{
   margin-top: 5px;
   color: #eeaa44;
-  width: 80%
+  width: 80%;
+  height: 30px;
+}
+
+.btn-utente p{
+  font-size: 1.5vh
 }
 
 .btn-utente-33{
   margin-top: 5px;
   color: #eeaa44;
   width: 33.33%;
-  font-size: 0.8vw
+  height: 30px;
+}
+
+.btn-utente-33 p{
+  font-size: 1.1vh
 }
 
 .btn-utente-50{
   margin-top: 5px;
   color: #eeaa44;
   width: 50%;
-  font-size: 0.8vw
+  height: 30px;
+}
+
+.btn-utente-50 p{
+  font-size: 0.8vh
+}
+
+.flip-box-coin {
+  width: 17vmax;
+  height: 17vmax;
+  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+}
+
+.square-box-coin{
+  width: 17vmax;
+}
+
+.btn-flip-box-back{
+  padding: 0; 
+  color: #eeaa44;
+  width: 10vw;
+  height: 3vw;
+  font-size: 1vw 
+}
+
+.flip-box-back-interlinea{
+  line-height: 2
+}
+
+.flip-box-back-u{
+  font-size: 1.5vw
+}
+
+.flip-box-back-span{
+  font-size: 1vw
+}
+
+/* MEDIA QUERIES------------------------------------------------------------------------------ */
+@media screen and (max-width: 576px) {
+  .pulsantiera-utente{
+    left: 2%;
+    height: 30%;
+    width: 96%
+  }
+
+  .pulsantiera-utente-tasti{
+    height: 30%;
+    overflow-y:auto
+  }
+
+  .liste-master{
+    position: absolute;
+    bottom: 0%;
+    left: 2%;
+    height: 400px;
+    width: 96%
+  }
+
+  .btn-utente{
+    margin-top: 5px;
+    color: #eeaa44;
+    width: 80%;
+    font-size: 2vh
+  }
+  
+  .btn-utente-33{
+    margin-top: 5px;
+    color: #eeaa44;
+    width: 33.33%;
+    font-size: 1.2vh
+  }
+  
+  .btn-utente-50{
+    margin-top: 5px;
+    color: #eeaa44;
+    width: 50%;
+    font-size: 1.2vh
+  }
+  
+  .flip-box-coin {
+    width: 100%;
+    height: 100%;
+    perspective: 1000px; /* Remove this if you don't want the 3D effect */
+  }
+
+  .square-box-coin{
+    width: 150px;
+    height: 150px;
+  }
+
+  .btn-flip-box-back{
+    padding: 0; 
+    color: #eeaa44;
+    width: 28vw;
+    height: 3vh;
+    font-size: 1.5vh 
+  }
+
+  .flip-box-back-interlinea{
+    line-height: 3
+  }
+  
+  .flip-box-back-u{
+    font-size: 1.5vh
+  }
+  
+  .flip-box-back-span{
+    font-size: 1.2vh
+  }
+
+  .btn-group{
+    width: 300px;
+  }
+
+  /* FOOTER - MEDIA QUERIES--------------------------------------------- */
+
+.footer-setting{
+  padding-top:0.5%;
+ 
+}
+
+.footer-setting b {
+  font-size: 2vw
+}
 }

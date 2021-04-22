@@ -2,11 +2,12 @@ import React from "react"
 
 export const TitoloPagina = ({ titolo }) => {
     return (
-        <React.Fragment>
-            <br/>
-            <div style={{ backgroundColor: "transparent", height: "10%", zIndex: "998", color: "#eeaa44", textShadow: "2px 2px black", display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
-                <span className="font-lombardia" style={{ fontSize: "3.5em" }}>{titolo}</span>
+        <>
+            <div className="centrato">
+                <div className="centrato" style={{ width: "50%", minWidth: "375px", height: "10%", color: "#eeaa44", textShadow: "2px 2px black" }}>
+                    <span className="font-lombardia" style={{ fontSize: "10vmin" }}>{titolo}</span>
+                </div>
             </div>
-        </React.Fragment>
+        </>
     )
 }
