@@ -38,13 +38,11 @@ db.on('error', _ => {
 
 io.on('connect', (socket) => {
   socket.on('join', ({ personaggio, location }, callback) => {
-    const { error, user } = addUser({ id: socket.id, personaggio, location });
     Msg.find({ idLocation: location.id }).then(result => {
       socket.emit('output-messages', result)
       socket.emit('message', { testo: `${personaggio.nominativo},entra in ${location.nome}`, idLocation: location.id });
       // socket.broadcast.to(user.location).emit('message', { utente: 'admin', testo: `${user.personaggio.nominativo}, has joined!` });
     })
-    if (error) return callback(error);
 
 
 
@@ -56,7 +54,6 @@ io.on('connect', (socket) => {
   });
 
   socket.on('sendMessage', ({ formValue, personaggio, location }, callback) => {
-    const user = getUser(socket.id);
     const messaggioInviato = new Msg(
       {
         testo: formValue,
