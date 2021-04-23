@@ -35,6 +35,7 @@ const CreazioneStanza = (props) => {
                 urlImgGiorno: urlImgGiorno,
                 urlImgNotte: urlImgNotte,
                 urlAudio: urlAudio,
+                urlMinimappa: props.immagineMinimappaReame,
                 chiave: chiave,
             },
             idSuperLocation: props.id,
@@ -46,6 +47,7 @@ const CreazioneStanza = (props) => {
                 urlImgGiorno: urlImgGiornoUmbra,
                 urlImgNotte: urlImgNotteUmbra,
                 urlAudio: urlAudioUmbra,
+                urlMinimappa: props.immagineMinimappaUmbra,
             },
             direzioniUmbra: superLoc <= 288 ? generaDirezioni(id + 144,true) :  generaDirezioni(id + 48,true)
         }

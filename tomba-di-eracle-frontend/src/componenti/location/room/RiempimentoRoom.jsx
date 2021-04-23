@@ -39,7 +39,8 @@ const RiempimentoRoom = () => {
                     </select>
                 </div>
                 <div className="row no-gutters">
-                    <CreazioneStanza id={locationSelezionata} superLoc={template.superLocation} cellePerRiga={template.colonne} immagineMinimappa={template.mappaReame} aggiungiMappa={setLocations} />
+                    <CreazioneStanza id={locationSelezionata} superLoc={template.superLocation} cellePerRiga={template.colonne}
+                     immagineMinimappaReame={template.mappaReame} immagineMinimappaUmbra={template.mappaUmbra} aggiungiMappa={setLocations} />
                 </div>
             </div>
         </>
