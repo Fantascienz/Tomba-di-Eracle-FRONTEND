@@ -65,6 +65,8 @@ const CreazioneRoom = () => {
                     </div>
                     <div className="col-md-6">
                     <MinimappaRegolabile pxDimensioniMappa="400" immagineMinimappa={mappaReame} cellePerRiga={colonne} lenteDisplay="none" />
+                    <br/>
+                    <MinimappaRegolabile pxDimensioniMappa="400" immagineMinimappa={mappaUmbra} cellePerRiga={colonne} lenteDisplay="none" />
                     </div>
                 </div>
 

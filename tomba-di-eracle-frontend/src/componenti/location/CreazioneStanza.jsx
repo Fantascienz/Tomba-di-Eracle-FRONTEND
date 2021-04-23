@@ -20,9 +20,23 @@ const CreazioneStanza = (props) => {
     const [urlImgGiornoUmbra, setUrlImgGiornoUmbra] = useState('')
     const [urlImgNotteUmbra, setUrlImgNotteUmbra] = useState('')
     const [urlAudioUmbra, setUrlAudioUmbra] = useState('')
+    const [chiaveUmbra, setChiaveUmbra] = useState(false)
     const [aggiunta, setAggiunta] = useState(false)
 
-    const changeHandler = [setNome, setAmbiente, setUrlImgGiorno, setUrlImgNotte, setUrlAudio, setChiave, setUrlImgGiornoUmbra, setUrlImgNotteUmbra, setUrlAudioUmbra]
+    const changeHandler = [setNome, setAmbiente, setUrlImgGiorno, setUrlImgNotte, setUrlAudio, setChiave, setUrlImgGiornoUmbra, setUrlImgNotteUmbra, setUrlAudioUmbra, setChiaveUmbra]
+
+    const formState = {
+        nome: nome,
+        ambiente: ambiente,
+        urlImgGiorno: urlImgGiorno,
+        urlImgNotte: urlImgNotte,
+        urlAudio: urlAudio,
+        chiave: chiave,
+        urlImgGiornoUmbra: urlImgGiornoUmbra,
+        urlImgNotteUmbra: urlImgNotteUmbra,
+        urlAudioUmbra: urlAudioUmbra,
+
+    }
 
     const aggiungiLocation = () => {
         let superLoc = parseInt(props.superLoc, 10);
@@ -39,7 +53,7 @@ const CreazioneStanza = (props) => {
                 chiave: chiave,
             },
             idSuperLocation: props.id,
-            direzioni: generaDirezioni(id,false),
+            direzioni: generaDirezioni(id, false),
             locationUmbra: {
                 id: superLoc <= 288 ? id + 144 : id + 48,
                 nome: nome,
@@ -48,14 +62,18 @@ const CreazioneStanza = (props) => {
                 urlImgNotte: urlImgNotteUmbra,
                 urlAudio: urlAudioUmbra,
                 urlMinimappa: props.immagineMinimappaUmbra,
+                chiave: chiaveUmbra ? chiave : null
             },
-            direzioniUmbra: superLoc <= 288 ? generaDirezioni(id + 144,true) :  generaDirezioni(id + 48,true)
+            direzioniUmbra: superLoc <= 288 ? generaDirezioni(id + 144, true) : generaDirezioni(id + 48, true)
         }
-        console.log(sublocation)
+        setAggiunta(true)
+        props.aggiungiLocation(sublocation)
+        resetState()
+
     }
 
     const generaDirezioni = (id, umbra) => {
-        let superLoc = parseInt(props.superLoc,10)
+        let superLoc = parseInt(props.superLoc, 10)
         if (umbra) {
             if (superLoc <= 288) {
                 superLoc += 144
@@ -74,68 +92,34 @@ const CreazioneStanza = (props) => {
         }
     }
 
-
-    // const handleSubmit = (event) => {
-
-    //     var tipoValidazione = this.tipoLocation() == 'Umbra' ? true : false;
-
-    //     if (LocationService.validaCampiCreazione(this.state, true, tipoValidazione)) {
-    //         let stanza = {
-    //             location: {
-    //                 nome: this.state.nome,
-    //                 tipo: 'Stanza',
-    //                 ambiente: this.state.ambiente,
-    //                 urlImgGiorno: this.state.urlImgGiorno,
-    //                 urlImgNotte: this.state.urlImgNotte,
-    //                 urlAudio: this.state.urlAudio,
-    //                 chiave: this.state.chiave,
-    //                 creatore: JSON.parse(sessionStorage.getItem('utente'))
-    //             },
-    //             umbra: {
-    //                 urlImgGiorno: this.state.urlImgGiornoUmbra,
-    //                 urlImgNotte: this.state.urlImgNotteUmbra,
-    //                 urlAudio: this.state.urlAudioUmbra
-    //             },
-    //             superLocation: this.state.loc,
-    //             direzioneUscita: this.state.uscita
-    //         }
-    //         LocationService.creaStanza(stanza).then(
-    //             alert('Stanza creata con successo!')
-    //         )
-    //         // event.preventDefault();
-    //     } else {
-    //         event.preventDefault();
-    //     }
-    // }
-
-
-    // const tipoLocation = () => {
-    //     var allLocation = JSON.parse(sessionStorage.getItem('allLocations'))
-
-    //     for (let i = 0; i < allLocation.length; i++) {
-    //         if (allLocation[i].id == this.state.loc) {
-    //             if (allLocation[i].tipo.includes('Umbra')) {
-    //                 return 'Umbra'
-    //             }
-    //             return 'Normale'
-    //         }
-    //     }
-    // }
+    const resetState = () => {
+        setNome('')
+        setAmbiente('')
+        setUrlImgGiorno('')
+        setUrlImgNotte('')
+        setUrlAudio('')
+        setChiave('')
+        setUrlImgGiornoUmbra('')
+        setUrlImgNotteUmbra('')
+        setUrlAudioUmbra('')
+        setChiaveUmbra(false)
+        setAggiunta(false)
+    }
     return (
         <React.Fragment>
+            {console.log(props.locationCella)}
             <div className="row">
                 <div className="col-md-6 centrato">
                     <h1>id selezionata {props.id}</h1>
                     <div style={{ width: "75%" }}>
                         <CreazioneLocationForm changeHandler={changeHandler} stanza={true} anteprimaGiorno={urlImgGiorno} anteprimaNotte={urlImgNotte}
-                            anteprimaGiornoUmbra={urlImgGiornoUmbra} anteprimaNotteUmbra={urlImgNotteUmbra}
-                            idLocation={props.id} />
-                        <button className="btn btn-dark" onClick={() => aggiungiLocation()}>Aggiungi</button>
+                            anteprimaGiornoUmbra={urlImgGiornoUmbra} anteprimaNotteUmbra={urlImgNotteUmbra} chiaveUmbra={chiaveUmbra}
+                            idLocation={props.id} formState={formState} formPlaceholders={props.locationCella} />
+                        <button className="btn btn-dark" onClick={() => aggiungiLocation()}>{aggiunta ? 'Modifica' : 'Aggiungi'}</button>
                     </div>
                 </div>
-
                 <div className="col-md-6 centrato" >
-                    <MinimappaRegolabile pxDimensioniMappa="400" immagineMinimappa={props.immagineMinimappa} cellePerRiga={props.cellePerRiga} lenteDisplay="none" />
+                    <MinimappaRegolabile pxDimensioniMappa="400" immagineMinimappa={props.immagineMinimappaReame} cellePerRiga={props.cellePerRiga} lenteDisplay="none" />
                 </div>
             </div>
         </React.Fragment>

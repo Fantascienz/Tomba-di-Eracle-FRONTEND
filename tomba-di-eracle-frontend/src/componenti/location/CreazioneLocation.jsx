@@ -79,9 +79,9 @@ class CreazioneLocation extends Component {
                             <TitoloPagina titolo="Creazione Location Esterna" />
                             <br />
                             <form onSubmit={this.handleSubmit} style={{ width: "75%" }}>
-                                <CreazioneLocationForm handleChange={this.handleChange} stanza={false} ingresso={this.state.locationIngresso} 
+                                {/* <CreazioneLocationForm handleChange={this.handleChange} stanza={false} ingresso={this.state.locationIngresso} 
                                     anteprimaGiorno={this.state.urlImgGiorno} anteprimaNotte={this.state.urlImgNotte}
-                                    anteprimaGiornoUmbra={this.state.urlImgGiornoUmbra} anteprimaNotteUmbra={this.state.urlImgNotteUmbra}/>
+                                    anteprimaGiornoUmbra={this.state.urlImgGiornoUmbra} anteprimaNotteUmbra={this.state.urlImgNotteUmbra}/> */}
                                 <button className="btn btn-dark">Crea</button>
                             </form>
                         </div>
