@@ -18,14 +18,14 @@ class SelezionaLocationForm extends Component {
 
         return (
 
-            <div className="input-group ">
-                <select className="form-select" name={this.props.id} id={this.props.id} onChange={this.props.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)", marginBottom: "2%" }}>
+            <>
+                <select className={!this.props.className ? "form-select location-form" : this.props.className} name={this.props.id} id={this.props.id} onChange={this.props.handleChange} style={this.props.style}>
                     <option value="">Seleziona Location</option>
                     {listaOrdinata.map(location =>
                         this.renderLista(location)
                     )}
                 </select>
-            </div>
+            </>
         );
     }
 }

@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { filtraListaRazza, modificaPersonaggio, getListaPersonaggi, ordinaPerRazza, ordinaPerNominativo, ordinaPerSesso, ordinaPerRango, ordinaPerDataCreazione, filtraListaStato, getByRazzaAndStato, ordinaPerId, ordinaPerRazzaEStatoByNominativo, getAllByRazzaOrderByNominativo, ordinaPerRazzaById, ordinaPerRazzaEStatoById, ordinaPerRazzaBySesso, ordinaPerRazzaEStatoBySesso, ordinaPerRazzaByRango, ordinaPerRazzaEStatoByRango, ordinaPerRazzaEStatoByDataCreazione, ordinaPerRazzaByDataCreazione, ordinaPerRazzaByIdUtente, ordinaPerRazzaEStatoByIdUtente, ordinaPerIdUtente, filtraListaPgUtente, ordinaPerUtenteByNominativo, ordinaPerUtenteBySesso, ordinaPerUtenteByRazza, ordinaPerUtenteById, ordinaPerUtenteByRango, ordinaPerUtenteByDataCreazione, ordinaPerUtenteERazza, ordinaPerUtenteERazzaById, ordinaPerUtenteERazzaByNominativo, ordinaPerUtenteERazzaBySesso, ordinePerUtenteERazzaByRango, ordinePerUtenteERazzaByDataCreazione, getAllByIdUtenteAndRazzaAndStato, getAllByIdUtenteAndStato } from '../../store/azioni/adminActions';
 import SelezionaLocationForm from '../forms/SelezionaLocationForm';
+import $ from 'jquery';
 
 class ListaPersonaggi extends Component {
 
@@ -33,7 +34,7 @@ class ListaPersonaggi extends Component {
     formModificaNomeGarou = (pg) => {
         return (
             <React.Fragment>
-                <input type="text" placeholder="Nome Garou" id="nuovoNomeGarou" onChange={this.handleChange} onFocus={(event) => event.target.value = this.state.nuovoNomeGarou} />
+                <input type="text" placeholder="Nome Garou" id="nuovoNomeGarou" onChange={this.handleChange} onFocus={(event) => event.target.value = this.state.nuovoNomeGarou} style={{ width: "100px" }} />
                 <button className="btn btn-secondary btn-sm" onClick={() => this.modificaNomeGarou(pg)} >Modifica</button>
             </React.Fragment>
         )
@@ -42,7 +43,7 @@ class ListaPersonaggi extends Component {
     formModificaTribu = (pg) => {
         return (
             <React.Fragment>
-                <select name="nuovaTribu" id="nuovaTribu" onChange={this.handleChange} onFocus={(event) => event.target.value = 'Senza Tribu'} >
+                <select name="nuovaTribu" id="nuovaTribu" onChange={this.handleChange} onFocus={(event) => event.target.value = 'Senza Tribu'} style={{ width: "100px" }}>
                     <option value="Senza Tribu">Senza Tribù</option>
                     <option value="Signori delle Ombre">Signori delle Ombre</option>
                     <option value="Zanne d'Argento">Zanne d'Argento</option>
@@ -66,8 +67,8 @@ class ListaPersonaggi extends Component {
     formModificaBranco = (pg) => {
         return (
             <React.Fragment>
-                <input type="text" placeholder="Ruolo" id="nuovoRuoloBranco" onChange={this.handleChange} onFocus={(event) => event.target.value = this.state.nuovoRuoloBranco} onBlur={(event) => event.target.value = this.state.nuovoRuoloBranco} />
-                <input type="text" placeholder="Branco" id="nuovoBranco" onChange={this.handleChange} onFocus={(event) => event.target.value = this.state.nuovoBranco} onBlur={(event) => event.target.value = this.state.nuovoBranco} />
+                <input type="text" placeholder="Ruolo" id="nuovoRuoloBranco" onChange={this.handleChange} onFocus={(event) => event.target.value = this.state.nuovoRuoloBranco} onBlur={(event) => event.target.value = this.state.nuovoRuoloBranco} style={{ width: "100px" }} />
+                <input type="text" placeholder="Branco" id="nuovoBranco" onChange={this.handleChange} onFocus={(event) => event.target.value = this.state.nuovoBranco} onBlur={(event) => event.target.value = this.state.nuovoBranco} style={{ width: "100px" }} />
                 <button className="btn btn-secondary btn-sm" onClick={() => this.modificaBranco(pg)} >Modifica</button>
             </React.Fragment>
         )
@@ -76,8 +77,8 @@ class ListaPersonaggi extends Component {
     formModificaSept = (pg) => {
         return (
             <React.Fragment>
-                <input type="text" placeholder="Ruolo" id="nuovoRuoloSept" onChange={this.handleChange} onFocus={(event) => event.target.value = this.state.nuovoRuoloSept} />
-                <input type="text" placeholder="Sept" id="nuovoSept" onChange={this.handleChange} onFocus={(event) => event.target.value = this.state.nuovoSept} />
+                <input type="text" placeholder="Ruolo" id="nuovoRuoloSept" onChange={this.handleChange} onFocus={(event) => event.target.value = this.state.nuovoRuoloSept} style={{ width: "100px" }} />
+                <input type="text" placeholder="Sept" id="nuovoSept" onChange={this.handleChange} onFocus={(event) => event.target.value = this.state.nuovoSept} style={{ width: "100px" }} />
                 <button className="btn btn-secondary btn-sm" onClick={() => this.modificaSept(pg)} >Modifica</button>
             </React.Fragment>
         )
@@ -152,7 +153,7 @@ class ListaPersonaggi extends Component {
     }
 
     modificaLocation = (pg) => {
-        if(this.state.nuovaUltimaLocation !== '') {
+        if (this.state.nuovaUltimaLocation !== '') {
             pg.ultimaLocation = this.state.nuovaUltimaLocation;
             this.modificaPersonaggio(pg)
         }
@@ -178,7 +179,7 @@ class ListaPersonaggi extends Component {
         this.props.aggiornaLista()
     }
 
-   
+
 
     maxRango = (pg) => {
         if (pg.utente.id === 0) {
@@ -534,7 +535,7 @@ class ListaPersonaggi extends Component {
 
         return (
             <React.Fragment>
-                <select class="form-select" onChange={this.handleFilterRazza} aria-label="Default select example">
+                <select onChange={this.handleFilterRazza} aria-label="Default select example">
                     {JSON.parse(sessionStorage.getItem('listaRazze')).map(razza =>
                         <option key={razza} value={razza}>{razza}</option>
                     )}
@@ -547,7 +548,7 @@ class ListaPersonaggi extends Component {
         if (JSON.parse(sessionStorage.getItem('listaUtenti')) != null) {
             return (
                 <React.Fragment>
-                    <select class="form-select" onChange={this.handleFilterUtente} aria-label="Default select example">
+                    <select onChange={this.handleFilterUtente} aria-label="Default select example">
                         {JSON.parse(sessionStorage.getItem('listaUtenti')).map(utente =>
                             <option key={utente.id} value={utente.id}>ID:{utente.id} {utente.nominativo}</option>
                         )}
@@ -561,7 +562,7 @@ class ListaPersonaggi extends Component {
 
         return (
             <React.Fragment>
-                <select class="form-select" onChange={this.handleFilterStato} aria-label="Default select example">
+                <select onChange={this.handleFilterStato} aria-label="Default select example">
                     <option value="" >Filtra</option>
                     <option value="Online">Online</option>
                     <option value="Offline">Offline</option>
@@ -574,15 +575,32 @@ class ListaPersonaggi extends Component {
 
     render() {
 
+        $(function () {
+            $('#fixed-headers').scroll(function (ev) {
+                /**
+                 * Quando la tabella scrolla sposta di posizione la prima riga e la prima colonna
+                 */
+                $('thead th').css('transform', 'translateY(' + this.scrollTop + 'px)');
+                $('tbody th').css('transform', 'translateX(' + this.scrollLeft + 'px)');
+            });
+        });
+
         return (
             <React.Fragment>
-                <div className="table-responsive ombra" style={{ width: "100%", backgroundColor: "white" }}>
-                    {/* <button className="btn btn-secondary" onClick={() => this.aggiorna()} >Aggiorna Lista</button> */}
-                    <table className="table align-middle table-hover table-sm caption-top">
-                        <caption >Lista Personaggi <button className="btn btn-primary" onClick={() => this.resetFiltro()}>Reset Filtro</button></caption>
-                        <thead className="table-dark align-middle" align="center">
-                            <tr style={{ color: "#eeaa44" }}>
-                                <th>Immagine</th>
+
+                <div className="ombra centrato" style={{ width: "100%", height: "100%" }}>
+
+                    <div className="table-reset" align="right">
+                        <button className="btn-reset" onClick={() => this.resetFiltro()}>Resetta Filtri</button>
+                    </div>
+
+                    <div className="table-reset-tappo">
+                    </div>
+
+                    <table className="table fixed-headers align-middle" id="fixed-headers">
+                        <thead className="table-dark align-middle" align="left">
+                            <tr>
+                                <th ><p style={{width:"50px"}}></p></th>
                                 <th><a href="#" onClick={() => this.ordinaPerId()} >ID</a></th>
                                 <th><a href="#" onClick={() => this.ordinaPerNominativo()}>Nominativo</a> </th>
                                 <th><a href="#" onClick={() => this.ordinaPerSesso()}>Sesso</a></th>
@@ -603,13 +621,13 @@ class ListaPersonaggi extends Component {
                                 <th>Modifica Tribù</th>
                                 <th>Modifica Branco</th>
                                 <th>Modifica Sept</th>
-                                
+
                             </tr>
                         </thead>
                         <tbody>
                             {JSON.parse(sessionStorage.getItem('listaPersonaggi')).map(pg =>
                                 <tr key={pg.id} align="center">
-                                    <td style={{ height: "100px", width: "auto", backgroundImage: `url('${pg.urlImmagine}')`, backgroundPosition: "center center", backgroundSize: "auto 100%", backgroundRepeat: "no-repeat" }}></td>
+                                    <th style={{ height: "100px", width: "auto", backgroundImage: `url('${pg.urlImmagine}')`, backgroundPosition: "center center", backgroundSize: "auto 100%", backgroundRepeat: "no-repeat" }} title={pg.id + ": " + pg.nominativo}></th>
                                     <td>{pg.id}</td>
                                     <td>{pg.nominativo}</td>
                                     <td>{pg.sesso}</td>
@@ -620,7 +638,7 @@ class ListaPersonaggi extends Component {
                                     <td>{pg.tribu}</td>
                                     <td>{pg.branco != null ? pg.branco : '/---/'}</td>
                                     <td>{pg.sept != null ? pg.sept : '/---/'}</td>
-                                    <td><p>ID: {pg.utente.id}</p> <p>{pg.utente.nominativo}</p> <p>{pg.utente.email}</p></td>
+                                    <td><span>ID: {pg.utente.id}</span> <br /><span>{pg.utente.nominativo}</span> <br /><span>{pg.utente.email}</span></td>
                                     <td>{pg.dataCreazione}</td>
                                     <td>{pg.ultimaLocation}</td>
                                     <td>{pg.stato}</td>
@@ -628,14 +646,21 @@ class ListaPersonaggi extends Component {
                                     <td>{this.formModificaNomeGarou(pg)}</td>
                                     <td>
                                         <form onSubmit={() => this.modificaLocation(pg)}>
-                                            <SelezionaLocationForm lista={JSON.parse(sessionStorage.getItem('allLocations'))} stanza={true} id="nuovaUltimaLocation" handleChange={this.handleChange} allLocations={true} />
+                                            <SelezionaLocationForm
+                                                className={"pippo"}
+                                                style={{ width: "100px" }}
+                                                lista={JSON.parse(sessionStorage.getItem('allLocations'))}
+                                                stanza={true}
+                                                id="nuovaUltimaLocation"
+                                                handleChange={this.handleChange}
+                                                allLocations={true} />
                                             <button className="btn btn-secondary btn-sm">Modifica</button>
                                         </form>
                                     </td>
                                     <td>{this.formModificaTribu(pg)}</td>
                                     <td>{this.formModificaBranco(pg)}</td>
                                     <td>{this.formModificaSept(pg)}</td>
-                                    
+
                                 </tr>
                             )}
                         </tbody>

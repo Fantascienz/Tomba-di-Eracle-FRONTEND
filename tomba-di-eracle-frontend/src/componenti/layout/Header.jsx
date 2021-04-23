@@ -11,7 +11,7 @@ class Header extends Component {
         if(sessionStorage.getItem('utente') != null){
             return(
                 <div className="row no-gutters" style={{height:"30%", position:"absolute", left:"0%", bottom:"0%", width:"103%"}}>
-                    <div className="col header-link">
+                    <div className="col header-link testo-sinistra" >
                         <a href="/paginaUtente"><b>Home</b></a>
                     </div>
 
@@ -19,7 +19,7 @@ class Header extends Component {
                     </div>
 
 
-                    <div className="col header-link">
+                    <div className="col header-link testo-destra">
                         <a href="/" onClick={() => this.eseguiLogout()}><b>Logout</b></a>
                     </div>
                 </div>
@@ -27,14 +27,14 @@ class Header extends Component {
         } else {
             return (
                 <div className="header-links-row row no-gutters" style={{}}>
-                    <div className="col header-link">
+                    <div className="col header-link testo-sinistra">
                         <a href="/"><b>Login</b></a>
                     </div>
 
                     <div className="col">
                     </div>
 
-                    <div className="col header-link">
+                    <div className="col header-link testo-destra">
                         <a href="/registrazione"><b>Registrazione</b></a>
                     </div>
                 </div>
