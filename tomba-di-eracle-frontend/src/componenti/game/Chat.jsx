@@ -24,6 +24,7 @@ export const ChatRoom = () => {
     
         socket.emit('join', { personaggio, location}, () => {
         })
+
     }, ENDPOINT)
 
     useEffect(() => {

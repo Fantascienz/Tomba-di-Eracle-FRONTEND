@@ -38,10 +38,11 @@ db.on('error', _ => {
 
 io.on('connect', (socket) => {
   socket.on('join', ({ personaggio, location }, callback) => {
-    Msg.find({ idLocation: location.id }).then(result => {
+    Msg.find().then(result => {
       socket.emit('output-messages', result)
       socket.emit('message', { testo: `${personaggio.nominativo},entra in ${location.nome}`, idLocation: location.id });
-      // socket.broadcast.to(user.location).emit('message', { utente: 'admin', testo: `${user.personaggio.nominativo}, has joined!` });
+      // io.to(location).emit('message', { utente: 'admin', testo: `${personaggio.nominativo}, has joined!`, idLocation: location.id });
+      socket.broadcast.emit('message', { utente: 'admin', testo: `${personaggio.nominativo}, has joined!`, idLocation: location.id });
     })
 
 
@@ -65,8 +66,7 @@ io.on('connect', (socket) => {
       });
     messaggioInviato.save().then(() => {
       
-      
-      socket.emit('message', {
+     io.emit('message', {
         testo: formValue,
         nomePersonaggio: personaggio.nominativo,
         idLocation: location.id,
@@ -79,13 +79,8 @@ io.on('connect', (socket) => {
     callback();
   })
 
-  // socket.on('disconnect', () => {
-  //   const user = removeUser(socket.id);
-
-  //   if (user) {
-  //     io.to(location).emit('message', { user: 'admin', testo: `${user.personaggio.nominativo} has left` });
-  //   }
-
+  // socket.on('disconnect', ({personaggio, location}) => {
+  //     socket.broadcast.emit('message', {  testo: `${personaggio.nominativo} has left`, idLocation: location.id })
   // })
 });
 
