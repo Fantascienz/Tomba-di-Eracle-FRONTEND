@@ -43,9 +43,11 @@ import Chirottero from '../chirotteri/Chirottero'
 
 
 
+
 class Gamepage extends Component {
 
     navigazione = (location) => {
+
         if (location !== null) {
             this.props.naviga(location)
         } else {
@@ -136,7 +138,7 @@ class Gamepage extends Component {
                                             {location.tipo.includes("Stanza") && location.urlMinimappa != null ?
                                                 <MinimappaRegolabile idLocation="" pxDimensioniMappa="500" lenteDisplay="none" cellePerRiga="2" immagineMinimappa={location.urlMinimappa} />
                                                 :
-                                                <Macromappa idLocation={location.id} pxDimensioniMappa="500" tipoLocation={location.tipo.includes('Umbra')?'Umbra':null}/>
+                                                <Macromappa idLocation={location.id} pxDimensioniMappa="500" tipoLocation={location.tipo.includes('Umbra') ? 'Umbra' : null} />
                                             }
                                         </div>
                                     </div>
