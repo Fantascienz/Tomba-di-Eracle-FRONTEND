@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { cercaNominativo, cercaPerNominativoETipo, filtraUtentiByTipo, getListaUtenti } from '../../store/azioni/adminActions';
+import $ from 'jquery';
 
 class TabellaUtenti extends Component {
 
     handleFiltroTipoUtente = (e) => {
-        if(this.props.filtroNominativo !== undefined) {
+        if (this.props.filtroNominativo !== undefined) {
             let filtro = {
                 nominativo: this.props.filtroNominativo,
                 tipo: e.target.value
@@ -22,7 +23,7 @@ class TabellaUtenti extends Component {
 
     handleCerca = (e) => {
 
-        if(this.props.filtroTipoUtente !== undefined) {
+        if (this.props.filtroTipoUtente !== undefined) {
             let filtro = {
                 nominativo: e.target.value,
                 tipo: this.props.filtroTipoUtente
@@ -34,7 +35,7 @@ class TabellaUtenti extends Component {
             }
             this.props.cercaNominativo(nominativo)
         }
-        
+
     }
 
 
@@ -42,14 +43,14 @@ class TabellaUtenti extends Component {
     formModificaTipo = (utente) => {
         if (utente.id !== JSON.parse(sessionStorage.getItem('utente')).id) {
             return (
-                <div style={{display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center"}}>
-                    <select name="nuovoTipo" id="nuovoTipo" onChange={this.props.handleChange} style={{width:"100px"}}>
+                <div style={{ display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
+                    <select name="nuovoTipo" id="nuovoTipo" onChange={this.props.handleChange} style={{ width: "100px" }}>
                         <option value="standard">Standard</option>
                         <option value="vip">VIP</option>
                         <option value="master">Master</option>
                         <option value="admin">Admin</option>
                     </select>
-                    <button className="btn btn-secondary btn-sm" onClick={() => this.props.modificaTipo(utente)} style={{ width: "100px" }}>Modifica</button>
+                    <button className="btn btn-secondary btn-sm" onClick={() => this.props.modificaTipo(utente)}>Modifica</button>
                 </div>
             )
         }
@@ -93,7 +94,7 @@ class TabellaUtenti extends Component {
     renderFiltroTipoUtente = () => {
         return (
             <React.Fragment>
-                <select class="form-select" onChange={this.handleFiltroTipoUtente} aria-label="Default select example">
+                <select onChange={this.handleFiltroTipoUtente} aria-label="Default select example" style={{ height: "1.5vw" }}>
                     {JSON.parse(sessionStorage.getItem('listaTipoUtenti')).map(utente =>
                         <option key={utente.id} value={utente}>{utente}</option>
                     )}
@@ -105,51 +106,56 @@ class TabellaUtenti extends Component {
     renderCercaUtente = () => {
         return (
             <React.Fragment>
-                    <input class="form-control me-2" id="nominativo"  type="search" onChange={this.handleCerca} placeholder="Cerca" aria-label="Search" />
-
+                <input className="me-2" id="nominativo" type="search" onChange={this.handleCerca} placeholder="Cerca" aria-label="Search" />
             </React.Fragment>
         )
     }
 
     render() {
+
+        $(function () {
+            $('#fixed-headers').scroll(function (ev) {
+                /**
+                 * Quando la tabella scrolla sposta di posizione la prima riga e la prima colonna
+                 */
+                $('thead th').css('transform', 'translateY(' + this.scrollTop + 'px)');
+                $('tbody th').css('transform', 'translateX(' + this.scrollLeft + 'px)');
+            });
+        });
+
         return (
-            <div className="table-responsive ombra" style={{ width: "100%", backgroundColor: "white" }}>
-                <table className="table align-middle table-hover table-sm caption-top">
-                    <caption>Lista Utenti <button className="btn btn-primary" onClick={() => this.props.aggiornaLista()}>Reset Filtro</button></caption>
+            <div className="ombra centrato" style={{ width: "100%", height: "100%" }}>
+
+                <div className="table-reset" align="right">
+                    <button className="btn-reset" onClick={() => this.props.aggiornaLista()}>Resetta Filtri</button>
+                </div>
+
+                <div className="table-reset-tappo" style={{height: "12vh"}}>
+                </div>
+
+                <table className="table fixed-headers align-middle" id="fixed-headers">
                     <thead className="table-dark align-middle" align="center">
-                        <tr style={{ color: "#eeaa44" }}>
-                            <th>ID</th>
-                            <th>Nominativo {this.renderCercaUtente()}</th>
-                            <th>Email</th>
+                        <tr>
+                            <th><p style={{width:"50px"}}></p></th>
+                            <th>Nominativo {this.renderCercaUtente()} </th>
+                            <th>Email Utente</th>
                             <th>Tipo {this.renderFiltroTipoUtente()}</th>
-                            <th>Personaggi</th>
-                            <th colSpan="3">Personaggi Creabili</th>
+                            <th>Personaggi creati dall'Utente</th>
+                            <th>Umani Generabili dall'Utente</th>
+                            <th>Garou Generabili dall'Utente</th>
+                            <th>PNG Generabili dall'Utente</th>
                             <th>Data di Registrazione</th>
-                            <th>Modifica Tipo</th>
-                            <th colSpan="3">Modifica Personaggi Creabili</th>
-                            <th>Ban</th>
-                        </tr>
-                        <tr style={{ color: "#eeaa44" }}>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th>Umani</th>
-                            <th>Garou</th>
-                            <th>PNG</th>
-                            <th></th>
-                            <th></th>
-                            <th>Max Umani</th>
-                            <th>Max Garou</th>
-                            <th>Max PNG</th>
-                            <th></th>
+                            <th>Modifica Privilegi Utente</th>
+                            <th>Modifica qnt Umani Generabili dall'Utente</th>
+                            <th>Modifica qnt Garou Generabili dall'Utente</th>
+                            <th>Modifica qnt PNG Generabili dall'Utente</th>
+                            <th>Banna Utente</th>
                         </tr>
                     </thead>
                     <tbody align="center">
                         {this.props.lista.map(utente =>
                             <tr key={utente.id}>
-                                <td>{utente.id}</td>
+                                <th title={utente.nominativo}>{utente.id}</th>
                                 <td>{utente.nominativo}</td>
                                 <td>{utente.email}</td>
                                 <td>{utente.tipo}</td>
