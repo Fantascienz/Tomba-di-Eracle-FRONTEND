@@ -7,7 +7,7 @@ import Header from '../layout/Header';
 import { TitoloPagina } from '../layout/TitoloPagina';
 import Macromappa from './Macromappa';
 import MinimappaRegolabile from './MinimappaReagolabile';
-import { coefficienteId, setDirezioniX3 } from './room/impostazioniDirezioni';
+import { coefficienteId, setDirezioniX1, setDirezioniX2, setDirezioniX3 } from './room/impostazioniDirezioni';
 
 const CreazioneStanza = (props) => {
 
@@ -25,7 +25,8 @@ const CreazioneStanza = (props) => {
     const changeHandler = [setNome, setAmbiente, setUrlImgGiorno, setUrlImgNotte, setUrlAudio, setChiave, setUrlImgGiornoUmbra, setUrlImgNotteUmbra, setUrlAudioUmbra]
 
     const aggiungiLocation = () => {
-        let id = props.id * coefficienteId(props.cellePerRiga) + parseInt(props.superLoc,10)
+        let superLoc = parseInt(props.superLoc, 10);
+        let id = props.id * coefficienteId(props.cellePerRiga) + superLoc
         let sublocation = {
             location: {
                 id: id,
@@ -35,15 +36,42 @@ const CreazioneStanza = (props) => {
                 urlImgNotte: urlImgNotte,
                 urlAudio: urlAudio,
                 chiave: chiave,
-                urlImgGiornoUmbra: urlImgGiornoUmbra,
-                urlImgNotteUmbra: urlImgNotteUmbra,
-                urlAudioUmbra: urlAudioUmbra,
             },
-            idSuperLocation: props.id
+            idSuperLocation: props.id,
+            direzioni: generaDirezioni(id,false),
+            locationUmbra: {
+                id: superLoc <= 288 ? id + 144 : id + 48,
+                nome: nome,
+                ambiente: ambiente,
+                urlImgGiorno: urlImgGiornoUmbra,
+                urlImgNotte: urlImgNotteUmbra,
+                urlAudio: urlAudioUmbra,
+            },
+            direzioniUmbra: superLoc <= 288 ? generaDirezioni(id + 144,true) :  generaDirezioni(id + 48,true)
         }
-        console.log(setDirezioniX3(props.superLoc,id))
-
+        console.log(sublocation)
     }
+
+    const generaDirezioni = (id, umbra) => {
+        let superLoc = parseInt(props.superLoc,10)
+        if (umbra) {
+            if (superLoc <= 288) {
+                superLoc += 144
+            } else {
+                superLoc += 48
+            }
+        }
+        switch (props.cellePerRiga) {
+            case '3':
+                return setDirezioniX3(superLoc, id, umbra)
+            case '2':
+                return setDirezioniX2(superLoc, id, umbra)
+            case '1':
+                return setDirezioniX1(superLoc, id, umbra)
+
+        }
+    }
+
 
     // const handleSubmit = (event) => {
 
