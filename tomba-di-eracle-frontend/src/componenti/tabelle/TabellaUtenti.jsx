@@ -158,17 +158,17 @@ class TabellaUtenti extends Component {
                                 <th title={utente.nominativo}>{utente.id}</th>
                                 <td>{utente.nominativo}</td>
                                 <td>{utente.email}</td>
-                                <td>{utente.tipo}</td>
+                                <td>{utente.tipo == "bannato" ? <b style={{color:"red"}}>Bannato</b> : utente.tipo == "admin" ? <b style={{color:"green"}}>Admin</b> : utente.tipo == "master" ? <b style={{color:"greenyellow"}}>Master</b> : utente.tipo}</td>
                                 <td>{utente.numeroPersonaggi}</td>
                                 <td>{utente.maxUmani}</td>
-                                <td>{utente.maxGarou}</td>
-                                <td>{utente.maxPng}</td>
+                                <td>{utente.tipo == "standard" || utente.tipo == "bannato" ? <b style={{color:"red", fontSize:"2vw"}} title="Un utente Standard non può avere Personaggi Garou">X</b> : utente.maxGarou}</td>
+                                <td>{utente.tipo == "admin" || utente.tipo == "master" ? utente.maxPng : <b style={{color:"red", fontSize:"2vw"}} title="Un utente non Admin/Master non può avere PNG">X</b>}</td>
                                 <td>{utente.dataRegistrazione}</td>
-                                <td>{this.formModificaTipo(utente)}</td>
+                                <td>{utente.tipo == "admin"?  <b style={{color:"red", fontSize:"2vw"}} title="I prigilegi di un Admin non possono essere modificati">X</b> :this.formModificaTipo(utente)}</td>
                                 <td>{this.formModificaUmani(utente)}</td>
-                                <td>{this.formModificaGarou(utente)}</td>
-                                <td>{this.formModificaPng(utente)}</td>
-                                <td>{this.tastoBan(utente)}</td>
+                                <td>{utente.tipo == "standard" || utente.tipo == "bannato" ? <b style={{color:"red", fontSize:"2vw"}} title="Un utente Standard non può avere Personaggi Garou">X</b> : this.formModificaGarou(utente)}</td>
+                                <td>{utente.tipo == "admin" || utente.tipo == "master" ? this.formModificaPng(utente) : <b style={{color:"red", fontSize:"2vw"}} title="Un utente non Admin/Master non può avere PNG">X</b>}</td>
+                                <td>{utente.tipo == "admin"?  <b style={{color:"red", fontSize:"2vw"}} title="Un Admin non può essere bannato">X</b> : this.tastoBan(utente)}</td>
                             </tr>
                         )}
                     </tbody>
@@ -186,7 +186,7 @@ const mapStateToProps = (state) => {
         filtroNominativo: state.admin.filtroNominativo
     }
 }
-
+ 
 const mapDispatchToProps = (dispatch) => {
     return {
         filtraUtentiByTipo: (filtro) => dispatch(filtraUtentiByTipo(filtro)),
