@@ -5,6 +5,7 @@ import withReactContent from 'sweetalert2-react-content';
 import { filtraListaRazza, modificaPersonaggio, getListaPersonaggi, ordinaPerRazza, ordinaPerNominativo, ordinaPerSesso, ordinaPerRango, ordinaPerDataCreazione, filtraListaStato, getByRazzaAndStato, ordinaPerId, ordinaPerRazzaEStatoByNominativo, getAllByRazzaOrderByNominativo, ordinaPerRazzaById, ordinaPerRazzaEStatoById, ordinaPerRazzaBySesso, ordinaPerRazzaEStatoBySesso, ordinaPerRazzaByRango, ordinaPerRazzaEStatoByRango, ordinaPerRazzaEStatoByDataCreazione, ordinaPerRazzaByDataCreazione, ordinaPerRazzaByIdUtente, ordinaPerRazzaEStatoByIdUtente, ordinaPerIdUtente, filtraListaPgUtente, ordinaPerUtenteByNominativo, ordinaPerUtenteBySesso, ordinaPerUtenteByRazza, ordinaPerUtenteById, ordinaPerUtenteByRango, ordinaPerUtenteByDataCreazione, ordinaPerUtenteERazza, ordinaPerUtenteERazzaById, ordinaPerUtenteERazzaByNominativo, ordinaPerUtenteERazzaBySesso, ordinePerUtenteERazzaByRango, ordinePerUtenteERazzaByDataCreazione, getAllByIdUtenteAndRazzaAndStato, getAllByIdUtenteAndStato } from '../../store/azioni/adminActions';
 import SelezionaLocationForm from '../forms/SelezionaLocationForm';
 import $ from 'jquery';
+import { pgIsGarou, rangoGarou } from '../utils/Utilities';
 
 class ListaPersonaggi extends Component {
 
@@ -611,6 +612,8 @@ class ListaPersonaggi extends Component {
                                 <th>Tribù</th>
                                 <th>Branco</th>
                                 <th>Sept</th>
+                                <th>Può inviare un Chirottero</th>
+                                <th>Può attraversare il Guanto</th>
                                 <th><a href="#" onClick={() => this.ordinaPerIdUtente()}>Proprietario</a> {this.renderFiltroUtente()}</th>
                                 <th><a href="#" onClick={() => this.ordinaPerDataCreazione()}>Data Creazione</a></th>
                                 <th>Ultima Location</th>
@@ -621,7 +624,8 @@ class ListaPersonaggi extends Component {
                                 <th>Modifica Tribù</th>
                                 <th>Modifica Branco</th>
                                 <th>Modifica Sept</th>
-
+                                <th>Mod. inviare Chirotteri</th>
+                                <th>Mod. attraversare il Guanto</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -632,18 +636,20 @@ class ListaPersonaggi extends Component {
                                     <td>{pg.nominativo}</td>
                                     <td>{pg.sesso}</td>
                                     <td>{pg.razza}</td>
-                                    <td>{pg.rango}</td>
-                                    <td>{pg.nomeGarou != null ? pg.nomeGarou : '/---/'}</td>
-                                    <td>{pg.auspicio != null ? pg.auspicio : '/---/'}</td>
-                                    <td>{pg.tribu}</td>
+                                    <td>{pgIsGarou(pg)? <span title={pg.rango}>{rangoGarou(pg)}</span> : pg.rango}</td>
+                                    <td>{pgIsGarou(pg)? pg.nomeGarou != null ? pg.nomeGarou : '/---/' : <b style={{color:"red", fontSize:"2vw"}} title="Il Pg non è un Garou e non può avere un Nome Garou">X</b>}</td>
+                                    <td>{pgIsGarou(pg)? pg.auspicio : <b style={{color:"red", fontSize:"2vw"}} title="Il Pg non è un Garou e non può avere un Auspicio">X</b>}</td>
+                                    <td>{pgIsGarou(pg)? pg.tribu : <b style={{color:"red", fontSize:"2vw"}} title="Il Pg non è un Garou e non può avere una Tribù">X</b>}</td>
                                     <td>{pg.branco != null ? pg.branco : '/---/'}</td>
                                     <td>{pg.sept != null ? pg.sept : '/---/'}</td>
+                                    <td>{pg.chirottero? <b style={{color:"green", fontSize:"1.5vw"}}>Si</b>:<b style={{color:"red", fontSize:"1.5vw"}}>No</b>}</td>
+                                    <td>{pg.umbra? <b style={{color:"green", fontSize:"1.5vw"}}>Si</b>:<b style={{color:"red", fontSize:"1.5vw"}}>No</b>}</td>
                                     <td><span>ID: {pg.utente.id}</span> <br /><span>{pg.utente.nominativo}</span> <br /><span>{pg.utente.email}</span></td>
                                     <td>{pg.dataCreazione}</td>
                                     <td>{pg.ultimaLocation}</td>
-                                    <td>{pg.stato}</td>
+                                    <td>{pg.stato == "online" ? <span style={{color:"green"}}>Online</span> : <span style={{color:"red"}}>Offline</span>}</td>
                                     <td>{this.formModificaRango(pg)}</td>
-                                    <td>{this.formModificaNomeGarou(pg)}</td>
+                                    <td>{pgIsGarou(pg)?this.formModificaNomeGarou(pg):<b style={{color:"red", fontSize:"2vw"}} title="Il Pg non è un Garou e non può avere un Nome Garou">X</b>}</td>
                                     <td>
                                         <form onSubmit={() => this.modificaLocation(pg)}>
                                             <SelezionaLocationForm
@@ -657,9 +663,11 @@ class ListaPersonaggi extends Component {
                                             <button className="btn btn-secondary btn-sm">Modifica</button>
                                         </form>
                                     </td>
-                                    <td>{this.formModificaTribu(pg)}</td>
+                                    <td>{pgIsGarou(pg)?this.formModificaTribu(pg):<b style={{color:"red", fontSize:"2vw"}} title="Il Pg non è un Garou e non può avere una Tribù">X</b>}</td>
                                     <td>{this.formModificaBranco(pg)}</td>
                                     <td>{this.formModificaSept(pg)}</td>
+                                    <td>DA AGGIUNGERE!!!</td>
+                                    <td>DA AGGIUNGERE!!!</td>
 
                                 </tr>
                             )}

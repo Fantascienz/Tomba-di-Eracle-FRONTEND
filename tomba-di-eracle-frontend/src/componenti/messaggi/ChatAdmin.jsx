@@ -71,9 +71,12 @@ class ChatAdmin extends React.Component {
     renderDestinatario = () => {
         if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin') {
             if (this.props.utente != undefined) {
-                return "Destinatario: " + this.props.utente.nominativo
+                return <>
+                            <span style={{color: "#eeaa44", fontSize:"1.5vw"}}>Destinatario:</span> 
+                            <p style={{color: "#eeaa44", fontSize:"2vw"}}>{this.props.utente.nominativo}</p>
+                        </>
             }
-            return "Destinatario: Nessuno"
+            return "Scegli destinatario..."
         }
         return "Destinatario: Admin"
     }
@@ -89,18 +92,19 @@ class ChatAdmin extends React.Component {
 
         return (
             <React.Fragment>
-                <div className="chat-admin row">
+                <div className="chat-admin row" style={{width:"113%"}}>
                     <main className="col-6" style={{padding:'2.9%'}}>
-                        <p className="font-lombardia bg-dark rounded" style={{ fontSize: '2em',color: "#eeaa44",marginLeft: '6%'}}>{this.renderDestinatario()}</p>
+                        <p className="font-lombardia-yellow bg-dark rounded" style={{ fontSize: '2em',color: "#eeaa44",marginLeft: '6%'}}>{this.renderDestinatario()}</p>
                         {listaOrdinata && listaOrdinata.map(msg =>
                             this.renderMessaggi(msg))}
                     </main>
 
                     <div className="col-1"></div>
 
-                    <form className="col-5" onSubmit={() => this.handleSubmit()}>
-                        <textarea name="testo" id="testo" cols="30" rows="10" placeholder="Scrivi messaggio..." onChange={this.handleChange} className="font-lombardia" style={{ fontSize: '2em' }}></textarea>
-                        <button type="submit" disabled={this.state.testo === '' ? true : false}>
+                    <form className="col-5" onSubmit={() => this.handleSubmit()} style={{height:"90%"}}>
+                        <textarea name="testo" id="testo" cols="30" rows="10" placeholder="Scrivi messaggio..." onChange={this.handleChange} className="font-lombardia" style={{ fontSize: '2em', height:"100%" }}></textarea>
+                        <button type="submit"   disabled={this.state.testo === '' || this.props.utente == undefined ? true : false}
+                                                title={this.state.testo === '' && this.props.utente == undefined ? "Scegli un destinatario e scrivi un messaggio" : this.state.testo === '' && this.props.utente != undefined ? "Scrivi un messaggio" : "Scegli un destinatario"}>
                             <img src={penna} alt="" />
                         </button>
                     </form>

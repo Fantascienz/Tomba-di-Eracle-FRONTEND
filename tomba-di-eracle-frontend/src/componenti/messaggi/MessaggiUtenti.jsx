@@ -21,7 +21,7 @@ class MessaggiUtenti extends Component {
     }
 
     renderTastoUtente = (utente) => {
-        return "Scrivi a (" + (utente.tipo === 'admin' ? 'Admin' : utente.id) + "): " + utente.nominativo;
+        return <span title={utente.id}>{utente.nominativo + (utente.tipo === 'admin' ? ' (Admin)' : '')}</span>;
     }
 
     render() {
@@ -33,7 +33,7 @@ class MessaggiUtenti extends Component {
         }
 
         let listaUtenti = JSON.parse(sessionStorage.getItem('listaUtenti')).sort(
-            (a, b) => (a.id < b.id ? -1 : Number(a.id > b.id))
+            (a, b) => (a.nominativo < b.nominativo ? -1 : Number(a.nominativo > b.nominativo))
         );
 
 
@@ -53,8 +53,8 @@ class MessaggiUtenti extends Component {
                             </div>
                         </div>
                         <div className="col-md-2">
-                            <h1 className="font-lombardia-yellow bg-dark rounded">Utenti</h1>
-                            <div style={{ overflowY: 'scroll', height: '70%' }}>
+                            <h1 className="font-lombardia-yellow bg-dark rounded">Scrivi a ...</h1>
+                            <div style={{ overflowY: 'auto', height: '70%' }}>
                                 {
                                     listaUtenti.map(utente =>
                                         JSON.parse(sessionStorage.getItem('utente')).id === utente.id ? '' :
