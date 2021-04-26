@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import io from 'socket.io-client';
+import { io } from 'socket.io-client';
 import divisore from '../../img/divisore.png'
 import penna from '../../img/quill.png'
 
@@ -21,24 +21,28 @@ export const ChatRoom = () => {
         socket.on('output-messages', (data) => {
             setMessages(data);
         });
-    
-        socket.emit('join', { personaggio, location}, () => {
+
+        socket.emit('join', { personaggio, location }, () => {
         })
+
 
     }, ENDPOINT)
 
     useEffect(() => {
         socket.on('message', (messaggio) => {
             setMessages([...messaggi, messaggio]);
+            socket.off('message');
         })
+
     }, [messaggi]);
-    
+
 
     const inviaMessaggio = (e) => {
         e.preventDefault();
 
-        socket.emit('sendMessage', {formValue, personaggio, location}, () => setFormValue(''));
+        socket.emit('sendMessage', { formValue, personaggio, location }, () => setFormValue(''));
         dummy.current.scrollIntoView({ behavior: 'smooth' });
+
     }
 
     return (<>
@@ -70,6 +74,7 @@ export const ChatRoom = () => {
 
 
 
+
 function MessaggioChat(props) {
     const { testo, idPersonaggio, immagine, nomePersonaggio, inviatoAlle } = props.messaggio;
 
@@ -85,20 +90,26 @@ function MessaggioChat(props) {
                         <td align='right'>
                             <span className="font-lombardia" style={{ fontSize: "1.3em" }}>{nomePersonaggio} </span>
                             {/*se non c'è un immagine,mette l'immagine di default corrispondente all'url*/}
-                            <img src={immagine || 'https://myasw.org/wp-content/uploads/2020/05/mr-anonymous.png'} atl="..." />
+                            <img src={immagine} alt="..." />
                         </td>
                         :
                         <td align='left'>
                             {/*se non c'è un immagine,mette l'immagine di default corrispondente all'url*/}
-                            <img src={immagine || 'https://myasw.org/wp-content/uploads/2020/05/mr-anonymous.png'} atl="..." />
-                            <span className="font-lombardia" style={{ fontSize: "1.3em" }}>{nomePersonaggio} </span>
+                            {nomePersonaggio == 'admin' ? null : <img src={immagine} alt="..." />}
+                            {nomePersonaggio == 'admin' ? null :
+                                <span className="font-lombardia" style={{ fontSize: "1.3em" }}>{nomePersonaggio} </span>}
                         </td>
                     }
                 </tr>
 
                 <tr>
                     <td align={messageClass === 'sent' ? 'right' : 'left'}>
-                        <p className="font-lombardia" style={{ fontSize: "1.8em" }}>{testo}</p>
+                        {nomePersonaggio == 'admin' ?
+                            <p className="font-lombardia" style={{ fontSize: "1.8em", color: 'grey' }}>{testo}</p>
+                            :
+                            <p className="font-lombardia" style={{ fontSize: "1.8em" }}>{testo}</p>
+                        }
+
                     </td>
                 </tr>
                 <tr>

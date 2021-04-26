@@ -41,14 +41,28 @@ import attraversaUmbra from '../../suoni/attraversa_guanto.mp3'
 import srotolaCarta from '../../suoni/flip_card.mp3'
 import Chirottero from '../chirotteri/Chirottero'
 
+import {io} from 'socket.io-client';
+
+
 
 
 
 class Gamepage extends Component {
-
     navigazione = (location) => {
-
+        const ENDPOINT = 'http://localhost:5000'
+        const personaggio = JSON.parse(sessionStorage.getItem('pgAttivo'));
+        const ultimaLocation = JSON.parse(sessionStorage.getItem('ultimaLocation'));
+        let socket;
+        socket = io(ENDPOINT)
+        
         if (location !== null) {
+            socket.emit('uscitaLocation', ( {personaggio,ultimaLocation} ), () => {
+                socket.off('uscitaLocation');
+            })
+
+            socket.emit('entrataNuovaLocation', ({personaggio, location, ultimaLocation}), () => {
+                socket.off('uscitaLocation');
+            })
             this.props.naviga(location)
         } else {
             withReactContent(Swal).fire({
@@ -197,7 +211,7 @@ class Gamepage extends Component {
                             </div>
                             :
                             <SuonoDirezione suono={passi}
-                                funzione={{ onend: () => this.navigazione(JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.idLocationNord) }}
+                                funzione={{ onend: () =>  this.navigazione(JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.idLocationNord) }}
                                 title={(JSON.parse(sessionStorage.getItem('ultimaLocation')).tipo.includes("Stanza") ? "Torna" : "Vai") + " a " + JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.nomeLocationNord}
                                 className="icona-freccia-alta"
                                 src={frecciaSU}
