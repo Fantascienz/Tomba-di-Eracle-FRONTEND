@@ -12,7 +12,7 @@ const RiempimentoRoom = () => {
     var subLoc = [];
 
     const [locations, setLocations] = useState([])
-    const [locationSelezionata, setLocationSelezionata] = useState(0)
+    const [locationSelezionata, setLocationSelezionata] = useState("1")
 
     const getLocationCella = () => {
         for (let i = 0; i < locations.length; i++) {
@@ -29,7 +29,7 @@ const RiempimentoRoom = () => {
         return (
             <>
                 {subLoc.map(loc =>
-                    <option value={loc} key={loc}>{loc}</option>
+                    <option value={loc} key={loc}>Location {loc}</option>
                 )}
             </>
         )
@@ -44,9 +44,6 @@ const RiempimentoRoom = () => {
                 if (nuoveLocations[i].idSuperLocation === location.idSuperLocation) {
                     console.log('VECCHIA',nuoveLocations[i])
                     modificaLocation(nuoveLocations[i],location)
-                    // nuoveLocations[i] = location
-                   
-                    //aggiorna location[i] con i campi di location !== ''
                     modificata = true;
                     break;
                 }
@@ -83,6 +80,15 @@ const RiempimentoRoom = () => {
             vecchiaLoc.location.chiave = nuovaLoc.location.chiave
             //inserire controllo per la spunta 
         }
+        if(nuovaLoc.chiaveUmbra) {
+            if (nuovaLoc.location.chiave !== '') {
+            vecchiaLoc.locationUmbra.chiave = nuovaLoc.location.chiave
+            } else {
+                vecchiaLoc.locationUmbra.chiave = vecchiaLoc.location.chiave
+            }
+        } else {
+            vecchiaLoc.locationUmbra.chiave = null
+        }
         if (nuovaLoc.locationUmbra.urlImgGiorno !== '') {
             vecchiaLoc.locationUmbra.urlImgGiorno = nuovaLoc.locationUmbra.urlImgGiorno
         }
@@ -102,7 +108,6 @@ const RiempimentoRoom = () => {
                     <TitoloPagina titolo="Riempimento Room" />
                     <h1>{locations.length}</h1>
                     <select className="form-select" onChange={(e) => setLocationSelezionata(e.target.value)} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)", width: '50%', alignSelf: 'center' }}>
-                        <option value={0}>Seleziona location</option>
                         {renderSelect()}
                     </select>
                 </div>

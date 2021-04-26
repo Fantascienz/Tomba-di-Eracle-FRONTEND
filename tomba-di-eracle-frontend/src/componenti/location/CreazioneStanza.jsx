@@ -35,7 +35,6 @@ const CreazioneStanza = (props) => {
         urlImgGiornoUmbra: urlImgGiornoUmbra,
         urlImgNotteUmbra: urlImgNotteUmbra,
         urlAudioUmbra: urlAudioUmbra,
-
     }
 
     const aggiungiLocation = () => {
@@ -64,7 +63,8 @@ const CreazioneStanza = (props) => {
                 urlMinimappa: props.immagineMinimappaUmbra,
                 chiave: chiaveUmbra ? chiave : null
             },
-            direzioniUmbra: superLoc <= 288 ? generaDirezioni(id + 144, true) : generaDirezioni(id + 48, true)
+            direzioniUmbra: superLoc <= 288 ? generaDirezioni(id + 144, true) : generaDirezioni(id + 48, true),
+            chiaveUmbra: chiaveUmbra,
         }
         setAggiunta(true)
         props.aggiungiLocation(sublocation)
@@ -110,7 +110,6 @@ const CreazioneStanza = (props) => {
             {console.log(props.locationCella)}
             <div className="row">
                 <div className="col-md-6 centrato">
-                    <h1>id selezionata {props.id}</h1>
                     <div style={{ width: "75%" }}>
                         <CreazioneLocationForm changeHandler={changeHandler} stanza={true} anteprimaGiorno={urlImgGiorno} anteprimaNotte={urlImgNotte}
                             anteprimaGiornoUmbra={urlImgGiornoUmbra} anteprimaNotteUmbra={urlImgNotteUmbra} chiaveUmbra={chiaveUmbra}
