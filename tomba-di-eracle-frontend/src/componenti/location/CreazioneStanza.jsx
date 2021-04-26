@@ -1,5 +1,4 @@
 import React, { Component, useState } from 'react';
-import RoomService from '../../servizi/RoomService';
 import CreazioneLocationForm from '../forms/CreazioneLocationForm';
 import MinimappaRegolabile from './MinimappaReagolabile';
 import { coefficienteId, setDirezioniX1, setDirezioniX2, setDirezioniX3 } from './room/impostazioniDirezioni';
@@ -57,12 +56,13 @@ const CreazioneStanza = (props) => {
                 urlImgNotte: urlImgNotte,
                 urlAudio: urlAudio,
                 urlMinimappa: props.immagineMinimappaReame,
-                meteoGiorno: superLocation.meteoGiorno.id,
-                meteoNotte: superLocation.meteoNotte.id,
+                meteoGiorno: superLocation.meteoGiorno,
+                meteoNotte: superLocation.meteoNotte,
                 chiave: chiave,
                 creatore: JSON.parse(sessionStorage.getItem('utente'))
             },
             idSuperLocation: props.id,
+            superLocation: superLocation,
             direzioni: generaDirezioni(id, false),
             locationUmbra: {
                 id: superLoc <= 288 ? id + 144 : id + 48,
@@ -81,11 +81,8 @@ const CreazioneStanza = (props) => {
             direzioniUmbra: superLoc <= 288 ? generaDirezioni(id + 144, true) : generaDirezioni(id + 48, true),
             chiaveUmbra: chiaveUmbra,
         }
-        // if (RoomService.validaStanzaRoom(sublocation)) {
-            setAggiunta(true)
-            props.aggiungiLocation(sublocation)
-            resetState()
-        // }
+        props.aggiungiLocation(sublocation)
+        resetState()
 
     }
 

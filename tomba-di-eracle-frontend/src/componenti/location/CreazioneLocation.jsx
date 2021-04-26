@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import LocationService from '../../servizi/LocationService';
-import CreazioneLocationForm from '../forms/CreazioneLocationForm';
 import Header from '../layout/Header';
 import { TitoloPagina } from '../layout/TitoloPagina';
 import Macromappa from './Macromappa';

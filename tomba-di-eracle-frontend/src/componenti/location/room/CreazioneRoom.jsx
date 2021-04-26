@@ -20,7 +20,7 @@ const CreazioneRoom = () => {
         let superLoc = [];
         for (let i = 288; i <= 335; i++) {
             if (JSON.parse(sessionStorage.getItem('allLocations'))[i].nome !== '/') {
-                if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' || JSON.parse(sessionStorage.getItem('utente')).id === JSON.parse(sessionStorage.getItem('allLocations'))[i].id) {
+                if ((JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' || JSON.parse(sessionStorage.getItem('utente')).id === JSON.parse(sessionStorage.getItem('allLocations'))[i].id) && !JSON.parse(sessionStorage.getItem('allLocations'))[i].room ) {
                     superLoc.push(JSON.parse(sessionStorage.getItem('allLocations'))[i])
                 }
             }
