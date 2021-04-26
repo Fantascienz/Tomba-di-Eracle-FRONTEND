@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Header from '../layout/Header';
 import ChatAdmin from './ChatAdmin';
+import "./MessaggiTraUtentiAdmin.css"
+
 
 class MessaggiAdmin extends Component {
     render() {
@@ -8,7 +10,7 @@ class MessaggiAdmin extends Component {
             <React.Fragment>
                 <Header />
                 <div className="corpoComponente centrato">
-                    <div className="centrato" style={{height:"100%", width:"50%"}}>
+                    <div className="centrato messaggi-utente">
                         <ChatAdmin />
                     </div>
                 </div>
