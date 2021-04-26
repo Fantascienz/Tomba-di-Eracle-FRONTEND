@@ -20,6 +20,18 @@ const CreazioneStanza = (props) => {
 
     const changeHandler = [setNome, setAmbiente, setUrlImgGiorno, setUrlImgNotte, setUrlAudio, setChiave, setUrlImgGiornoUmbra, setUrlImgNotteUmbra, setUrlAudioUmbra, setChiaveUmbra]
 
+    var allLocations = JSON.parse(sessionStorage.getItem('allLocations'));
+
+    const getSuperLocation = () => {
+        for (let i = 0; i < allLocations.length; i++) {
+            if (allLocations[i].id == props.superLoc) {
+                return allLocations[i]
+            }
+        }
+    }
+
+    var superLocation = getSuperLocation()
+
     const formState = {
         nome: nome,
         ambiente: ambiente,
@@ -33,39 +45,47 @@ const CreazioneStanza = (props) => {
     }
 
     const aggiungiLocation = () => {
-        let superLoc = parseInt(props.superLoc, 10);
+        let superLoc = superLocation.id;
         let id = props.id * coefficienteId(props.cellePerRiga) + superLoc
         let sublocation = {
             location: {
                 id: id,
+                tipo: 'Reame',
                 nome: nome,
                 ambiente: ambiente,
                 urlImgGiorno: urlImgGiorno,
                 urlImgNotte: urlImgNotte,
                 urlAudio: urlAudio,
                 urlMinimappa: props.immagineMinimappaReame,
+                meteoGiorno: superLocation.meteoGiorno.id,
+                meteoNotte: superLocation.meteoNotte.id,
                 chiave: chiave,
+                creatore: JSON.parse(sessionStorage.getItem('utente'))
             },
             idSuperLocation: props.id,
             direzioni: generaDirezioni(id, false),
             locationUmbra: {
                 id: superLoc <= 288 ? id + 144 : id + 48,
                 nome: nome,
+                tipo: 'Umbra',
                 ambiente: ambiente,
                 urlImgGiorno: urlImgGiornoUmbra,
                 urlImgNotte: urlImgNotteUmbra,
                 urlAudio: urlAudioUmbra,
                 urlMinimappa: props.immagineMinimappaUmbra,
-                chiave: chiaveUmbra ? chiave : null
+                meteoGiorno: superLocation.meteoGiorno.id,
+                meteoNotte: superLocation.meteoNotte.id,
+                chiave: chiaveUmbra ? chiave : null,
+                creatore: JSON.parse(sessionStorage.getItem('utente'))
             },
             direzioniUmbra: superLoc <= 288 ? generaDirezioni(id + 144, true) : generaDirezioni(id + 48, true),
             chiaveUmbra: chiaveUmbra,
         }
-        if (RoomService.validaStanzaRoom(sublocation)) {
+        // if (RoomService.validaStanzaRoom(sublocation)) {
             setAggiunta(true)
             props.aggiungiLocation(sublocation)
             resetState()
-        }
+        // }
 
     }
 
@@ -111,7 +131,7 @@ const CreazioneStanza = (props) => {
                         <CreazioneLocationForm changeHandler={changeHandler} stanza={true} anteprimaGiorno={urlImgGiorno} anteprimaNotte={urlImgNotte}
                             anteprimaGiornoUmbra={urlImgGiornoUmbra} anteprimaNotteUmbra={urlImgNotteUmbra} chiaveUmbra={chiaveUmbra}
                             idLocation={props.id} formState={formState} formPlaceholders={props.locationCella} />
-                        <button className="btn btn-dark" onClick={() => aggiungiLocation()}>{aggiunta ? 'Modifica' : 'Aggiungi'}</button>
+                        <button className="btn btn-dark" onClick={() => aggiungiLocation()}>Aggiungi</button>
                     </div>
                 </div>
                 <div className="col-md-6 centrato" >

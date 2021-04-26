@@ -1,9 +1,14 @@
+import axios from "axios";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content"
-import RiempimentoRoom from "../componenti/location/room/RiempimentoRoom";
 
+const URL = "http://localhost:8080/locations/rooms/"
 
 class RoomService {
+
+    inserimentoRoom = (rooms) => {
+        return axios.post(URL,rooms)
+    }
 
     validaCreazionRoom = (room) => {
         if (room.superLocation == 0 || room.colonne == 0 || room.mappaReame === '' || room.mappaUmbra == '') {
