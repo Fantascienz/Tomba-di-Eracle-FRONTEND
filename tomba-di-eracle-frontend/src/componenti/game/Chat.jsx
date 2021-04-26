@@ -8,6 +8,7 @@ let socket;
 export const ChatRoom = () => {
     const dummy = useRef();
     const personaggio = JSON.parse(sessionStorage.getItem('pgAttivo'));
+    const [personaggi, setPersonaggi] = useState([]);
     const location = JSON.parse(sessionStorage.getItem('ultimaLocation'));
     const ENDPOINT = 'http://localhost:5000';
     const [messaggi, setMessages] = useState([]);
@@ -33,6 +34,12 @@ export const ChatRoom = () => {
             setMessages([...messaggi, messaggio]);
             socket.off('message');
         })
+        socket.on('locationData', ({personaggi}) => {
+            setPersonaggi(personaggi);
+            
+        })
+
+        alert(JSON.stringify(personaggi))
 
     }, [messaggi]);
 
@@ -41,6 +48,7 @@ export const ChatRoom = () => {
         e.preventDefault();
 
         socket.emit('sendMessage', { formValue, personaggio, location }, () => setFormValue(''));
+        
         dummy.current.scrollIntoView({ behavior: 'smooth' });
 
     }

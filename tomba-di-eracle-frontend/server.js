@@ -2,7 +2,7 @@ const express = require('express');
 const socketio = require("socket.io");
 const http = require('http');
 
-const { addUser, removeUser, getUser, getUsersInRoom } = require('./src/server/users');
+const { addUser, removeUser, getUser, getUsersInRoom, getUsersInlocation } = require('./src/server/users');
 
 const PORT = process.env.PORT || 5000;
 
@@ -37,17 +37,24 @@ db.on('error', _ => {
 
 
 io.on('connect', (socket) => {
-  socket.on('join', ({ personaggio, location }, callback) => {
+  socket.on('join', ({ personaggio, location}, callback) => {
+    const {user} = addUser({id: socket.id, personaggio, location});
+    const  personaggi = getUsersInlocation(user.location)
+    socket.emit('locationData', { location: user.location, personaggi});
+    console.log(personaggi)
     Msg.find().then(result => {
+     
       socket.emit('output-messages', result)
       socket.emit('message', { nomePersonaggio: 'admin', testo: `${personaggio.nominativo}, entra in ${location.nome}`, idLocation: location.id });
       socket.broadcast.emit('message', { nomePersonaggio: 'admin', testo: `${personaggio.nominativo}, entra in ${location.nome} !`, idLocation: location.id });
     })
+    
     socket.join(location);
     callback();
   });
 
   socket.on('sendMessage', ({ formValue, personaggio, location }, callback) => {
+    
     const messaggioInviato = new Msg(
       {
         testo: formValue,
@@ -58,18 +65,21 @@ io.on('connect', (socket) => {
         immagine: personaggio.urlImmagine
       });
     messaggioInviato.save().then(() => {
-
+     
       io.emit('message', {
         testo: formValue,
         nomePersonaggio: personaggio.nominativo,
         idLocation: location.id,
         immagine: personaggio.urlImmagine
       });
+      
     })
     callback();
   })
 
+  
   socket.on('uscitaLocation', ({ personaggio, ultimaLocation }) => {
+    
     socket.broadcast.emit('message', { nomePersonaggio: 'admin', testo: `${personaggio.nominativo} si sposta da ${ultimaLocation.nome}`, idLocation: ultimaLocation.id })
   })
 
