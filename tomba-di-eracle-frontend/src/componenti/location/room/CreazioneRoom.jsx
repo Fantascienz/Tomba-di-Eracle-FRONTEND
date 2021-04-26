@@ -15,12 +15,13 @@ const CreazioneRoom = () => {
     const [mappaUmbra, setMappaUmbra] = useState('')
 
     const history = useHistory();
+    const allLocations = JSON.parse(sessionStorage.getItem('allLocations'));
 
     const getListaSuperLoc = () => {
         let superLoc = [];
-        for (let i = 288; i <= 335; i++) {
-            if (JSON.parse(sessionStorage.getItem('allLocations'))[i].nome !== '/') {
-                if ((JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' || JSON.parse(sessionStorage.getItem('utente')).id === JSON.parse(sessionStorage.getItem('allLocations'))[i].id) && !JSON.parse(sessionStorage.getItem('allLocations'))[i].room ) {
+        for (let i = 0; i < allLocations.length; i++) {
+            if (allLocations[i].nome !== '/') {
+                if ((JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' || JSON.parse(sessionStorage.getItem('utente')).id === allLocations[i].id) && !allLocations[i].room && allLocations[i].tipo === 'Reame' ) {
                     superLoc.push(JSON.parse(sessionStorage.getItem('allLocations'))[i])
                 }
             }
