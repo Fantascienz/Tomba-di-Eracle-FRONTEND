@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { eliminaConversazione, getAllConversazioni, getConversazione, getConversazioneUtente, inviaMessaggio } from '../../store/azioni/messaggiActions';
 import Header from '../layout/Header';
 import ChatAdmin from '../messaggi/ChatAdmin'
+import "./MessaggiTraUtentiAdmin.css"
+
 
 class MessaggiUtenti extends Component {
 
@@ -13,8 +15,8 @@ class MessaggiUtenti extends Component {
     renderVisualizzaConversazione = (utente) => {
         return (
             <>
-                <button className="btn btn-secondary" onClick={() => this.props.getConversazioneUtente(utente)} style={{ width: '49%' }}>{utente.nominativo}</button>
-                <button className="btn btn-danger" onClick={() => this.props.eliminaConversazione(utente)} style={{ marginLeft: '2%', width: '49%' }}>Elimina Conversazione</button>
+                <button className="btn btn-secondary btn-messaggi" onClick={() => this.props.getConversazioneUtente(utente)} style={{ width: '49%' }}>{utente.nominativo}</button>
+                <button className="btn btn-danger btn-messaggi" onClick={() => this.props.eliminaConversazione(utente)} style={{ marginLeft: '2%', width: '49%' }}>Elimina</button>
                 <hr />
             </>
         )
@@ -26,6 +28,7 @@ class MessaggiUtenti extends Component {
 
     render() {
         let listaOrdinata = []
+
         if (this.props.conversazioni !== '') {
             listaOrdinata = this.props.conversazioni.sort(
                 (a, b) => (a.id > b.id ? -1 : Number(a.id < b.id))
@@ -40,33 +43,41 @@ class MessaggiUtenti extends Component {
         return (
             <React.Fragment>
                 <Header />
-                <div className="corpoComponente" style={{ width: "100%", height: "100%" }}>
-                    <div className="row" style={{ width: "100%", height: "100%", marginTop: '1%', marginLeft: '1%' }}>
-                        <div className="col-md-3">
-                            <h1 className="font-lombardia-yellow bg-dark rounded">Conversazioni Attive: {this.props.conversazioni.length}</h1>
-                            <div style={{ overflowY: this.props.conversazioni.length == 0 ? '' : 'scroll', height: '70%' }}>
-                                {this.props.conversazioni.length == 0 ? <p className="font-lombardia-yellow bg-dark rounded" style={{ fontSize: '2em' }}>Non ci sono conversazioni attive</p> :
+                <div className="corpoComponente">
+
+                    <div className="row messaggi-row">
+
+                        <div className="prima-colonna">
+                            <h1 className="font-lombardia-yellow bg-dark rounded messaggi-row" >Conversazioni Attive: {this.props.conversazioni.length}</h1>
+                            <div style={{ overflowY: 'auto', height: '85%' }}>
+                                {this.props.conversazioni.length == 0 ?
+                                    <h1 className="font-lombardia-yellow bg-dark rounded messaggi-row" >Non ci sono conversazioni attive</h1>
+                                    :
                                     listaOrdinata.map(utente =>
                                         this.renderVisualizzaConversazione(utente)
                                     )
                                 }
                             </div>
                         </div>
-                        <div className="col-md-2">
-                            <h1 className="font-lombardia-yellow bg-dark rounded">Scrivi a ...</h1>
-                            <div style={{ overflowY: 'auto', height: '70%' }}>
+
+                        <div className="seconda-colonna" >
+                            <h1 className="font-lombardia-yellow bg-dark rounded messaggi-row">Scrivi a ...</h1>
+                            <div style={{ overflowY: 'auto', height: '85%' }}>
                                 {
                                     listaUtenti.map(utente =>
-                                        JSON.parse(sessionStorage.getItem('utente')).id === utente.id ? '' :
+                                        JSON.parse(sessionStorage.getItem('utente')).id === utente.id ?
+                                            ''
+                                            :
                                             <>
-                                                <button className="btn btn-secondary" style={{ width: "100%" }} onClick={() => this.props.getConversazioneUtente(utente)}>{this.renderTastoUtente(utente)}</button>
+                                                <button className="btn btn-secondary btn-messaggi" onClick={() => this.props.getConversazioneUtente(utente)}>{this.renderTastoUtente(utente)}</button>
                                                 <hr />
                                             </>
                                     )
                                 }
                             </div>
                         </div>
-                        <div className="col-md-6" style={{ width: "50%", height: "85%" }}>
+
+                        <div className="messaggi-chat-scrittura terza-colonna">
                             <ChatAdmin utente={this.props.utente} />
                         </div>
                     </div>
