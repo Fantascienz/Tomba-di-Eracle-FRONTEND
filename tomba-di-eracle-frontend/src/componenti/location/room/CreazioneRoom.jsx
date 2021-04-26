@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useHistory } from "react-router";
+import RoomService from "../../../servizi/RoomService";
 import Footer from "../../layout/Footer"
 import Header from "../../layout/Header";
 import { TitoloPagina } from "../../layout/TitoloPagina";
@@ -34,8 +35,10 @@ const CreazioneRoom = () => {
             mappaReame: mappaReame,
             mappaUmbra: mappaUmbra
         }
-        sessionStorage.setItem('roomTemplate', JSON.stringify(room));
-        history.push('/riempimentoRoom')
+        if (RoomService.validaCreazionRoom(room)) {
+            sessionStorage.setItem('roomTemplate', JSON.stringify(room));
+            history.push('/riempimentoRoom')
+        }
     }
 
     return (
@@ -64,9 +67,9 @@ const CreazioneRoom = () => {
                         <button className="btn btn-dark" onClick={() => toImpostaRoom()}>Crea Room</button>
                     </div>
                     <div className="col-md-6">
-                    <MinimappaRegolabile pxDimensioniMappa="400" immagineMinimappa={mappaReame} cellePerRiga={colonne} lenteDisplay="none" />
-                    <br/>
-                    <MinimappaRegolabile pxDimensioniMappa="400" immagineMinimappa={mappaUmbra} cellePerRiga={colonne} lenteDisplay="none" />
+                        <MinimappaRegolabile pxDimensioniMappa="400" immagineMinimappa={mappaReame} cellePerRiga={colonne} lenteDisplay="none" />
+                        <br />
+                        <MinimappaRegolabile pxDimensioniMappa="400" immagineMinimappa={mappaUmbra} cellePerRiga={colonne} lenteDisplay="none" />
                     </div>
                 </div>
 

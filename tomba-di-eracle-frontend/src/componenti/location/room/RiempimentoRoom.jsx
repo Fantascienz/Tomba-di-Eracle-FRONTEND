@@ -104,7 +104,7 @@ const RiempimentoRoom = () => {
             <div className="corpoComponente">
                 <div className="row no-gutters">
                     <TitoloPagina titolo="Riempimento Room" />
-                    {locationAggiunte === Math.pow(template.colonne, 2) ? <button>Invia room</button> : null}
+                    {locationAggiunte === Math.pow(template.colonne, 2) ? <button className="btn btn-danger" onClick={() => console.log(locations)}>Invia room</button> : null}
                     <select className="form-select" onChange={(e) => setLocationSelezionata(e.target.value)} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)", width: '50%', alignSelf: 'center' }}>
                         {renderSelect()}
                     </select>

@@ -1,8 +1,20 @@
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content"
+import RiempimentoRoom from "../componenti/location/room/RiempimentoRoom";
 
 
 class RoomService {
+
+    validaCreazionRoom = (room) => {
+        if (room.superLocation == 0 || room.colonne == 0 || room.mappaReame === '' || room.mappaUmbra == '') {
+            withReactContent(Swal).fire({
+                title: <p>Tutti i campi sono obbligatori!</p>
+            })
+            return false;
+        }
+        return true;
+    }
+
     validaStanzaRoom = (stanza) => {
         if (stanza.location.nome === '' || stanza.location.urlImgGiorno === '' || stanza.location.urlImgNotte === '' ||
             stanza.location.ambiente == '' || stanza.locationUmbra.urlImgGiorno === '' || stanza.locationUmbra.urlImgNotte === '') {
