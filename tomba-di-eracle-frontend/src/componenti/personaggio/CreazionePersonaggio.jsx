@@ -63,6 +63,7 @@ class CreazionePersonaggio extends Component {
                 }
                 this.props.creaPersonaggio(umano)
             } else {
+                alert(this.state.rango)
                 withReactContent(Swal).fire({
                     title: <p>Tutti i campi sono obbligatori!</p>
                 })
@@ -134,17 +135,13 @@ class CreazionePersonaggio extends Component {
     isNormaleRazza = () => {
         if (this.state.tipo === 'normale') {
 
-
             return (
-                <React.Fragment>
+                <>
                     <div className="input-group">
                         <span className="input-group-text" style={{ width: "30%" }}>Razza</span>
-                        <select className="form-select" id="razza" value={this.state.razza} onChange={this.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)" }}>
-                            <option defaultValue="" >Razza</option>
-                            <option value="Umano">Umano</option>
-                        </select>
+                        <input className="form-control" type="text" id="nominativo" value={this.state.razza = "Umano"} readOnly />
                     </div>
-                </React.Fragment>
+                </>
             )
         }
     }
@@ -152,7 +149,7 @@ class CreazionePersonaggio extends Component {
     isGarouRazza = () => {
         if (this.state.tipo === 'garou') {
             return (
-                <React.Fragment>
+                <>
                     <div className="input-group">
                         <span className="input-group-text" style={{ width: "30%" }}>Razza</span>
                         <select className="form-select" id="razza" value={this.state.razza} onChange={this.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)" }}>
@@ -163,7 +160,7 @@ class CreazionePersonaggio extends Component {
                         </select>
                     </div>
 
-                </React.Fragment>
+                </>
             )
         }
     }
@@ -171,12 +168,12 @@ class CreazionePersonaggio extends Component {
     isPngRazza = () => {
         if (this.state.tipo === 'png') {
             return (
-                <React.Fragment>
+                <>
                     <div className="input-group">
                         <span className="input-group-text" style={{ width: "30%" }}>Razza</span>
                         <input className="form-control" id="razza" value={this.state.razza} onChange={this.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)" }} />
                     </div>
-                </React.Fragment>
+                </>
             )
         }
 
@@ -186,7 +183,7 @@ class CreazionePersonaggio extends Component {
     isGarouAuspicio = () => {
         if (this.state.tipo === 'garou') {
             return (
-                <React.Fragment>
+                <>
                     <div className="input-group">
                         <span className="input-group-text" style={{ width: "30%" }}>Auspicio</span>
                         <select className="form-select" id="auspicio" value={this.state.auspicio} onChange={this.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)" }}>
@@ -198,7 +195,7 @@ class CreazionePersonaggio extends Component {
                             <option value="Ragabash">Ragabash</option>
                         </select>
                     </div>
-                </React.Fragment>
+                </>
             )
         }
     }
@@ -206,7 +203,7 @@ class CreazionePersonaggio extends Component {
     isGarouTribu = () => {
         if (this.state.tipo === 'garou') {
             return (
-                <React.Fragment>
+                <>
                     <div className="input-group">
                         <span className="input-group-text" style={{ width: "30%" }}>Tribù</span>
                         <select className="form-select" id="tribu" value={this.state.tribu} onChange={this.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)" }}>
@@ -214,7 +211,7 @@ class CreazionePersonaggio extends Component {
                             <option value="Senza tribu">Senza tribù</option>
                         </select>
                     </div>
-                </React.Fragment>
+                </>
             )
         }
     }
@@ -222,9 +219,9 @@ class CreazionePersonaggio extends Component {
     isGarouRango = () => {
         if (this.state.tipo === 'garou') {
             return (
-                <React.Fragment>
+                <>
                     <option value="Cucciolo">0</option>
-                </React.Fragment>
+                </>
             )
         }
     }
@@ -232,7 +229,7 @@ class CreazionePersonaggio extends Component {
     isPngRango = () => {
         if (this.state.tipo === 'png') {
             return (
-                <React.Fragment>
+                <>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -243,7 +240,7 @@ class CreazionePersonaggio extends Component {
                     <option value="8">8</option>
                     <option value="9">9</option>
                     <option value="10">10</option>
-                </React.Fragment>
+                </>
             )
         }
     }
@@ -251,12 +248,12 @@ class CreazionePersonaggio extends Component {
     isGarouBranco = () => {
         if (this.state.tipo === 'garou' && (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' || JSON.parse(sessionStorage.getItem('utente')).tipo === 'master')) {
             return (
-                <React.Fragment>
+                <>
                     <div className="input-group">
                         <span className="input-group-text" style={{ width: "30%" }}>Branco</span>
                         <input className="form-control" type="text" id="brancoInput" onChange={this.handleChange} value={this.state.brancoInput} />
                     </div>
-                </React.Fragment>
+                </>
             )
 
         }
@@ -266,12 +263,12 @@ class CreazionePersonaggio extends Component {
     isGarouRuolo = () => {
         if (this.state.tipo === 'garou' && (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' || JSON.parse(sessionStorage.getItem('utente')).tipo === 'master')) {
             return (
-                <React.Fragment>
+                <>
                     <div className="input-group">
                         <span className="input-group-text" style={{ width: "30%" }}>Ruolo nel Branco</span>
                         <input className="form-control" type="text" id="ruolo" onChange={this.handleChange} value={this.state.ruolo} />
                     </div>
-                </React.Fragment>
+                </>
             )
 
         }
@@ -280,12 +277,12 @@ class CreazionePersonaggio extends Component {
     isGarouSept = () => {
         if (this.state.tipo === 'garou' && (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' || JSON.parse(sessionStorage.getItem('utente')).tipo === 'master')) {
             return (
-                <React.Fragment>
+                <>
                     <div className="input-group">
                         <span className="input-group-text" style={{ width: "30%" }}>Sept</span>
                         <input className="form-control" type="text" id="septInput" onChange={this.handleChange} value={this.state.septInput} />
                     </div>
-                </React.Fragment>
+                </>
             )
         }
     }
@@ -293,12 +290,12 @@ class CreazionePersonaggio extends Component {
     isGarouRuoloSept = () => {
         if (this.state.tipo === 'garou' && (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' || JSON.parse(sessionStorage.getItem('utente')).tipo === 'master')) {
             return (
-                <React.Fragment>
+                <>
                     <div className="input-group">
                         <span className="input-group-text" style={{ width: "30%" }}>Ruolo nella Sept</span>
                         <input className="form-control" type="text" id="ruoloSept" onChange={this.handleChange} value={this.state.ruoloSept} />
                     </div>
-                </React.Fragment>
+                </>
             )
         }
     }
@@ -306,12 +303,12 @@ class CreazionePersonaggio extends Component {
     isGarouUrlLupo = () => {
         if (this.state.tipo === 'garou') {
             return (
-                <React.Fragment>
+                <>
                     <div className="input-group">
-                        <span className="input-group-text" style={{ width: "30%" }}>Url Immagine Lupus</span>
+                        <span className="input-group-text" style={{ width: "30%" }}>Url Img. Lupus</span>
                         <input className="form-control" type="text" id="urlLupo" onChange={this.handleChange} value={this.state.urlLupo} />
                     </div>
-                </React.Fragment>
+                </>
             )
         }
     }
@@ -320,12 +317,12 @@ class CreazionePersonaggio extends Component {
     isGarouUrlCrinos = () => {
         if (this.state.tipo === 'garou') {
             return (
-                <React.Fragment>
+                <>
                     <div className="input-group">
-                        <span className="input-group-text" style={{ width: "30%" }}>Url Immagine Crinos</span>
+                        <span className="input-group-text" style={{ width: "30%" }}>Url Img. Crinos</span>
                         <input className="form-control" type="text" id="urlCrinos" onChange={this.handleChange} value={this.state.urlCrinos} />
                     </div>
-                </React.Fragment>
+                </>
             )
         }
     }
@@ -333,7 +330,7 @@ class CreazionePersonaggio extends Component {
     isPngUmbra = () => {
         if (this.state.tipo === 'png') {
             return (
-                <React.Fragment>
+                <>
                     <div className="input-group">
                         <span className="input-group-text" style={{ width: "30%" }}>Può attraversare il Guanto?</span>
                         <select className="form-select" id="umbra" value={this.state.umbra} onChange={this.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)" }}>
@@ -342,7 +339,7 @@ class CreazionePersonaggio extends Component {
                             <option value={false}>No</option>
                         </select>
                     </div>
-                </React.Fragment>
+                </>
             )
         }
     }
@@ -350,7 +347,7 @@ class CreazionePersonaggio extends Component {
     isPngCrinos = () => {
         if (this.state.tipo === 'png') {
             return (
-                <React.Fragment>
+                <>
                     <div className="input-group">
                         <span className="input-group-text" style={{ width: "30%" }}>Può inviare un Chirottero?</span>
                         <select className="form-select" id="crinos" value={this.state.crinos} onChange={this.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)" }}>
@@ -359,146 +356,131 @@ class CreazionePersonaggio extends Component {
                             <option value={false}>No</option>
                         </select>
                     </div>
-                </React.Fragment>
+                </>
             )
         }
     }
 
     showImmaginePG() {
         return (
-            <React.Fragment>
+            <>
                 {this.state.urlImmagine === '' ?
-                    <div style={{
-                        backgroundColor: "grey", width: "150px", height: "150px", borderRadius: "100px",
-                        display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center"
-                    }}>
+                    <div className="centrato anteprima-pg-nonAttiva">
                         <p>Immagine Personaggio</p>
                     </div>
                     :
-                    <div style={{
-                        backgroundColor: "trasparent", width: "150px", height: "150px", borderRadius: "100px",
-                        backgroundImage: `url('${this.state.urlImmagine}')`, backgroundSize: "auto 100%", backgroundRepeat: "no-repeat", backgroundPosition: "center center"
-                    }}>
-                    </div>
+                    <div className="centrato anteprima-pg-attiva" style={{ backgroundImage: `url('${this.state.urlImmagine}')` }}> </div>
                 }
-            </React.Fragment>
+            </>
         )
     }
 
-    showImmaginiLive() {
+    showImmagineCrinos() {
         return (
-            <React.Fragment>
-                <br />
-
+            <>
                 {this.state.urlCrinos === '' ?
-                    <div style={{
-                        backgroundColor: "grey", width: "150px", height: "150px", borderRadius: "100px",
-                        display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center"
-                    }}>
+                    <div className="centrato anteprima-pg-nonAttiva" >
                         <p>Immagine Crinos</p>
                     </div>
                     :
-                    <div style={{
-                        backgroundColor: "trasparent", width: "150px", height: "150px", borderRadius: "100px",
-                        backgroundImage: `url('${this.state.urlCrinos}')`, backgroundSize: "auto 100%", backgroundRepeat: "no-repeat", backgroundPosition: "center center"
-                    }}>
-                    </div>
+                    <div className="centrato anteprima-pg-attiva" style={{ backgroundImage: `url('${this.state.urlCrinos}')` }}> </div>
                 }
+            </>
+        )
+    }
 
-                <br />
-
+    showImmagineLupus() {
+        return (
+            <>
                 {this.state.urlLupo === '' ?
-                    <div style={{
-                        backgroundColor: "grey", width: "150px", height: "150px", borderRadius: "100px",
-                        display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center"
-                    }}>
+                    <div className="centrato anteprima-pg-nonAttiva" >
                         <p>Immagine Lupus</p>
                     </div>
                     :
-                    <div style={{
-                        backgroundColor: "trasparent", width: "150px", height: "150px", borderRadius: "100px",
-                        backgroundImage: `url('${this.state.urlLupo}')`, backgroundSize: "auto 100%", backgroundRepeat: "no-repeat", backgroundPosition: "center center"
-                    }}>
-                    </div>
+                    <div className="centrato anteprima-pg-attiva" style={{ backgroundImage: `url('${this.state.urlLupo}')` }}> </div>
                 }
-
-            </React.Fragment>
+            </>
         )
     }
 
     render() {
         return (
-            <React.Fragment>
+            <>
                 <Header />
                 <div className="corpoComponente">
                     <div style={{ height: "100%", display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
 
-                        <div className="container" style={{ width: "80%" }}>
+                        <div className="container" style={{ overflowY: "auto" }}>
                             <form onSubmit={this.handleSubmit}>
                                 <div className="row">
-                                    <div className="col-lg-10">
-
-                                        <div className="input-group">
-                                            <span className="input-group-text" style={{ width: "30%" }}>Nome completo</span>
-                                            <input className="form-control" type="text" id="nominativo" onChange={this.handleChange} value={this.state.nominativo} />
-                                        </div>
-                                        <div className="input-group">
-                                            <span className="input-group-text" style={{ width: "30%" }}>Sesso</span>
-                                            <select className="form-select" id="sesso" value={this.state.sesso} onChange={this.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)" }}>
-                                                <option defaultValue="">Sesso:</option>
-                                                <option value="M">Uomo</option>
-                                                <option value="F">Donna</option>
-                                            </select>
-                                        </div>
-                                        {this.isNormaleRazza()}
-                                        {this.isGarouRazza()}
-                                        {this.isPngRazza()}
-                                        {this.isGarouAuspicio()}
-                                        {this.isGarouTribu()}
-
-                                        <div className="input-group">
-                                            <span className="input-group-text" style={{ width: "30%" }}>Rango</span>
-                                            <select className="form-select" id="rango" value={this.state.rango} onChange={this.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)" }}>
-                                                <option defaultValue="" >Rango</option>
-
-                                                {this.state.tipo === 'garou' ?
-                                                    <option value="0">Cucciolo</option>
-                                                    :
-                                                    <option value="0">0</option>
-                                                }
-                                                {this.isPngRango()}
-
-                                            </select>
-                                        </div>
-
-                                        {this.isGarouBranco()}
-                                        {this.isGarouRuolo()}
-                                        {this.isGarouSept()}
-                                        {this.isGarouRuoloSept()}
-                                        {this.isPngUmbra()}
-                                        {this.isPngCrinos()}
-
-                                        <div className="input-group">
-                                            <span className="input-group-text" style={{ width: "30%" }}>Url Immagine Personaggio</span>
-                                            <input className="form-control" id="urlImmagine" type="text" value={this.state.urlImmagine} onChange={this.handleChange} />
-                                        </div>
-
-                                        {this.isGarouUrlCrinos()}
-                                        {this.isGarouUrlLupo()}
-
+                                    <div className="input-group">
+                                        <span className="input-group-text">Nome completo</span>
+                                        <input className="form-control" type="text" id="nominativo" onChange={this.handleChange} value={this.state.nominativo} />
                                     </div>
-                                    <div className="col-md-2">
-                                        {this.showImmaginePG()}
+                                    <div className="input-group">
+                                        <span className="input-group-text" style={{ width: "30%" }}>Sesso</span>
+                                        <select className="form-select" id="sesso" value={this.state.sesso} onChange={this.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)" }}>
+                                            <option defaultValue="">Sesso:</option>
+                                            <option value="M">Uomo</option>
+                                            <option value="F">Donna</option>
+                                        </select>
+                                    </div>
+                                    {this.isNormaleRazza()}
+                                    {this.isGarouRazza()}
+                                    {this.isPngRazza()}
+                                    {this.isGarouAuspicio()}
+                                    {this.isGarouTribu()}
 
-                                        {this.state.tipo === 'garou' ? this.showImmaginiLive() : null}
+                                    <div className="input-group">
+                                        <span className="input-group-text" style={{ width: "30%" }}>Rango</span>
+                                        <select className="form-select" id="rango" value={this.state.rango} onChange={this.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)" }}>
+                                            <option value=''> Rango</option>
+                                            {this.state.tipo === 'garou' ?
+                                                <option value="0">Cucciolo</option>
+                                                :
+                                                <option value="0">0</option>
+                                            }
+                                            {this.isPngRango()}
+
+                                        </select>
+                                    </div>
+
+                                    {this.isGarouBranco()}
+                                    {this.isGarouRuolo()}
+                                    {this.isGarouSept()}
+                                    {this.isGarouRuoloSept()}
+                                    {this.isPngUmbra()}
+                                    {this.isPngCrinos()}
+
+                                    <div className="input-group">
+                                        <span className="input-group-text" style={{ width: "30%" }}>Url Immagine</span>
+                                        <input className="form-control" id="urlImmagine" type="text" value={this.state.urlImmagine} onChange={this.handleChange} />
+                                    </div>
+
+                                    {this.isGarouUrlCrinos()}
+                                    {this.isGarouUrlLupo()}
+                                </div>
+
+                                <div className="row no-gutters" align="center" style={{ marginTop: "10px" }}>
+                                    <div className="col-4">
+                                        {this.state.tipo === 'garou' ? this.showImmagineCrinos() : null}
+                                    </div>
+
+                                    <div className="col-4">
+                                        {this.showImmaginePG()}
+                                    </div>
+
+                                    <div className="col-4">
+                                        {this.state.tipo === 'garou' ? this.showImmagineLupus() : null}
                                     </div>
                                 </div>
+
                                 <button className="btn btn-dark" style={{ marginTop: "10px" }}>Crea</button>
                             </form>
                         </div>
                     </div>
                 </div>
-            </React.Fragment>
+            </>
         );
     }
 }

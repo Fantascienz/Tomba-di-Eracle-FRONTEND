@@ -91,12 +91,15 @@ a:hover{
   color:#eeaa44;
   text-shadow: 1px 1px black;
   background-color: #282c34;
-  border: 1px solid black
+  border: 1px solid black;
+  font-size: 1.5vh;
+  width:30%;
 }
 
 .form-control{
   border: 1px solid black;
   background-color: rgba(211, 211, 211, 0.568);
+  font-size: 1.5vh;
 }
 
 .form-control:focus{
@@ -105,6 +108,11 @@ a:hover{
 	border-color: #eeaa44;
 	outline:0;
 	box-shadow:0 0 0 .25rem rgba(238, 170, 68,.25)
+}
+
+
+.form-select{
+  font-size: 1.5vh;
 }
 
 .form-select:focus{
@@ -953,6 +961,26 @@ div.table-reset-tappo{
 }
 
 
+/* CREAZIONE PERSONAGGIO---------------------------------------------------------- */
+.anteprima-pg-nonAttiva{
+  background-color: grey;
+  width: 15vw;
+  height: 15vw;
+  border-radius: 15vw
+}
+
+.anteprima-pg-attiva{
+  background-color: #1e1e24;
+  width: 15vw;
+  height: 15vw;
+  border-radius: 15vw;
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  background-position: center center
+}
+
+
+
 
 /* MEDIA QUERIES------------------------------------------------------------------------------ */
 @media screen and (max-width: 576px) {
@@ -1063,5 +1091,19 @@ div.table-reset-tappo{
   #opzioni-master{
     font-size: 2.3vw
   }
+
+
+/* CREAZIONE PERSONAGGIO - MEDIA QUERIES---------------------------------------------------------- */
+.anteprima-pg-nonAttiva{
+  width: 13vh;
+  height: 13vh;
+  border-radius: 13vh
+}
+
+.anteprima-pg-attiva{
+  width: 13vh;
+  height: 13vh;
+  border-radius: 13vh
+}
 
 }

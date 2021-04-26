@@ -26,7 +26,7 @@ class Header extends Component {
             )
         } else {
             return (
-                <div className="header-links-row row no-gutters" style={{}}>
+                <div className="row no-gutters" style={{height:"30%", position:"absolute", left:"0%", bottom:"0%", width:"103%"}}>
                     <div className="col header-link testo-sinistra">
                         <a href="/"><b>Login</b></a>
                     </div>
