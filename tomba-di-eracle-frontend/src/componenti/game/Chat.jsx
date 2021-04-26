@@ -58,7 +58,7 @@ export const ChatRoom = () => {
 
       <form onSubmit={inviaMessaggio}>
 
-        <textarea className="font-lombardia" name="areaMsg" id="areaMsg" cols="30" rows="5" value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="Scrivi messaggio..."></textarea>
+        <textarea className="font-lombardia" name="areaMsg" id="areaMsg" cols="30" rows="5" value={formValue} onChange={(e) => setFormValue(e.target.value)} placeholder="Scrivi messaggio..." maxLength="5000"></textarea>
 
         <div style={{right: "5%" }} align="center">
           <p style={{ fontSize: "1vh" }}>Caratteri rimanenti: <span>{contaParole(5000)}</span></p>

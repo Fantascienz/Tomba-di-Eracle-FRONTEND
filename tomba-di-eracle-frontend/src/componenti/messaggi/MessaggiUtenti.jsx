@@ -69,8 +69,7 @@ class MessaggiUtenti extends Component {
                                             ''
                                             :
                                             <>
-                                                <button className="btn btn-secondary btn-messaggi" onClick={() => this.props.getConversazioneUtente(utente)}>{this.renderTastoUtente(utente)}</button>
-                                                <hr />
+                                                <button className="btn btn-secondary btn-messaggi" onClick={() => this.props.getConversazioneUtente(utente)} style={{marginBottom:"5px"}}>{this.renderTastoUtente(utente)}</button>
                                             </>
                                     )
                                 }

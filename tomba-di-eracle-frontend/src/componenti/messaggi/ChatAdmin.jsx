@@ -81,7 +81,44 @@ class ChatAdmin extends React.Component {
             }
             return "Scegli destinatario..."
         }
-        return "Destinatario: Admin"
+        return "Chatta con un Admin"
+    }
+
+    abilitaPulsante() {
+        if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin') {
+            if (this.state.testo === '' || this.props.utente == undefined) {
+                return true
+            }
+            return false
+        } else {
+            if (this.state.testo === '') {
+                return true
+            }
+            return false
+        }
+    }
+
+    titlePulsante() {
+        if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin') {
+            if (this.state.testo === '' && this.props.utente == undefined) {
+                return "Scegli un destinatario e scrivi un messaggio"
+            } else if (this.state.testo === '' && this.props.utente != undefined) {
+                return "Scrivi un messaggio"
+            } else if (this.state.testo !== '' && this.props.utente == undefined) {
+                return "Scegli un destinatario"
+            }
+            return "Invia il messaggio"
+        } else {
+            if (this.state.testo === '') {
+                return "Scrivi un messaggio"
+            }
+            return "Invia il messaggio"
+        }
+    }
+
+    contaParole(maxParole) {
+        var c = this.state.testo.length;
+        return maxParole - c;
     }
 
     render() {
@@ -104,12 +141,18 @@ class ChatAdmin extends React.Component {
 
                     <div className="quinta-colonna">
                         <form onSubmit={() => this.handleSubmit()} style={{ paddingLeft: "5%", height: "90%" }}>
-                            <textarea name="testo" id="testo" placeholder="Scrivi messaggio..." onChange={this.handleChange} className="font-lombardia" ></textarea>
-                            <button type="submit" disabled={this.state.testo === '' || this.props.utente == undefined ? true : false}
-                                title={this.state.testo === '' && this.props.utente == undefined ? "Scegli un destinatario e scrivi un messaggio" : this.state.testo === '' && this.props.utente != undefined ? "Scrivi un messaggio" : "Scegli un destinatario"}>
+                            <textarea name="testo" id="testo" placeholder="Scrivi messaggio..." onChange={this.handleChange} className="font-lombardia" maxLength="200"></textarea>
+                            
+                            <button type="submit" disabled={this.abilitaPulsante()}
+                                title={this.titlePulsante()}>
                                 <img src={penna} alt="" />
                             </button>
                         </form>
+                    </div>
+
+                    <div className="contaCaratteri">
+                        <i>Caratteri rimanenti: </i> 
+                        <span>{this.contaParole(200)}</span>
                     </div>
                 </div>
             </React.Fragment>
