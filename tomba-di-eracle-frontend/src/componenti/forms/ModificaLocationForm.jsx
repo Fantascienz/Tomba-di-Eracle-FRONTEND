@@ -5,7 +5,7 @@ class ModificaLocationForm extends Component {
 
     renderListaModificaEsterne = (location) => {
         if (JSON.parse(sessionStorage.getItem('utente')).id === location.creatore.id || JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin') {
-            if (location.mappa === 'Esterna' && location.tipo === 'Reame') {
+            if (location.mappa === 'Esterna' && location.tipo === 'Reame' && location.nome !== '/') {
                 return <option value={location.id} key={location.id}>({location.id}) - {location.nome}</option>
             }
         }
@@ -18,7 +18,7 @@ class ModificaLocationForm extends Component {
     }
 
     renderListaModificaUmbra = (location) => {
-        if (location.tipo === 'Umbra' && location.mappa === 'Esterna') {
+        if (location.tipo === 'Umbra' && location.mappa === 'Esterna' && location.nome !== '/') {
             return <option value={location.id} key={location.id}>({location.id}) - {location.nome}</option>
         }
     }
@@ -26,7 +26,7 @@ class ModificaLocationForm extends Component {
     renderFormModificaAdmin = () => {
         if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin') {
             return (
-                <React.Fragment>
+                <>
                     <select className="form-select" name="fasciaOraria" id="fasciaOraria" onChange={this.props.handleChange} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)", marginBottom: "1%" }}>
                         <option value="">Seleziona Fascia Oraria</option>
                         <option value="Giorno">Giorno</option>
@@ -38,7 +38,7 @@ class ModificaLocationForm extends Component {
                     <div className="input-group">
                         <input className="form-control" type="date" id="data" onChange={this.props.handleChange} style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} />
                     </div>
-                </React.Fragment>
+                </>
             )
         }
     }
