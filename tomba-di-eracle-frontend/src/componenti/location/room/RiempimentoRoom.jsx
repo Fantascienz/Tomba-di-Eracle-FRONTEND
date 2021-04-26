@@ -36,14 +36,14 @@ const RiempimentoRoom = () => {
     }
 
     const aggiungiLocation = (location) => {
-        
+
         if (location.idSuperLocation !== 0) {
             let modificata = false;
             let nuoveLocations = locations
             for (let i = 0; i < nuoveLocations.length; i++) {
                 if (nuoveLocations[i].idSuperLocation === location.idSuperLocation) {
-                    console.log('VECCHIA',nuoveLocations[i])
-                    modificaLocation(nuoveLocations[i],location)
+                    console.log('VECCHIA', nuoveLocations[i])
+                    modificaLocation(nuoveLocations[i], location)
                     modificata = true;
                     break;
                 }
@@ -53,8 +53,6 @@ const RiempimentoRoom = () => {
             }
             setLocations(nuoveLocations)
             console.log(locations)
-        } else {
-            alert('scegli una location,cazzone')
         }
     }
 
@@ -80,9 +78,9 @@ const RiempimentoRoom = () => {
             vecchiaLoc.location.chiave = nuovaLoc.location.chiave
             //inserire controllo per la spunta 
         }
-        if(nuovaLoc.chiaveUmbra) {
+        if (nuovaLoc.chiaveUmbra) {
             if (nuovaLoc.location.chiave !== '') {
-            vecchiaLoc.locationUmbra.chiave = nuovaLoc.location.chiave
+                vecchiaLoc.locationUmbra.chiave = nuovaLoc.location.chiave
             } else {
                 vecchiaLoc.locationUmbra.chiave = vecchiaLoc.location.chiave
             }

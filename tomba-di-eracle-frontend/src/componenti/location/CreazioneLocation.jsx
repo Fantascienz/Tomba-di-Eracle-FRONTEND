@@ -4,6 +4,8 @@ import CreazioneLocationForm from '../forms/CreazioneLocationForm';
 import Header from '../layout/Header';
 import { TitoloPagina } from '../layout/TitoloPagina';
 import Macromappa from './Macromappa';
+import CreaEsterna from '../forms/CreaEsterna'
+import { useHistory } from 'react-router';
 
 class CreazioneLocation extends Component {
 
@@ -12,7 +14,7 @@ class CreazioneLocation extends Component {
         nome: '',
         ambiente: '',
         meteo: 1,
-        ingresso: '',
+        // ingresso: '',
         urlImgGiorno: '',
         urlImgNotte: '',
         urlAudio: null,
@@ -20,9 +22,9 @@ class CreazioneLocation extends Component {
         urlImgGiornoUmbra: '',
         urlImgNotteUmbra: '',
         urlAudioUmbra: null,
-        // locationIngresso: '',
-        // direzioneIngresso: ''
     }
+
+    // history = useHistory();
 
     handleChange = (event) => {
         this.setState({
@@ -31,8 +33,9 @@ class CreazioneLocation extends Component {
     }
 
     handleSubmit = (event) => {
-        
-        if (LocationService.validaCampiCreazione(this.state, false)) {
+        event.preventDefault()
+        if (LocationService.validaCampiCreazione(this.state, false, false)) {
+            
             let locationCreata = {
                 location: {
                     id: this.state.locationId,
@@ -44,11 +47,11 @@ class CreazioneLocation extends Component {
                     chiave: this.state.chiave,
                     creatore: JSON.parse(sessionStorage.getItem('utente'))
                 },
-                idLocationIngresso: parseInt(this.state.locationIngresso, 10),
+                // idLocationIngresso: parseInt(this.state.locationIngresso, 10),
                 // direzioneIngresso: this.state.direzioneIngresso,
-                ingresso: this.state.ingresso,
-                meteoGiorno: this.state.meteo,
-                meteoNotte: this.state.meteo,
+                // ingresso: this.state.ingresso,
+                meteoGiorno: parseInt(this.state.meteo, 10),
+                meteoNotte: parseInt(this.state.meteo, 10),
                 umbra: {
                     urlImgGiorno: this.state.urlImgGiornoUmbra,
                     urlImgNotte: this.state.urlImgNotteUmbra,
@@ -56,9 +59,9 @@ class CreazioneLocation extends Component {
                 }
             }
             // alert(locationCreata.meteoGiorno)
-            LocationService.creaLocation(locationCreata).then(
+            LocationService.creaLocation(locationCreata).then(() => {
                 alert('Location creata con successo!')
-                
+            }
             )
         } else {
             event.preventDefault()
@@ -79,9 +82,7 @@ class CreazioneLocation extends Component {
                             <TitoloPagina titolo="Creazione Location Esterna" />
                             <br />
                             <form onSubmit={this.handleSubmit} style={{ width: "75%" }}>
-                                {/* <CreazioneLocationForm handleChange={this.handleChange} stanza={false} ingresso={this.state.locationIngresso} 
-                                    anteprimaGiorno={this.state.urlImgGiorno} anteprimaNotte={this.state.urlImgNotte}
-                                    anteprimaGiornoUmbra={this.state.urlImgGiornoUmbra} anteprimaNotteUmbra={this.state.urlImgNotteUmbra}/> */}
+                                <CreaEsterna handleChange={this.handleChange} state={this.state} />
                                 <button className="btn btn-dark">Crea</button>
                             </form>
                         </div>
