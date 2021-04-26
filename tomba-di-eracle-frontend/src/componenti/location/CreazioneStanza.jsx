@@ -1,11 +1,6 @@
 import React, { Component, useState } from 'react';
-import LocationService from '../../servizi/LocationService';
+import RoomService from '../../servizi/RoomService';
 import CreazioneLocationForm from '../forms/CreazioneLocationForm';
-import SelezionaLocationForm from '../forms/SelezionaLocationForm';
-import { SelezionaUscitaForm } from '../forms/SelezionaUscitaForm';
-import Header from '../layout/Header';
-import { TitoloPagina } from '../layout/TitoloPagina';
-import Macromappa from './Macromappa';
 import MinimappaRegolabile from './MinimappaReagolabile';
 import { coefficienteId, setDirezioniX1, setDirezioniX2, setDirezioniX3 } from './room/impostazioniDirezioni';
 
@@ -66,9 +61,11 @@ const CreazioneStanza = (props) => {
             direzioniUmbra: superLoc <= 288 ? generaDirezioni(id + 144, true) : generaDirezioni(id + 48, true),
             chiaveUmbra: chiaveUmbra,
         }
-        setAggiunta(true)
-        props.aggiungiLocation(sublocation)
-        resetState()
+        if (RoomService.validaStanzaRoom(sublocation)) {
+            setAggiunta(true)
+            props.aggiungiLocation(sublocation)
+            resetState()
+        }
 
     }
 

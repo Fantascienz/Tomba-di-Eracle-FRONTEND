@@ -5,7 +5,6 @@ import Header from '../layout/Header';
 import { TitoloPagina } from '../layout/TitoloPagina';
 import Macromappa from './Macromappa';
 import CreaEsterna from '../forms/CreaEsterna'
-import { useHistory } from 'react-router';
 
 class CreazioneLocation extends Component {
 
@@ -14,7 +13,6 @@ class CreazioneLocation extends Component {
         nome: '',
         ambiente: '',
         meteo: 1,
-        // ingresso: '',
         urlImgGiorno: '',
         urlImgNotte: '',
         urlAudio: null,
@@ -23,8 +21,6 @@ class CreazioneLocation extends Component {
         urlImgNotteUmbra: '',
         urlAudioUmbra: null,
     }
-
-    // history = useHistory();
 
     handleChange = (event) => {
         this.setState({
@@ -35,7 +31,7 @@ class CreazioneLocation extends Component {
     handleSubmit = (event) => {
         event.preventDefault()
         if (LocationService.validaCampiCreazione(this.state, false, false)) {
-            
+
             let locationCreata = {
                 location: {
                     id: this.state.locationId,
@@ -47,9 +43,6 @@ class CreazioneLocation extends Component {
                     chiave: this.state.chiave,
                     creatore: JSON.parse(sessionStorage.getItem('utente'))
                 },
-                // idLocationIngresso: parseInt(this.state.locationIngresso, 10),
-                // direzioneIngresso: this.state.direzioneIngresso,
-                // ingresso: this.state.ingresso,
                 meteoGiorno: parseInt(this.state.meteo, 10),
                 meteoNotte: parseInt(this.state.meteo, 10),
                 umbra: {
@@ -58,7 +51,6 @@ class CreazioneLocation extends Component {
                     urlAudio: this.state.urlAudioUmbra
                 }
             }
-            // alert(locationCreata.meteoGiorno)
             LocationService.creaLocation(locationCreata).then(() => {
                 alert('Location creata con successo!')
             }

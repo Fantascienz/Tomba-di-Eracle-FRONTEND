@@ -13,6 +13,7 @@ const RiempimentoRoom = () => {
 
     const [locations, setLocations] = useState([])
     const [locationSelezionata, setLocationSelezionata] = useState("1")
+    const [locationAggiunte, setLocationAggiunte] = useState(0)
 
     const getLocationCella = () => {
         for (let i = 0; i < locations.length; i++) {
@@ -37,23 +38,22 @@ const RiempimentoRoom = () => {
 
     const aggiungiLocation = (location) => {
 
-        if (location.idSuperLocation !== 0) {
-            let modificata = false;
-            let nuoveLocations = locations
-            for (let i = 0; i < nuoveLocations.length; i++) {
-                if (nuoveLocations[i].idSuperLocation === location.idSuperLocation) {
-                    console.log('VECCHIA', nuoveLocations[i])
-                    modificaLocation(nuoveLocations[i], location)
-                    modificata = true;
-                    break;
-                }
+        let modificata = false;
+        let nuoveLocations = locations
+        for (let i = 0; i < nuoveLocations.length; i++) {
+            if (nuoveLocations[i].idSuperLocation === location.idSuperLocation) {
+                console.log('VECCHIA', nuoveLocations[i])
+                modificaLocation(nuoveLocations[i], location)
+                modificata = true;
+                break;
             }
-            if (!modificata) {
-                nuoveLocations.push(location)
-            }
-            setLocations(nuoveLocations)
-            console.log(locations)
         }
+        if (!modificata) {
+            nuoveLocations.push(location)
+        }
+        setLocations(nuoveLocations)
+        setLocationAggiunte(nuoveLocations.length)
+        console.log(locations)
     }
 
     const modificaLocation = (vecchiaLoc, nuovaLoc) => {
@@ -104,7 +104,7 @@ const RiempimentoRoom = () => {
             <div className="corpoComponente">
                 <div className="row no-gutters">
                     <TitoloPagina titolo="Riempimento Room" />
-                    <h1>{locations.length}</h1>
+                    {locationAggiunte === Math.pow(template.colonne, 2) ? <button>Invia room</button> : null}
                     <select className="form-select" onChange={(e) => setLocationSelezionata(e.target.value)} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)", width: '50%', alignSelf: 'center' }}>
                         {renderSelect()}
                     </select>
