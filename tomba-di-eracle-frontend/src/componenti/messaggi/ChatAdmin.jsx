@@ -3,7 +3,9 @@ import { connect } from "react-redux"
 import { getConversazione, inviaMessaggio } from "../../store/azioni/messaggiActions"
 import avatarEracle from '../../img/eracleCapovolto.png';
 import penna from '../../img/quill.png'
-import { withRouter } from "react-router";
+import "./MessaggiTraUtentiAdmin.css"
+import { estraiNome } from "../utils/Utilities";
+
 
 class ChatAdmin extends React.Component {
 
@@ -42,17 +44,19 @@ class ChatAdmin extends React.Component {
         } else {
             messageClass = messaggio.inviatoDa === 'Admin' ? 'sent' : 'received';
         }
+
         let srcImmagine;
         if (messaggio.inviatoDa === 'Utente') {
             srcImmagine = avatarEracle;
         } else {
             srcImmagine = 'https://cdn.dribbble.com/users/295073/screenshots/5081089/hacker_logo_v1.0.jpg?compress=1&resize=400x300';
         }
+
         return (
             <>
                 <div className={`message ${messageClass}`} key={messaggio.id}>
                     <img src={srcImmagine} style={{ height: '50px', width: '50px' }} className="tombaJPG rounded-circle"></img>
-                    <p className="font-lombardia" style={{ fontSize: '2em' }}
+                    <p className="font-lombardia"
                         title={this.renderTitle(messaggio)} >{messaggio.testo}</p>
                 </div>
                 <hr />
@@ -71,10 +75,9 @@ class ChatAdmin extends React.Component {
     renderDestinatario = () => {
         if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin') {
             if (this.props.utente != undefined) {
-                return <>
-                            <span style={{color: "#eeaa44", fontSize:"1.5vw"}}>Destinatario:</span> 
-                            <p style={{color: "#eeaa44", fontSize:"2vw"}}>{this.props.utente.nominativo}</p>
-                        </>
+                return (<>
+                    {this.props.utente.nominativo}
+                </>)
             }
             return "Scegli destinatario..."
         }
@@ -92,22 +95,22 @@ class ChatAdmin extends React.Component {
 
         return (
             <React.Fragment>
-                <div className="chat-admin row" style={{width:"113%"}}>
-                    <main className="col-6" style={{padding:'2.9%'}}>
-                        <p className="font-lombardia-yellow bg-dark rounded" style={{ fontSize: '2em',color: "#eeaa44",marginLeft: '6%'}}>{this.renderDestinatario()}</p>
+                <div className="chat-admin row">
+                    <div className="quarta-colonna">
+                        <h1 className="font-lombardia-yellow bg-dark rounded messaggi-row" >{this.renderDestinatario()}</h1>
                         {listaOrdinata && listaOrdinata.map(msg =>
                             this.renderMessaggi(msg))}
-                    </main>
+                    </div>
 
-                    <div className="col-1"></div>
-
-                    <form className="col-5" onSubmit={() => this.handleSubmit()} style={{height:"90%"}}>
-                        <textarea name="testo" id="testo" cols="30" rows="10" placeholder="Scrivi messaggio..." onChange={this.handleChange} className="font-lombardia" style={{ fontSize: '2em', height:"100%" }}></textarea>
-                        <button type="submit"   disabled={this.state.testo === '' || this.props.utente == undefined ? true : false}
-                                                title={this.state.testo === '' && this.props.utente == undefined ? "Scegli un destinatario e scrivi un messaggio" : this.state.testo === '' && this.props.utente != undefined ? "Scrivi un messaggio" : "Scegli un destinatario"}>
-                            <img src={penna} alt="" />
-                        </button>
-                    </form>
+                    <div className="quinta-colonna">
+                        <form onSubmit={() => this.handleSubmit()} style={{ paddingLeft: "5%", height: "90%" }}>
+                            <textarea name="testo" id="testo" placeholder="Scrivi messaggio..." onChange={this.handleChange} className="font-lombardia" ></textarea>
+                            <button type="submit" disabled={this.state.testo === '' || this.props.utente == undefined ? true : false}
+                                title={this.state.testo === '' && this.props.utente == undefined ? "Scegli un destinatario e scrivi un messaggio" : this.state.testo === '' && this.props.utente != undefined ? "Scrivi un messaggio" : "Scegli un destinatario"}>
+                                <img src={penna} alt="" />
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </React.Fragment>
         )

@@ -68,13 +68,13 @@ a:hover{
   width: 100px;
   height: 40px;
   font-size: 15px;
-  box-shadow: 0 16px 32px 0 rgba(0,0,0,0.5);
+  box-shadow: 5px 8px 10px 0 rgba(0,0,0,0.5);
 }
 
 .btn-dark:hover{
   color:#c58b34;
   font-weight: bold ;
-  box-shadow: 0 16px 32px 0 rgba(0,0,0,0.8);
+  box-shadow: 8px 8px 10px 0 rgba(0,0,0,0.8);
   
 }
 
@@ -120,7 +120,7 @@ a:hover{
 	background-color:rgba(255, 255, 255, 0.699);
 	border-color: #eeaa44;
 	outline:0;
-	box-shadow:0 0 0 .25rem rgba(238, 170, 68,.25)
+	box-shadow: 0 0 0 .25rem rgba(238, 170, 68,.25)
 }
 
 .form-control::placeholder{
@@ -154,7 +154,7 @@ a:hover{
 .btn-gold:hover{
   cursor: pointer;
   font-weight: bold ;
-  box-shadow: 0 16px 32px 0 rgba(0,0,0,0.8);
+  box-shadow: 8px 16px 20px 0 rgba(0,0,0,0.8);
 }
 
 .btn-gold-disabled{
@@ -301,7 +301,7 @@ a:hover{
 }
 
 .ombra{
-  box-shadow: 0px 16px 20px 0 rgba(0,0,0,1);
+  box-shadow: 8px 16px 20px 0 rgba(0,0,0,1);
 }
 
 .griglia-macromappa{
@@ -640,86 +640,6 @@ button:disabled {
   font-size: 2em
 }
 
-/* CHAT ADMIN -------------------------------------------------------------------------*/
-.chat-admin {
-  background-color: transparent;
-  /* text-align: center; */
-  width: 100%;
-  height: 90%;
-  margin: 0 auto;
-  background-image: url('./img/libro.png');
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  padding-top:5%
-}
-
-.chat-admin main {
-  padding: 5%;
-  top: 5%;
-  height: 93%;
-  width: 50%;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  background-color: transaprent;
-}
-
-.chat-admin form {
-  height: 80%;
-  position: relative;
-  top: 5%;
-  right:3%;
-  width: 40%;
-  display: flex;
-  font-size: 1rem;
-  align-items: flex-end;
-}
-
-.chat-admin form button {
-  width: 50%;
-  height: 25%;
-  position: relative;
-}
-
-
-.chat-admin textarea {
-  line-height: 1;
-  width: 100%;
-  height: 100%;
-  font-size: 1.5rem;
-  background-color: transparent;
-  color: black;
-  outline: none;
-  border: 1px solid rgba(0,0,0,0.2);
-  padding: 0 2%;
-}
-
-
-.chat-admin button {
-  border: none;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  cursor: pointer;
-  font-size: 1.25rem;
-  background-color: transparent;
-}
-
-.chat-admin ul, li {
-  text-align: left;
-  list-style: none;
-}
-
-.chat-admin p {
-  max-width: 500px;
-  margin-bottom: 12px;
-  line-height: 24px;
-  padding: 10px 20px;
-  border-radius: 0px;
-  position: relative;
-  color: black;
-}
 
 /* FOOTER--------------------------------------------- */
 
@@ -966,7 +886,8 @@ div.table-reset-tappo{
   background-color: grey;
   width: 15vw;
   height: 15vw;
-  border-radius: 15vw
+  border-radius: 15vw;
+  box-shadow: 5px 5px 5px 0px rgba(0,0,0,1)
 }
 
 .anteprima-pg-attiva{
@@ -976,7 +897,8 @@ div.table-reset-tappo{
   border-radius: 15vw;
   background-size: auto 100%;
   background-repeat: no-repeat;
-  background-position: center center
+  background-position: center center;
+  box-shadow: 5px 5px 5px 0px rgba(0,0,0,1)
 }
 
 
