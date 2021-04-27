@@ -110,11 +110,11 @@ class CreazioneLocationForm extends Component {
                 <h1>{this.props.tipo}</h1>
                 <div className="centrato col-6" >
                     <div className="input-group">
-                        <input type="text" className="form-control" id="nome" placeholder={this.props.formPlaceholders != undefined ? 'Nome: ' + this.props.formPlaceholders.location.nome : '* Nome'} onChange={(e) => this.props.changeHandler[0](e.target.value)} value={this.props.formState.nome} style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} /> <br />
+                        <input type="text" className="form-control" id="nome" placeholder={this.props.formPlaceholders != undefined ? (this.props.formPlaceholders.location != null ? 'Nome: ' + this.props.formPlaceholders.location.nome : 'prova') : '* Nome'} onChange={(e) => this.props.changeHandler[0](e.target.value)} value={this.props.formState.nome} style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} /> <br />
                     </div>
                     <div className="input-group">
-                        <select name="ambiente" id="ambiente" className="form-select" placeholder={this.props.formPlaceholders != undefined ? 'Ambiente: ' + this.props.formPlaceholders.location.ambiente : '* Ambiente'} value={this.props.formState.ambiente} onChange={(e) => this.props.changeHandler[1](e.target.value)} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)", marginBottom: "1%" }}>
-                            <option value="">{this.props.formPlaceholders != undefined ? 'Ambiente: ' + this.props.formPlaceholders.location.ambiente : '* Seleziona un Ambiente'}</option>
+                        <select name="ambiente" id="ambiente" className="form-select" placeholder={this.props.formPlaceholders != undefined ? (this.props.formPlaceholders.location != null ? 'Ambiente: ' + this.props.formPlaceholders.location.ambiente : 'prova') : '* Ambiente'} value={this.props.formState.ambiente} onChange={(e) => this.props.changeHandler[1](e.target.value)} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)", marginBottom: "1%" }}>
+                            <option value="">{this.props.formPlaceholders != undefined ? (this.props.formPlaceholders.location != null ? 'Ambiente: ' + this.props.formPlaceholders.location.ambiente : 'prova') : '* Seleziona un Ambiente'}</option>
                             <option value="Aperto">Aperto</option>
                             <option value="Chiuso">Chiuso</option>
                         </select>

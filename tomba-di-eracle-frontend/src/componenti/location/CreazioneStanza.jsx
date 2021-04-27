@@ -15,20 +15,8 @@ const CreazioneStanza = (props) => {
     const [urlImgNotteUmbra, setUrlImgNotteUmbra] = useState('')
     const [urlAudioUmbra, setUrlAudioUmbra] = useState('')
     const [chiaveUmbra, setChiaveUmbra] = useState(false)
-    const [tipo, setTipo] = useState('')
 
     const changeHandler = [setNome, setAmbiente, setUrlImgGiorno, setUrlImgNotte, setUrlAudio, setChiave, setUrlImgGiornoUmbra, setUrlImgNotteUmbra, setUrlAudioUmbra, setChiaveUmbra]
-
-    var allLocations = JSON.parse(sessionStorage.getItem('allLocations'));
-    
-
-    const getSuperLocation = () => {
-        for (let i = 0; i < allLocations.length; i++) {
-            if (allLocations[i].id == props.superLoc.id) {
-                return allLocations[i]
-            }
-        }
-    }
 
     const setMappa = () => {
         if (props.cellePerRiga == 3) {
@@ -54,31 +42,31 @@ const CreazioneStanza = (props) => {
         urlAudioUmbra: urlAudioUmbra,
     }
 
+
     const aggiungiLocation = () => {
-        // let superLocation = getSuperLocation()
-        // let superLoc = superLocation.id;
         let id = props.id * coefficienteId(props.cellePerRiga) + props.superLoc.id
         let sublocation = {
-            location: {
-                id: id,
-                tipo: 'Reame',
-                nome: nome,
-                ambiente: ambiente,
-                urlImgGiorno: urlImgGiorno,
-                urlImgNotte: urlImgNotte,
-                urlAudio: urlAudio,
-                urlMinimappa: props.immagineMinimappaReame,
-                meteoGiorno: props.superLoc.meteoGiorno,
-                meteoNotte: props.superLoc.meteoNotte,
-                chiave: chiave,
-                creatore: JSON.parse(sessionStorage.getItem('utente')),
-                mappa: setMappa()
-            },
+            location:
+                JSON.parse(sessionStorage.getItem('roomTemplate')).superLocation.tipo === 'Reame' ? {
+                    id: id,
+                    tipo: 'Reame',
+                    nome: nome,
+                    ambiente: ambiente,
+                    urlImgGiorno: urlImgGiorno,
+                    urlImgNotte: urlImgNotte,
+                    urlAudio: urlAudio,
+                    urlMinimappa: props.immagineMinimappaReame,
+                    meteoGiorno: props.superLoc.meteoGiorno,
+                    meteoNotte: props.superLoc.meteoNotte,
+                    chiave: chiave,
+                    creatore: JSON.parse(sessionStorage.getItem('utente')),
+                    mappa: setMappa()
+                } : null,
             idSuperLocation: props.id,
             superLocation: props.superLoc,
-            direzioni: generaDirezioni(id, false),
+            direzioni: generaDirezioni(id, false,false),
             locationUmbra: {
-                id: props.superLoc.id <= 288 ? id + 144 : id + 48,
+                id: JSON.parse(sessionStorage.getItem('roomTemplate')).superLocation.tipo === 'Reame' ? props.superLoc.id <= 288 ? id + 144 : id + 48 : props.superLoc.id + 200000,
                 nome: nome,
                 tipo: 'Umbra',
                 ambiente: ambiente,
@@ -92,15 +80,16 @@ const CreazioneStanza = (props) => {
                 creatore: JSON.parse(sessionStorage.getItem('utente')),
                 mappa: setMappa()
             },
-            direzioniUmbra: props.superLoc.id <= 288 ? generaDirezioni(id + 144, true) : generaDirezioni(id + 48, true),
+            direzioniUmbra: JSON.parse(sessionStorage.getItem('roomTemplate')).superLocation.tipo === 'Reame' ? (props.superLoc.id <= 288 ? generaDirezioni(id + 144, true,false) : generaDirezioni(id + 48, true,false)) : generaDirezioni(props.superLoc.id + 200000, false,true),
             chiaveUmbra: chiaveUmbra,
         }
+        console.log(sublocation)
         props.aggiungiLocation(sublocation)
         resetState()
 
     }
 
-    const generaDirezioni = (id, umbra) => {
+    const generaDirezioni = (id, umbra,subUmbra) => {
         let superLoc = props.superLoc.id
         if (umbra) {
             if (superLoc <= 288) {
@@ -115,7 +104,7 @@ const CreazioneStanza = (props) => {
             case '2':
                 return setDirezioniX2(superLoc, id, umbra)
             case '1':
-                return setDirezioniX1(superLoc, id, umbra)
+                return setDirezioniX1(superLoc, id, umbra,subUmbra)
 
         }
     }
@@ -131,7 +120,6 @@ const CreazioneStanza = (props) => {
         setUrlImgNotteUmbra('')
         setUrlAudioUmbra('')
         setChiaveUmbra(false)
-        setTipo('')
     }
     return (
         <React.Fragment>

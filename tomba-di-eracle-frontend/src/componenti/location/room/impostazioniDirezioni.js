@@ -140,7 +140,7 @@ export const setDirezioniX2 = (idSuperLoc, id,umbra) => {
     }
 }
 
-export const setDirezioniX1 = (idSuperLoc,id,umbra) => {
+export const setDirezioniX1 = (idSuperLoc,id,umbra,subUmbra) => {
     let loc = parseInt(id, 10)
     let superLoc = parseInt(idSuperLoc, 10);
     return {
@@ -149,6 +149,6 @@ export const setDirezioniX1 = (idSuperLoc,id,umbra) => {
         idLocationEst: superLoc,
         idLocationSud: superLoc,
         idLocationOvest: superLoc,
-        idLocationSpecchio: umbra ? loc - 48 : loc + 48
+        idLocationSpecchio: subUmbra ? null : umbra ? loc - 48 : loc + 48
     }
 }

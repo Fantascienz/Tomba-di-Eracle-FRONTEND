@@ -49,7 +49,6 @@ const RiempimentoRoom = () => {
         let nuoveLocations = locations
         for (let i = 0; i < nuoveLocations.length; i++) {
             if (nuoveLocations[i].idSuperLocation == location.idSuperLocation) {
-                alert('mod')
                 modificaLocation(nuoveLocations[i], location)
                 modificata = true;
                 break;
