@@ -5,14 +5,15 @@ import Footer from "../../layout/Footer"
 import Header from "../../layout/Header";
 import { TitoloPagina } from "../../layout/TitoloPagina";
 import MinimappaRegolabile from "../MinimappaReagolabile";
+// import MinilocationRegolabile from "../MinilocationReagolabile";
 
 
 const CreazioneRoom = () => {
 
     const [superLoc, setSuperLoc] = useState(0)
     const [colonne, setColonne] = useState(0)
-    const [mappaReame, setMappaReame] = useState('')
-    const [mappaUmbra, setMappaUmbra] = useState('')
+    const [locationReame, setMappaReame] = useState('')
+    const [locationUmbra, setMappaUmbra] = useState('')
 
     const history = useHistory();
     const allLocations = JSON.parse(sessionStorage.getItem('allLocations'));
@@ -21,7 +22,7 @@ const CreazioneRoom = () => {
         let superLoc = [];
         for (let i = 0; i < allLocations.length; i++) {
             if (allLocations[i].nome !== '/') {
-                if ((JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' || JSON.parse(sessionStorage.getItem('utente')).id === allLocations[i].id) && !allLocations[i].room && allLocations[i].tipo === 'Reame') {
+                if ((JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' || JSON.parse(sessionStorage.getItem('utente')).id === allLocations[i].id) && !allLocations[i].room) {
                     superLoc.push(JSON.parse(sessionStorage.getItem('allLocations'))[i])
                 }
             }
@@ -29,17 +30,23 @@ const CreazioneRoom = () => {
         return superLoc;
     }
 
-    const getMappaSuperLoc = () => {
+    const getSuperLoc = () => {
         for (let i = 0; i < allLocations.length; i++) {
             if (allLocations[i].id == superLoc) {
-                return allLocations[i].mappa
+                // alert(allLocations[i])
+                console.log(allLocations[i]);
+                return allLocations[i]
             }
         }
     }
 
     const renderOptions = () => {
-        let mappa = getMappaSuperLoc()
-        if (mappa === 'Macro' || mappa === 'Esterna') {
+        let location = getSuperLoc()
+        console.log(location.mappa);
+        if (location.tipo === 'Umbra') {
+            return <option value={1}>1 x 1</option>
+        }
+        if (location.mappa === 'Macro' || location.mappa === 'Esterna') {
             return (
                 <>
                     <option value={3}>3 x 3</option>
@@ -48,7 +55,7 @@ const CreazioneRoom = () => {
                 </>
             )
         }
-        if (mappa === 'Mid') {
+        if (location.mappa === 'Mid') {
             return (
                 <>
                     <option value={2}>2 x 2</option>
@@ -56,12 +63,17 @@ const CreazioneRoom = () => {
                 </>
             )
         }
-        if (mappa === 'Inner') {
+        if (location.mappa === 'Inner') {
             return (
                 <>
                     <option value={1}>1 x 1</option>
                 </>
             )
+        }
+        if (location.mappa === 'Stanza') {
+            if (location.tipo === 'Reame') {
+                return <option value={0}>Questa location non può avere sotto-location!</option>
+            }
         }
     }
 
@@ -69,8 +81,8 @@ const CreazioneRoom = () => {
         let room = {
             superLocation: superLoc,
             colonne: colonne,
-            mappaReame: mappaReame,
-            mappaUmbra: mappaUmbra
+            locationReame: locationReame,
+            locationUmbra: locationUmbra
         }
         if (RoomService.validaCreazionRoom(room)) {
             sessionStorage.setItem('roomTemplate', JSON.stringify(room));
@@ -88,7 +100,7 @@ const CreazioneRoom = () => {
                         <select className="form-select" name="super" id="super" onChange={(e) => setSuperLoc(e.target.value)} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)" }}>
                             <option value={0}>Seleziona Location Padre</option>
                             {getListaSuperLoc().map(superLoc =>
-                                <option value={superLoc.id} key={superLoc.id}>({superLoc.id} - {superLoc.nome})</option>
+                                <option value={superLoc.id} key={superLoc.id}>({superLoc.id} - {superLoc.nome} - {superLoc.tipo})</option>
                             )}
                         </select>
                         <select className="form-select" name="colonne" id="colonne" onChange={(e) => setColonne(e.target.value)} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)" }}>
@@ -102,9 +114,9 @@ const CreazioneRoom = () => {
                         <button className="btn btn-dark" onClick={() => toImpostaRoom()}>Crea Room</button>
                     </div>
                     <div className="col-md-6">
-                        <MinimappaRegolabile pxDimensioniMappa="400" immagineMinimappa={mappaReame} cellePerRiga={colonne} lenteDisplay="none" />
+                        <MinimappaRegolabile pxDimensioniMappa="400" immagineMinimappa={locationReame} cellePerRiga={colonne} lenteDisplay="none" />
                         <br />
-                        <MinimappaRegolabile pxDimensioniMappa="400" immagineMinimappa={mappaUmbra} cellePerRiga={colonne} lenteDisplay="none" />
+                        <MinimappaRegolabile pxDimensioniMappa="400" immagineMinimappa={locationUmbra} cellePerRiga={colonne} lenteDisplay="none" />
                     </div>
                 </div>
 
