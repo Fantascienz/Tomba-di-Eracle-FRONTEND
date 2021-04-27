@@ -5,7 +5,6 @@ import Footer from "../../layout/Footer"
 import Header from "../../layout/Header";
 import { TitoloPagina } from "../../layout/TitoloPagina";
 import MinimappaRegolabile from "../MinimappaReagolabile";
-// import MinilocationRegolabile from "../MinilocationReagolabile";
 
 
 const CreazioneRoom = () => {
@@ -30,19 +29,14 @@ const CreazioneRoom = () => {
         return superLoc;
     }
 
-    const getSuperLoc = () => {
+    const renderOptions = () => {
+        let location = {};
         for (let i = 0; i < allLocations.length; i++) {
             if (allLocations[i].id == superLoc) {
-                // alert(allLocations[i])
-                console.log(allLocations[i]);
-                return allLocations[i]
+                location = allLocations[i]
             }
         }
-    }
 
-    const renderOptions = () => {
-        let location = getSuperLoc()
-        console.log(location.mappa);
         if (location.tipo === 'Umbra') {
             return <option value={1}>1 x 1</option>
         }
@@ -77,9 +71,17 @@ const CreazioneRoom = () => {
         }
     }
 
+    const getSuperLocation = () => {
+        for (let i = 0; i < allLocations.length; i++) {
+            if (allLocations[i].id == superLoc) {
+                return allLocations[i]
+            }
+        }
+    }
+
     const toImpostaRoom = () => {
         let room = {
-            superLocation: superLoc,
+            superLocation: getSuperLocation(),
             colonne: colonne,
             locationReame: locationReame,
             locationUmbra: locationUmbra
@@ -94,7 +96,7 @@ const CreazioneRoom = () => {
         <>
             <Header />
             <div className="corpoComponente">
-                <TitoloPagina titolo="Crazione Room" />
+                <TitoloPagina titolo="Creazione Room" />
                 <div className="row no-gutters">
                     <div className="col-md-6">
                         <select className="form-select" name="super" id="super" onChange={(e) => setSuperLoc(e.target.value)} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)" }}>
