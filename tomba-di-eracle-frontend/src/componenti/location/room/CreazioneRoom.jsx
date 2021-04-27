@@ -21,12 +21,48 @@ const CreazioneRoom = () => {
         let superLoc = [];
         for (let i = 0; i < allLocations.length; i++) {
             if (allLocations[i].nome !== '/') {
-                if ((JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' || JSON.parse(sessionStorage.getItem('utente')).id === allLocations[i].id) && !allLocations[i].room && allLocations[i].tipo === 'Reame' ) {
+                if ((JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' || JSON.parse(sessionStorage.getItem('utente')).id === allLocations[i].id) && !allLocations[i].room && allLocations[i].tipo === 'Reame') {
                     superLoc.push(JSON.parse(sessionStorage.getItem('allLocations'))[i])
                 }
             }
         }
         return superLoc;
+    }
+
+    const getMappaSuperLoc = () => {
+        for (let i = 0; i < allLocations.length; i++) {
+            if (allLocations[i].id == superLoc) {
+                return allLocations[i].mappa
+            }
+        }
+    }
+
+    const renderOptions = () => {
+        let mappa = getMappaSuperLoc()
+        if (mappa === 'Macro' || mappa === 'Esterna') {
+            return (
+                <>
+                    <option value={3}>3 x 3</option>
+                    <option value={2}>2 x 2</option>
+                    <option value={1}>1 x 1</option>
+                </>
+            )
+        }
+        if (mappa === 'Mid') {
+            return (
+                <>
+                    <option value={2}>2 x 2</option>
+                    <option value={1}>1 x 1</option>
+                </>
+            )
+        }
+        if (mappa === 'Inner') {
+            return (
+                <>
+                    <option value={1}>1 x 1</option>
+                </>
+            )
+        }
     }
 
     const toImpostaRoom = () => {
@@ -57,9 +93,7 @@ const CreazioneRoom = () => {
                         </select>
                         <select className="form-select" name="colonne" id="colonne" onChange={(e) => setColonne(e.target.value)} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)" }}>
                             <option value={0}>Seleziona Griglia Minimappa</option>
-                            <option value={3}>3 x 3</option>
-                            <option value={2}>2 x 2</option>
-                            <option value={1}>1 x 1</option>
+                            {renderOptions()}
                         </select>
                         <input type="text" placeholder="Url Minimappa Reame" onChange={(e) => setMappaReame(e.target.value)} style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} />
                         <br />

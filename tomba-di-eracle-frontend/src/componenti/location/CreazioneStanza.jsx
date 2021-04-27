@@ -29,6 +29,18 @@ const CreazioneStanza = (props) => {
         }
     }
 
+    const setMappa = () => {
+        if (props.cellePerRiga == 3) {
+            return 'Mid'
+        }
+        if (props.cellePerRiga == 2) {
+            return 'Inner'
+        }
+        if (props.cellePerRiga == 1) {
+            return 'Stanza'
+        }
+    }
+
     var superLocation = getSuperLocation()
 
     const formState = {
@@ -59,7 +71,8 @@ const CreazioneStanza = (props) => {
                 meteoGiorno: superLocation.meteoGiorno,
                 meteoNotte: superLocation.meteoNotte,
                 chiave: chiave,
-                creatore: JSON.parse(sessionStorage.getItem('utente'))
+                creatore: JSON.parse(sessionStorage.getItem('utente')),
+                mappa: setMappa()
             },
             idSuperLocation: props.id,
             superLocation: superLocation,
@@ -76,7 +89,8 @@ const CreazioneStanza = (props) => {
                 meteoGiorno: superLocation.meteoGiorno.id,
                 meteoNotte: superLocation.meteoNotte.id,
                 chiave: chiaveUmbra ? chiave : null,
-                creatore: JSON.parse(sessionStorage.getItem('utente'))
+                creatore: JSON.parse(sessionStorage.getItem('utente')),
+                mappa: setMappa()
             },
             direzioniUmbra: superLoc <= 288 ? generaDirezioni(id + 144, true) : generaDirezioni(id + 48, true),
             chiaveUmbra: chiaveUmbra,
