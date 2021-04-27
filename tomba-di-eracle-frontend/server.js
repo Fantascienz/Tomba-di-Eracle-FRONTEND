@@ -80,7 +80,7 @@ io.on('connect', (socket) => {
       socket.broadcast.emit('message', { nomePersonaggio: 'admin', testo: `${personaggio.nominativo}, entra in ${ultimaLocation.direzioni.nomeLocationNord}!`, idLocation: location });
     } else if (location == ultimaLocation.direzioni.idLocationOvest) {
       socket.broadcast.emit('message', { nomePersonaggio: 'admin', testo: `${personaggio.nominativo}, entra in ${ultimaLocation.direzioni.nomeLocationOvest}!`, idLocation: location });
-    }else if (location == ultimaLocation.direzioni.idLocationEst) {
+    } else if (location == ultimaLocation.direzioni.idLocationEst) {
       socket.broadcast.emit('message', { nomePersonaggio: 'admin', testo: `${personaggio.nominativo}, entra in ${ultimaLocation.direzioni.nomeLocationEst}!`, idLocation: location });
     }
   })

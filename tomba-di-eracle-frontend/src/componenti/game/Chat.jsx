@@ -1,6 +1,3 @@
-import { firestore } from "../../App";
-import React, { useRef, useState } from 'react';
-import { useCollectionData } from 'react-firebase-hooks/firestore';
 import React, { useRef, useState, useEffect } from 'react';
 import { io } from 'socket.io-client';
 import divisore from '../../img/divisore.png'
@@ -108,9 +105,9 @@ function MessaggioChat(props) {
                 <tr>
                     <td align={messageClass === 'sent' ? 'right' : 'left'}>
                         {nomePersonaggio == 'admin' ?
-                            <p className="font-lombardia" style={{ fontSize: "1.8em", color: 'grey' }}>{testo}</p>
+                            <p className="font-lombardia" style={{ fontSize: "1.8em", color: 'grey' }} title={nomePersonaggio}>{testo}</p>
                             :
-                            <p className="font-lombardia" style={{ fontSize: "1.8em" }}>{testo}</p>
+                            <p className="font-lombardia" style={{ fontSize: "1.8em" }} title={nomePersonaggio}>{testo}</p>
                         }
 
                     </td>
