@@ -55,7 +55,7 @@ io.on('connect', (socket) => {
         idPersonaggio: personaggio.id,
         nomePersonaggio: personaggio.nominativo,
         idLocation: location.id,
-        immagine: personaggio.urlImmagine
+        immagine: personaggio.immagineAttiva
       });
     messaggioInviato.save().then(() => {
 
@@ -63,7 +63,7 @@ io.on('connect', (socket) => {
         testo: formValue,
         nomePersonaggio: personaggio.nominativo,
         idLocation: location.id,
-        immagine: personaggio.urlImmagine
+        immagine: personaggio.immagineAttiva
       });
     })
     callback();

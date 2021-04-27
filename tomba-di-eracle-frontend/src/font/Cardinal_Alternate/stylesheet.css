@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'Cardinal-Alternate';
+    src: url('Cardinal-Alternate.eot');
+    src: url('Cardinal-Alternate.eot?#iefix') format('embedded-opentype'),
+        url('Cardinal-Alternate.woff2') format('woff2'),
+        url('Cardinal-Alternate.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+

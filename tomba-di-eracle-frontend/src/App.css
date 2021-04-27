@@ -187,119 +187,6 @@ a:hover{
   align-items: center
 }
 
-.navigazione-sezione{
-  z-index: 1;
-  position: relative; 
-  top: 5%;
-  left: 1%; 
-  height: 85%; 
-  width: 35%; 
-  /* background-color: pink;  */
-  float: left; 
-  display: flex; 
-  justify-content: center; 
-  flex-direction: column; 
-  align-items: center
-}
-
-.navigazione-area{
-  position: relative;
-  /* background-color: red;  */
-  height: 100%;
-}
-
-.navigazione-immagine{
-  position: absolute;
-  left:5%;
-  top:5%;
-  height: 94%;
-  width: 90%;
-  background-color: transparent;
-  background-position: center center; 
-  background-repeat: no-repeat; 
-  background-size: auto 90%
-}
-
-.navigazione-link{
-  background-color: transparent;
-  display: flex; 
-  justify-content: center; 
-  flex-direction: column; 
-  align-items: center;
-  position: absolute
-}
-
-.icona-alta{
-  width: 85%;
-}
-
-.icona-alta-disabled{
-  width: 85%;
-  filter: grayscale(100%);
-}
-
-.icona-alta:hover{
-  cursor: pointer;
-  width: 95%;
-}
-
-.icona-larga{
-  height: 85%;
-}
-
-.icona-larga-disabled{
-  height: 85%;
-  filter: grayscale(100%);
-}
-
-.icona-larga:hover{
-  cursor: pointer;
-  height: 95%;
-}
-
-.icona-freccia-larga{
-  width: 100%;
-}
-
-.icona-freccia-larga-disabled{
-  width: 100%;
-  filter: grayscale(100%);
-}
-
-.icona-freccia-larga:hover{
-  cursor: pointer;
-  width: 135%;
-}
-
-
-.icona-freccia-alta{
-  height: 100%;
-}
-
-.icona-freccia-alta-disabled{
-  height: 100%;
-  filter: grayscale(100%);
-}
-
-.icona-freccia-alta:hover{
-  cursor: pointer;
-  height: 135%;
-}
-
-.chat-sezione{
-  position: relative;
-  top: 5%;
-  right: 1%;
-  height: 85%;
-  width: 62%;
-  background-color: transparent;
-  float: right;
-  display: flex; 
-  justify-content: center; 
-  flex-direction: column; 
-  align-items: center
-}
-
 .ombra{
   box-shadow: 8px 16px 20px 0 rgba(0,0,0,1);
 }
@@ -328,6 +215,39 @@ a:hover{
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'CardinalAlternate';
+  src: url('./font/Cardinal_Alternate/CardinalAlternate.eot');
+  src: url('./font/Cardinal_Alternate/CardinalAlternate.eot?#iefix') format('embedded-opentype'),
+      url('./font/Cardinal_Alternate/CardinalAlternate.woff2') format('woff2'),
+      url('./font/Cardinal_Alternate/CardinalAlternate.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MiddleAgesDeco';
+  src: url('./font/MiddleAgesDeco/MiddleAgesDeco.eot');
+  src: url('./font/MiddleAgesDeco/MiddleAgesDeco.eot?#iefix') format('embedded-opentype'),
+      url('./font/MiddleAgesDeco/MiddleAgesDeco.woff2') format('woff2'),
+      url('./font/MiddleAgesDeco/MiddleAgesDeco.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'MiddleAges';
+  src: url('./font/MiddleAges/MiddleAges.eot');
+  src: url('./font/MiddleAges/MiddleAges.eot?#iefix') format('embedded-opentype'),
+      url('./font/MiddleAges/MiddleAges.woff2') format('woff2'),
+      url('./font/MiddleAges/MiddleAges.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 .font-lombardia{
   font-family: 'Lombardia';
 }
@@ -336,6 +256,36 @@ a:hover{
   font-family: 'Lombardia';
   color: #eeaa44
 }
+
+.font-Cardinal{
+  font-family: 'CardinalAlternate';
+}
+
+.font-Cardinal-yellow{
+  font-family: 'CardinalAlternate';
+  color: #eeaa44
+}
+
+.font-MiddleAges{
+  font-family: 'MiddleAges';
+}
+
+.font-MiddleAges-yellow{
+  font-family: 'MiddleAges';
+  color: #eeaa44
+}
+
+.font-MiddleAgesDeco{
+  font-family: 'MiddleAgesDeco';
+}
+
+.font-MiddleAgesDeco-yellow{
+  font-family: 'MiddleAgesDeco';
+  color: #eeaa44
+}
+
+
+
 
 /* FLIP BOX------------------------------------------------------------ */
 
@@ -540,7 +490,6 @@ a:hover{
   position: relative;
 }
 
-
 .chat textarea {
   line-height: 1;
   width: 100%;
@@ -568,7 +517,6 @@ textarea::-webkit-scrollbar-thumb {
   background: #eeaa44;
 }
 
-
 .chat button {
   border: none;
   text-align: center;
@@ -584,8 +532,6 @@ button:disabled {
   cursor: not-allowed;
   background-color: transparent;
 }
-
-
 
 .chat ul, li {
   text-align: left;
@@ -606,7 +552,6 @@ button:disabled {
   display: flex;
   align-items: center;
 }
-
 
 .sent {
   flex-direction: row-reverse;
@@ -631,274 +576,16 @@ button:disabled {
 }
 
 .sent p::first-letter {
-	color:red;
-  font-size: 2em
-}
-
-.received p::first-letter {
-	color:red;
-  font-size: 2em
-}
-
-
-/* FOOTER--------------------------------------------- */
-
-.footer-setting{
-  border: none;
-}
-
-.footer-setting b {
-  font-size: 2vmin
-}
-
-.footer-setting p {
-  font-size: 2vmin
-}
-
-/* HEADER---------------------------------------------- */
-.header-link{
-  font-size: 2vh;
-  z-index: 999;
+	color:rgb(165, 14, 14);
+  font-size: 1.5em;
+  font-family: 'MiddleAgesDeco';
   
 }
 
-.testo-sinistra{
-  margin-left: 5%;
-  text-align: left;
-}
-
-.testo-destra{
-  margin-right: 5%;
-  text-align: right;
-}
-
-.header-links-row{
-    z-index: 999;
-    height: 30%;
-    position: absolute;
-    left: 0%;
-    bottom: 0%;
-    width: 10% 
-}
-
-#titolo-home{
-  position: absolute;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  background-image: url('../src/img/titolo.png');
-  background-size: auto 8vh;
-  background-position: center center;
-  background-repeat: no-repeat
-}
-
-/* SCHEDA UTENTE---------------------------------------------- */
-.eracle-bg{
-  background-image: url('../src/img/eracleCapovolto.png');
-  background-position: center center; 
-  background-repeat: no-repeat;
-  background-size: 101% auto
-}
-
-.pulsantiera-utente{
-  position: absolute;
-  left: 2%;
-  height: 80%;
-  width: 23%;
-}
-
-.pulsantiera-utente-tasti{
-  position: relative;
-  overflow-y: auto;
-  height: 40%;
-  bottom: 0%;
-}
-
-.liste-master{
-  z-index: 999;
-  position: absolute;
-  right: 5%;
-  height: 80%;
-  width: 70%;
-}
-
-.btn-dark-disabilitato:disabled{
-  opacity: 100%;
-}
-
-.btn-utente{
-  margin-bottom: 5px;
-  color: #eeaa44;
-  width: 80%;
-  height: 30px;
-}
-
-.btn-utente p{
-  font-size: 1.5vh
-}
-
-.btn-utente-33{
-  margin-bottom: 5px;
-  color: #eeaa44;
-  width: 33.33%;
-  height: 30px;
-}
-
-.btn-utente-33 p{
-  font-size: 1vw
-}
-
-.btn-utente-50{
-  margin-bottom: 5px;
-  color: #eeaa44;
-  width: 50%;
-  height: 30px;
-}
-
-.btn-utente-50 p{
-  font-size: 1vw
-}
-
-.flip-box-coin {
-  width: 17vmax;
-  height: 17vmax;
-  perspective: 1000px; /* Remove this if you don't want the 3D effect */
-}
-
-.square-box-coin{
-  width: 17vmax;
-}
-
-.btn-flip-box-back{
-  padding: 0; 
-  color: #eeaa44;
-  width: 10vw;
-  height: 3vw;
-  font-size: 1vw 
-}
-
-.flip-box-back-interlinea{
-  line-height: 2
-}
-
-.flip-box-back-u{
-  font-size: 1.5vw
-}
-
-.flip-box-back-span{
-  font-size: 1vw
-}
-
-.btn-group{
-  width: 80%;
-}
-
-
-/* TABELLE------------------------------------------------------- */
-table.fixed-headers {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  position: relative;
-  background: rgb(46, 45, 45);
-}
-
-/* questo attiva la scrollbar */
-#fixed-headers {
-  height: 100%; 
-  display: block; 
-  overflow: auto; 
-  bottom: 0
-}
-
-#fixed-headers thead {
-transform: translateZ(0);
-}
-
-#fixed-headers thead th {
-  /* background: rgb(46, 45, 45); */
-  background-color: rgb(46, 45, 45);
-  text-align: center;
-  height: 5vh;
-}
-
-div.table-reset{
-  background-color: rgb(46, 45, 45);
-  width: 100%;
-  height: 5vh;
-  top: 0;
-  color: white;
-}
-
-div.table-reset-tappo{
-  background-color: rgb(46, 45, 45);
-  width: 68px;
-  height: 10.5vh;
-  position: absolute;
-  top: 0;
-  left: 0;
-  color: white;
-  z-index: 3;
-}
-
-.btn-reset{
-  height: 100%;
-  font-size: 0.8em;
-  border-radius: 0.5rem;
-  background-color: #eeaa44;
-  color: #212529;
-}
-
-.btn-reset:hover{
-  font-weight: bold;
-}
-
-#fixed-headers tbody th {
-  text-align: center;
-  background: rgb(46, 45, 45);;
-  transform: translateZ(0);
-}
-
-#fixed-headers thead tr{
-  color: #eeaa44;
-  font-size: 1.2vh;
-}
-
-#fixed-headers tr{
-  font-size: 1.2vh;
-  color: white;
-}
-
-#fixed-headers tbody tr:hover{
-  color: red;
-}
-
-.btn-sm{
-  width: 100px;
-  height: 1.5vw;
-  min-height: 20px;
-  font-size: 1vh;
-}
-
-
-/* CREAZIONE PERSONAGGIO---------------------------------------------------------- */
-.anteprima-pg-nonAttiva{
-  background-color: grey;
-  width: 15vw;
-  height: 15vw;
-  border-radius: 15vw;
-  box-shadow: 5px 5px 5px 0px rgba(0,0,0,1)
-}
-
-.anteprima-pg-attiva{
-  background-color: #1e1e24;
-  width: 15vw;
-  height: 15vw;
-  border-radius: 15vw;
-  background-size: auto 100%;
-  background-repeat: no-repeat;
-  background-position: center center;
-  box-shadow: 5px 5px 5px 0px rgba(0,0,0,1)
+.received p::first-letter {
+	color:rgb(165, 14, 14);
+  font-size: 1.5em;
+  font-family: 'MiddleAgesDeco';
 }
 
 
@@ -906,126 +593,5 @@ div.table-reset-tappo{
 
 /* MEDIA QUERIES------------------------------------------------------------------------------ */
 @media screen and (max-width: 576px) {
-
-  /* HEADER - MEDIA QUERIES ---------------------------------------------- */
-  #titolo-home{
-  background-size: auto 9vw;
-  }
-
-  /* SCHEDA UTENTE - MEDIA QUERIES ---------------------------------------------- */
-  .pulsantiera-utente{
-    left: 2%;
-    height: 34%;
-    width: 96%;
-    display: flex;
-    justify-content: center; 
-    flex-direction: initial; 
-    align-items: center
-  }
-
-  .pulsantiera-utente-tasti{
-    height: 100%;
-    width: 225px;
-    overflow-y:auto;
-    float: right;
-    display: flex;
-    justify-content: center; 
-    flex-direction: column; 
-    align-items: center
-  }
-
-  .liste-master{
-    position: absolute;
-    bottom: 0%;
-    left: 2%;
-    height: 400px;
-    width: 96%;
-  }
-
-  .btn-utente{
-    margin-bottom: 5px;
-    color: #eeaa44;
-    width: 80%;
-    font-size: 2vh
-  }
-  
-  .btn-utente-33{
-    margin-bottom: 5px;
-    color: #eeaa44;
-    width: 33.33%;
-  }
-
-  .btn-utente-33 p{
-    font-size: 9px;
-  }
-  
-  .btn-utente-50{
-    margin-bottom: 5px;
-    color: #eeaa44;
-    width: 50%;
-  }
-
-  .btn-utente-50 p{
-    font-size: 1.5vh
-  }
-  
-  .flip-box-coin {
-    width: 140px;
-    height: 140px;
-    perspective: 1000px; /* Remove this if you don't want the 3D effect */
-  }
-
-  .square-box-coin{
-    width: 150px;
-    height: 150px;
-    float: left;
-  }
-
-  .btn-flip-box-back{
-    padding: 0; 
-    color: #eeaa44;
-    width: 28vw;
-    height: 3vh;
-    font-size: 1.5vh 
-  }
-
-  .flip-box-back-interlinea{
-    line-height: 3
-  }
-  
-  .flip-box-back-u{
-    font-size: 1.5vh
-  }
-  
-  .flip-box-back-span{
-    font-size: 1.2vh
-  }
-
-  .btn-group{
-    width: 80%;
-  }
-
-/* FOOTER - MEDIA QUERIES--------------------------------------------- */
-  .footer-setting b {
-    font-size: 3vw
-  }
-
-  #opzioni-master{
-    font-size: 2.3vw
-  }
-
-
-/* CREAZIONE PERSONAGGIO - MEDIA QUERIES---------------------------------------------------------- */
-.anteprima-pg-nonAttiva{
-  width: 13vh;
-  height: 13vh;
-  border-radius: 13vh
-}
-
-.anteprima-pg-attiva{
-  width: 13vh;
-  height: 13vh;
-  border-radius: 13vh
-}
 
 }

@@ -88,16 +88,16 @@ function MessaggioChat(props) {
                 <tr>
                     {messageClass === 'sent' ?
                         <td align='right'>
-                            <span className="font-lombardia" style={{ fontSize: "1.3em" }}>{nomePersonaggio} </span>
+                            <span className="font-Cardinal" style={{ fontSize: "1em" }}>{nomePersonaggio} </span>
                             {/*se non c'è un immagine,mette l'immagine di default corrispondente all'url*/}
-                            <img src={immagine} alt="..." />
+                            <img src={immagine} alt="..." style={{borderRadius:"60% 60% 0 0", border:"1px solid black"}}/>
                         </td>
                         :
                         <td align='left'>
                             {/*se non c'è un immagine,mette l'immagine di default corrispondente all'url*/}
-                            {nomePersonaggio == 'admin' ? null : <img src={immagine} alt="..." />}
+                            {nomePersonaggio == 'admin' ? null : <img src={immagine} alt="..." style={{borderRadius:"60% 60% 0 0", border:"1px solid black"}}/>}
                             {nomePersonaggio == 'admin' ? null :
-                                <span className="font-lombardia" style={{ fontSize: "1.3em" }}>{nomePersonaggio} </span>}
+                                <span className="font-Cardinal" style={{ fontSize: "1em" }}>{nomePersonaggio} </span>}
                         </td>
                     }
                 </tr>
@@ -105,9 +105,9 @@ function MessaggioChat(props) {
                 <tr>
                     <td align={messageClass === 'sent' ? 'right' : 'left'}>
                         {nomePersonaggio == 'admin' ?
-                            <p className="font-lombardia" style={{ fontSize: "1.8em", color: 'grey' }} title={nomePersonaggio}>{testo}</p>
+                            <p className="font-Cardinal" style={{ fontSize: "1.5em", color: 'grey' }} title={nomePersonaggio}>{testo}</p>
                             :
-                            <p className="font-lombardia" style={{ fontSize: "1.8em" }} title={nomePersonaggio}>{testo}</p>
+                            <p className="font-Cardinal" style={{ fontSize: "1.5em" }} title={nomePersonaggio}>{testo}</p>
                         }
 
                     </td>

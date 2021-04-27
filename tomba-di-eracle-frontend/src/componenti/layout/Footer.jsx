@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { ModalComponente } from '../utils/ModalComponent';
 import SchedaUtente from '../utente/SchedaUtente';
+import "./Footer.css"
 
 
 class Footer extends Component {

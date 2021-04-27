@@ -1,0 +1,110 @@
+.navigazione-sezione{
+    z-index: 1;
+    position: relative; 
+    top: 5%;
+    left: 1%; 
+    height: 85%; 
+    width: 35%; 
+    float: left; 
+    display: flex; 
+    justify-content: center; 
+    flex-direction: column; 
+    align-items: center
+  }
+  
+  .navigazione-area{
+    position: relative;
+    height: 100%;
+  }
+  
+  .navigazione-immagine{
+    position: absolute;
+    left:5%;
+    top:5%;
+    height: 94%;
+    width: 90%;
+    background-color: transparent;
+    background-position: center center; 
+    background-repeat: no-repeat; 
+    background-size: auto 90%
+  }
+  
+  .navigazione-link{
+    background-color: transparent;
+    display: flex; 
+    justify-content: center; 
+    flex-direction: column; 
+    align-items: center;
+    position: absolute
+  }
+  
+  .icona-alta{
+    width: 85%;
+  }
+  
+  .icona-alta-disabled{
+    width: 85%;
+    filter: grayscale(100%);
+  }
+  
+  .icona-alta:hover{
+    cursor: pointer;
+    width: 95%;
+  }
+  
+  .icona-larga{
+    height: 85%;
+  }
+  
+  .icona-larga-disabled{
+    height: 85%;
+    filter: grayscale(100%);
+  }
+  
+  .icona-larga:hover{
+    cursor: pointer;
+    height: 95%;
+  }
+  
+  .icona-freccia-larga{
+    width: 100%;
+  }
+  
+  .icona-freccia-larga-disabled{
+    width: 100%;
+    filter: grayscale(100%);
+  }
+  
+  .icona-freccia-larga:hover{
+    cursor: pointer;
+    width: 135%;
+  }
+  
+  
+  .icona-freccia-alta{
+    height: 100%;
+  }
+  
+  .icona-freccia-alta-disabled{
+    height: 100%;
+    filter: grayscale(100%);
+  }
+  
+  .icona-freccia-alta:hover{
+    cursor: pointer;
+    height: 135%;
+  }
+
+  .chat-sezione{
+    position: relative;
+    top: 5%;
+    right: 1%;
+    height: 85%;
+    width: 62%;
+    background-color: transparent;
+    float: right;
+    display: flex; 
+    justify-content: center; 
+    flex-direction: column; 
+    align-items: center
+  }

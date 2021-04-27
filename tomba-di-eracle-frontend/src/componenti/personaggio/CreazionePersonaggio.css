@@ -1,0 +1,40 @@
+/* CREAZIONE PERSONAGGIO---------------------------------------------------------- */
+.anteprima-pg-nonAttiva{
+    background-color: grey;
+    width: 15vw;
+    height: 15vw;
+    border-radius: 15vw;
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,1)
+  }
+  
+  .anteprima-pg-attiva{
+    background-color: #1e1e24;
+    width: 15vw;
+    height: 15vw;
+    border-radius: 15vw;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: center center;
+    box-shadow: 5px 5px 5px 0px rgba(0,0,0,1)
+  }
+  
+  
+  
+  
+  /* MEDIA QUERIES------------------------------------------------------------------------------ */
+  @media screen and (max-width: 576px) {
+  
+  /* CREAZIONE PERSONAGGIO - MEDIA QUERIES---------------------------------------------------------- */
+  .anteprima-pg-nonAttiva{
+    width: 13vh;
+    height: 13vh;
+    border-radius: 13vh
+  }
+  
+  .anteprima-pg-attiva{
+    width: 13vh;
+    height: 13vh;
+    border-radius: 13vh
+  }
+  
+  }

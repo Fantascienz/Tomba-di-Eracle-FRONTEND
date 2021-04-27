@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import withReactContent from 'sweetalert2-react-content'
 import Swal from 'sweetalert2'
 import { browserHistory } from '../..'
+import { io } from 'socket.io-client';
 //IMPORT COMPONENTI CUSTOM---------------------------
 import Macromappa from '../location/Macromappa'
 import { ModalComponente } from '../utils/ModalComponent'
@@ -34,8 +35,9 @@ import passi from '../../suoni/suono_passi.mp3'
 import attraversaUmbra from '../../suoni/attraversa_guanto.mp3'
 import srotolaCarta from '../../suoni/flip_card.mp3'
 import Chirottero from '../chirotteri/Chirottero'
+//IMPORT CSS--------------------------------------
+import "./Gamepage.css"
 
-import {io} from 'socket.io-client';
 
 
 
@@ -48,13 +50,13 @@ class Gamepage extends Component {
         const ultimaLocation = JSON.parse(sessionStorage.getItem('ultimaLocation'));
         let socket;
         socket = io(ENDPOINT)
-        
+
         if (location !== null) {
-            socket.emit('uscitaLocation', ( {personaggio,ultimaLocation} ), () => {
+            socket.emit('uscitaLocation', ({ personaggio, ultimaLocation }), () => {
                 socket.off('uscitaLocation');
             })
 
-            socket.emit('entrataNuovaLocation', ({personaggio, location, ultimaLocation}), () => {
+            socket.emit('entrataNuovaLocation', ({ personaggio, location, ultimaLocation }), () => {
                 socket.off('uscitaLocation');
             })
             this.props.naviga(location)
@@ -79,8 +81,33 @@ class Gamepage extends Component {
         browserHistory.go()
     }
 
+    formaBase = () => {
+        var pg = JSON.parse(sessionStorage.getItem('pgAttivo'))
+        pg.immagineAttiva = pg.urlImmagine
+        sessionStorage.setItem('pgAttivo', JSON.stringify(pg))
+    }
+
+    formaForte = () => {
+        var pg = JSON.parse(sessionStorage.getItem('pgAttivo'))
+        pg.immagineAttiva = pg.urlCrinos
+        sessionStorage.setItem('pgAttivo', JSON.stringify(pg))
+    }
+
+    formaVeloce = () => {
+        var pg = JSON.parse(sessionStorage.getItem('pgAttivo'))
+        pg.immagineAttiva = pg.urlLupo
+        sessionStorage.setItem('pgAttivo', JSON.stringify(pg))
+    }
+
     componentDidMount() {
-        this.props.primoAccesso(JSON.parse(sessionStorage.getItem('pgAttivo')))
+        // this.props.primoAccesso(JSON.parse(sessionStorage.getItem('pgAttivo')))
+        var a = JSON.parse(sessionStorage.getItem('pgAttivo'))
+        if (a.immagineAttiva == null) {
+            a.immagineAttiva = JSON.parse(sessionStorage.getItem('pgAttivo')).urlImmagine
+        }
+        sessionStorage.setItem('pgAttivo', JSON.stringify(a))
+
+        this.props.primoAccesso(a)
     }
 
     corniceNavigazione(tipoLocation) {
@@ -205,7 +232,7 @@ class Gamepage extends Component {
                             </div>
                             :
                             <SuonoDirezione suono={passi}
-                                funzione={{ onend: () =>  this.navigazione(JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.idLocationNord) }}
+                                funzione={{ onend: () => this.navigazione(JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.idLocationNord) }}
                                 title={(JSON.parse(sessionStorage.getItem('ultimaLocation')).tipo.includes("Stanza") ? "Torna" : "Vai") + " a " + JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.nomeLocationNord}
                                 className="icona-freccia-alta"
                                 src={frecciaSU}
@@ -271,7 +298,7 @@ class Gamepage extends Component {
 
                         {/* ------------NOME LOCATION------------ */}
                         <div className="navigazione-link" title={"Id: " + location.id} style={{ left: "28.75%", top: "79.7%", width: "41.65%", height: "4.97%", zIndex: "9999", backgroundColor: "transparent" }}>
-                            <b className="font-lombardia" style={{ fontSize: "1.5em", color: `${location.tipo == "Umbra" ? "blue" : "black"}` }} >{location.nome}</b>
+                            <b className="font-lombardia" style={{ fontSize: "1.5em", color: `${location.tipo == "Umbra" ? "blue" : "#eeaa44"}` }} >{location.nome}</b>
 
                         </div>
                     </div>
@@ -286,7 +313,7 @@ class Gamepage extends Component {
                     <div title={PG.nominativo} style={{ backgroundColor: "transparent", position: "absolute", top: "5%", right: "5%", width: "100px", height: "100px" }}>
                         <ModalComponente
                             suono={srotolaCarta}
-                            bottone={<div className="btn-immagine"><DettagliPersonaggio personaggio={PG} altezza="100px" larghezza="auto" immagine={PG.urlImmagine} dimImmagine="100px auto" /></div>}
+                            bottone={<div className="btn-immagine"><DettagliPersonaggio personaggio={PG} altezza="100px" larghezza="auto" immagine={PG.immagineAttiva} dimImmagine="100px auto" /></div>}
                             size='sm'
                             contenuto={
                                 <div className="centrato" >
@@ -297,6 +324,30 @@ class Gamepage extends Component {
 
 
                                     <div className="centrato" style={{ position: "relative", backgroundColor: "transparent", height: "100%", width: "100%" }}>
+                                        {/* FORMA BASE */}
+                                        {PG.urlCrinos == null && PG.urlLupo == null ?
+                                            null :
+                                            <form onSubmit={() => this.formaBase()}>
+                                                <button className="btn btn-gold" style={{ width: "100%", fontSize: "1.5em" }}><b className="font-lombardia">Homid</b></button>
+                                            </form>
+                                        }
+
+                                        {/* FORMA FORTE */}
+                                        {PG.urlCrinos == null ?
+                                            null :
+                                            <form onSubmit={() => this.formaForte()}>
+                                                <button className="btn btn-gold" style={{ width: "100%", fontSize: "1.5em" }}><b className="font-lombardia">Crinos</b></button>
+                                            </form>
+                                        }
+
+                                        {/* FORMA VELOCE */}
+                                        {PG.urlLupo == null ?
+                                            null :
+                                            <form onSubmit={() => this.formaVeloce()}>
+                                                <button className="btn btn-gold" style={{ width: "100%", fontSize: "1.5em" }}><b className="font-lombardia">Lupus</b></button>
+                                            </form>
+                                        }
+
                                         {/* LOGOUT PERSONAGGIO----------------------- */}
                                         <button className="btn btn-gold" onClick={() => this.logout()} style={{ width: "100%", fontSize: "1.5em" }}><b className="font-lombardia">E S C I</b></button>
                                     </div>
