@@ -9,7 +9,7 @@ export const coefficienteId = (cellePerRiga) => {
     }
 }
 
-export const setDirezioniX3 = (idSuperLoc, id , umbra) => {
+export const setDirezioniX3 = (idSuperLoc, id , umbra,mappa) => {
     let loc = parseInt(id, 10)
     let superLoc = parseInt(idSuperLoc, 10);
     switch (id) {
@@ -20,7 +20,7 @@ export const setDirezioniX3 = (idSuperLoc, id , umbra) => {
                 idLocationEst: loc + 1000,
                 idLocationSud: loc + 3000,
                 idLocationOvest: superLoc,
-                idLocationSpecchio: umbra ? loc - 48 : loc + 48
+                idLocationSpecchio: mappa === 'Macro' ? umbra ? loc - 144 : loc + 144 : umbra ? loc - 48 : loc + 48
             }
         case 2000 + superLoc:
             return {
@@ -29,7 +29,7 @@ export const setDirezioniX3 = (idSuperLoc, id , umbra) => {
                 idLocationEst: loc + 1000,
                 idLocationSud: loc + 3000,
                 idLocationOvest: loc - 1000,
-                idLocationSpecchio: umbra ? loc - 48 : loc + 48
+                idLocationSpecchio: mappa === 'Macro' ? umbra ? loc - 144 : loc + 144 : umbra ? loc - 48 : loc + 48
             }
         case 3000 + superLoc:
             return {
@@ -38,7 +38,7 @@ export const setDirezioniX3 = (idSuperLoc, id , umbra) => {
                 idLocationEst: superLoc,
                 idLocationSud: loc + 3000,
                 idLocationOvest: loc - 1000,
-                idLocationSpecchio: umbra ? loc - 48 : loc + 48
+                idLocationSpecchio: mappa === 'Macro' ? umbra ? loc - 144 : loc + 144 : umbra ? loc - 48 : loc + 48
             }
         case 4000 + superLoc:
             return {
@@ -47,7 +47,7 @@ export const setDirezioniX3 = (idSuperLoc, id , umbra) => {
                 idLocationEst: loc + 1000,
                 idLocationSud: loc + 3000,
                 idLocationOvest: superLoc,
-                idLocationSpecchio: umbra ? loc - 48 : loc + 48
+                idLocationSpecchio: mappa === 'Macro' ? umbra ? loc - 144 : loc + 144 : umbra ? loc - 48 : loc + 48
             }
         case 5000 + superLoc:
             return {
@@ -56,7 +56,7 @@ export const setDirezioniX3 = (idSuperLoc, id , umbra) => {
                 idLocationEst: loc + 1000,
                 idLocationSud: loc + 3000,
                 idLocationOvest: loc - 1000,
-                idLocationSpecchio: umbra ? loc - 48 : loc + 48
+                idLocationSpecchio: mappa === 'Macro' ? umbra ? loc - 144 : loc + 144 : umbra ? loc - 48 : loc + 48
             }
         case 6000 + superLoc:
             return {
@@ -65,7 +65,7 @@ export const setDirezioniX3 = (idSuperLoc, id , umbra) => {
                 idLocationEst: superLoc,
                 idLocationSud: loc + 3000,
                 idLocationOvest: loc - 1000,
-                idLocationSpecchio: umbra ? loc - 48 : loc + 48
+                idLocationSpecchio: mappa === 'Macro' ? umbra ? loc - 144 : loc + 144 : umbra ? loc - 48 : loc + 48
             }
         case 7000 + superLoc:
             return {
@@ -74,7 +74,7 @@ export const setDirezioniX3 = (idSuperLoc, id , umbra) => {
                 idLocationEst: loc + 1000,
                 idLocationSud: superLoc,
                 idLocationOvest: superLoc,
-                idLocationSpecchio: umbra ? loc - 48 : loc + 48
+                idLocationSpecchio: mappa === 'Macro' ? umbra ? loc - 144 : loc + 144 : umbra ? loc - 48 : loc + 48
             }
         case 8000 + superLoc:
             return {
@@ -83,7 +83,7 @@ export const setDirezioniX3 = (idSuperLoc, id , umbra) => {
                 idLocationEst: loc + 1000,
                 idLocationSud: superLoc,
                 idLocationOvest: loc - 1000,
-                idLocationSpecchio: umbra ? loc - 48 : loc + 48
+                idLocationSpecchio: mappa === 'Macro' ? umbra ? loc - 144 : loc + 144 : umbra ? loc - 48 : loc + 48
             }
         case 9000 + superLoc:
             return {
@@ -92,12 +92,12 @@ export const setDirezioniX3 = (idSuperLoc, id , umbra) => {
                 idLocationEst: superLoc,
                 idLocationSud: superLoc,
                 idLocationOvest: loc - 1000,
-                idLocationSpecchio: umbra ? loc - 48 : loc + 48
+                idLocationSpecchio: mappa === 'Macro' ? umbra ? loc - 144 : loc + 144 : umbra ? loc - 48 : loc + 48
             }
     }
 }
 
-export const setDirezioniX2 = (idSuperLoc, id,umbra) => {
+export const setDirezioniX2 = (idSuperLoc, id,umbra,mappa) => {
     let loc = parseInt(id, 10)
     let superLoc = parseInt(idSuperLoc, 10);
     switch (id) {
@@ -108,7 +108,7 @@ export const setDirezioniX2 = (idSuperLoc, id,umbra) => {
                 idLocationEst: loc + 10000,
                 idLocationSud: loc + 20000,
                 idLocationOvest: superLoc,
-                idLocationSpecchio: umbra ? loc - 48 : loc + 48
+                idLocationSpecchio: mappa === 'Macro' ? umbra ? loc - 144 : loc + 144 : umbra ? loc - 48 : loc + 48
             }
         case 20000 + superLoc:
             return {
@@ -117,7 +117,7 @@ export const setDirezioniX2 = (idSuperLoc, id,umbra) => {
                 idLocationEst: superLoc,
                 idLocationSud: loc + 20000,
                 idLocationOvest: loc - 10000,
-                idLocationSpecchio: umbra ? loc - 48 : loc + 48
+                idLocationSpecchio: mappa === 'Macro' ? umbra ? loc - 144 : loc + 144 : umbra ? loc - 48 : loc + 48
             }
         case 30000 + superLoc:
             return {
@@ -126,7 +126,7 @@ export const setDirezioniX2 = (idSuperLoc, id,umbra) => {
                 idLocationEst: loc + 10000,
                 idLocationSud: superLoc,
                 idLocationOvest: superLoc,
-                idLocationSpecchio: umbra ? loc - 48 : loc + 48
+                idLocationSpecchio: mappa === 'Macro' ? umbra ? loc - 144 : loc + 144 : umbra ? loc - 48 : loc + 48
             }
         case 40000 + superLoc:
             return {
@@ -135,12 +135,12 @@ export const setDirezioniX2 = (idSuperLoc, id,umbra) => {
                 idLocationEst: superLoc,
                 idLocationSud: superLoc,
                 idLocationOvest: loc - 10000,
-                idLocationSpecchio: umbra ? loc - 48 : loc + 48
+                idLocationSpecchio: mappa === 'Macro' ? umbra ? loc - 144 : loc + 144 : umbra ? loc - 48 : loc + 48
             }
     }
 }
 
-export const setDirezioniX1 = (idSuperLoc,id,umbra,subUmbra) => {
+export const setDirezioniX1 = (idSuperLoc,id,umbra,subUmbra,mappa) => {
     let loc = parseInt(id, 10)
     let superLoc = parseInt(idSuperLoc, 10);
     return {
@@ -149,6 +149,6 @@ export const setDirezioniX1 = (idSuperLoc,id,umbra,subUmbra) => {
         idLocationEst: superLoc,
         idLocationSud: superLoc,
         idLocationOvest: superLoc,
-        idLocationSpecchio: subUmbra ? null : umbra ? loc - 48 : loc + 48
+        idLocationSpecchio: mappa === 'Macro' ? subUmbra ? null : umbra ? loc - 144 : loc + 144 : subUmbra ? null : umbra ? loc - 48 : loc + 48
     }
 }

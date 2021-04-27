@@ -64,7 +64,7 @@ const CreazioneStanza = (props) => {
                 } : null,
             idSuperLocation: props.id,
             superLocation: props.superLoc,
-            direzioni: generaDirezioni(id, false,false),
+            direzioni: generaDirezioni(id, false,false,props.superLoc.mappa),
             locationUmbra: {
                 id: JSON.parse(sessionStorage.getItem('roomTemplate')).superLocation.tipo === 'Reame' ? props.superLoc.id <= 288 ? id + 144 : id + 48 : props.superLoc.id + 200000,
                 nome: nome,
@@ -79,8 +79,8 @@ const CreazioneStanza = (props) => {
                 chiave: chiaveUmbra ? chiave : null,
                 creatore: JSON.parse(sessionStorage.getItem('utente')),
                 mappa: setMappa()
-            },
-            direzioniUmbra: JSON.parse(sessionStorage.getItem('roomTemplate')).superLocation.tipo === 'Reame' ? (props.superLoc.id <= 288 ? generaDirezioni(id + 144, true,false) : generaDirezioni(id + 48, true,false)) : generaDirezioni(props.superLoc.id + 200000, false,true),
+            },                                      //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------> rivedo sto 100000 (deve avere come risultato 20000 qualsiasi sia superLoc.id)
+            direzioniUmbra: JSON.parse(sessionStorage.getItem('roomTemplate')).superLocation.tipo === 'Reame' ? (props.superLoc.id <= 288 ? generaDirezioni(id + 144, true,false,props.superLoc.mappa) : generaDirezioni(id + 48, true,false,props.superLoc.mappa)) : generaDirezioni(props.superLoc.id + 100000, false,true,props.superLoc.mappa),
             chiaveUmbra: chiaveUmbra,
         }
         console.log(sublocation)
@@ -89,7 +89,7 @@ const CreazioneStanza = (props) => {
 
     }
 
-    const generaDirezioni = (id, umbra,subUmbra) => {
+    const generaDirezioni = (id, umbra,subUmbra,mappa) => {
         let superLoc = props.superLoc.id
         if (umbra) {
             if (superLoc <= 288) {
@@ -100,11 +100,11 @@ const CreazioneStanza = (props) => {
         }
         switch (props.cellePerRiga) {
             case '3':
-                return setDirezioniX3(superLoc, id, umbra)
+                return setDirezioniX3(superLoc, id, umbra,mappa)
             case '2':
-                return setDirezioniX2(superLoc, id, umbra)
+                return setDirezioniX2(superLoc, id, umbra,mappa)
             case '1':
-                return setDirezioniX1(superLoc, id, umbra,subUmbra)
+                return setDirezioniX1(superLoc, id, umbra,subUmbra,mappa)
 
         }
     }

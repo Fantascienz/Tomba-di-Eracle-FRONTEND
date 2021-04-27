@@ -41,6 +41,7 @@ class ModificaLocation extends Component {
                 alert('Location eliminata correttamente!')
             )
         }
+
     }
 
     handleUpdate = (event) => {
@@ -69,10 +70,10 @@ class ModificaLocation extends Component {
         }
     }
 
-    getListaEsterne = () => {
+    getListaEsterneRoom = () => {
         let esterne = [];
-        for (let i = 288; i <= 335; i++) {
-            if (JSON.parse(sessionStorage.getItem('allLocations'))[i].nome !== '/') {
+        for (let i = 0; i < JSON.parse(sessionStorage.getItem('allLocations')).length; i++) {
+            if (JSON.parse(sessionStorage.getItem('allLocations'))[i].room) {
                 esterne.push(JSON.parse(sessionStorage.getItem('allLocations'))[i])
             }
         }
@@ -87,6 +88,7 @@ class ModificaLocation extends Component {
     render() {
 
         let stanze = JSON.parse(sessionStorage.getItem('stanze'));
+        let allLocations = JSON.parse(sessionStorage.getItem('allLocations'))
 
         return (
             <React.Fragment>
@@ -110,7 +112,7 @@ class ModificaLocation extends Component {
                             <TitoloPagina titolo="Elimina Location" />
                             <div className="centrato">
                                 {/* <form> */}
-                                <SelezionaLocationForm lista={this.getListaEsterne()} stanza={false} id="loc" handleChange={this.handleChange} />
+                                <SelezionaLocationForm lista={this.getListaEsterneRoom()} stanza={false} id="loc" handleChange={this.handleChange} />
                                 <ModalComponente
                                     contenuto={<ConfermaScelta messaggio={messaggioEliminazioneLocation} funzione={this.handleDelete} />}
                                     bottone={<button className="btn btn-dark" >Elimina</button>}
@@ -119,10 +121,10 @@ class ModificaLocation extends Component {
                             </div>
                             <TitoloPagina titolo="Elimina Stanza" />
                             <div className="centrato">
-                                <form onSubmit={this.handleDelete}>
+                                {/* <form onSubmit={() => alert('implementa!')}>
                                     <SelezionaLocationForm lista={stanze} stanza={true} id="loc" handleChange={this.handleChange} />
                                     <button className="btn btn-dark">Elimina</button>
-                                </form>
+                                </form> */}
                             </div>
                         </div>
                     </div>
