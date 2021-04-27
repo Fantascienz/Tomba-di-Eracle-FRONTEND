@@ -5,6 +5,7 @@ import withReactContent from "sweetalert2-react-content";
 import PersonaggioService from "../../servizi/PersonaggioService";
 import { creaPersonaggio } from "../../store/azioni/personaggioActions";
 import Header from "../layout/Header";
+import "./CreazionePersonaggio.css"
 
 
 class CreazionePersonaggio extends Component {

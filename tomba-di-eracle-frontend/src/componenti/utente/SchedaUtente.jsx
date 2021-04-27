@@ -15,6 +15,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import AdminService from '../../servizi/AdminService';
 import { estraiNome } from '../utils/Utilities';
+import "./SchedaUtente.css"
 
 
 class SchedaUtente extends Component {

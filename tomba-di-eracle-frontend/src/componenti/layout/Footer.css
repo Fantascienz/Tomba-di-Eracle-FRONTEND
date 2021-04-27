@@ -1,0 +1,23 @@
+.footer-setting{
+    border: none;
+}
+  
+.footer-setting b {
+    font-size: 2vmin
+}
+  
+.footer-setting p {
+    font-size: 2vmin
+}
+
+
+/* MEDIA QUERIES------------------------------------------------------------------------------ */
+@media screen and (max-width: 576px) {
+    .footer-setting b {
+        font-size: 3vw
+    }
+    
+    #opzioni-master{
+        font-size: 2.3vw
+    }
+}
