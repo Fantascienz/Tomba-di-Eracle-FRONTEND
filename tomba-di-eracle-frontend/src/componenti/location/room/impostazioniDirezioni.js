@@ -9,7 +9,7 @@ export const coefficienteId = (cellePerRiga) => {
     }
 }
 
-export const setDirezioniX3 = (idSuperLoc, id , umbra,mappa) => {
+export const setDirezioniX3 = (idSuperLoc, id, umbra, mappa) => {
     let loc = parseInt(id, 10)
     let superLoc = parseInt(idSuperLoc, 10);
     switch (id) {
@@ -97,7 +97,7 @@ export const setDirezioniX3 = (idSuperLoc, id , umbra,mappa) => {
     }
 }
 
-export const setDirezioniX2 = (idSuperLoc, id,umbra,mappa) => {
+export const setDirezioniX2 = (idSuperLoc, id, umbra, mappa) => {
     let loc = parseInt(id, 10)
     let superLoc = parseInt(idSuperLoc, 10);
     switch (id) {
@@ -140,15 +140,23 @@ export const setDirezioniX2 = (idSuperLoc, id,umbra,mappa) => {
     }
 }
 
-export const setDirezioniX1 = (idSuperLoc,id,umbra,subUmbra,mappa) => {
+export const setDirezioniX1 = (idSuperLoc, id, umbra, subUmbra, mappa) => {
     let loc = parseInt(id, 10)
     let superLoc = parseInt(idSuperLoc, 10);
     return {
-        idLocation: loc,
+        idLocation: loc >= 300000 ? loc - 100000 : loc,
         idLocationNord: superLoc,
         idLocationEst: superLoc,
         idLocationSud: superLoc,
         idLocationOvest: superLoc,
-        idLocationSpecchio: mappa === 'Macro' ? subUmbra ? null : umbra ? loc - 144 : loc + 144 : subUmbra ? null : umbra ? loc - 48 : loc + 48
+        idLocationSpecchio: generaIdLocationSpecchio1x1(mappa, subUmbra, umbra,loc, superLoc)
     }
+}
+
+const generaIdLocationSpecchio1x1 = (mappa, subUmbra, umbra,loc, superLoc) => {
+    console.log("super loc " + superLoc)
+    let remSubUmbra = superLoc % 1000
+    console.log("specchiosubumbra " + remSubUmbra)
+    let specchioSubUmbra = remSubUmbra <= 288 ? superLoc - 144 : superLoc - 48
+    return mappa === 'Macro' ? subUmbra ? specchioSubUmbra : umbra ? loc - 144 : loc + 144 : subUmbra ? specchioSubUmbra : umbra ? loc - 48 : loc + 48
 }

@@ -38,7 +38,9 @@ const CreazioneRoom = () => {
         }
 
         if (location.tipo === 'Umbra') {
-            return <option value={1}>1 x 1</option>
+            if (location.id < 200000) {
+                return <option value={1}>1 x 1</option>
+            } else return <option value={0}>Questa location non può avere sotto-location!</option>
         }
         if (location.mappa === 'Macro' || location.mappa === 'Esterna') {
             return (
