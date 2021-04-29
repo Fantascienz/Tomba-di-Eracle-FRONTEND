@@ -21,7 +21,7 @@ const generaIdLocationSpecchio = (idSuperLoc, idLoc) => {
     return idLoc - 144;
 }
 
-export const setDirezioniX3 = (idSuperLoc, id, umbra, mappa) => {
+export const setDirezioniX3 = (idSuperLoc, id) => {
     let loc = parseInt(id, 10)
     let superLoc = parseInt(idSuperLoc, 10);
     switch (id) {
@@ -109,7 +109,7 @@ export const setDirezioniX3 = (idSuperLoc, id, umbra, mappa) => {
     }
 }
 
-export const setDirezioniX2 = (idSuperLoc, id, umbra, mappa) => {
+export const setDirezioniX2 = (idSuperLoc, id) => {
     let loc = parseInt(id, 10)
     let superLoc = parseInt(idSuperLoc, 10);
     switch (id) {
@@ -152,7 +152,7 @@ export const setDirezioniX2 = (idSuperLoc, id, umbra, mappa) => {
     }
 }
 
-export const setDirezioniX1 = (idSuperLoc, id, umbra, subUmbra, mappa) => {
+export const setDirezioniX1 = (idSuperLoc, id) => {
     let loc = parseInt(id, 10)
     let superLoc = parseInt(idSuperLoc, 10);
     return {
@@ -167,23 +167,10 @@ export const setDirezioniX1 = (idSuperLoc, id, umbra, subUmbra, mappa) => {
 }
 
 const generaIdLocationSpecchio1x1 = (idSuperLoc, loc) => {
-    console.log("loc: "+loc)
-    console.log("idSuperLoc: "+idSuperLoc)
-    var specchio = generaIdLocationSpecchio(idSuperLoc, loc)
-    console.log("specchio: "+specchio)
-
-    var radicaleX00000 = (loc - loc % 100000)/100000;
-
-    console.log("radicaleX00000: "+radicaleX00000)
-
-    if (radicaleX00000==1){
+    let radice = (loc - loc % 100000)/100000;
+    if (radice==1){
         return generaIdLocationSpecchio(idSuperLoc, loc)
-    } else if (radicaleX00000==2){
-        // return JSON.parse(sessionStorage.getItem('roomTemplate').superLocation.direzioni.idLocationSpecchio)
+    } else if (radice==2){
         return generaIdLocationSpecchio(idSuperLoc, idSuperLoc)
     }
-
-
-    
-
 }

@@ -30,16 +30,6 @@ const CreazioneStanza = (props) => {
         }
     }
 
-    // const decidiCheCazzoDeviDaFa = (id) => {
-    //     if (props.superLoc.tipo === 'Reame') {
-    //         if (props.superLoc.id % 1000 <= 288) {
-    //             return generaDirezioni(id + 144, true, false, props.superLoc.mappa)
-    //         }
-    //         return generaDirezioni(id + 48, true, false, props.superLoc.mappa)
-    //     }
-    //     return generaDirezioni(props.superLoc.id + 200000, false, true, props.superLoc.mappa)
-    // }
-
     const formState = {
         nome: nome,
         ambiente: ambiente,
@@ -55,8 +45,6 @@ const CreazioneStanza = (props) => {
 
     const aggiungiLocation = () => {
         let id = props.id * coefficienteId(props.cellePerRiga) + props.superLoc.id
-        console.log((props.superLoc.id % 1000))
-        console.log(props.superLoc.tipo === 'Reame')
         let sublocation = {
             location:
             props.superLoc.tipo === 'Reame' ? {
@@ -76,7 +64,7 @@ const CreazioneStanza = (props) => {
                 } : null,
             idSuperLocation: props.id,
             superLocation: props.superLoc,
-            direzioni: generaDirezioni(id, false, false, props.superLoc.mappa),
+            direzioni: generaDirezioni(id, false),
             locationUmbra: {
                 id: props.superLoc.tipo === 'Reame' ?
                     (props.superLoc.id % 1000 <= 288 ? id + 144 : id + 48) :
@@ -93,19 +81,16 @@ const CreazioneStanza = (props) => {
                 chiave: chiaveUmbra ? chiave : null,
                 creatore: JSON.parse(sessionStorage.getItem('utente')),
                 mappa: setMappa()
-            },                                      //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------> rivedo sto 100000 (deve avere come risultato 20000 qualsiasi sia superLoc.id)
-            direzioniUmbra: JSON.parse(sessionStorage.getItem('roomTemplate')).superLocation.tipo === 'Reame' ? props.superLoc.id % 1000 <= 288 ? generaDirezioni(id + 144, true, false, props.superLoc.mappa) : generaDirezioni(id + 48, true, false, props.superLoc.mappa) : generaDirezioni(props.superLoc.id + 200000, false, true, props.superLoc.mappa),
-            // direzioniUmbra: JSON.parse(sessionStorage.getItem('roomTemplate')).superLocation.tipo === 'Reame' ? (props.superLoc.id % 1000 <= 288 ? console.log("SI") : console.log("NO")) : generaDirezioni(props.superLoc.id + 200000, false, true, props.superLoc.mappa),
-            // direzioniUmbra: decidiCheCazzoDeviDaFa(id),
+            },                                    
+            direzioniUmbra: JSON.parse(sessionStorage.getItem('roomTemplate')).superLocation.tipo === 'Reame' ? props.superLoc.id % 1000 <= 288 ? generaDirezioni(id + 144, true) : generaDirezioni(id + 48, true) : generaDirezioni(props.superLoc.id + 200000, false),
             chiaveUmbra: chiaveUmbra,
         }
-        console.log(sublocation)
         props.aggiungiLocation(sublocation)
         resetState()
 
     }
 
-    const generaDirezioni = (id, umbra, subUmbra, mappa) => {
+    const generaDirezioni = (id, umbra) => {
         let superLoc = props.superLoc.id
         if (umbra) {
             if (superLoc % 1000 <= 288) {
@@ -116,12 +101,11 @@ const CreazioneStanza = (props) => {
         }
         switch (props.cellePerRiga) {
             case '3':
-                return setDirezioniX3(superLoc, id, umbra, mappa)
+                return setDirezioniX3(superLoc, id)
             case '2':
-                return setDirezioniX2(superLoc, id, umbra, mappa)
+                return setDirezioniX2(superLoc, id)
             case '1':
-                return setDirezioniX1(superLoc, id, umbra, subUmbra, mappa)
-
+                return setDirezioniX1(superLoc, id)
         }
     }
 
