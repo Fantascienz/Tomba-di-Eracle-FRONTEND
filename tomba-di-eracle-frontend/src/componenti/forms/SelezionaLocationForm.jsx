@@ -2,39 +2,13 @@ import React, { Component } from 'react';
 
 class SelezionaLocationForm extends Component {
 
+    //AL MOMENTO IL COMPONENTE MOSTRA TUTTE LE LOCATION MACRO O ESTERNE,A PATTO CHE L'UTENTE SIA ADMIN O SIA IL CREATORE DELLA LOCATION
     renderLista = (elemento) => {
-        // if (this.props.allLocations) {
-        console.log(elemento)
         if (elemento.creatore.id === JSON.parse(sessionStorage.getItem('utente')).id || JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin') {
             if (elemento.tipo === 'Reame' && (elemento.mappa === 'Macro' || elemento.mappa === 'Esterna')) {
                 return <option value={elemento.id} key={elemento.id}>{elemento.id}: {elemento.nome}</option>
             }
         }
-        // if ((elemento.creatore !== null && JSON.parse(sessionStorage.getItem('utente')).id === elemento.creatore.id) || JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin') {
-        //     if (elemento.tipo === 'Reame' || elemento.mappa === 'Stanza') {
-        //         return <option value={elemento.id} key={elemento.id}>{elemento.id}: {elemento.nome}</option>
-        //     } else {
-        //         return <option value={elemento.id} key={elemento.id}> {elemento.id}: (UMBRA) - {elemento.nome}  </option>
-        //     }
-        // }
-        // } else if (!this.props.stanza) {
-        //     if (elemento.mappa === 'Esterna' && elemento.tipo === 'Reame') {
-        //         if ((elemento.creatore !== null && utente.id === elemento.creatore.id) || utente.tipo === 'admin') {
-        //             if (elemento.tipo === 'Reame' || elemento.mappa === 'Stanza') {
-        //                 return <option value={elemento.id} key={elemento.id}>{elemento.id}: {elemento.nome}</option>
-        //             } else {
-        //                 return <option value={elemento.id} key={elemento.id}> {elemento.id}: (UMBRA) - {elemento.nome}  </option>
-        //             }
-        //         }
-        //     }
-        // } else {
-        //     if ((elemento.subLocation.creatore !== null && utente.id === elemento.subLocation.creatore.id) || utente.tipo === 'admin') {
-        //         if (elemento.subLocation.mappa === 'Stanza') {
-        //             return <option value={elemento.subLocation.id} key={elemento.subLocation.id}>
-        //                 {elemento.subLocation.id}{elemento.subLocation.tipo === 'Stanza Umbra' ? "(UMBRA) - " : ""}: {elemento.subLocation.nome}</option>
-        //         }
-        //     }
-        // }
     }
     render() {
 

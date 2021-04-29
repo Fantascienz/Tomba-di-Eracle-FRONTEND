@@ -86,7 +86,6 @@ const RiempimentoRoom = () => {
         }
         if (nuovaLoc.location.chiave !== '') {
             vecchiaLoc.location.chiave = nuovaLoc.location.chiave
-            //inserire controllo per la spunta 
         }
         if (nuovaLoc.chiaveUmbra) {
             if (nuovaLoc.location.chiave !== '') {

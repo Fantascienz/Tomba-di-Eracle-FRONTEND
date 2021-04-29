@@ -10,7 +10,6 @@ export const coefficienteId = (cellePerRiga) => {
 }
 
 const generaIdLocationSpecchio = (idSuperLoc, idLoc) => {
-    //se la radice della superlocation è reame (macro o esterna)
     if (idSuperLoc % 1000 <= 144) {
         return idLoc + 144;
     } else if (idSuperLoc % 1000 >= 289 && idSuperLoc % 1000 <= 336) {

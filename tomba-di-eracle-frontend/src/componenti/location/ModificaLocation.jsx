@@ -41,7 +41,6 @@ class ModificaLocation extends Component {
                 alert('Location eliminata correttamente!')
             )
         }
-
     }
 
     handleUpdate = (event) => {
@@ -87,9 +86,6 @@ class ModificaLocation extends Component {
 
     render() {
 
-        let stanze = JSON.parse(sessionStorage.getItem('stanze'));
-        let allLocations = JSON.parse(sessionStorage.getItem('allLocations'))
-
         return (
             <React.Fragment>
                 <Header />
@@ -111,13 +107,11 @@ class ModificaLocation extends Component {
                         <div className="col-md-3 " >
                             <TitoloPagina titolo="Elimina Location" />
                             <div className="centrato">
-                                {/* <form> */}
                                 <SelezionaLocationForm lista={this.getListaEsterneRoom()} stanza={false} id="loc" handleChange={this.handleChange} />
                                 <ModalComponente
                                     contenuto={<ConfermaScelta messaggio={messaggioEliminazioneLocation} funzione={this.handleDelete} />}
                                     bottone={<button className="btn btn-dark" >Elimina</button>}
                                 />
-                                {/* </form> */}
                             </div>
                             <TitoloPagina titolo="Elimina Stanza" />
                             <div className="centrato">
