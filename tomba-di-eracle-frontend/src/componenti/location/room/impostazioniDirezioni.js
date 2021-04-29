@@ -161,15 +161,29 @@ export const setDirezioniX1 = (idSuperLoc, id, umbra, subUmbra, mappa) => {
         idLocationEst: superLoc,
         idLocationSud: superLoc,
         idLocationOvest: superLoc,
-        idLocationSpecchio: generaIdLocationSpecchio(superLoc,loc)
-        // generaIdLocationSpecchio1x1(mappa, subUmbra, umbra, loc, superLoc)
+        idLocationSpecchio: generaIdLocationSpecchio1x1(superLoc, loc >= 300000 ? loc - 100000 : loc)
+        
     }
 }
 
-const generaIdLocationSpecchio1x1 = (mappa, subUmbra, umbra, loc, superLoc) => {
-    console.log("super loc " + superLoc)
-    let remSubUmbra = superLoc % 1000
-    console.log("specchiosubumbra " + remSubUmbra)
-    let specchioSubUmbra = remSubUmbra <= 288 ? superLoc - 144 : superLoc - 48
-    return mappa === 'Macro' ? subUmbra ? specchioSubUmbra : umbra ? loc - 144 : loc + 144 : subUmbra ? specchioSubUmbra : umbra ? loc - 48 : loc + 48
+const generaIdLocationSpecchio1x1 = (idSuperLoc, loc) => {
+    console.log("loc: "+loc)
+    console.log("idSuperLoc: "+idSuperLoc)
+    var specchio = generaIdLocationSpecchio(idSuperLoc, loc)
+    console.log("specchio: "+specchio)
+
+    var radicaleX00000 = (loc - loc % 100000)/100000;
+
+    console.log("radicaleX00000: "+radicaleX00000)
+
+    if (radicaleX00000==1){
+        return generaIdLocationSpecchio(idSuperLoc, loc)
+    } else if (radicaleX00000==2){
+        // return JSON.parse(sessionStorage.getItem('roomTemplate').superLocation.direzioni.idLocationSpecchio)
+        return generaIdLocationSpecchio(idSuperLoc, idSuperLoc)
+    }
+
+
+    
+
 }
