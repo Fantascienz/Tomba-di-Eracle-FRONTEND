@@ -53,15 +53,15 @@ const Macromappa = ({ idLocation, pxDimensioniMappa, mostraStanze, tipoLocation 
                     </div>
 
                     {/* INGRANDIMENTO---------- */}
-                    <div style={{ position: "absolute", top: "0", zIndex: "3", height: "100%", width: "100%", display: `${showIngrandimento ? '' : 'none'}` }}>
+                    <div style={{ position: "absolute", top: "0", zIndex: "2", height: "100%", width: "100%", display: `${showIngrandimento ? '' : 'none'}` }}>
                          {/* <Magnifier imageSrc={immagineMacromappa()} dragToMove={false} /> */}
-                         <GlassMagnifier imageSrc={immagineMacromappa()} magnifierOffsetX={-170} magnifierOffsetY={170} magnifierSize="400px" allowOverflow={true} cursorStyle="crosshair"/>
+                         <GlassMagnifier imageSrc={immagineMacromappa()} magnifierOffsetX={-200} magnifierOffsetY={200} magnifierSize="400px" allowOverflow={true} cursorStyle="crosshair" magnifierBorderColor="black" />
                     </div>
 
 
                     {/* PULSANTIERA------------ */}
                     <Draggable>
-                        <div className="centrato" style={{ position: "absolute", bottom: "0%", right: "-10%", zIndex: "9999", backgroundColor: "transparent" }}>
+                        <div className="centrato" style={{ position: "absolute", bottom: "0%", right: "-10%", zIndex: "1", backgroundColor: "transparent" }}>
                             {mostraStanze ?
                                 <div title="Pulsante #1" style={{ height: `${pxDimensioniCella}px`, width: `${pxDimensioniCella}px` }}>
                                     <img className="btn centrato" title={showStanze ? 'Non Mostrare Stanze' : 'Mostra Stanze'} src={porta} style={{ height: "130%" }} onClick={() => setShowStanze(!showStanze)} alt="" />
