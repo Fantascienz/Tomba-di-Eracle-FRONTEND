@@ -34,8 +34,8 @@ class DettagliPersonaggioBack extends Component {
                     <div style={{ position: "absolute", bottom: "7%", backgroundColor: "transparent", width: "100%", height: "auto" }}>
 
                         <div className="centrato" style={{ position: "absolute", bottom: "0%", backgroundColor: "transparent", width: "100%", height: "auto" }}>
-                            <button className="btn-gold" style={{ width: "80%", height: "15%" }} onClick={() => this.modificaPersonaggio(singleCharacter)}>Modifica</button>
-                            <button className="btn-gold" style={{ width: "80%", height: "15%" }} onClick={() => this.setPGAttivo(singleCharacter)}>Gioca</button>
+                            <button className="btn-gold" style={{ width: "80%", height: "10%" }} onClick={() => this.modificaPersonaggio(singleCharacter)}><b className="font-lombardia" style={{ fontSize: "1.8vw" }}>Modifica</b></button>
+                            <button className="btn-gold" style={{ width: "80%", height: "10%" }} onClick={() => this.setPGAttivo(singleCharacter)}><b className="font-lombardia" style={{ fontSize: "3vh" }}>G i o c a</b></button>
                         </div>
 
                     </div>
