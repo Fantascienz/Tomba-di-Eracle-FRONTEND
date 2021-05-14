@@ -5,15 +5,31 @@ const msgSchema = new mongoose.Schema({
         required: true
     },
 
-    utente: {
+    inviatoAlle: {
+        type: Date,
+        required: true
+    },
+
+    idPersonaggio: {
+        type: Number,
+        required: true
+    },
+
+    nomePersonaggio: {
         type: String,
         required: true
     },
 
-    location: {
+    idLocation: {
+        type: Number,
+        required: true
+    },
+
+    immagine: {
         type: String,
         required: true
-    }
+    },
+
 });
 
 const Msg = mongoose.model('message', msgSchema);
