@@ -7,7 +7,7 @@ import { browserHistory } from '../..'
 import { io } from 'socket.io-client';
 //IMPORT COMPONENTI CUSTOM---------------------------
 import Macromappa from '../location/Macromappa'
-import { ModalComponente } from '../utils/ModalComponent'
+import { ModalPergamena } from '../utils/ModalComponent'
 import { naviga, primoAccesso } from '../../store/azioni/gameActions'
 import DettagliPersonaggio from '../personaggio/DettagliPersonaggio'
 import { SuonoDirezione } from '../utils/SuonoSuImmagine'
@@ -22,13 +22,20 @@ import ModificaMeteoGamepage from '../forms/ModificaMeteoGamepage'
 import cardGame from '../../img/gameCard.png';
 import cardGameUmbra from '../../img/gameCard_umbra.png'
 import mappa from '../../img/mappa_icona.png'
+import mappaUmbra from '../../img/mappa_icona_umbra.png'
 import porta from '../../img/porta_icona.png'
+import portaUmbra from '../../img/porta_icona_umbra.png'
 import specchio from '../../img/specchio_icona.png'
+import specchioUmbra from '../../img/specchio_icona_umbra.png'
 import chirottero from '../../img/chirottero_icona.png'
 import frecciaSX from '../../img/freccia_sx.png'
 import frecciaDX from '../../img/freccia_dx.png'
 import frecciaSU from '../../img/freccia_su.png'
 import frecciaGIU from '../../img/freccia_giu.png'
+import frecciaSXUmbra from '../../img/freccia_sx_umbra.png'
+import frecciaDXUmbra from '../../img/freccia_dx_umbra.png'
+import frecciaSUUmbra from '../../img/freccia_su_umbra.png'
+import frecciaGIUUmbra from '../../img/freccia_giu_umbra.png'
 import Scroll from '../../img/scroll.png'
 //IMPORT SUONI------------------------------------
 import passi from '../../suoni/suono_passi.mp3'
@@ -37,6 +44,7 @@ import srotolaCarta from '../../suoni/flip_card.mp3'
 import Chirottero from '../chirotteri/Chirottero'
 //IMPORT CSS--------------------------------------
 import "./Gamepage.css"
+import trasformazionePG from './TrasformazionePG'
 
 
 
@@ -81,24 +89,6 @@ class Gamepage extends Component {
         browserHistory.go()
     }
 
-    formaBase = () => {
-        var pg = JSON.parse(sessionStorage.getItem('pgAttivo'))
-        pg.immagineAttiva = pg.urlImmagine
-        sessionStorage.setItem('pgAttivo', JSON.stringify(pg))
-    }
-
-    formaForte = () => {
-        var pg = JSON.parse(sessionStorage.getItem('pgAttivo'))
-        pg.immagineAttiva = pg.urlCrinos
-        sessionStorage.setItem('pgAttivo', JSON.stringify(pg))
-    }
-
-    formaVeloce = () => {
-        var pg = JSON.parse(sessionStorage.getItem('pgAttivo'))
-        pg.immagineAttiva = pg.urlLupo
-        sessionStorage.setItem('pgAttivo', JSON.stringify(pg))
-    }
-
     componentDidMount() {
         // this.props.primoAccesso(JSON.parse(sessionStorage.getItem('pgAttivo')))
         var a = JSON.parse(sessionStorage.getItem('pgAttivo'))
@@ -138,7 +128,7 @@ class Gamepage extends Component {
         var stanze = JSON.parse(sessionStorage.getItem('stanzeLocation'));
 
         return (
-            <div style={{ position: "absolute", top: "0", height: "100%", width: "100%", backgroundColor: "dimgray" }}>
+            <div className="gamepage">
                 <div className="navigazione-sezione">
 
                     <div className="navigazione-area">
@@ -159,33 +149,52 @@ class Gamepage extends Component {
                         {/* ------------PULSANTI AZIONI------------ */}
                         {/* pulsante: mappa------------------------------------------------- */}
                         <div className="navigazione-link" title="Apri la Minimappa" style={{ left: "6.99%", top: "4.47%", width: "14.67%", height: "9.2%", zIndex: "9999" }}>
-                            <ModalComponente
-                                suono={srotolaCarta}
-                                bottone={<img className="icona-alta" src={mappa} alt="" />}
-                                size='sm'
-                                contenuto={
-                                    <div className="centrato" >
-                                        <div className="centrato" style={{ position: "fixed", backgroundColor: "none" }}>
-                                            <img src={Scroll} style={{ height: "800px", transform: "rotate(90deg)" }} alt="" />
-                                        </div>
 
-                                        <div className="centrato" style={{ position: "fixed", backgroundColor: "transparent", height: "500px", width: "500px" }}>
-                                            {location.tipo.includes("Stanza") && location.urlMinimappa != null ?
-                                                <MinimappaRegolabile idLocation="" pxDimensioniMappa="500" lenteDisplay="none" cellePerRiga="2" immagineMinimappa={location.urlMinimappa} />
-                                                :
-                                                <Macromappa idLocation={location.id} pxDimensioniMappa="500" tipoLocation={location.tipo.includes('Umbra') ? 'Umbra' : null} />
-                                            }
-                                        </div>
+                            
+
+                            <ModalPergamena
+                                bottone={<img className="icona-alta" src={location.tipo === "Umbra" || location.tipo === "Stanza Umbra" ? mappaUmbra : mappa} alt="" />}
+                                contenuto={
+                                    <div className="centrato" style={{ position: "fixed", backgroundColor: "transparent", height: "500px", width: "500px" }}>
+                                        {location.tipo.includes("Stanza") && location.urlMinimappa != null ?
+                                            <MinimappaRegolabile idLocation="" pxDimensioniMappa="500" lenteDisplay="none" cellePerRiga="2" immagineMinimappa={location.urlMinimappa} />
+                                            :
+                                            <Macromappa idLocation={location.id} pxDimensioniMappa="500" tipoLocation={location.tipo.includes('Umbra') ? 'Umbra' : null} />
+                                        }
                                     </div>
-                                } />
+                                }
+                            />
+
+                            {/* <img className="icona-alta" src={location.tipo === "Umbra" || location.tipo === "Stanza Umbra" ? mappaUmbra : mappa} alt="" />
+
+                            <ModalPergamena
+                                bottone={<div className="svgCustom" style={{ height: "100%", width: "100%", position: "absolute", top: "0", left: "0" }}>
+                                    <svg viewBox="2 4 70 70" style={{ height: "120%", width: "120%" }}>
+                                        <path d="M 5 15 C 6.5 16.5 9.5 17 10 16.5 C 22 13 34 17 46 17 C 50.5 17 54 17 53.5 15.5 C 52.5 13 51 13.5 50.5 14 C 50.5 12.5 53 11 54 11 C 63.5 23 58.5 37.5 55.5 54 C 48 62.5 19 51 6.5 56 C 6.5 42.5 4.5 46.5 5 15.5"
+                                            fill="transparent" stroke="rgba(255, 0, 0, 0.5)" strokeWidth="3px" vectorEffect="non-scaling-stroke" />
+                                    </svg>
+                                </div>}
+                                contenuto={
+                                    <div className="centrato" style={{ position: "fixed", backgroundColor: "transparent", height: "500px", width: "500px" }}>
+                                        {location.tipo.includes("Stanza") && location.urlMinimappa != null ?
+                                            <MinimappaRegolabile idLocation="" pxDimensioniMappa="500" lenteDisplay="none" cellePerRiga="2" immagineMinimappa={location.urlMinimappa} />
+                                            :
+                                            <Macromappa idLocation={location.id} pxDimensioniMappa="500" tipoLocation={location.tipo.includes('Umbra') ? 'Umbra' : null} />
+                                        }
+                                    </div>
+                                }
+                            /> */}
+
                         </div>
+
+
 
                         {/* pulsante: porta */}
                         <div className="navigazione-link" style={{ left: "77.65%", top: "4.43%", width: "14.67%", height: "9.2%", zIndex: "9999" }}>
                             {stanze == null || stanze[0] == null ?
-                                <img className="icona-larga-disabled" title="Non ci sono Stanze nella Location" src={porta} alt="" />
+                                null
                                 :
-                                <img className="icona-larga" title="Accedi ad una Stanza della Location" src={porta} onClick={() => this.visualizzazioneStanze()} alt="" />
+                                <img className="icona-larga" title="Accedi ad una Stanza della Location" src={location.tipo === "Umbra" || location.tipo === "Stanza Umbra" ? portaUmbra : porta} onClick={() => this.visualizzazioneStanze()} alt="" />
                             }
                         </div>
 
@@ -194,9 +203,8 @@ class Gamepage extends Component {
                         {PG.umbra ?
                             <SuonoDirezione suono={attraversaUmbra}
                                 funzione={{ onend: () => this.navigazione(JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.idLocationSpecchio) }}
-                                title="Oltrepassa il Guanto"
-                                className="icona-larga"
-                                src={specchio}
+                                title="Oltrepassa il Guanto" className="icona-larga"
+                                src={location.tipo === "Umbra" || location.tipo === "Stanza Umbra" ? specchioUmbra : specchio}
                                 style={{ left: "73.23%", top: "82.23%", width: "11.25%", height: "7.04%", zIndex: "9999" }} />
                             : null}
 
@@ -204,19 +212,11 @@ class Gamepage extends Component {
                         {/* pulsante: chirottero------------------------------------------------- */}
                         {PG.chirottero ?
                             <div className="navigazione-link" title="Invia un Chirottero" style={{ left: "14.93%", top: "82.23%", width: "11.25%", height: "7.04%", zIndex: "9999" }}>
-                                <ModalComponente
-                                    suono={srotolaCarta}
+                                <ModalPergamena
                                     bottone={<img className="icona-alta" src={chirottero} alt="" />}
-                                    size='sm'
                                     contenuto={
-                                        <div className="centrato" >
-                                            <div className="centrato" style={{ position: "fixed", backgroundColor: "none" }}>
-                                                <img src={Scroll} style={{ height: "800px", transform: "rotate(90deg)" }} alt="" />
-                                            </div>
-
-                                            <div style={{ position: "fixed", backgroundColor: "transparent", height: "500px", width: "600px" }}>
-                                                <Chirottero />
-                                            </div>
+                                        <div style={{ position: "fixed", backgroundColor: "transparent", height: "500px", width: "600px" }}>
+                                            <Chirottero />
                                         </div>
                                     } />
                             </div>
@@ -227,57 +227,49 @@ class Gamepage extends Component {
                         {/* ------------PULSANTI MOVIMENTO------------ */}
                         {/* NORD */}
                         {JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.idLocationNord == null ?
-                            <div className="navigazione-link" title="Nessuna Location a Nord!" style={{ left: "44.05%", top: "8.73%", width: "11.25%", height: "8.56%", zIndex: "9999" }}>
-                                <img className="icona-freccia-alta-disabled" src={frecciaSU} alt="" />
-                            </div>
+                            null
                             :
                             <SuonoDirezione suono={passi}
                                 funzione={{ onend: () => this.navigazione(JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.idLocationNord) }}
                                 title={(JSON.parse(sessionStorage.getItem('ultimaLocation')).tipo.includes("Stanza") ? "Torna" : "Vai") + " a " + JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.nomeLocationNord}
                                 className="icona-freccia-alta"
-                                src={frecciaSU}
+                                src={location.tipo === "Umbra" || location.tipo === "Stanza Umbra" ? frecciaSUUmbra : frecciaSU}
                                 style={{ left: "44.05%", top: "8.73%", width: "11.25%", height: "8.56%", zIndex: "9999" }} />
                         }
 
                         {/* EST */}
                         {JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.idLocationEst == null ?
-                            <div className="navigazione-link" title="Nessuna Location ad Est!" style={{ left: "79.47%", top: "46.33%", width: "13.07%", height: "7.01%", zIndex: "9999" }}>
-                                <img className="icona-freccia-larga-disabled" src={frecciaDX} alt="" />
-                            </div>
+                            null
                             :
                             <SuonoDirezione suono={passi}
                                 funzione={{ onend: () => this.navigazione(JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.idLocationEst) }}
                                 title={(JSON.parse(sessionStorage.getItem('ultimaLocation')).tipo.includes("Stanza") ? "Torna" : "Vai") + " a " + JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.nomeLocationEst}
                                 className="icona-freccia-larga"
-                                src={frecciaDX}
+                                src={location.tipo === "Umbra" || location.tipo === "Stanza Umbra" ? frecciaDXUmbra : frecciaDX}
                                 style={{ left: "79.47%", top: "46.33%", width: "13.07%", height: "7.01%", zIndex: "9999" }} />
                         }
 
                         {/* SUD */}
                         {JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.idLocationSud == null ?
-                            <div className="navigazione-link" title="Nessuna Location a Sud!" style={{ left: "44%", top: "85.89%", width: "11.25%", height: "8.09%", zIndex: "9999" }}>
-                                <img className="icona-freccia-alta-disabled" src={frecciaGIU} alt="" />
-                            </div>
+                            null
                             :
                             <SuonoDirezione suono={passi}
                                 funzione={{ onend: () => this.navigazione(JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.idLocationSud) }}
                                 title={(JSON.parse(sessionStorage.getItem('ultimaLocation')).tipo.includes("Stanza") ? "Torna" : "Vai") + " a " + JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.nomeLocationSud}
                                 className="icona-freccia-alta"
-                                src={frecciaGIU}
+                                src={location.tipo === "Umbra" || location.tipo === "Stanza Umbra" ? frecciaGIUUmbra : frecciaGIU}
                                 style={{ left: "44%", top: "85.89%", width: "11.25%", height: "8.09%", zIndex: "9999" }} />
                         }
 
                         {/* OVEST */}
                         {JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.idLocationOvest == null ?
-                            <div className="navigazione-link" title="Nessuna Location ad Ovest!" style={{ left: "6.77%", top: "46.2%", width: "13.07%", height: "7.01%", zIndex: "9999" }}>
-                                <img className="icona-freccia-larga-disabled" src={frecciaSX} alt="" />
-                            </div>
+                            null
                             :
                             <SuonoDirezione suono={passi}
                                 funzione={{ onend: () => this.navigazione(JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.idLocationOvest) }}
                                 title={(JSON.parse(sessionStorage.getItem('ultimaLocation')).tipo.includes("Stanza") ? "Torna" : "Vai") + " a " + JSON.parse(sessionStorage.getItem('ultimaLocation')).direzioni.nomeLocationOvest}
                                 className="icona-freccia-larga"
-                                src={frecciaSX}
+                                src={location.tipo === "Umbra" || location.tipo === "Stanza Umbra" ? frecciaSXUmbra : frecciaSX}
                                 style={{ left: "6.77%", top: "46.2%", width: "13.07%", height: "7.01%", zIndex: "9999" }} />
                         }
 
@@ -285,10 +277,10 @@ class Gamepage extends Component {
                         {/* ------------SOLE/LUNA------------ */}
                         {(JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' || JSON.parse(sessionStorage.getItem('utente')).tipo === 'master') ?
                             <div onClick={() => withReactContent(Swal).fire({ html: <ModificaMeteoGamepage ultimaLocation={JSON.parse(sessionStorage.getItem('ultimaLocation'))} /> })}>
-                                <GiornoNotte />
+                                <GiornoNotte location={location} />
                             </div>
                             :
-                            <GiornoNotte />
+                            <GiornoNotte location={location} />
                         }
 
 
@@ -298,7 +290,7 @@ class Gamepage extends Component {
 
                         {/* ------------NOME LOCATION------------ */}
                         <div className="navigazione-link" title={"Id: " + location.id} style={{ left: "28.75%", top: "79.7%", width: "41.65%", height: "4.97%", zIndex: "9999", backgroundColor: "transparent" }}>
-                            <b className="font-lombardia" style={{ fontSize: "1.5em", color: `${location.tipo == "Umbra" ? "blue" : "#eeaa44"}` }} >{location.nome}</b>
+                            <b className="font-Cardinal" style={{}} >{location.nome}</b>
 
                         </div>
                     </div>
@@ -306,51 +298,22 @@ class Gamepage extends Component {
 
                 <div className="chat-sezione">
 
+                    {/* CHAT ROOM------------------------------------- */}
                     <div style={{ backgroundColor: "transparent", position: "absolute", top: "0", left: "0", width: "100%", height: "100%" }}>
                         <ChatRoom />
                     </div>
 
+                    {/* AVATAR PG------------------------------------ */}
                     <div title={PG.nominativo} style={{ backgroundColor: "transparent", position: "absolute", top: "5%", right: "5%", width: "100px", height: "100px" }}>
-                        <ModalComponente
-                            suono={srotolaCarta}
+                        <ModalPergamena
                             bottone={<div className="btn-immagine"><DettagliPersonaggio personaggio={PG} altezza="100px" larghezza="auto" immagine={PG.immagineAttiva} dimImmagine="100px auto" /></div>}
-                            size='sm'
                             contenuto={
-                                <div className="centrato" >
-                                    {/* SFONDO MODAL----------------------- */}
-                                    <div className="centrato" style={{ position: "fixed", backgroundColor: "none" }}>
-                                        <img src={Scroll} style={{ height: "800px", transform: "rotate(90deg)" }} alt="" />
-                                    </div>
+                                <div className="centrato" style={{ position: "relative", backgroundColor: "transparent", height: "100%", width: "100%" }}>
+                                    {/* TRASFORMAZIONE PERSONAGGIO--------------- */}
+                                    {trasformazionePG(PG, PG.urlImmagine, PG.urlCrinos, PG.urlLupo, "Homid", "Crinos", "Lupus")}
 
-
-                                    <div className="centrato" style={{ position: "relative", backgroundColor: "transparent", height: "100%", width: "100%" }}>
-                                        {/* FORMA BASE */}
-                                        {PG.urlCrinos == null && PG.urlLupo == null ?
-                                            null :
-                                            <form onSubmit={() => this.formaBase()}>
-                                                <button className="btn btn-gold" style={{ width: "100%", fontSize: "1.5em" }}><b className="font-lombardia">Homid</b></button>
-                                            </form>
-                                        }
-
-                                        {/* FORMA FORTE */}
-                                        {PG.urlCrinos == null ?
-                                            null :
-                                            <form onSubmit={() => this.formaForte()}>
-                                                <button className="btn btn-gold" style={{ width: "100%", fontSize: "1.5em" }}><b className="font-lombardia">Crinos</b></button>
-                                            </form>
-                                        }
-
-                                        {/* FORMA VELOCE */}
-                                        {PG.urlLupo == null ?
-                                            null :
-                                            <form onSubmit={() => this.formaVeloce()}>
-                                                <button className="btn btn-gold" style={{ width: "100%", fontSize: "1.5em" }}><b className="font-lombardia">Lupus</b></button>
-                                            </form>
-                                        }
-
-                                        {/* LOGOUT PERSONAGGIO----------------------- */}
-                                        <button className="btn btn-gold" onClick={() => this.logout()} style={{ width: "100%", fontSize: "1.5em" }}><b className="font-lombardia">E S C I</b></button>
-                                    </div>
+                                    {/* LOGOUT PERSONAGGIO----------------------- */}
+                                    <button className="btn btn-gold" onClick={() => this.logout()} style={{ width: "100%", fontSize: "1.5em" }}><b className="font-lombardia">E S C I</b></button>
                                 </div>
                             }
                         />

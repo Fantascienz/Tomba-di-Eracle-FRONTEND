@@ -1,3 +1,11 @@
+.gamepage{
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: dimgray
+}
+
 .navigazione-sezione{
     z-index: 1;
     position: relative; 
@@ -108,3 +116,30 @@
     flex-direction: column; 
     align-items: center
   }
+
+  .font-Cardinal{
+    font-size: 1.3vw;
+    line-height: 1
+  }
+
+  .svgCustom{
+    opacity: 0%
+  }
+
+  .svgCustom:hover{
+    opacity: 100%;
+    background-image: url('../../img/mappa_icona.png');
+    background-position: center center;
+    background-size: 98% auto;
+    background-repeat: no-repeat;
+  }
+
+   /* MEDIA QUERIES------------------------------------------------------------------------------ */
+   @media screen and (max-width: 576px) {
+
+    .font-Cardinal{
+      font-size: 3vw;
+      line-height: 1
+    }
+
+   }
