@@ -212,7 +212,7 @@ class SchedaUtente extends Component {
 
     creaStanza = () => {
         LocationService.sessioneAllLocation().then(() => {
-            browserHistory.push('creazioneStanza')
+            browserHistory.push('creazioneRoom')
             browserHistory.go()
         }
         )

@@ -6,6 +6,9 @@ import Header from '../layout/Header';
 import Macromappa from './Macromappa';
 import { TitoloPagina } from '../layout/TitoloPagina';
 import ModificaStanzaForm from '../forms/ModificaStanzaForm';
+import ConfermaScelta from '../utils/ConfermaScelta';
+import { ModalComponente } from '../utils/ModalComponent';
+import { messaggioEliminazioneLocation } from '../utils/costanti';
 
 class ModificaLocation extends Component {
 
@@ -24,6 +27,7 @@ class ModificaLocation extends Component {
         urlMinimappa: '',
         urlAudio: ''
     }
+
 
     handleChange = (event) => {
         this.setState({
@@ -63,7 +67,16 @@ class ModificaLocation extends Component {
         } else {
             event.preventDefault();
         }
+    }
 
+    getListaEsterneRoom = () => {
+        let esterne = [];
+        for (let i = 0; i < JSON.parse(sessionStorage.getItem('allLocations')).length; i++) {
+            if (JSON.parse(sessionStorage.getItem('allLocations'))[i].room) {
+                esterne.push(JSON.parse(sessionStorage.getItem('allLocations'))[i])
+            }
+        }
+        return esterne;
     }
 
     componentDidMount() {
@@ -72,12 +85,6 @@ class ModificaLocation extends Component {
     }
 
     render() {
-
-        let listaLocationOrdinata = JSON.parse(sessionStorage.getItem('allLocations')).sort(
-            (a, b) => (a.id < b.id ? -1 : Number(a.id > b.id))
-        );
-
-        let stanze = JSON.parse(sessionStorage.getItem('stanze'));
 
         return (
             <React.Fragment>
@@ -100,17 +107,18 @@ class ModificaLocation extends Component {
                         <div className="col-md-3 " >
                             <TitoloPagina titolo="Elimina Location" />
                             <div className="centrato">
-                                <form onSubmit={this.handleDelete}>
-                                    <SelezionaLocationForm lista={listaLocationOrdinata} stanza={false} id="loc" handleChange={this.handleChange} />
-                                    <button className="btn btn-dark">Elimina</button>
-                                </form>
+                                <SelezionaLocationForm lista={this.getListaEsterneRoom()} stanza={false} id="loc" handleChange={this.handleChange} />
+                                <ModalComponente
+                                    contenuto={<ConfermaScelta messaggio={messaggioEliminazioneLocation} funzione={this.handleDelete} />}
+                                    bottone={<button className="btn btn-dark" >Elimina</button>}
+                                />
                             </div>
                             <TitoloPagina titolo="Elimina Stanza" />
                             <div className="centrato">
-                                <form onSubmit={this.handleDelete}>
+                                {/* <form onSubmit={() => alert('implementa!')}>
                                     <SelezionaLocationForm lista={stanze} stanza={true} id="loc" handleChange={this.handleChange} />
                                     <button className="btn btn-dark">Elimina</button>
-                                </form>
+                                </form> */}
                             </div>
                         </div>
                     </div>

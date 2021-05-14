@@ -22,6 +22,7 @@ import ModificaMeteoGamepage from '../forms/ModificaMeteoGamepage'
 import cardGame from '../../img/gameCard.png';
 import cardGameUmbra from '../../img/gameCard_umbra.png'
 import mappa from '../../img/mappa_icona.png'
+// import mappa from '../../img/Mappa-fumo-gif.gif'
 import mappaUmbra from '../../img/mappa_icona_umbra.png'
 import porta from '../../img/porta_icona.png'
 import portaUmbra from '../../img/porta_icona_umbra.png'
@@ -150,10 +151,8 @@ class Gamepage extends Component {
                         {/* pulsante: mappa------------------------------------------------- */}
                         <div className="navigazione-link" title="Apri la Minimappa" style={{ left: "6.99%", top: "4.47%", width: "14.67%", height: "9.2%", zIndex: "9999" }}>
 
-                            
-
                             <ModalPergamena
-                                bottone={<img className="icona-alta" src={location.tipo === "Umbra" || location.tipo === "Stanza Umbra" ? mappaUmbra : mappa} alt="" />}
+                                bottone={<div className="icona-minimappa"> </div>}
                                 contenuto={
                                     <div className="centrato" style={{ position: "fixed", backgroundColor: "transparent", height: "500px", width: "500px" }}>
                                         {location.tipo.includes("Stanza") && location.urlMinimappa != null ?
@@ -164,6 +163,19 @@ class Gamepage extends Component {
                                     </div>
                                 }
                             />
+
+                            {/* <ModalPergamena
+                                bottone={<img className="icona-alta" src={location.tipo === "Umbra" || location.tipo === "Stanza Umbra" ? mappaUmbra : mappa} alt="" />}
+                                contenuto={
+                                    <div className="centrato" style={{ position: "fixed", backgroundColor: "transparent", height: "500px", width: "500px" }}>
+                                        {location.tipo.includes("Stanza") && location.urlMinimappa != null ?
+                                            <MinimappaRegolabile idLocation="" pxDimensioniMappa="500" lenteDisplay="none" cellePerRiga="2" immagineMinimappa={location.urlMinimappa} />
+                                            :
+                                            <Macromappa idLocation={location.id} pxDimensioniMappa="500" tipoLocation={location.tipo.includes('Umbra') ? 'Umbra' : null} />
+                                        }
+                                    </div>
+                                }
+                            /> */}
 
                             {/* <img className="icona-alta" src={location.tipo === "Umbra" || location.tipo === "Stanza Umbra" ? mappaUmbra : mappa} alt="" />
 

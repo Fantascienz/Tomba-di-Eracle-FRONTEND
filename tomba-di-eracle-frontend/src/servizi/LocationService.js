@@ -52,55 +52,36 @@ class LocationService {
 
     validaCampiCreazione(location, isStanza, umbra) {
         if (!isStanza) {
-            if (location.nome === '' || location.tipo === '' || location.ambiente === '' || location.urlImgGiorno === ''
-                || location.locationIngresso === '' || location.urlImgGiornoUmbra === '') {
+            if (location.locationId === 999) {
+                withReactContent(Swal).fire({
+                    title: <div>
+                        <p>Scegli la posizione della Location!</p>
+                    </div>
+                })
+                return false;
+            }
+            if (location.nome === '' || location.ambiente === '' || location.urlImgGiorno === ''
+                || location.urlImgGiornoUmbra === '' || location.chiave === '') {
                 withReactContent(Swal).fire({
                     title: <div>
                         <p>Nome, Ambiente, Ingresso</p>
-                        <p>Immagine giorno</p>
+                        <p>Posizione, Chiave</p>
+                        <p>e Immagine giorno</p>
                         <p>sono obbligatori!</p>
                     </div>
                 })
                 return false;
             }
-            if (location.direzioneIngresso === '') {
-                withReactContent(Swal).fire({
-                    title: <div>
-                        <p>Seleziona una direzione d'ingresso!</p>
-                    </div>
-                })
-                return false;
-            }
             return true;
-            // } else {
-            //     if (location.loc === '') {
-            //         withReactContent(Swal).fire({
-            //             title: <p>Indica una Location per la Stanza!</p>
-            //         })
-            //         return false;
-            //     } else {
-            //         if (location.nome === '' || location.ambiente === '' || location.urlImgGiorno === '' || location.urlImgGiornoUmbra === '') {
-            //             withReactContent(Swal).fire({
-            //                 title: <div>
-            //                     <p>Nome,Ambiente,Ingresso</p>
-            //                     <p>Immagine giorno</p>
-            //                     <p>sono obbligatori!</p>
-            //                 </div>
-            //             })
-            //             return false;
-            //         }
-            //         return true;
-            //     }
-            // }
         } else {
             if (location.loc === '') {
                 withReactContent(Swal).fire({
                     title: <p>Indica una Location per la Stanza!</p>
                 })
                 return false;
-            } 
-            
-            if(umbra){
+            }
+
+            if (umbra) {
                 if (location.nome === '' || location.ambiente === '' || location.urlImgGiornoUmbra === '') {
                     withReactContent(Swal).fire({
                         title: <div>
