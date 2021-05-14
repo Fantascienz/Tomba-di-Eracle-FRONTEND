@@ -9,6 +9,15 @@ import teurgoCrescente from '../../img/6_lunaFalce_crescente_icona.png'
 import philodoxCrescente from '../../img/7_lunaMezza_crescente_icona.png'
 import galliardCrescente from '../../img/8_lunaGibbosa_crescente_icona.png'
 
+import soleUmbra from '../../img/sole_icona_umbra.png'
+import arhounUmbra from '../../img/1_lunaPiena_icona_umbra.png'
+import galliardCalanteUmbra from '../../img/2_lunaGibbosa_decrescente_icona_umbra.png'
+import philodoxCalanteUmbra from '../../img/3_lunaMezza_decrescente_icona_umbra.png'
+import teurgoCalanteUmbra from '../../img/4_lunaFalce_decrescente_icona_umbra.png'
+import teurgoCrescenteUmbra from '../../img/6_lunaFalce_crescente_icona_umbra.png'
+import philodoxCrescenteUmbra from '../../img/7_lunaMezza_crescente_icona_umbra.png'
+import galliardCrescenteUmbra from '../../img/8_lunaGibbosa_crescente_icona_umbra.png'
+
 class GiornoNotte extends Component {
     constructor(props) {
         super(props);
@@ -98,19 +107,19 @@ class GiornoNotte extends Component {
         if (giornoLunare === 0 || giornoLunare > 27) {
             return ragabash;
         } else if (giornoLunare > 0 && giornoLunare < 6){
-            return teurgoCrescente;
+            return this.props.location.tipo === "Umbra" || this.props.location.tipo === "Stanza Umbra" ? teurgoCrescenteUmbra : teurgoCrescente;
         } else if (giornoLunare > 23 && giornoLunare < 28) {
-            return teurgoCalante;
+            return this.props.location.tipo === "Umbra" || this.props.location.tipo === "Stanza Umbra" ? teurgoCalanteUmbra : teurgoCalante;
         } else if (giornoLunare > 5 && giornoLunare < 10) {
-            return philodoxCrescente;
+            return this.props.location.tipo === "Umbra" || this.props.location.tipo === "Stanza Umbra" ? philodoxCrescenteUmbra : philodoxCrescente;
         } else if (giornoLunare > 19 && giornoLunare < 24) {
-            return philodoxCalante;
+            return this.props.location.tipo === "Umbra" || this.props.location.tipo === "Stanza Umbra" ? philodoxCalanteUmbra : philodoxCalante;
         } else if (giornoLunare > 9 && giornoLunare < 14) {
-            return galliardCrescente;
+            return this.props.location.tipo === "Umbra" || this.props.location.tipo === "Stanza Umbra" ? galliardCrescenteUmbra : galliardCrescente;
         } else if (giornoLunare > 15 && giornoLunare < 20) {
-            return galliardCalante;
+            return this.props.location.tipo === "Umbra" || this.props.location.tipo === "Stanza Umbra" ? galliardCalanteUmbra : galliardCalante;
         } else {
-            return arhoun;
+            return this.props.location.tipo === "Umbra" || this.props.location.tipo === "Stanza Umbra" ? arhounUmbra : arhoun;
         }
 
     }
@@ -123,14 +132,14 @@ class GiornoNotte extends Component {
             <>
                 {(orario <= 6 || orario >= 17) ?
 
-                    <div className="navigazione-link" title="Giorno / Notte" style={{ left: "45.8%", top: "2.91%", width: "7.36%", height: "4.97%", zIndex: "9999" }}>
+                    <div className="navigazione-link" title="Notte" style={{ left: "45.8%", top: "2.91%", width: "7.36%", height: "4.97%", zIndex: "9999" }}>
                         <img src={this.faseLunare()} style={{ width: "100%" }} alt="..."/>
                     </div>
 
                     :
 
-                    <div className="navigazione-link" title="Giorno / Notte" style={{ left: "45.8%", top: "2.91%", width: "7.36%", height: "4.97%", zIndex: "9999" }}>
-                        <img src={sole} style={{ width: "100%" }} alt="..."/>
+                    <div className="navigazione-link" title="Giorno" style={{ left: "45.8%", top: "2.91%", width: "7.36%", height: "4.97%", zIndex: "9999" }}>
+                        <img src={this.props.location.tipo === "Umbra" || this.props.location.tipo === "Stanza Umbra" ? soleUmbra : sole} style={{ width: "100%" }} alt="..."/>
                     </div>
                 }
 

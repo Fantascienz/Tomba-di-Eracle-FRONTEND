@@ -48,7 +48,8 @@ io.on('connect', (socket) => {
   });
 
   socket.on('sendMessage', ({ formValue, personaggio, location }, callback) => {
-    const messaggioInviato = new Msg(
+    
+      const messaggioInviato = new Msg(
       {
         testo: formValue,
         inviatoAlle: new Date(),
@@ -57,6 +58,7 @@ io.on('connect', (socket) => {
         idLocation: location.id,
         immagine: personaggio.immagineAttiva
       });
+      console.log(messaggioInviato)
     messaggioInviato.save().then(() => {
 
       io.emit('message', {
