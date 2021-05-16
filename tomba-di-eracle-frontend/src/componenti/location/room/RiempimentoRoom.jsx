@@ -112,15 +112,16 @@ const RiempimentoRoom = () => {
             <Header />
             <div className="corpoComponente">
                 <div className="row no-gutters">
-                    <TitoloPagina titolo="Riempimento Room" />
+                    <TitoloPagina titolo="Riempimento Room" fontSize="8vh" />
                     {locationAggiunte === Math.pow(template.colonne, 2) ? <button className="btn btn-danger" onClick={() => inserimentoLocations()}>Invia room</button> : null}
                     <select className="form-select" onChange={(e) => setLocationSelezionata(e.target.value)} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)", width: '50%', alignSelf: 'center' }}>
                         {renderSelect()}
                     </select>
                 </div>
+
                 <div className="row no-gutters">
                     <CreazioneStanza id={locationSelezionata} superLoc={template.superLocation} cellePerRiga={template.colonne}
-                        immagineMinimappaReame={template.mappaReame} immagineMinimappaUmbra={template.mappaUmbra}
+                        immagineMinimappaReame={template.locationReame} immagineMinimappaUmbra={template.locationUmbra}
                         locationCella={getLocationCella()} locations={locations} aggiungiLocation={aggiungiLocation} />
                 </div>
             </div>

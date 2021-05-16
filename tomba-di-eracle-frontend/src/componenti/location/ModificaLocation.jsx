@@ -92,11 +92,11 @@ class ModificaLocation extends Component {
                 <div className="corpoComponente">
                     <div className="row">
                         <div className="col-md-3 centrato">
-                            <TitoloPagina titolo="Modifica Location" />
+                            <TitoloPagina titolo="Modifica Location" fontSize="5vh"/>
                             <ModificaLocationForm handleChange={this.handleChange} handleUpdate={this.handleUpdate} />
                         </div>
                         <div className="col-md-3 centrato">
-                            <TitoloPagina titolo="Modifica Stanza" />
+                            <TitoloPagina titolo="Modifica Stanza" fontSize="5vh"/>
                             <ModificaStanzaForm handleChange={this.handleChange} handleUpdate={this.handleUpdate} />
                         </div>
 
@@ -105,7 +105,7 @@ class ModificaLocation extends Component {
                         </div>
 
                         <div className="col-md-3 " >
-                            <TitoloPagina titolo="Elimina Location" />
+                            <TitoloPagina titolo="Elimina Location" fontSize="5vh"/>
                             <div className="centrato">
                                 <SelezionaLocationForm lista={this.getListaEsterneRoom()} stanza={false} id="loc" handleChange={this.handleChange} />
                                 <ModalComponente
@@ -113,7 +113,7 @@ class ModificaLocation extends Component {
                                     bottone={<button className="btn btn-dark" >Elimina</button>}
                                 />
                             </div>
-                            <TitoloPagina titolo="Elimina Stanza" />
+                            <TitoloPagina titolo="Elimina Stanza" fontSize="5vh"/>
                             <div className="centrato">
                                 {/* <form onSubmit={() => alert('implementa!')}>
                                     <SelezionaLocationForm lista={stanze} stanza={true} id="loc" handleChange={this.handleChange} />

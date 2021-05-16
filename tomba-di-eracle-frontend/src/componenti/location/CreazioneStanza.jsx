@@ -133,7 +133,7 @@ const CreazioneStanza = (props) => {
                     </div>
                 </div>
                 <div className="col-md-6 centrato" >
-                    <MinimappaRegolabile pxDimensioniMappa="400" immagineMinimappa={props.immagineMinimappaReame} cellePerRiga={props.cellePerRiga} lenteDisplay="none" />
+                    <MinimappaRegolabile pxDimensioniMappa="50" immagineMinimappa={props.superLoc.tipo == "Reame"? props.immagineMinimappaReame: props.immagineMinimappaUmbra} cellePerRiga={props.cellePerRiga} lenteDisplay="none" />
                 </div>
             </div>
         </React.Fragment>
