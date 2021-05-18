@@ -7,6 +7,7 @@ import { TitoloPagina } from "../../layout/TitoloPagina";
 import MinimappaRegolabile from "../MinimappaReagolabile";
 import Mappa from '../../../img/macromappa.jpg'
 import Macromappa2 from "../Macromappa2";
+import { trovaAlberoLocPadri, trovaLocation, trovaLocPadre, trovaLocsFiglie } from "../../utils/LocationUtils";
 
 
 const CreazioneRoom = () => {
@@ -84,12 +85,25 @@ const CreazioneRoom = () => {
     }
 
     const getSuperLocationUmbra = () => {
-        for (let i = 0; i < allLocations.length; i++) {
-            if (allLocations[i].id == superLoc) {
-                if (allLocations[i].tipo == 'Umbra') {
-                    return allLocations[i].id
+        const allLocations2 = JSON.parse(sessionStorage.getItem('allLocations'));
+
+        const direzioniEIdETipoLocations = []
+        for (let i = 0; i < allLocations2.length; i++) {
+            const oggettoLocation={
+                id: allLocations2[i].id,
+                direzioni: allLocations2[i].direzioni,
+                tipo: allLocations2[i].tipo
+            }
+            direzioniEIdETipoLocations.push(oggettoLocation)
+        }
+
+        for (let i = 0; i < direzioniEIdETipoLocations.length; i++) {
+            if (direzioniEIdETipoLocations[i].id == superLoc) {
+
+                if (direzioniEIdETipoLocations[i].tipo == 'Umbra') {
+                    return direzioniEIdETipoLocations[i].id
                 }
-                return allLocations[i].direzioni.idLocationSpecchio;
+                return direzioniEIdETipoLocations[i].direzioni.idLocationSpecchio;
             }
         }
     }
@@ -194,7 +208,10 @@ const CreazioneRoom = () => {
 
                         {/* {grigliaMacromappa(12, 1, Mappa)} */}
 
-                        <Macromappa2 locationSelezionata={superLoc} idIniziale={1} immagineSfondoMappa={Mappa}/>
+                        <Macromappa2 locationSelezionata={superLoc} navigaLocation />
+
+                        {console.log("LOCATION", trovaLocsFiglie(1002))}
+                        {console.log("ALBERO", trovaAlberoLocPadri(2))}
 
 
 

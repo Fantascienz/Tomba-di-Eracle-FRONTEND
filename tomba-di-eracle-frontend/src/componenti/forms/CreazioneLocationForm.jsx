@@ -49,7 +49,7 @@ class CreazioneLocationForm extends Component {
                             </div>
 
                             <div className="input-group">
-                                <input type="text" className="form-control" id="chiave" placeholder={this.props.formPlaceholders != undefined ? 'Chiave d\' Accesso: ' + this.props.formPlaceholders.location.chiave : 'Chiave d\'Accesso'} value={this.props.formState.chiave} onChange={(e) => this.props.changeHandler[5](e.target.value)} maxlength="5" style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} /> <br />
+                                <input type="text" className="form-control" id="chiave" placeholder={this.props.formPlaceholders != undefined ? 'Chiave d\' Accesso: ' + this.props.formPlaceholders.location.chiave : 'Chiave d\'Accesso'} value={this.props.formState.chiave} onChange={(e) => this.props.changeHandler[5](e.target.value)} maxLength="5" style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} /> <br />
                             </div>
                             <p>Applica la chiave all'umbra <input type="checkbox" id="chiave-umbra" onClick={() => this.props.changeHandler[9](!this.props.chiaveUmbra)} /></p>
                         </>
