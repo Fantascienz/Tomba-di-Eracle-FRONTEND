@@ -6,6 +6,7 @@ import { filtraListaRazza, modificaPersonaggio, getListaPersonaggi, ordinaPerRaz
 import SelezionaLocationForm from '../forms/SelezionaLocationForm';
 import $ from 'jquery';
 import { pgIsGarou, rangoGarou } from '../utils/Utilities';
+import { optionGroupLocationsPerTipoEMappa, trovaLocation } from '../utils/LocationUtils';
 
 class ListaPersonaggi extends Component {
 
@@ -601,7 +602,7 @@ class ListaPersonaggi extends Component {
                     <table className="table fixed-headers align-middle" id="fixed-headers">
                         <thead className="table-dark align-middle" align="left">
                             <tr>
-                                <th ><p style={{width:"50px"}}></p></th>
+                                <th ><p style={{ width: "50px" }}></p></th>
                                 <th><a href="#" onClick={() => this.ordinaPerId()} >ID</a></th>
                                 <th><a href="#" onClick={() => this.ordinaPerNominativo()}>Nominativo</a> </th>
                                 <th><a href="#" onClick={() => this.ordinaPerSesso()}>Sesso</a></th>
@@ -636,34 +637,63 @@ class ListaPersonaggi extends Component {
                                     <td>{pg.nominativo}</td>
                                     <td>{pg.sesso}</td>
                                     <td>{pg.razza}</td>
-                                    <td>{pgIsGarou(pg)? <span title={pg.rango}>{rangoGarou(pg)}</span> : pg.rango}</td>
-                                    <td>{pgIsGarou(pg)? pg.nomeGarou != null ? pg.nomeGarou : '/---/' : <b style={{color:"red", fontSize:"2vw"}} title="Il Pg non è un Garou e non può avere un Nome Garou">X</b>}</td>
-                                    <td>{pgIsGarou(pg)? pg.auspicio : <b style={{color:"red", fontSize:"2vw"}} title="Il Pg non è un Garou e non può avere un Auspicio">X</b>}</td>
-                                    <td>{pgIsGarou(pg)? pg.tribu : <b style={{color:"red", fontSize:"2vw"}} title="Il Pg non è un Garou e non può avere una Tribù">X</b>}</td>
+                                    <td>{pgIsGarou(pg) ? <span title={pg.rango}>{rangoGarou(pg)}</span> : pg.rango}</td>
+                                    <td>{pgIsGarou(pg) ? pg.nomeGarou != null ? pg.nomeGarou : '/---/' : <b style={{ color: "red", fontSize: "2vw" }} title="Il Pg non è un Garou e non può avere un Nome Garou">X</b>}</td>
+                                    <td>{pgIsGarou(pg) ? pg.auspicio : <b style={{ color: "red", fontSize: "2vw" }} title="Il Pg non è un Garou e non può avere un Auspicio">X</b>}</td>
+                                    <td>{pgIsGarou(pg) ? pg.tribu : <b style={{ color: "red", fontSize: "2vw" }} title="Il Pg non è un Garou e non può avere una Tribù">X</b>}</td>
                                     <td>{pg.branco != null ? pg.branco : '/---/'}</td>
                                     <td>{pg.sept != null ? pg.sept : '/---/'}</td>
-                                    <td>{pg.chirottero? <b style={{color:"green", fontSize:"1.5vw"}}>Si</b>:<b style={{color:"red", fontSize:"1.5vw"}}>No</b>}</td>
-                                    <td>{pg.umbra? <b style={{color:"green", fontSize:"1.5vw"}}>Si</b>:<b style={{color:"red", fontSize:"1.5vw"}}>No</b>}</td>
+                                    <td>{pg.chirottero ? <b style={{ color: "green", fontSize: "1.5vw" }}>Si</b> : <b style={{ color: "red", fontSize: "1.5vw" }}>No</b>}</td>
+                                    <td>{pg.umbra ? <b style={{ color: "green", fontSize: "1.5vw" }}>Si</b> : <b style={{ color: "red", fontSize: "1.5vw" }}>No</b>}</td>
                                     <td><span>ID: {pg.utente.id}</span> <br /><span>{pg.utente.nominativo}</span> <br /><span>{pg.utente.email}</span></td>
                                     <td>{pg.dataCreazione}</td>
-                                    <td>{pg.ultimaLocation}</td>
-                                    <td>{pg.stato == "online" ? <span style={{color:"green"}}>Online</span> : <span style={{color:"red"}}>Offline</span>}</td>
+                                    <td>ID: {trovaLocation(pg.ultimaLocation).id}
+                                        <br />
+                                        {"(" + trovaLocation(pg.ultimaLocation).tipo + ")"}
+                                        <br />
+                                        {trovaLocation(pg.ultimaLocation).nome}</td>
+                                    <td>{pg.stato == "online" ? <span style={{ color: "green" }}>Online</span> : <span style={{ color: "red" }}>Offline</span>}</td>
                                     <td>{this.formModificaRango(pg)}</td>
-                                    <td>{pgIsGarou(pg)?this.formModificaNomeGarou(pg):<b style={{color:"red", fontSize:"2vw"}} title="Il Pg non è un Garou e non può avere un Nome Garou">X</b>}</td>
+                                    <td>{pgIsGarou(pg) ? this.formModificaNomeGarou(pg) : <b style={{ color: "red", fontSize: "2vw" }} title="Il Pg non è un Garou e non può avere un Nome Garou">X</b>}</td>
                                     <td>
                                         <form onSubmit={() => this.modificaLocation(pg)}>
-                                            <SelezionaLocationForm
-                                                className={"pippo"}
-                                                style={{ width: "100px" }}
-                                                lista={JSON.parse(sessionStorage.getItem('allLocations'))}
-                                                stanza={true}
-                                                id="nuovaUltimaLocation"
-                                                handleChange={this.handleChange}
-                                                allLocations={true} />
+                                            <select className={"pippo"} name={this.props.id} id="nuovaUltimaLocation" onChange={this.handleChange} style={{ width: "100px" }}>
+                                                <option value="">Seleziona Location</option>
+                                                <optgroup label="Macrolocation (Reame)">
+                                                    {optionGroupLocationsPerTipoEMappa("Reame", "Macro").map(elemento =>
+                                                        <option value={elemento.id} key={elemento.id}>{elemento.id} {elemento.nome}</option>
+                                                    )}
+                                                </optgroup>
+                                                <optgroup label="Macrolocation (Umbra)">
+                                                    {optionGroupLocationsPerTipoEMappa("Umbra", "Macro").map(elemento =>
+                                                        <option value={elemento.id} key={elemento.id}>{elemento.id} {elemento.nome}</option>
+                                                    )}
+                                                </optgroup>
+                                                <optgroup label="Location Esterne (Reame)">
+                                                    {optionGroupLocationsPerTipoEMappa("Reame", "Esterna").map(elemento =>
+                                                        <option value={elemento.id} key={elemento.id}>{elemento.id} {elemento.nome}</option>
+                                                    )}
+                                                </optgroup>
+                                                <optgroup label="Location Esterne (Umbra)">
+                                                    {optionGroupLocationsPerTipoEMappa("Umbra", "Esterna").map(elemento =>
+                                                        <option value={elemento.id} key={elemento.id}>{elemento.id} {elemento.nome}</option>
+                                                    )}
+                                                </optgroup>
+                                                <optgroup label="Stanze (Reame)">
+                                                    {optionGroupLocationsPerTipoEMappa("Reame", "Stanza").map(elemento =>
+                                                        <option value={elemento.id} key={elemento.id}>{elemento.id} {elemento.nome}</option>
+                                                    )}
+                                                </optgroup>
+                                                <optgroup label="Stanze (Umbra)">
+                                                    {optionGroupLocationsPerTipoEMappa("Umbra", "Stanza").map(elemento =>
+                                                        <option value={elemento.id} key={elemento.id}>{elemento.id} {elemento.nome}</option>
+                                                    )}
+                                                </optgroup>
+                                            </select>
                                             <button className="btn btn-secondary btn-sm">Modifica</button>
                                         </form>
                                     </td>
-                                    <td>{pgIsGarou(pg)?this.formModificaTribu(pg):<b style={{color:"red", fontSize:"2vw"}} title="Il Pg non è un Garou e non può avere una Tribù">X</b>}</td>
+                                    <td>{pgIsGarou(pg) ? this.formModificaTribu(pg) : <b style={{ color: "red", fontSize: "2vw" }} title="Il Pg non è un Garou e non può avere una Tribù">X</b>}</td>
                                     <td>{this.formModificaBranco(pg)}</td>
                                     <td>{this.formModificaSept(pg)}</td>
                                     <td>DA AGGIUNGERE!!!</td>

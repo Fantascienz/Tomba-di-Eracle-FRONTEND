@@ -46,6 +46,7 @@ import Chirottero from '../chirotteri/Chirottero'
 //IMPORT CSS--------------------------------------
 import "./Gamepage.css"
 import trasformazionePG from './TrasformazionePG'
+import Macromappa2 from '../location/Macromappa2'
 
 
 
@@ -155,11 +156,13 @@ class Gamepage extends Component {
                                 bottone={<div className="icona-minimappa"> </div>}
                                 contenuto={
                                     <div className="centrato" style={{ position: "fixed", backgroundColor: "transparent", height: "500px", width: "500px" }}>
-                                        {location.tipo.includes("Stanza") && location.urlMinimappa != null ?
+                                        {/* {location.tipo.includes("Stanza") && location.urlMinimappa != null ?
                                             <MinimappaRegolabile idLocation="" pxDimensioniMappa="500" lenteDisplay="none" cellePerRiga="2" immagineMinimappa={location.urlMinimappa} />
                                             :
                                             <Macromappa idLocation={location.id} pxDimensioniMappa="500" tipoLocation={location.tipo.includes('Umbra') ? 'Umbra' : null} />
-                                        }
+                                        } */}
+
+                                        <Macromappa2 locationSelezionata={parseInt(location.id)} permettiIngrandimento/>
                                     </div>
                                 }
                             />

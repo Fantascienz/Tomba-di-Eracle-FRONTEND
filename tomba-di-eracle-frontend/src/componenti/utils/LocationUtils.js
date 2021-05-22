@@ -1,8 +1,10 @@
+
 //trova una location completa dalla lista delle location in sessione
 export function trovaLocation(loc) {
 
     var location = {}
     var allLocations = JSON.parse(sessionStorage.getItem('allLocations'));
+
 
     for (let i = 0; i < allLocations.length; i++) {
         if (allLocations[i].id == loc) {
@@ -38,6 +40,30 @@ export function trovaLocPadre(daFiglia) {
         }
     }
 
+}
+
+//crea un array dell'albero gerarchico dei soli ID a partire dalla location selezionata
+export function arrayAlberoGerarchicoLocation(loc1){
+    var albero = [loc1];
+
+    if (trovaLocPadre(loc1)!=null){
+        var loc2 = trovaLocPadre(loc1);
+        albero.push(loc2);
+        if (trovaLocPadre(loc2)!=null){
+            var loc3 = trovaLocPadre(loc2);
+            albero.push(loc3);
+            if (trovaLocPadre(loc3)!=null){
+                var loc4 = trovaLocPadre(loc3);
+                albero.push(loc4);
+                if (trovaLocPadre(loc4)!=null){
+                    var loc5 = trovaLocPadre(loc4);
+                    albero.push(loc5);
+                }
+            }
+        }
+    }
+
+    return albero
 }
 
 //trova tutte le location da cui discende la stanza, creando un oggetto con quelle location
@@ -161,20 +187,23 @@ export function trovaAlberoLocPadri(daFiglia) {
     }
 }
 
+
+//controlla che tipo di location è: xxx | mxxx | dmxxx | cdmxxx
+export function trovaTipologiaLocation(locId) {
+    if (locId - locId % 1000 == 0) {
+        return 'xxx'
+    } else if (locId - locId % 10000 == 0) {
+        return 'mxxx'
+    } else if (locId - locId % 100000 == 0) {
+        return 'dmxxx'
+    } else if (locId - locId % 1000000 == 0) {
+        return 'cdmxxx'
+    }
+}
+
+
 //trova tutte le location che discendono dalla location selezionata
 export function trovaLocsFiglie(locPadre) {
-
-    //controlla che tipo di location è: xxx | mxxx | dmxxx | cdmxxx
-    var tipoLocation = '';
-    if (locPadre - locPadre % 1000 == 0) {
-        tipoLocation = 'xxx'
-    } else if (locPadre - locPadre % 10000 == 0) {
-        tipoLocation = 'mxxx'
-    } else if (locPadre - locPadre % 100000 == 0) {
-        tipoLocation = 'dmxxx'
-    } else if (locPadre - locPadre % 1000000 == 0) {
-        tipoLocation = 'cdmxxx'
-    }
 
     //trova tutte le location che contengono la Location padre e aggiungile ad un oggetto
     var alberoLocationsFiglie = []
@@ -182,7 +211,7 @@ export function trovaLocsFiglie(locPadre) {
     var numeroFiglie = 0
     var numeroFiglieDiFiglie = 0
     for (let i = 0; i < allLocations.length; i++) {
-        if (tipoLocation == 'xxx') {
+        if (trovaTipologiaLocation(locPadre) == 'xxx') {
             if (allLocations[i].id % 1000 == locPadre && allLocations[i].id!=locPadre) {
                 alberoLocationsFiglie.push(trovaLocsFiglie(allLocations[i].id))
                 numeroFiglieDiFiglie=numeroFiglieDiFiglie+trovaLocsFiglie(allLocations[i].id).numeroFiglie;
@@ -193,7 +222,7 @@ export function trovaLocsFiglie(locPadre) {
                     break
                 }
             }
-        } else if (tipoLocation == 'mxxx'){
+        } else if (trovaTipologiaLocation(locPadre) == 'mxxx'){
             if (allLocations[i].id % 10000 == locPadre && allLocations[i].id!=locPadre) {
                 alberoLocationsFiglie.push(trovaLocsFiglie(allLocations[i].id))
                 numeroFiglieDiFiglie=numeroFiglieDiFiglie+trovaLocsFiglie(allLocations[i].id).numeroFiglie;
@@ -203,12 +232,12 @@ export function trovaLocsFiglie(locPadre) {
                 }
                 
             }
-        } else if (tipoLocation == 'dmxxx'){
+        } else if (trovaTipologiaLocation(locPadre) == 'dmxxx'){
             if (allLocations[i].id % 100000 == locPadre && allLocations[i].id!=locPadre) {
                 alberoLocationsFiglie.push(trovaLocsFiglie(allLocations[i].id))
                 numeroFiglieDiFiglie=numeroFiglieDiFiglie+trovaLocsFiglie(allLocations[i].id).numeroFiglie;
             }
-        } else if (tipoLocation == 'cdmxxx'){
+        } else if (trovaTipologiaLocation(locPadre) == 'cdmxxx'){
             if (allLocations[i].id % 1000000 == locPadre && allLocations[i].id!=locPadre) {
                 alberoLocationsFiglie.push(trovaLocsFiglie(allLocations[i].id))
                 numeroFiglieDiFiglie=numeroFiglieDiFiglie+trovaLocsFiglie(allLocations[i].id).numeroFiglie;
@@ -233,4 +262,34 @@ export function presenzaStanze(location){
         return true;
     }
     return false;
+}
+
+//trova la location specchio dell'ID passato
+export function trovaLocationSpecchio(idLocation){
+    return trovaLocation(idLocation).direzioni.idLocationSpecchio;
+}
+
+
+//funzione specifica per le Select di Location: torna tutte le location di uno specifico .tipo (Reame/Umbra) e .mappa (Macro/Esterna/Stanza)
+export function optionGroupLocationsPerTipoEMappa(tipologia, mappa){
+    var allLocations = JSON.parse(sessionStorage.getItem('allLocations'));
+    var arrayLocationsPerTipologiaEMappa = [];
+    var mappa = mappa=="Macro"? ['Macro'] : mappa=="Esterna"? ['Esterna'] : ['Mid', 'Inner', 'Stanza']
+
+    for(let i = 0; i<allLocations.length; i++){
+        if(allLocations[i].tipo == tipologia && mappa.includes(allLocations[i].mappa) && allLocations[i].nome != "/"){
+            var oggettoArray = {
+                id: allLocations[i].id,
+                nome: ": "+allLocations[i].nome
+            } 
+
+            arrayLocationsPerTipologiaEMappa.push(oggettoArray);
+        }
+    }
+
+    if(arrayLocationsPerTipologiaEMappa.length == 0){
+        return [{id:"", nome:"--nessuna location disponibile--"}]
+    }
+
+    return arrayLocationsPerTipologiaEMappa;
 }

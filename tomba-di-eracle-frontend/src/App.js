@@ -9,7 +9,6 @@ import ModificaUtente from './componenti/utente/ModificaUtente';
 import Gamepage from './componenti/game/Gamepage';
 import ModificaPersonaggio from './componenti/personaggio/ModificaPersonaggio';
 import CreazioneLocation from './componenti/location/CreazioneLocation'
-import Macromappa from './componenti/location/Macromappa';
 import ModificaLocation from './componenti/location/ModificaLocation';
 import CreazioneStanza from './componenti/location/CreazioneStanza';
 import firebase from 'firebase/app';

@@ -7,7 +7,7 @@ import { TitoloPagina } from "../../layout/TitoloPagina";
 import MinimappaRegolabile from "../MinimappaReagolabile";
 import Mappa from '../../../img/macromappa.jpg'
 import Macromappa2 from "../Macromappa2";
-import { trovaAlberoLocPadri, trovaLocation, trovaLocPadre, trovaLocsFiglie } from "../../utils/LocationUtils";
+import { arrayAlberoGerarchicoLocation, trovaAlberoLocPadri, trovaLocation, trovaLocPadre, trovaLocsFiglie } from "../../utils/LocationUtils";
 
 
 const CreazioneRoom = () => {
@@ -89,7 +89,7 @@ const CreazioneRoom = () => {
 
         const direzioniEIdETipoLocations = []
         for (let i = 0; i < allLocations2.length; i++) {
-            const oggettoLocation={
+            const oggettoLocation = {
                 id: allLocations2[i].id,
                 direzioni: allLocations2[i].direzioni,
                 tipo: allLocations2[i].tipo
@@ -195,26 +195,15 @@ const CreazioneRoom = () => {
                         padding: "5px",
                         gridColumnStart: "1",
                         display: "grid",
-                        gridTemplateColumns: "auto 60vh auto",
-                        gridTemplateRows: "auto 60vh auto"
+                        gridTemplateRows: "auto auto auto",
+                        gridTemplateColumns: "auto auto auto"
                     }}>
-                        {/* MACROMAPPA */}
-                        {/* <div style={{
+                        <div style={{
                             gridColumnStart: "2",
                             gridRowStart: "2"
-                        }}>
-                            <Macromappa idLocation={superLoc} pxDimensioniMappa="500" tipoLocation={getTipoSuperlocation()} />
-                        </div> */}
-
-                        {/* {grigliaMacromappa(12, 1, Mappa)} */}
-
-                        <Macromappa2 locationSelezionata={superLoc} navigaLocation />
-
-                        {console.log("LOCATION", trovaLocsFiglie(1002))}
-                        {console.log("ALBERO", trovaAlberoLocPadri(2))}
-
-
-
+                    }}>
+                            <Macromappa2 locationSelezionata={superLoc} permettiNavigazione permettiNavigazioneSpecchio permettiIngrandimento dimensioneMappa="50vmin" />
+                        </div>
                     </div>
 
                     {/* LATO DESTRO */}
