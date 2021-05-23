@@ -2,7 +2,7 @@ const initState = {
     utente: {},
     redirect: '',
     admin: false,
-    personaggio: {}
+    personaggio: {},
 }
 
 const utenteReducer = (state = initState, action) => {
@@ -35,9 +35,6 @@ const utenteReducer = (state = initState, action) => {
                 redirect: '/game'
             }
             break;
-
-
-
         default:
             break;
     }

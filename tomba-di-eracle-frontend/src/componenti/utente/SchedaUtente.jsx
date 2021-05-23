@@ -15,10 +15,17 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import AdminService from '../../servizi/AdminService';
 import { estraiNome } from '../utils/Utilities';
+import GridLoader from "react-spinners/GridLoader";
 import "./SchedaUtente.css"
+import { loadingScreen } from '../../store/azioni/loadingScreenActions';
 
 
 class SchedaUtente extends Component {
+
+
+    state = {
+        loadingScreen: false
+    }
 
     componentDidMount() {
         if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' || JSON.parse(sessionStorage.getItem('utente')).tipo === 'master') {
@@ -181,14 +188,14 @@ class SchedaUtente extends Component {
         if (JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' || JSON.parse(sessionStorage.getItem('utente')).tipo === 'master') {
             return (
                 <>
-                    <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%", height:"9%" }}>
-                        <button className="btn btn-dark btn-dark-disabilitato" style={{ color: "#eeaa44", width: "66%", height: "100%", fontSize: "1vh", borderRadius: "5px 5px 0 0", marginRight:"1%" }} disabled>Location...</button>
+                    <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%", height: "9%" }}>
+                        <button className="btn btn-dark btn-dark-disabilitato" style={{ color: "#eeaa44", width: "66%", height: "100%", fontSize: "1vh", borderRadius: "5px 5px 0 0", marginRight: "1%" }} disabled>Location...</button>
                         <button className="btn btn-dark btn-dark-disabilitato" style={{ color: "#eeaa44", width: "33%", height: "100%", fontSize: "1vh", borderRadius: "5px 5px 0 0" }} disabled>Stanza...</button>
                     </div>
                     <div className="btn-group" role="group" aria-label="Basic example" style={{ color: "#eeaa44", width: "80%" }}>
                         <button className="btn btn-dark btn-utente-33" style={{ width: "33%", borderRadius: "0 0 0 5px" }} onClick={() => this.creaLocation()}><p>...Crea</p></button>
-                        <button className="btn btn-dark btn-utente-33" style={{ width: "33%", borderRadius: "0 0 5px 0", marginRight:"1%" }} onClick={() => this.modificaLocation()}><p>...Modifica</p></button>
-                        <button className="btn btn-dark btn-utente-33" style={{ width: "33%", borderRadius: "0 0 5px 5px" }}onClick={() => this.creaStanza()}><p>...Crea</p></button>
+                        <button className="btn btn-dark btn-utente-33" style={{ width: "33%", borderRadius: "0 0 5px 0", marginRight: "1%" }} onClick={() => this.modificaLocation()}><p>...Modifica</p></button>
+                        <button className="btn btn-dark btn-utente-33" style={{ width: "33%", borderRadius: "0 0 5px 5px" }} onClick={() => this.creaStanza()}><p>...Crea</p></button>
                     </div>
                 </>
             )
@@ -199,7 +206,6 @@ class SchedaUtente extends Component {
     creaLocation = () => {
         browserHistory.push('creazioneLocation')
         browserHistory.go()
-
     }
 
     modificaLocation = () => {
@@ -211,7 +217,20 @@ class SchedaUtente extends Component {
     }
 
     creaStanza = () => {
+        this.props.visualizzaLoadingScreen()
         LocationService.sessioneAllLocation().then(() => {
+            console.log(this.props.loadingScreen)
+            let allLocations = JSON.parse(sessionStorage.getItem('allLocations'));
+            let superLoc = []
+            for (let i = 0; i < allLocations.length; i++) {
+                if (allLocations[i].nome !== '/') {
+                    if ((JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' || JSON.parse(sessionStorage.getItem('utente')).id ===
+                        allLocations[i].id) && !allLocations[i].room) {
+                        superLoc.push(allLocations[i])
+                    }
+                }
+            }
+            sessionStorage.setItem('listaSuperLocation', JSON.stringify(superLoc))
             browserHistory.push('creazioneRoom')
             browserHistory.go()
         }
@@ -336,7 +355,7 @@ class SchedaUtente extends Component {
                 </div>
 
                 <div className="liste-master centrato" align="center">
-                    {this.renderListe()}
+                    {!this.props.loadingScreen ? this.renderListe() : <GridLoader color='#910000' loading={this.props.loadingScreen} size={150} />}
                 </div>
             </div>
 
@@ -350,7 +369,7 @@ const mapStateToProps = (state) => {
         visualizzaPgAdmin: state.admin.visualizzaPgAdmin,
         visualizzaPg: state.master.visualizzaPg,
         listaUtentiFiltrata: state.admin.listaUtentiFiltrata,
-
+        loadingScreen: state.loadingScreen.loadingScreen
     }
 }
 
@@ -360,6 +379,7 @@ const mapDispatchToProps = (dispatch) => {
         visulizzaPgAdmin: () => dispatch(visualizzaPgAdmin()),
         visualizzaListaPg: () => dispatch(visualizzaListaPg()),
         visualizzaPgMaster: () => dispatch(visualizzaPgMaster()),
+        visualizzaLoadingScreen: () => dispatch(loadingScreen())
     }
 }
 

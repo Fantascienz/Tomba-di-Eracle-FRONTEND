@@ -6,6 +6,7 @@ import masterReducer from './masterReducer';
 import gameReducer from './gameReducer';
 import messaggiReducer from './messaggiReducer';
 import chirotteriReducer from './chirotteriReducer';
+import loadingScreenReducer from './loadingScreenReducer';
 
 const rootReducer = combineReducers({
     utente: utenteReducer,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
     master: masterReducer,
     game: gameReducer,
     messaggi: messaggiReducer,
-    chirotteri: chirotteriReducer
+    chirotteri: chirotteriReducer,
+    loadingScreen: loadingScreenReducer
 })
 
 export default rootReducer;
