@@ -15,7 +15,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import AdminService from '../../servizi/AdminService';
 import { estraiNome } from '../utils/Utilities';
-import GridLoader from "react-spinners/GridLoader";
+import CircleLoader from "react-spinners/CircleLoader";
 import "./SchedaUtente.css"
 import { loadingScreen } from '../../store/azioni/loadingScreenActions';
 
@@ -355,7 +355,7 @@ class SchedaUtente extends Component {
                 </div>
 
                 <div className="liste-master centrato" align="center">
-                    {!this.props.loadingScreen ? this.renderListe() : <GridLoader color='#910000' loading={this.props.loadingScreen} size={150} />}
+                    {!this.props.loadingScreen ? this.renderListe() : <CircleLoader color='#910000' loading={this.props.loadingScreen} size={350} />}
                 </div>
             </div>
 
