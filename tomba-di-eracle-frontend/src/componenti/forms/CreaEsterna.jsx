@@ -24,7 +24,7 @@ const CreaEsterna = (props) => {
                 </select>
             </div>
             <div className="row" style={{ backgroundColor: "transparent" }}>
-                <div className="centrato col-3" >
+                <div className="centrato col-6" >
                     <div className="input-group">
                         <input type="text" className="form-control" id="nome" placeholder="Nome" onChange={props.handleChange} style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} /> <br />
                     </div>
@@ -63,6 +63,8 @@ const CreaEsterna = (props) => {
                     <div className="input-group">
                         <input type="text" className="form-control" id="urlAudioUmbra" onChange={props.handleChange} placeholder='Url Audio Umbra' style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} /> <br />
                     </div>
+                </div>
+                <div className="centrato col-6">
                     <div className="row" style={{ height: "50%" }}>
                         <div className="navigazione-sezione col-6" style={{ width: "50%" }} title="Anteprima URL Giorno">
                             <div className="navigazione-area" >
@@ -77,6 +79,7 @@ const CreaEsterna = (props) => {
                             </div>
                         </div>
                     </div>
+
                     <div className="row" style={{ height: "50%" }}>
                         <div className="navigazione-sezione col-6" style={{ width: "50%" }} title="Anteprima URL Umbra Giorno">
                             <div className="navigazione-area" >

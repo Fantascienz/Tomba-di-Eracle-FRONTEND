@@ -70,12 +70,15 @@ class CreazioneLocation extends Component {
                 <div className="corpoComponente">
                     <div className="row">
                         <div className="col-md-6 centrato">
-                            <TitoloPagina titolo="Creazione Location Esterna" />
+                            <TitoloPagina titolo="Creazione Location Esterna" fontSize="5vh" />
                             <br />
-                            <form onSubmit={this.handleSubmit} style={{ width: "75%" }}>
-                                <CreaEsterna handleChange={this.handleChange} state={this.state} />
-                                <button className="btn btn-dark">Crea</button>
-                            </form>
+                            <div className="centrato"
+                                style={{height:"75vh"}}>
+                                <form onSubmit={this.handleSubmit} style={{ width: "75%", overflowY: "auto", overflowX:"hidden"}}>
+                                    <CreaEsterna handleChange={this.handleChange} state={this.state} />
+                                    <button className="btn btn-dark">Crea</button>
+                                </form>
+                            </div>
                         </div>
 
                         <div className="col-md-4 centrato">
