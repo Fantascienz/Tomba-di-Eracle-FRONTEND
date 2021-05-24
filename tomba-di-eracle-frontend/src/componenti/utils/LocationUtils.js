@@ -293,3 +293,18 @@ export function optionGroupLocationsPerTipoEMappa(tipologia, mappa){
 
     return arrayLocationsPerTipologiaEMappa;
 }
+
+
+//ritorna un Array dei soli ID delle location Esterne che sono state definite (che hanno un nome != da "/")
+export function arrayIdLocationEsterneDefinite(){
+    var arrayLocEsterneDefinite = optionGroupLocationsPerTipoEMappa("Reame", "Esterna");
+
+    var arrayIdLocEsterneDefinite = [];
+
+    for (let i = 0; i<arrayLocEsterneDefinite.length; i++){
+        arrayIdLocEsterneDefinite.push(arrayLocEsterneDefinite[i].id)
+    }
+
+    return arrayIdLocEsterneDefinite;
+}
+

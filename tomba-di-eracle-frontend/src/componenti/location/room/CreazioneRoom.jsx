@@ -184,6 +184,26 @@ const CreazioneRoom = () => {
     //     )
     // }
 
+
+    const handleChangeUrlMinimappaReale = (e) =>{
+        if(e.target.value.length>=e.target.maxLength){
+            alert("Attenzione! L'URL inserito per la Minimappa Reame è maggiore di "+e.target.maxLength+" caratteri! Scegli un URL più corto!")
+            e.target.value=null;
+        } else {
+            setMappaReame(e.target.value);
+        }
+    }
+
+    const handleChangeUrlMinimappaUmbra = (e) =>{
+        if(e.target.value.length>=e.target.maxLength){
+            alert("Attenzione! L'URL inserito per la Minimappa Umbra è maggiore di "+e.target.maxLength+" caratteri! Scegli un URL più corto!")
+            e.target.value=null;
+        } else {
+            setMappaUmbra(e.target.value);
+        }
+    }
+
+
     return (
         <>
             <Header />
@@ -250,7 +270,7 @@ const CreazioneRoom = () => {
                                 gridColumnStart: "1"
                             }}>
                                 {getTipoSuperlocation() != "Umbra" ?
-                                    <input type="text" placeholder="Url Minimappa Reame" onChange={(e) => setMappaReame(e.target.value)} style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} />
+                                    <input id="minimappa-reale-input-url" type="text" placeholder="Url Minimappa Reame" onChange={(e) => handleChangeUrlMinimappaReale(e)} style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} maxLength="1024" />
                                     :
                                     null
                                 }
@@ -279,7 +299,7 @@ const CreazioneRoom = () => {
                                 gridRowStart: "1",
                                 gridColumnStart: "3"
                             }}>
-                                <input type="text" placeholder="Url Minimappa Umbra" onChange={(e) => setMappaUmbra(e.target.value)} style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} />
+                                <input id="minimappa-umbra-input-url" type="text" placeholder="Url Minimappa Umbra" onChange={(e) => handleChangeUrlMinimappaUmbra(e)} style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} maxLength="1024"/>
 
                             </div>
 
@@ -299,11 +319,8 @@ const CreazioneRoom = () => {
                         </div>
 
                         {/* BOTTONE invio */}
-                        <div style={{
-                            padding: "2px",
-                            gridRowStart: "4",
-                        }}>
-                            <button className="btn btn-dark" onClick={() => toImpostaRoom()}>Crea Room</button>
+                        <div style={{ padding: "2px", gridRowStart: "4" }}>
+                            <button className="btn btn-dark" onClick={() => toImpostaRoom()} disabled={locationReame=="" || locationUmbra=="" || superLoc==0 || colonne==0 ? true: false}>Crea Room</button>
                         </div>
 
                     </div>

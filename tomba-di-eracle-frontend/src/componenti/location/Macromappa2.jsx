@@ -84,7 +84,7 @@ const Macromappa2 = ({ locationSelezionata, idIniziale, permettiNavigazione, per
                     celleGriglia.push(
                         <div
                             id={locationCella.id}
-                            title={tipoUtenteSessione("Admin") || tipoUtenteSessione("Master") ? locationCella.id + " - " + locationCella.nome + " (clicka per aprire)" : locationCella.nome + " (clicka per aprire)"}
+                            title={tipoUtenteSessione("Admin") || tipoUtenteSessione("Master") ? locationCella.id + " - " + locationCella.nome + "\n(clicka per aprire)" : locationCella.nome + "\n(clicka per aprire)"}
                             className="cella-con-stanze"
                             style={{
                                 gridColumnStart: `${j}`,

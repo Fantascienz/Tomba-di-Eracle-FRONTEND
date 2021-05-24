@@ -3,7 +3,7 @@ import LocationService from '../../servizi/LocationService';
 import Header from '../layout/Header';
 import { TitoloPagina } from '../layout/TitoloPagina';
 import Macromappa from './Macromappa';
-import CreaEsterna from '../forms/CreaEsterna'
+import {CreaEsterna, GrigliaLocEsterne} from '../forms/CreaEsterna'
 
 class CreazioneLocation extends Component {
 
@@ -69,22 +69,28 @@ class CreazioneLocation extends Component {
                 <Header />
                 <div className="corpoComponente">
                     <div className="row">
+
+                        <div className="row">
+                            <TitoloPagina titolo="Creazione Location Esterna" fontSize="8vh" />
+                        </div>
+
                         <div className="col-md-6 centrato">
-                            <TitoloPagina titolo="Creazione Location Esterna" fontSize="5vh" />
-                            <br />
                             <div className="centrato"
-                                style={{height:"75vh"}}>
-                                <form onSubmit={this.handleSubmit} style={{ width: "75%", overflowY: "auto", overflowX:"hidden"}}>
+                                style={{ height: "75vh" }}>
+                                <form onSubmit={this.handleSubmit} style={{ width: "75%", overflowY: "auto", overflowX: "hidden" }}>
                                     <CreaEsterna handleChange={this.handleChange} state={this.state} />
                                     <button className="btn btn-dark">Crea</button>
                                 </form>
                             </div>
                         </div>
 
-                        <div className="col-md-4 centrato">
-                            <div style={{ marginTop: "10%" }}>
-                                <Macromappa pxDimensioniMappa="400" lenteDisplay="none" idLocation={parseInt(this.state.locationIngresso)} />
-                            </div>
+                        <div className="col-md-6 centrato"
+                            style={{
+                                display: "grid",
+                                gridTemplateColumns: "auto 60vh auto",
+                                gridTemplateRows: "auto 60vh auto"
+                            }}>
+                            <GrigliaLocEsterne idLocSelezionata={this.state.locationId}/>
                         </div>
 
                     </div>
