@@ -361,7 +361,7 @@ const Macromappa2 = ({ locationSelezionata, idIniziale, permettiNavigazione, per
                                 {locationSelezionata != null || locationSelezionata != undefined ?
                                     <>
                                         <label><b>Posizione</b> - <img src={Segnaposto} height="30" alt="..." /></label>
-                                        {console.log(sessionStorage.getItem('pgAttivo')==null?"NESSUN PG":"PG")}
+                                        {/* {console.log(sessionStorage.getItem('pgAttivo')==null?"NESSUN PG":"PG")} */}
                                         {sessionStorage.getItem('pgAttivo')==null?
                                         <p>Questa icona evidenzia la location che è stata selezionata, o l'eventuale location all'interno della quale si trova quella selezionata.</p>
                                         :

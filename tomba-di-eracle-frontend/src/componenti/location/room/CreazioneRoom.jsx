@@ -19,18 +19,21 @@ const CreazioneRoom = () => {
 
     const history = useHistory();
     const allLocations = JSON.parse(sessionStorage.getItem('allLocations'));
+    const listaSuperLoc = JSON.parse(sessionStorage.getItem('listaSuperLocation'))
 
-    const getListaSuperLoc = () => {
-        let superLoc = [];
-        for (let i = 0; i < allLocations.length; i++) {
-            if (allLocations[i].nome !== '/') {
-                if ((JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' || JSON.parse(sessionStorage.getItem('utente')).id === allLocations[i].id) && !allLocations[i].room) {
-                    superLoc.push(JSON.parse(sessionStorage.getItem('allLocations'))[i])
-                }
-            }
-        }
-        return superLoc;
-    }
+
+
+    // const getListaSuperLoc = () => {
+    //     let superLoc = [];
+    //     for (let i = 0; i < allLocations.length; i++) {
+    //         if (allLocations[i].nome !== '/') {
+    //             if ((JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' || JSON.parse(sessionStorage.getItem('utente')).id === allLocations[i].id) && !allLocations[i].room) {
+    //                 superLoc.push(JSON.parse(sessionStorage.getItem('allLocations'))[i])
+    //             }
+    //         }
+    //     }
+    //     return superLoc;
+    // }
 
     const renderOptions = () => {
         let location = {};
@@ -201,7 +204,7 @@ const CreazioneRoom = () => {
                         <div style={{
                             gridColumnStart: "2",
                             gridRowStart: "2"
-                    }}>
+                        }}>
                             <Macromappa2 locationSelezionata={superLoc} permettiNavigazione permettiNavigazioneSpecchio permettiIngrandimento dimensioneMappa="50vmin" />
                         </div>
                     </div>
@@ -218,7 +221,7 @@ const CreazioneRoom = () => {
                         <div style={{ gridRowStart: "1", padding: "2px" }}>
                             <select className="form-select" name="super" id="super" onChange={(e) => setSuperLoc(e.target.value)} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)" }}>
                                 <option value={0}>Seleziona la Location all'interno della quale creare la Room</option>
-                                {getListaSuperLoc().map(superLoc =>
+                                {listaSuperLoc.map(superLoc =>
                                     <option value={superLoc.id} key={superLoc.id}>({superLoc.id} - {superLoc.nome} - {superLoc.tipo})</option>
                                 )}
                             </select>
