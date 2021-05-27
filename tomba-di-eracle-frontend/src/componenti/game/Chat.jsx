@@ -1,5 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react';
+<<<<<<< HEAD
 import { io } from 'socket.io-client';
+=======
+import io from 'socket.io-client';
+>>>>>>> 46b6307 (implementata parte della chat)
 import divisore from '../../img/divisore.png'
 import penna from '../../img/quill.png'
 import { ModalComponente } from '../utils/ModalComponent'
@@ -7,6 +11,7 @@ import srotolaCarta from '../../suoni/flip_card.mp3'
 import Scroll from '../../img/scroll.png'
 import "./Chat.css"
 
+let socket;
 
 let socket;
 
@@ -26,28 +31,45 @@ export const ChatRoom = () => {
         socket.on('output-messages', (data) => {
             setMessages(data);
         });
+<<<<<<< HEAD
 
         socket.emit('join', { personaggio, location }, () => {
         })
 
 
+=======
+    
+        socket.emit('join', { personaggio, location}, () => {
+        })
+>>>>>>> 46b6307 (implementata parte della chat)
     }, ENDPOINT)
 
     useEffect(() => {
         socket.on('message', (messaggio) => {
             setMessages([...messaggi, messaggio]);
+<<<<<<< HEAD
             socket.off('message');
         })
 
     }, [messaggi]);
 
+=======
+        })
+    }, [messaggi]);
+    
+>>>>>>> 46b6307 (implementata parte della chat)
 
     const inviaMessaggio = (e) => {
         e.preventDefault();
 
+<<<<<<< HEAD
         socket.emit('sendMessage', { formValue, personaggio, location }, () => setFormValue(''));
         dummy.current.scrollIntoView({ behavior: 'smooth' });
 
+=======
+        socket.emit('sendMessage', {formValue, personaggio, location}, () => setFormValue(''));
+        dummy.current.scrollIntoView({ behavior: 'smooth' });
+>>>>>>> 46b6307 (implementata parte della chat)
     }
 
     return (<>
@@ -85,6 +107,7 @@ function MessaggioChat(props) {
 
     const personaggioAttivo = JSON.parse(sessionStorage.getItem('pgAttivo'));
 
+<<<<<<< HEAD
     const messageClass = (idPersonaggio === personaggioAttivo.id ? 'sent' : 'received');
     console.log("idPersonaggio: "+idPersonaggio+", personaggioAttivo: "+personaggioAttivo.id+", messageClass: "+messageClass+", testo: "+testo);
 
@@ -93,10 +116,14 @@ function MessaggioChat(props) {
     var minutoInvio = inviatoAlleOrario.toLocaleString(undefined, { minute: "numeric" })
     var visualizzaOrarioInvio = "Inviato alle " + oraInvio + ":" + minutoInvio
 
+=======
+    const messageClass = idPersonaggio === personaggioAttivo.id ? 'sent' : 'received';
+>>>>>>> 46b6307 (implementata parte della chat)
 
     return (<>
         <div className={`message ${messageClass}`}>
             <table style={{ width: "100%" }}>
+<<<<<<< HEAD
 
                 {/* -------------------------------IMMAGINE CHAT------------------------------- */}
                 <tr border="1">
@@ -181,6 +208,32 @@ function MessaggioChat(props) {
                 <tr>
                     <td colSpan="2" align="center">
                         <img src={divisore} atl="..." style={{ width: "100%", opacity:"30%" }} />
+=======
+                <tr>
+                    {messageClass === 'sent' ?
+                        <td align='right'>
+                            <span className="font-lombardia" style={{ fontSize: "1.3em" }}>{nomePersonaggio} </span>
+                            {/*se non c'è un immagine,mette l'immagine di default corrispondente all'url*/}
+                            <img src={immagine || 'https://myasw.org/wp-content/uploads/2020/05/mr-anonymous.png'} atl="..." />
+                        </td>
+                        :
+                        <td align='left'>
+                            {/*se non c'è un immagine,mette l'immagine di default corrispondente all'url*/}
+                            <img src={immagine || 'https://myasw.org/wp-content/uploads/2020/05/mr-anonymous.png'} atl="..." />
+                            <span className="font-lombardia" style={{ fontSize: "1.3em" }}>{nomePersonaggio} </span>
+                        </td>
+                    }
+                </tr>
+
+                <tr>
+                    <td align={messageClass === 'sent' ? 'right' : 'left'}>
+                        <p className="font-lombardia" style={{ fontSize: "1.8em" }}>{testo}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center">
+                        <img src={divisore} atl="..." style={{ width: "100%" }} />
+>>>>>>> 46b6307 (implementata parte della chat)
                     </td>
                 </tr>
             </table>
