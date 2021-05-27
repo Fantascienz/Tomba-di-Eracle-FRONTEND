@@ -38,54 +38,58 @@ db.on('error', _ => {
 
 io.on('connect', (socket) => {
   socket.on('join', ({ personaggio, location }, callback) => {
-    Msg.find().then(result => {
+    const { error, user } = addUser({ id: socket.id, personaggio, location });
+    Msg.find({ idLocation: location.id }).then(result => {
       socket.emit('output-messages', result)
-      socket.emit('message', { nomePersonaggio: 'admin', testo: `${personaggio.nominativo}, entra in ${location.nome}`, idLocation: location.id });
-      socket.broadcast.emit('message', { nomePersonaggio: 'admin', testo: `${personaggio.nominativo}, entra in ${location.nome} !`, idLocation: location.id });
+      socket.emit('message', { testo: `${personaggio.nominativo},entra in ${location.nome}`, idLocation: location.id });
+      // socket.broadcast.to(user.location).emit('message', { utente: 'admin', testo: `${user.personaggio.nominativo}, has joined!` });
     })
+    if (error) return callback(error);
+
+
+
     socket.join(location);
+
+    // io.to(user.location).emit('roomData', { location: user.location, users: getUsersInRoom(user.location) });
+
     callback();
   });
 
   socket.on('sendMessage', ({ formValue, personaggio, location }, callback) => {
-    
-      const messaggioInviato = new Msg(
+    const user = getUser(socket.id);
+    const messaggioInviato = new Msg(
       {
         testo: formValue,
         inviatoAlle: new Date(),
         idPersonaggio: personaggio.id,
         nomePersonaggio: personaggio.nominativo,
         idLocation: location.id,
-        immagine: personaggio.immagineAttiva
+        immagine: personaggio.urlImmagine
       });
-      console.log(messaggioInviato)
     messaggioInviato.save().then(() => {
-
-      io.emit('message', {
+      
+      
+      socket.emit('message', {
         testo: formValue,
         nomePersonaggio: personaggio.nominativo,
         idLocation: location.id,
-        immagine: personaggio.immagineAttiva
+        immagine: personaggio.urlImmagine
       });
+      // io.to(user.location).emit('roomData', { location: user.location, users: getUsersInRoom(user.location) })
     })
+
+
     callback();
   })
 
-  socket.on('uscitaLocation', ({ personaggio, ultimaLocation }) => {
-    socket.broadcast.emit('message', { nomePersonaggio: 'admin', testo: `${personaggio.nominativo} si sposta da ${ultimaLocation.nome}`, idLocation: ultimaLocation.id })
-  })
+  // socket.on('disconnect', () => {
+  //   const user = removeUser(socket.id);
 
-  socket.on('entrataNuovaLocation', ({ personaggio, location, ultimaLocation }) => {
-    if(location == ultimaLocation.direzioni.idLocationNord) {
-      socket.broadcast.emit('message', { nomePersonaggio: 'admin', testo: `${personaggio.nominativo}, entra in ${ultimaLocation.direzioni.nomeLocationNord}!`, idLocation: location });
-    } else if (location == ultimaLocation.direzioni.idLocationSud) {
-      socket.broadcast.emit('message', { nomePersonaggio: 'admin', testo: `${personaggio.nominativo}, entra in ${ultimaLocation.direzioni.nomeLocationNord}!`, idLocation: location });
-    } else if (location == ultimaLocation.direzioni.idLocationOvest) {
-      socket.broadcast.emit('message', { nomePersonaggio: 'admin', testo: `${personaggio.nominativo}, entra in ${ultimaLocation.direzioni.nomeLocationOvest}!`, idLocation: location });
-    } else if (location == ultimaLocation.direzioni.idLocationEst) {
-      socket.broadcast.emit('message', { nomePersonaggio: 'admin', testo: `${personaggio.nominativo}, entra in ${ultimaLocation.direzioni.nomeLocationEst}!`, idLocation: location });
-    }
-  })
+  //   if (user) {
+  //     io.to(location).emit('message', { user: 'admin', testo: `${user.personaggio.nominativo} has left` });
+  //   }
+
+  // })
 });
 
 app.use(router);
