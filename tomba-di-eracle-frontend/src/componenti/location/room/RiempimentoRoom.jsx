@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useHistory } from "react-router";
 import RoomService from "../../../servizi/RoomService";
 import Header from "../../layout/Header";
 import { TitoloPagina } from "../../layout/TitoloPagina";
@@ -16,9 +17,14 @@ const RiempimentoRoom = () => {
     const [locationSelezionata, setLocationSelezionata] = useState("1")
     const [locationAggiunte, setLocationAggiunte] = useState(0)
 
+    const history = useHistory()
+
     const inserimentoLocations = () => {
-        RoomService.inserimentoRoom(locations).then(
-            alert('inserimento ok')
+        RoomService.inserimentoRoom(locations).then(() => {
+            sessionStorage.removeItem('listaSuperLocation')
+            history.push('/paginaUtente');
+            history.go()
+        }
         )
     }
 

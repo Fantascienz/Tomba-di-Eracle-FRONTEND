@@ -209,6 +209,7 @@ class SchedaUtente extends Component {
     }
 
     modificaLocation = () => {
+        this.props.visualizzaLoadingScreen()
         LocationService.sessioneAllLocation().then(() => {
             browserHistory.push('modificaLocation')
             browserHistory.go()
