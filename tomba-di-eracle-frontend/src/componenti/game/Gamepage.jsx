@@ -40,6 +40,7 @@ import { io } from 'socket.io-client';
 
 let ENDPOINT = 'http://localhost:5000';
 let socket = io(ENDPOINT);
+const personaggio = JSON.parse(sessionStorage.getItem('pgAttivo'));
 
 
 class Gamepage extends Component {
