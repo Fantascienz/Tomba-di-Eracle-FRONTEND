@@ -6,7 +6,6 @@ import Registrazione from './componenti/utente/Registrazione';
 import Utente from './componenti/utente/Utente';
 import CreazionePersonaggio from './componenti/personaggio/CreazionePersonaggio';
 import ModificaUtente from './componenti/utente/ModificaUtente';
-import Gamepage from './componenti/game/Gamepage';
 import ModificaPersonaggio from './componenti/personaggio/ModificaPersonaggio';
 import CreazioneLocation from './componenti/location/CreazioneLocation'
 import Macromappa from './componenti/location/Macromappa';
@@ -18,6 +17,7 @@ import 'firebase/auth';
 import Forecast from './componenti/game/Forecast';
 import MessaggiUtenti from './componenti/messaggi/MessaggiUtenti';
 import MessaggiAdmin from './componenti/messaggi/MessaggiAdmin';
+import Gamepage from './componenti/game/Gamepage';
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
