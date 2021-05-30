@@ -34,7 +34,7 @@ export const TabellaStanze = ({ lista, entra, isKallios }) => {
                             <tr key={stanza.subLocation.id}>
                                 <td>{stanza.subLocation.nome}</td>
                                 <td>{stanza.subLocation.ambiente}</td>
-                                {stanza.subLocation.chiave == null ?
+                                {!stanza.subLocation.hasChiave ?
                                     <td>Entrata Libera</td>
                                     :
                                     <td><input type="text" maxLength="5" placeholder="Chiave" id="inputChiave" onChange={(e) => setChiave(e.target.value)} style={{ width: "50%" }} /></td>

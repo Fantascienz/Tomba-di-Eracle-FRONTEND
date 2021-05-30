@@ -79,7 +79,7 @@ class Gamepage extends Component {
 
     visualizzazioneStanze = () => {
         withReactContent(Swal).fire({
-            html: <TabellaStanze lista={this.props.stanzeLocation} entra={this.navigazione} isKallios={this.isKallios} />
+            html: <TabellaStanze lista={this.props.stanzeLocation} entra={this.navigazione} isKallios={this.isKallios()} />
         })
     }
 

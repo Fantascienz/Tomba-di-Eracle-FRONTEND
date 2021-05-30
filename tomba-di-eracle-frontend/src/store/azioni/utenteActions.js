@@ -10,6 +10,7 @@ import AdminService from "../../servizi/AdminService"
 export const login = (utente) => {
     return (dispatch) => {
         UtenteService.login(utente).then(res => {
+            LocationService.sessioneAllLocation()
             sessionStorage.setItem('utente', JSON.stringify(res.data))
             //se l'utente è admin o master,recupero la lista dei personaggi totali e poi eseguo la dispatch,altrimenti eseguo solo la dispatch
             if (res.data.tipo === 'admin' || res.data.tipo === 'master') {
@@ -30,9 +31,10 @@ export const login = (utente) => {
                         sessionStorage.setItem('listaTipoUtenti', JSON.stringify(res.data))
                     })
                 )
+                    // .then(
+                    //     LocationService.sessioneAllLocation()
+                    // )
                     .then(
-                        LocationService.sessioneAllLocation()
-                    ).then(
                         dispatch({
                             type: 'LOGIN_UTENTE',
                             utente: utente,
