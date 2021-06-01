@@ -2,7 +2,7 @@ const express = require('express');
 const socketio = require("socket.io");
 const http = require('http');
 
-const { addUser, removeUser, getUser, getUsersInRoom } = require('./src/server/users');
+const { addUser, removeUser, getUser, getUsersInRoom, getUsersInlocation } = require('./src/server/users');
 
 const PORT = process.env.PORT || 5000;
 
@@ -37,17 +37,18 @@ db.on('error', _ => {
 
 
 io.on('connect', (socket) => {
-  socket.on('join', ({ personaggio, location }, callback) => {
-    const { error, user } = addUser({ id: socket.id, personaggio, location });
-    Msg.find({ idLocation: location.id }).then(result => {
+  socket.on('join', ({ personaggio, location}, callback) => {
+    const {user} = addUser({id: socket.id, personaggio, location});
+    const  personaggi = getUsersInlocation(user.location)
+    socket.emit('locationData', { location: user.location, personaggi});
+    console.log(personaggi)
+    Msg.find().then(result => {
+     
       socket.emit('output-messages', result)
       socket.emit('message', { testo: `${personaggio.nominativo},entra in ${location.nome}`, idLocation: location.id });
       // socket.broadcast.to(user.location).emit('message', { utente: 'admin', testo: `${user.personaggio.nominativo}, has joined!` });
     })
-    if (error) return callback(error);
-
-
-
+    
     socket.join(location);
 
     // io.to(user.location).emit('roomData', { location: user.location, users: getUsersInRoom(user.location) });
@@ -56,7 +57,7 @@ io.on('connect', (socket) => {
   });
 
   socket.on('sendMessage', ({ formValue, personaggio, location }, callback) => {
-    const user = getUser(socket.id);
+    
     const messaggioInviato = new Msg(
       {
         testo: formValue,
@@ -67,23 +68,25 @@ io.on('connect', (socket) => {
         immagine: personaggio.urlImmagine
       });
     messaggioInviato.save().then(() => {
-      
-      
-      socket.emit('message', {
+     
+      io.emit('message', {
         testo: formValue,
         nomePersonaggio: personaggio.nominativo,
         idLocation: location.id,
         immagine: personaggio.urlImmagine
       });
-      // io.to(user.location).emit('roomData', { location: user.location, users: getUsersInRoom(user.location) })
+      
     })
 
 
     callback();
   })
 
-  // socket.on('disconnect', () => {
-  //   const user = removeUser(socket.id);
+  
+  socket.on('uscitaLocation', ({ personaggio, ultimaLocation }) => {
+    
+    socket.broadcast.emit('message', { nomePersonaggio: 'admin', testo: `${personaggio.nominativo} si sposta da ${ultimaLocation.nome}`, idLocation: ultimaLocation.id })
+  })
 
   //   if (user) {
   //     io.to(location).emit('message', { user: 'admin', testo: `${user.personaggio.nominativo} has left` });
