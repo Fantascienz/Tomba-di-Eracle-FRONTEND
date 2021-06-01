@@ -1,46 +1,99 @@
 import React, { useRef, useState, useEffect } from 'react';
-import io from 'socket.io-client';
-import divisore from '../../img/divisore.png'
-import penna from '../../img/quill.png'
-import "./Chat.css"
+import { ModalComponente } from '../utils/ModalComponent';
+import divisore from '../../img/divisore.png';
+import penna from '../../img/quill.png';
+import { useSelector, useDispatch } from 'react-redux';
 
-let socket;
 
-export const ChatRoom = () => {
+export const ChatRoom = ({ socket, location, personaggio, ENDPOINT }) => {
+    const dispatch = useDispatch();
+    const personaggiOnline = useSelector(state => state.online.personaggi);
     const dummy = useRef();
-    const personaggio = JSON.parse(sessionStorage.getItem('pgAttivo'));
-    const location = JSON.parse(sessionStorage.getItem('ultimaLocation'));
-    const ENDPOINT = 'http://localhost:5000';
     const [messaggi, setMessages] = useState([]);
 
     const [formValue, setFormValue] = useState(''); //hook per creare il messaggio con i dati del personaggio e della location
 
 
     useEffect(() => {
-        socket = io(ENDPOINT);
+
+        socket.emit('join', { personaggio, location }, () => {
+        })
 
         socket.on('output-messages', (data) => {
             setMessages(data);
         });
-    
-        socket.emit('join', { personaggio, location}, () => {
-        })
+
+        socket.on('locationData', (data) => {
+            dispatch({ type: 'setList', listaPersonaggi: data.personaggi });
+        });
+
+        return () => {
+            socket.off('output-message');
+            socket.off('join');
+            socket.off('locationData');
+        }
+
+
+
     }, ENDPOINT)
 
     useEffect(() => {
         socket.on('message', (messaggio) => {
             setMessages([...messaggi, messaggio]);
+
         })
+        socket.on('messageEntrataLocation', (messaggio) => {
+            setMessages([...messaggi, messaggio])
+
+        })
+
+        socket.on('messageUscitaLocation', (messaggio) => {
+            setMessages([...messaggi, messaggio])
+
+        })
+
+        socket.on('locationData', (data) => {
+            dispatch({ type: 'setList', listaPersonaggi: data.personaggi });
+        });
+
+        return () => {
+            socket.off('locationData');
+            socket.off('messageEntrataLocation');
+            socket.off('messageUscitaLocation');
+            socket.off('message');
+        }
+
+
     }, [messaggi]);
-    
+
+
 
     const inviaMessaggio = (e) => {
         e.preventDefault();
+        socket.emit('sendMessage', { formValue, personaggio, location }, () => setFormValue(''));
 
-        socket.emit('sendMessage', {formValue, personaggio, location}, () => setFormValue(''));
         dummy.current.scrollIntoView({ behavior: 'smooth' });
+
     }
 
+    const getList = () => {
+        socket.emit('getList', () => {
+
+        });
+        socket.on('listaOnline', (data) => {
+            dispatch({ type: 'setList', listaPersonaggi: data.personaggi });
+        })
+
+        socket.on('listaCambiata', (data) => {
+            dispatch({ type: 'setList', listaPersonaggi: data.personaggi });
+        })
+
+        return () => {
+            socket.off('getList');
+            socket.off('listaOnline');
+        }
+
+    }
     return (<>
         {/* NEL TAG MAIN VENGONO VISUALIZZATI I MESSAGGI */}
         <div className="chat">
@@ -52,7 +105,24 @@ export const ChatRoom = () => {
                         "")}
 
                 <span ref={dummy}></span>
+                {<ModalComponente
+                    bottone={<button className='btn btn-primary' onClick={() => getList()}>PG</button>}
+                    size='s'
+                    contenuto={
+                        <div>
+                            {
+                                personaggiOnline.map(pg =>
+                                    pg.personaggio.ultimaLocation === location.id ?
+                                    <h1 key={pg.id}>{pg.personaggio.nominativo}</h1>
+                                    :
+                                    ""
+                                )
+                            }
+                        </div>
+                    }
+                />}
             </main>
+
 
             <form onSubmit={inviaMessaggio}>
 
@@ -61,23 +131,15 @@ export const ChatRoom = () => {
                 <button type="submit" disabled={!formValue} title={!formValue ? 'Inserisci un testo' : 'Scrivi'}>
                     <img src={penna} alt='...' style={{ width: "auto", height: "80%" }} />
                 </button>
-
             </form>
         </div>
     </>)
 }
 
-
-
-
-
 function MessaggioChat(props) {
     const { testo, idPersonaggio, immagine, nomePersonaggio, inviatoAlle } = props.messaggio;
-
     const personaggioAttivo = JSON.parse(sessionStorage.getItem('pgAttivo'));
-
     const messageClass = idPersonaggio === personaggioAttivo.id ? 'sent' : 'received';
-
     return (<>
         <div className={`message ${messageClass}`}>
             <table style={{ width: "100%" }}>
@@ -86,20 +148,26 @@ function MessaggioChat(props) {
                         <td align='right'>
                             <span className="font-lombardia" style={{ fontSize: "1.3em" }}>{nomePersonaggio} </span>
                             {/*se non c'è un immagine,mette l'immagine di default corrispondente all'url*/}
-                            <img src={immagine || 'https://myasw.org/wp-content/uploads/2020/05/mr-anonymous.png'} atl="..." />
+                            <img src={immagine} alt="..." />
                         </td>
                         :
                         <td align='left'>
                             {/*se non c'è un immagine,mette l'immagine di default corrispondente all'url*/}
-                            <img src={immagine || 'https://myasw.org/wp-content/uploads/2020/05/mr-anonymous.png'} atl="..." />
-                            <span className="font-lombardia" style={{ fontSize: "1.3em" }}>{nomePersonaggio} </span>
+                            {nomePersonaggio == 'admin' ? null : <img src={immagine} alt="..." />}
+                            {nomePersonaggio == 'admin' ? null :
+                                <span className="font-lombardia" style={{ fontSize: "1.3em" }}>{nomePersonaggio} </span>}
                         </td>
                     }
                 </tr>
 
                 <tr>
                     <td align={messageClass === 'sent' ? 'right' : 'left'}>
-                        <p className="font-lombardia" style={{ fontSize: "1.8em" }}>{testo}</p>
+                        {nomePersonaggio == 'admin' ?
+                            <p className="font-lombardia" style={{ fontSize: "1.8em", color: 'grey' }} title={nomePersonaggio}>{testo}</p>
+                            :
+                            <p className="font-lombardia" style={{ fontSize: "1.8em" }} title={nomePersonaggio}>{testo}</p>
+                        }
+
                     </td>
                 </tr>
                 <tr>
