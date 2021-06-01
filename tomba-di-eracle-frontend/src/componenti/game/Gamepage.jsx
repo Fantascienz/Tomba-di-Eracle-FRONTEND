@@ -48,8 +48,6 @@ import "./Gamepage.css"
 import trasformazionePG from './TrasformazionePG'
 import Macromappa2 from '../location/Macromappa2'
 
-import { io } from 'socket.io-client';
-
 
 let ENDPOINT = 'http://localhost:5000';
 let socket = io(ENDPOINT);
@@ -57,7 +55,6 @@ let socket = io(ENDPOINT);
 
 class Gamepage extends Component {
 
-   
     navigazione = (location) => {
         const personaggio = JSON.parse(sessionStorage.getItem('pgAttivo'));
         const ultimaLocation = JSON.parse(sessionStorage.getItem('ultimaLocation'));
@@ -325,7 +322,7 @@ class Gamepage extends Component {
 
                     {/* CHAT ROOM------------------------------------- */}
                     <div style={{ backgroundColor: "transparent", position: "absolute", top: "0", left: "0", width: "100%", height: "100%" }}>
-                        <ChatRoom ENDPOINT={ENDPOINT} socket={socket} location={JSON.parse(sessionStorage.getItem('ultimaLocation'))} personaggio={personaggio} />
+                        <ChatRoom ENDPOINT={ENDPOINT} socket={socket} location={JSON.parse(sessionStorage.getItem('ultimaLocation'))} personaggio={PG} />
                     </div>
 
                     {/* AVATAR PG------------------------------------ */}
