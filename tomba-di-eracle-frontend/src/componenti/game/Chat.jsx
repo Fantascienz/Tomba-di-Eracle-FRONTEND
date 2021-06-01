@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
+<<<<<<< HEAD
 import { ModalComponente } from '../utils/ModalComponent';
 import divisore from '../../img/divisore.png';
 import penna from '../../img/quill.png';
@@ -8,6 +9,16 @@ import { useSelector, useDispatch } from 'react-redux';
 export const ChatRoom = ({ socket, location, personaggio, ENDPOINT }) => {
     const dispatch = useDispatch();
     const personaggiOnline = useSelector(state => state.online.personaggi);
+=======
+import io from 'socket.io-client';
+import divisore from '../../img/divisore.png'
+import penna from '../../img/quill.png'
+import "./Chat.css"
+
+let socket;
+
+export const ChatRoom = () => {
+>>>>>>> 87fc1b3 (modifichine carinine)
     const dummy = useRef();
     const [messaggi, setMessages] = useState([]);
 
@@ -22,6 +33,7 @@ export const ChatRoom = ({ socket, location, personaggio, ENDPOINT }) => {
         socket.on('output-messages', (data) => {
             setMessages(data);
         });
+<<<<<<< HEAD
 
         socket.on('locationData', (data) => {
             dispatch({ type: 'setList', listaPersonaggi: data.personaggi });
@@ -35,11 +47,17 @@ export const ChatRoom = ({ socket, location, personaggio, ENDPOINT }) => {
 
 
 
+=======
+    
+        socket.emit('join', { personaggio, location}, () => {
+        })
+>>>>>>> 87fc1b3 (modifichine carinine)
     }, ENDPOINT)
 
     useEffect(() => {
         socket.on('message', (messaggio) => {
             setMessages([...messaggi, messaggio]);
+<<<<<<< HEAD
 
         })
         socket.on('messageEntrataLocation', (messaggio) => {
@@ -50,6 +68,8 @@ export const ChatRoom = ({ socket, location, personaggio, ENDPOINT }) => {
         socket.on('messageUscitaLocation', (messaggio) => {
             setMessages([...messaggi, messaggio])
 
+=======
+>>>>>>> 87fc1b3 (modifichine carinine)
         })
 
         socket.on('locationData', (data) => {
@@ -65,6 +85,7 @@ export const ChatRoom = ({ socket, location, personaggio, ENDPOINT }) => {
 
 
     }, [messaggi]);
+<<<<<<< HEAD
 
 
 
@@ -74,6 +95,15 @@ export const ChatRoom = ({ socket, location, personaggio, ENDPOINT }) => {
 
         dummy.current.scrollIntoView({ behavior: 'smooth' });
 
+=======
+    
+
+    const inviaMessaggio = (e) => {
+        e.preventDefault();
+
+        socket.emit('sendMessage', {formValue, personaggio, location}, () => setFormValue(''));
+        dummy.current.scrollIntoView({ behavior: 'smooth' });
+>>>>>>> 87fc1b3 (modifichine carinine)
     }
 
     const getList = () => {
@@ -139,7 +169,13 @@ export const ChatRoom = ({ socket, location, personaggio, ENDPOINT }) => {
 function MessaggioChat(props) {
     const { testo, idPersonaggio, immagine, nomePersonaggio, inviatoAlle } = props.messaggio;
     const personaggioAttivo = JSON.parse(sessionStorage.getItem('pgAttivo'));
+<<<<<<< HEAD
     const messageClass = idPersonaggio === personaggioAttivo.id ? 'sent' : 'received';
+=======
+
+    const messageClass = idPersonaggio === personaggioAttivo.id ? 'sent' : 'received';
+
+>>>>>>> 87fc1b3 (modifichine carinine)
     return (<>
         <div className={`message ${messageClass}`}>
             <table style={{ width: "100%" }}>
