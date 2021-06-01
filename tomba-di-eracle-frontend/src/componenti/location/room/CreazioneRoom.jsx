@@ -5,10 +5,8 @@ import Footer from "../../layout/Footer"
 import Header from "../../layout/Header";
 import { TitoloPagina } from "../../layout/TitoloPagina";
 import MinimappaRegolabile from "../MinimappaReagolabile";
-import Mappa from '../../../img/macromappa.jpg'
 import Macromappa2 from "../Macromappa2";
-import { arrayAlberoGerarchicoLocation, trovaAlberoLocPadri, trovaLocation, trovaLocPadre, trovaLocsFiglie } from "../../utils/LocationUtils";
-
+import './CreazioneRoom.css';
 
 const CreazioneRoom = () => {
 
@@ -21,26 +19,10 @@ const CreazioneRoom = () => {
     const allLocations = JSON.parse(sessionStorage.getItem('allLocations'));
     const listaSuperLoc = JSON.parse(sessionStorage.getItem('listaSuperLocation'))
 
-
-
-    // const getListaSuperLoc = () => {
-    //     let superLoc = [];
-    //     for (let i = 0; i < allLocations.length; i++) {
-    //         if (allLocations[i].nome !== '/') {
-    //             if ((JSON.parse(sessionStorage.getItem('utente')).tipo === 'admin' || JSON.parse(sessionStorage.getItem('utente')).id === allLocations[i].id) && !allLocations[i].room) {
-    //                 superLoc.push(JSON.parse(sessionStorage.getItem('allLocations'))[i])
-    //             }
-    //         }
-    //     }
-    //     return superLoc;
-    // }
-
     const renderOptions = () => {
         let location = {};
         for (let i = 0; i < allLocations.length; i++) {
-            if (allLocations[i].id == superLoc) {
-                location = allLocations[i]
-            }
+            if (allLocations[i].id == superLoc) { location = allLocations[i] }
         }
 
         if (location.tipo === 'Umbra') {
@@ -67,23 +49,17 @@ const CreazioneRoom = () => {
         }
         if (location.mappa === 'Inner') {
             return (
-                <>
-                    <option value={1}>1 x 1</option>
-                </>
+                <> <option value={1}>1 x 1</option> </>
             )
         }
         if (location.mappa === 'Stanza') {
-            if (location.tipo === 'Reame') {
-                return <option value={0}>Questa location non può avere sotto-location!</option>
-            }
+            if (location.tipo === 'Reame') { return <option value={0}>Questa location non può avere sotto-location!</option> }
         }
     }
 
     const getSuperLocation = () => {
         for (let i = 0; i < allLocations.length; i++) {
-            if (allLocations[i].id == superLoc) {
-                return allLocations[i]
-            }
+            if (allLocations[i].id == superLoc) { return allLocations[i] }
         }
     }
 
@@ -132,59 +108,6 @@ const CreazioneRoom = () => {
         }
     }
 
-    // const grigliaMacromappa = (cellePerRiga, idIniziale, immagineSfondoMappa) => {
-
-    //     var columns = cellePerRiga;
-    //     var rows = cellePerRiga;
-    //     var celleGriglia = []
-    //     var gridTemplateColumnsN = ""
-    //     var gridTemplateRowsN = ""
-    //     var idIniziale = idIniziale
-
-    //     for (let i = 1; i <= rows; i++) {
-    //         for (let j = 1; j <= columns; j++) {
-    //             let id = idIniziale++
-    //             celleGriglia.push(
-    //                 <div title={id} 
-    //                     style={{
-    //                     border: ` ${id==superLoc ? "2px solid red": "1px solid black"}`,
-    //                     gridColumnStart: `${j}`,
-    //                     gridRowStart: `${i}`
-    //                 }}
-    //                 >
-
-    //                 </div>
-    //             )
-    //         }
-    //     }
-
-
-    //     for (let c = 1; c <= columns; c++) {
-    //         gridTemplateColumnsN = gridTemplateColumnsN + "auto "
-    //     }
-
-    //     for (let r = 1; r <= rows; r++) {
-    //         gridTemplateRowsN = gridTemplateRowsN + "auto "
-    //     }
-
-    //     return (
-    //         <div style={{
-    //             backgroundColor: "red",
-    //             gridColumnStart: "2",
-    //             gridRowStart: "2",
-    //             display: "grid",
-    //             gridTemplateColumns: `${gridTemplateColumnsN}`,
-    //             gridTemplateRows: `${gridTemplateRowsN}`,
-    //             backgroundImage: `url('${immagineSfondoMappa}')`,
-    //             backgroundRepeat: "no-repeat",
-    //             backgroundSize: "100% 99.8%"
-    //         }}>
-    //             {celleGriglia}
-    //         </div>
-    //     )
-    // }
-
-
     const handleChangeUrlMinimappaReale = (e) =>{
         if(e.target.value.length>=e.target.maxLength){
             alert("Attenzione! L'URL inserito per la Minimappa Reame è maggiore di "+e.target.maxLength+" caratteri! Scegli un URL più corto!")
@@ -207,39 +130,24 @@ const CreazioneRoom = () => {
     return (
         <>
             <Header />
-            <div className="corpoComponente" style={{ overflowY: "auto", overflowX: "hidden" }}>
+            <div className="corpoComponente">
 
                 <TitoloPagina titolo="Creazione Room" fontSize="8vh" />
 
-                <div style={{ display: "grid", gridTemplateColumns: "40% 60%" }}>
+                <div className="grid-body-creazione-room">
 
-                    {/* LATO SINISTRO */}
-                    <div style={{
-                        padding: "5px",
-                        gridColumnStart: "1",
-                        display: "grid",
-                        gridTemplateRows: "auto auto auto",
-                        gridTemplateColumns: "auto auto auto"
-                    }}>
-                        <div style={{
-                            gridColumnStart: "2",
-                            gridRowStart: "2"
-                        }}>
-                            <Macromappa2 locationSelezionata={superLoc} permettiNavigazione permettiNavigazioneSpecchio permettiIngrandimento dimensioneMappa="50vmin" />
+                    <div className="lato-sx">
+                        <div>
+                            <Macromappa2 locationSelezionata={superLoc} abilitaComandi permettiNavigazione permettiNavigazioneSpecchio permettiIngrandimento dimensioneMappa="50vmin" />
                         </div>
                     </div>
 
-                    {/* LATO DESTRO */}
-                    <div style={{
-                        gridColumnStart: "2",
-                        display: "grid",
-                        gridTemplateRows: "auto auto auto auto",
-                        padding: "2px"
-                    }}>
+
+                    <div className="lato-dx">
 
                         {/* SELECT Super Location */}
-                        <div style={{ gridRowStart: "1", padding: "2px" }}>
-                            <select className="form-select" name="super" id="super" onChange={(e) => setSuperLoc(e.target.value)} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)" }}>
+                        <div style={{ gridRowStart: "1"}}>
+                            <select className="form-select" name="super" id="super" onChange={(e) => setSuperLoc(e.target.value)}>
                                 <option value={0}>Seleziona la Location all'interno della quale creare la Room</option>
                                 {listaSuperLoc.map(superLoc =>
                                     <option value={superLoc.id} key={superLoc.id}>({superLoc.id} - {superLoc.nome} - {superLoc.tipo})</option>
@@ -248,42 +156,27 @@ const CreazioneRoom = () => {
                         </div>
 
                         {/* SELECT Griglia */}
-                        <div style={{ gridRowStart: "2", padding: "2px" }}>
-                            <select className="form-select" name="colonne" id="colonne" onChange={(e) => setColonne(e.target.value)} style={{ border: "1px solid black", backgroundColor: "rgba(211, 211, 211, 0.568)" }}>
+                        <div style={{ gridRowStart: "2"}}>
+                            <select className="form-select" name="colonne" id="colonne" onChange={(e) => setColonne(e.target.value)}>
                                 <option value={0}>Seleziona il numero di Stanze in cui si vuole dividere la Room</option>
                                 {renderOptions()}
                             </select>
                         </div>
 
-                        <div style={{
-                            padding: "2px",
-                            gridRowStart: "3",
-                            display: "grid",
-                            gridTemplateRows: "auto auto",
-                            gridTemplateColumns: "auto auto auto"
-                        }}>
+                        <div className="boxes-minimappe" 
+                            style={{ gridRowStart: "3" }}>
 
                             {/* INPUT Url Minimappa Reame */}
-                            <div style={{
-                                padding: "2px",
-                                gridRowStart: "1",
-                                gridColumnStart: "1"
-                            }}>
+                            <div style={{ gridRowStart: "1", gridColumnStart: "1" }}>
                                 {getTipoSuperlocation() != "Umbra" ?
-                                    <input id="minimappa-reale-input-url" type="text" placeholder="Url Minimappa Reame" onChange={(e) => handleChangeUrlMinimappaReale(e)} style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} maxLength="1024" />
+                                    <input id="minimappa-reale-input-url" type="text" placeholder="Url Minimappa Reame" onChange={(e) => handleChangeUrlMinimappaReale(e)} maxLength="1024" />
                                     :
                                     null
                                 }
                             </div>
 
                             {/* MINIMAPPA Reame */}
-                            <div style={{
-                                padding: "2px",
-                                gridRowStart: "2",
-                                gridColumnStart: "1",
-                                display: "grid",
-                                gridTemplateColumns: "auto 50vh auto"
-                            }}>
+                            <div style={{ gridRowStart: "2", gridColumnStart: "1", display: "grid", gridTemplateColumns: "auto 50vh auto" }}>
                                 <div style={{ gridColumnStart: "2" }}>
                                     {getTipoSuperlocation() != "Umbra" ?
                                         <MinimappaRegolabile idLocation={superLoc} pxDimensioniMappa="50" immagineMinimappa={locationReame} cellePerRiga={colonne} lenteDisplay="none" />
@@ -294,23 +187,12 @@ const CreazioneRoom = () => {
                             </div>
 
                             {/* INPUT Url Minimappa Umbra */}
-                            <div style={{
-                                padding: "2px",
-                                gridRowStart: "1",
-                                gridColumnStart: "3"
-                            }}>
-                                <input id="minimappa-umbra-input-url" type="text" placeholder="Url Minimappa Umbra" onChange={(e) => handleChangeUrlMinimappaUmbra(e)} style={{ marginBottom: "1%", borderRadius: "5px 5px 5px 5px" }} maxLength="1024"/>
-
+                            <div style={{ gridRowStart: "1", gridColumnStart: "3" }}>
+                                <input id="minimappa-umbra-input-url" type="text" placeholder="Url Minimappa Umbra" onChange={(e) => handleChangeUrlMinimappaUmbra(e)} maxLength="1024"/>
                             </div>
 
                             {/* MINIMAPPA Umbra */}
-                            <div style={{
-                                padding: "2px",
-                                gridRowStart: "2",
-                                gridColumnStart: "3",
-                                display: "grid",
-                                gridTemplateColumns: "auto 50vh auto"
-                            }}>
+                            <div style={{ gridRowStart: "2", gridColumnStart: "3", display: "grid", gridTemplateColumns: "auto 50vh auto" }}>
                                 <div style={{ gridColumnStart: "2" }}>
                                     <MinimappaRegolabile idLocation={getSuperLocationUmbra()} pxDimensioniMappa="50" immagineMinimappa={locationUmbra} cellePerRiga={colonne} lenteDisplay="none" />
                                 </div>
@@ -319,17 +201,14 @@ const CreazioneRoom = () => {
                         </div>
 
                         {/* BOTTONE invio */}
-                        <div style={{ padding: "2px", gridRowStart: "4" }}>
+                        <div style={{ gridRowStart: "4" }}>
                             <button className="btn btn-dark" onClick={() => toImpostaRoom()} disabled={locationReame=="" || locationUmbra=="" || superLoc==0 || colonne==0 ? true: false}>Crea Room</button>
                         </div>
 
                     </div>
-
                 </div>
-
             </div>
             < Footer />
-
         </>
     )
 }

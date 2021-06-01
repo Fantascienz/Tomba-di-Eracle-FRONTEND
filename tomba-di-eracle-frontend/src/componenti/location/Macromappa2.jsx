@@ -18,7 +18,7 @@ import { GlassMagnifier } from 'react-image-magnifiers';
 import './Macromappa2.css'
 import { tipoUtenteSessione } from '../utils/UtenteUtils';
 
-const Macromappa2 = ({ locationSelezionata, idIniziale, permettiNavigazione, permettiNavigazioneSpecchio, permettiIngrandimento, dimensioneMappa }) => {
+const Macromappa2 = ({ locationSelezionata, idIniziale, abilitaComandi, permettiNavigazione, permettiNavigazioneSpecchio, permettiIngrandimento, dimensioneMappa }) => {
 
     var locationSelezionata = (locationSelezionata == 0 ? locationSelezionata = null : locationSelezionata);
     var grandezzaMappa = (idIniziale == null || idIniziale <= 288) ? 12 : 0;
@@ -54,19 +54,10 @@ const Macromappa2 = ({ locationSelezionata, idIniziale, permettiNavigazione, per
 
     }
 
-    const grigliaMacromappa = () => {
-
+    const celleGriglia = () => {
         var columns = griglia;
         var rows = griglia;
         var celleGriglia = []
-        var gridTemplateColumnsN = ""
-        var gridTemplateRowsN = ""
-        // LE LOCATION ESTERNE SONO DA IMPLEMENTARE GRAFICAMENTE ALL?INTERNO DELLA MACROMAPPA
-        // però i quadretti che le comprandono sono esterno al 12*12, bisogna capire come fare,
-        // tipo creare una griglia più grande, 14*14: quando è selezionata una Loc. INTERNA alla 12*12 (macro o stanza che sia),
-        // si mostra solo la griglia che parte da col2-row2 e finisce a col13-row13, mentre qando si seleziona una Loc ESTERNA alla 12*12,
-        // si mostra tutta la griglia 14*14, oppure solo la griglia di col1 / row1 / col14 / row 14, sempre tenendo conto che non ci sono
-        // location in col1-row1 / col14-row1 / col1/row14 / col14-row14
         var idStart = idPrimaCella < 1000 ? idPrimaCella - 1 :
             idPrimaCella > 1000 && idPrimaCella < 10000 ? idPrimaCella - 1000 :
                 idPrimaCella > 10000 && idPrimaCella < 100000 ? idPrimaCella - 10000 :
@@ -79,41 +70,49 @@ const Macromappa2 = ({ locationSelezionata, idIniziale, permettiNavigazione, per
                         idPrimaCella > 10000 && idPrimaCella < 100000 ? idStart += 10000 :
                             idStart);
 
-
-                if (navigaLocation && presenzaStanze(locationCella)) {
+                if (navigaLocation && presenzaStanze(locationCella) && abilitaComandi) {
                     celleGriglia.push(
-                        <div
-                            id={locationCella.id}
+                        <div id={locationCella.id}
                             title={tipoUtenteSessione("Admin") || tipoUtenteSessione("Master") ? locationCella.id + " - " + locationCella.nome + "\n(clicka per aprire)" : locationCella.nome + "\n(clicka per aprire)"}
                             className="cella-con-stanze"
-                            style={{
-                                gridColumnStart: `${j}`,
-                                gridRowStart: `${i}`,
-                                backgroundImage: `${locationSelezionata == locationCella.id || arrayAlberoGerarchicoLocation(locationSelezionata).includes(locationCella.id) ? "url('" + Segnaposto + "')" : "none"}`,
-                                opacity: `${arrayAlberoGerarchicoLocation(locationSelezionata).includes(locationCella.id) ? "55%" : "100%"}`
+                            style={{ gridColumnStart: `${j}`,
+                                     gridRowStart: `${i}`,
+                                     backgroundImage: `${locationSelezionata == locationCella.id || arrayAlberoGerarchicoLocation(locationSelezionata).includes(locationCella.id) ? "url('" + Segnaposto + "')" : "none"}`,
+                                     opacity: `${arrayAlberoGerarchicoLocation(locationSelezionata).includes(locationCella.id) ? "55%" : "100%"}`
                             }}
-                            onClick={(e) => apriCella(parseInt(e.target.id))}
-                        >
+                            onClick={(e) => apriCella(parseInt(e.target.id))} >
                         </div>
                     )
                 } else {
                     celleGriglia.push(
-                        <div
-                            title={tipoUtenteSessione("Admin") || tipoUtenteSessione("Master") ? locationCella.id + " - " + locationCella.nome : locationCella.nome}
+                        <div title={tipoUtenteSessione("Admin") || tipoUtenteSessione("Master") ? locationCella.id + " - " + locationCella.nome : locationCella.nome}
                             className="cella-no-stanze"
-                            style={{
-                                gridColumnStart: `${j}`,
-                                gridRowStart: `${i}`,
-                                backgroundImage: `${locationSelezionata == locationCella.id || arrayAlberoGerarchicoLocation(locationSelezionata).includes(locationCella.id) ? "url('" + Segnaposto + "')" : "none"}`,
-                                opacity: `${arrayAlberoGerarchicoLocation(locationSelezionata).includes(locationCella.id) ? "55%" : "100%"}`
-                            }}
-                        >
+                            style={{ gridColumnStart: `${j}`,
+                                     gridRowStart: `${i}`,
+                                     backgroundImage: `${locationSelezionata == locationCella.id || arrayAlberoGerarchicoLocation(locationSelezionata).includes(locationCella.id) ? "url('" + Segnaposto + "')" : "none"}`,
+                                     opacity: `${arrayAlberoGerarchicoLocation(locationSelezionata).includes(locationCella.id) ? "55%" : "100%"}`
+                            }}>
                         </div>
                     )
                 }
             }
         }
 
+        return celleGriglia;
+    }
+
+    const grigliaMacromappa = () => {
+        var columns = griglia;
+        var rows = griglia;
+        var gridTemplateColumnsN = ""
+        var gridTemplateRowsN = ""
+
+        // // LE LOCATION ESTERNE SONO DA IMPLEMENTARE GRAFICAMENTE ALL?INTERNO DELLA MACROMAPPA
+        // // però i quadretti che le comprandono sono esterno al 12*12, bisogna capire come fare,
+        // // tipo creare una griglia più grande, 14*14: quando è selezionata una Loc. INTERNA alla 12*12 (macro o stanza che sia),
+        // // si mostra solo la griglia che parte da col2-row2 e finisce a col13-row13, mentre qando si seleziona una Loc ESTERNA alla 12*12,
+        // // si mostra tutta la griglia 14*14, oppure solo la griglia di col1 / row1 / col14 / row 14, sempre tenendo conto che non ci sono
+        // // location in col1-row1 / col14-row1 / col1/row14 / col14-row14
 
         for (let c = 1; c <= columns; c++) {
             gridTemplateColumnsN = gridTemplateColumnsN + "auto "
@@ -124,7 +123,6 @@ const Macromappa2 = ({ locationSelezionata, idIniziale, permettiNavigazione, per
         }
 
         return (
-
             <div className="griglia-mappa"
                 style={{
                     gridTemplateColumns: `${gridTemplateColumnsN}`,
@@ -134,7 +132,7 @@ const Macromappa2 = ({ locationSelezionata, idIniziale, permettiNavigazione, per
 
                 {(idIniziale > 288 && idIniziale <= 384) ? alert("Hai selezionato una location ESTERNA, che non è ancora implementata (vedi componente Macromappa2)") : null}
 
-                {!magnifier ? celleGriglia : <GlassMagnifier imageSrc={mappa} magnifierOffsetX={-150} magnifierOffsetY={150} magnifierSize="300px" allowOverflow={true} cursorStyle="crosshair" magnifierBorderColor="black" />}
+                {!magnifier ? celleGriglia() : <GlassMagnifier imageSrc={mappa} magnifierOffsetX={-150} magnifierOffsetY={150} magnifierSize="300px" allowOverflow={true} cursorStyle="crosshair" magnifierBorderColor="black" />}
 
             </div>
         )
@@ -263,94 +261,90 @@ const Macromappa2 = ({ locationSelezionata, idIniziale, permettiNavigazione, per
 
 
     const pulsantiera = () => {
+        if (abilitaComandi) {
+            return (
+                <div className="pulsantiera"
+                    style={{
+                        backgroundImage: `url('${CornicePulsantiera}')`,
+                    }}>
 
-        return (
-            <div className="pulsantiera"
-                style={{
-                    backgroundImage: `url('${CornicePulsantiera}')`,
-                }}>
-
-                {(permettiNavigazione && trovaTipologiaLocation(idPrimaCella) == 'xxx') ?
-                    /* PULSANTE - Navigazione on/off */
-                    <div title={navigaLocation ? "Disattiva navigazione della mappa" : "Attiva navigazione della mappa"}
-                        className="pulsante-nav"
-                        style={{
-                            gridColumnStart: "2",
-                            backgroundImage: `url('${NavigazioneIcona}'), url('${NavigazioneOmbra}')`,
-                        }}
-                        onClick={() => setNavigaLocation(!navigaLocation)}
-                    >
-                    </div>
-                    :
-                    (navigaLocation && trovaTipologiaLocation(idPrimaCella) != 'xxx') ?
-                        /* PULSANTE - Torna-al-padre-delle-locations-visualizzate */
-                        <div title="Torna alla vista precedente"
+                    {(permettiNavigazione && trovaTipologiaLocation(idPrimaCella) == 'xxx') ?
+                        /* PULSANTE - Navigazione on/off */
+                        <div title={navigaLocation ? "Disattiva navigazione della mappa" : "Attiva navigazione della mappa"}
                             className="pulsante-nav"
                             style={{
                                 gridColumnStart: "2",
-                                backgroundImage: `url('${FrecciaIcona}'), url('${FrecciaOmbra}')`,
+                                backgroundImage: `url('${NavigazioneIcona}'), url('${NavigazioneOmbra}')`,
                             }}
-                            onClick={() => tornaVistaPrecedente(idPrimaCella)}
+                            onClick={() => setNavigaLocation(!navigaLocation)}
+                        >
+                        </div>
+                        :
+                        (navigaLocation && trovaTipologiaLocation(idPrimaCella) != 'xxx') ?
+                            /* PULSANTE - Torna-al-padre-delle-locations-visualizzate */
+                            <div title="Torna alla vista precedente"
+                                className="pulsante-nav"
+                                style={{
+                                    gridColumnStart: "2",
+                                    backgroundImage: `url('${FrecciaIcona}'), url('${FrecciaOmbra}')`,
+                                }}
+                                onClick={() => tornaVistaPrecedente(idPrimaCella)}
+                            >
+                            </div>
+                            :
+                            null}
+
+
+                    {permettiNavigazioneSpecchio ?
+                        /* PULSANTE - Switcha a Specchio on/off */
+                        <div title="Passa alla mappa Specchio"
+                            className="pulsante-nav"
+                            style={{
+                                gridColumnStart: "3",
+                                backgroundImage: `url('${SpecchioIcona}'), url('${SpecchioOmbra}')`,
+                            }}
+                            onClick={() => switchToLocsSpecchio(idPrimaCella)}
                         >
                         </div>
                         :
                         null}
 
+                    {permettiIngrandimento ?
+                        /* PULSANTE - Magnifier on/off */
+                        <div title={magnifier ? "Disattiva ingrandimento" : "Attiva ingrandimento"}
+                            className="pulsante-nav"
+                            style={{
+                                gridColumnStart: "4",
+                                backgroundImage: `url('${IngrandimentoIcona}')`,
+                            }}
+                            onClick={() => setMagnifier(!magnifier)}
+                        >
+                        </div>
+                        :
+                        null}
 
-                {permettiNavigazioneSpecchio ?
-                    /* PULSANTE - Switcha a Specchio on/off */
-                    <div title="Passa alla mappa Specchio"
+                    {/* PULSANTE - Modal Info su utilizzo di Mappa e pulsanti on/off */}
+                    <div title="Info"
                         className="pulsante-nav"
                         style={{
-                            gridColumnStart: "3",
-                            backgroundImage: `url('${SpecchioIcona}'), url('${SpecchioOmbra}')`,
+                            gridColumnStart: "5",
+                            backgroundImage: `url('${InfoIcona}'), url('${InfoOmbra}')`,
                         }}
-                        onClick={() => switchToLocsSpecchio(idPrimaCella)}
-                    >
+                        onClick={() => setInfo(!info)}>
                     </div>
-                    :
-                    null}
 
-                {permettiIngrandimento ?
-                    /* PULSANTE - Magnifier on/off */
-                    <div title={magnifier ? "Disattiva ingrandimento" : "Attiva ingrandimento"}
-                        className="pulsante-nav"
-                        style={{
-                            gridColumnStart: "4",
-                            backgroundImage: `url('${IngrandimentoIcona}')`,
-                        }}
-                        onClick={() => setMagnifier(!magnifier)}
-                    >
-                    </div>
-                    :
-                    null}
-
-                {/* PULSANTE - Modal Info su utilizzo di Mappa e pulsanti on/off */}
-                <div title="Info"
-                    className="pulsante-nav"
-                    style={{
-                        gridColumnStart: "5",
-                        backgroundImage: `url('${InfoIcona}'), url('${InfoOmbra}')`,
-                    }}
-                    onClick={() => setInfo(!info)}>
                 </div>
-
-            </div>
-        )
+            )
+        }
+        return null
     }
 
     return (
         <div className="container-mappa"
-            style={{
-                gridTemplateColumns: `${"auto " + dimensioneMappa + " auto"}`,
-                gridTemplateRows: `${"auto " + dimensioneMappa + " 5vmin"}`
-            }}>
-            <div className="modale modale-copertura"
-                style={{ display: `${info ? 'grid' : "none"}` }}>
-                <div className="modale modale-pergamena"
-                    style={{
-                        backgroundImage: `url('${Pergamena}')`,
-                    }}>
+            style={{ gridTemplateColumns: `${"auto " + dimensioneMappa + " auto"}`,
+                     gridTemplateRows: `${"auto " + dimensioneMappa + " 5vmin"}` }}>
+            <div className="modale modale-copertura" style={{ display: `${info ? 'grid' : "none"}` }}>
+                <div className="modale modale-pergamena" style={{ backgroundImage: `url('${Pergamena}')` }}>
                     <div className="modale modale-contenuto">
                         <div className="modale modale-header">
                             <span onClick={() => setInfo(false)}>X</span>
@@ -362,12 +356,12 @@ const Macromappa2 = ({ locationSelezionata, idIniziale, permettiNavigazione, per
                                     <>
                                         <label><b>Posizione</b> - <img src={Segnaposto} height="30" alt="..." /></label>
                                         {/* {console.log(sessionStorage.getItem('pgAttivo')==null?"NESSUN PG":"PG")} */}
-                                        {sessionStorage.getItem('pgAttivo')==null?
-                                        <p>Questa icona evidenzia la location che è stata selezionata, o l'eventuale location all'interno della quale si trova quella selezionata.</p>
-                                        :
-                                        <p>Questa icona evidenzia la location in cui si trova il Personaggio.</p>
+                                        {sessionStorage.getItem('pgAttivo') == null ?
+                                            <p>Questa icona evidenzia la location che è stata selezionata, o l'eventuale location all'interno della quale si trova quella selezionata.</p>
+                                            :
+                                            <p>Questa icona evidenzia la location in cui si trova il Personaggio.</p>
                                         }
-                                    
+
                                         <hr />
                                     </>
                                     : null}

@@ -162,7 +162,7 @@ class Gamepage extends Component {
                                             <Macromappa idLocation={location.id} pxDimensioniMappa="500" tipoLocation={location.tipo.includes('Umbra') ? 'Umbra' : null} />
                                         } */}
 
-                                        <Macromappa2 locationSelezionata={parseInt(location.id)} permettiIngrandimento/>
+                                        <Macromappa2 locationSelezionata={parseInt(location.id)} abilitaComandi permettiIngrandimento/>
                                     </div>
                                 }
                             />
