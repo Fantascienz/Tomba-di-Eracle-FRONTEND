@@ -48,28 +48,32 @@ import "./Gamepage.css"
 import trasformazionePG from './TrasformazionePG'
 import Macromappa2 from '../location/Macromappa2'
 
+import { io } from 'socket.io-client';
 
 
-
+let ENDPOINT = 'http://localhost:5000';
+let socket = io(ENDPOINT);
 
 
 class Gamepage extends Component {
+
+   
     navigazione = (location) => {
-        const ENDPOINT = 'http://localhost:5000'
         const personaggio = JSON.parse(sessionStorage.getItem('pgAttivo'));
         const ultimaLocation = JSON.parse(sessionStorage.getItem('ultimaLocation'));
-        let socket;
-        socket = io(ENDPOINT)
+        
 
         if (location !== null) {
             socket.emit('uscitaLocation', ({ personaggio, ultimaLocation }), () => {
-                socket.off('uscitaLocation');
+            })
+            
+            socket.emit('entrataNuovaLocation', ({ personaggio, location, ultimaLocation }), () => {
             })
 
-            socket.emit('entrataNuovaLocation', ({ personaggio, location, ultimaLocation }), () => {
-                socket.off('uscitaLocation');
-            })
             this.props.naviga(location)
+
+            socket.off('uscitaLocation');
+            socket.off('entrataNuovaLocation');
         } else {
             withReactContent(Swal).fire({
                 title: <p>Non c'è nulla in questa direzione!</p>
@@ -84,12 +88,19 @@ class Gamepage extends Component {
     }
 
     logout = () => {
+        socket.emit('logout', ({location: JSON.parse(sessionStorage.getItem('ultimaLocation')).id, personaggio: JSON.parse(sessionStorage.getItem('pgAttivo')) }), () => {
+
+        })
+        socket.off();
         sessionStorage.removeItem('pgAttivo')
         sessionStorage.removeItem('ultimaLocation')
         sessionStorage.removeItem('stanzeLocation')
         browserHistory.push('/paginaUtente')
         browserHistory.go()
     }
+
+
+    
 
     componentDidMount() {
         // this.props.primoAccesso(JSON.parse(sessionStorage.getItem('pgAttivo')))
@@ -132,7 +143,6 @@ class Gamepage extends Component {
         return (
             <div className="gamepage">
                 <div className="navigazione-sezione">
-
                     <div className="navigazione-area">
 
 
@@ -315,7 +325,7 @@ class Gamepage extends Component {
 
                     {/* CHAT ROOM------------------------------------- */}
                     <div style={{ backgroundColor: "transparent", position: "absolute", top: "0", left: "0", width: "100%", height: "100%" }}>
-                        <ChatRoom />
+                        <ChatRoom ENDPOINT={ENDPOINT} socket={socket} location={JSON.parse(sessionStorage.getItem('ultimaLocation'))} personaggio={personaggio} />
                     </div>
 
                     {/* AVATAR PG------------------------------------ */}
@@ -327,8 +337,11 @@ class Gamepage extends Component {
                                     {/* TRASFORMAZIONE PERSONAGGIO--------------- */}
                                     {trasformazionePG(PG, PG.urlImmagine, PG.urlCrinos, PG.urlLupo, "Homid", "Crinos", "Lupus")}
 
-                                    {/* LOGOUT PERSONAGGIO----------------------- */}
-                                    <button className="btn btn-gold" onClick={() => this.logout()} style={{ width: "100%", fontSize: "1.5em" }}><b className="font-lombardia">E S C I</b></button>
+                                   
+                                    <div className="centrato" style={{ position: "relative", backgroundColor: "transparent", height: "100%", width: "100%" }}>
+                                        {/* LOGOUT PERSONAGGIO----------------------- */}
+                                        <button className="btn btn-gold" onClick={() => this.logout()} style={{ width: "100%", fontSize: "1.5em" }}><b className="font-lombardia">E S C I</b></button>
+                                    </div>
                                 </div>
                             }
                         />
@@ -352,7 +365,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return ({
         naviga: (location) => dispatch(naviga(location)),
-        primoAccesso: (personaggio) => dispatch(primoAccesso(personaggio))
+        primoAccesso: (personaggio) => dispatch(primoAccesso(personaggio)),
     })
 }
 

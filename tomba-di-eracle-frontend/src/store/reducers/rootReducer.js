@@ -6,7 +6,11 @@ import masterReducer from './masterReducer';
 import gameReducer from './gameReducer';
 import messaggiReducer from './messaggiReducer';
 import chirotteriReducer from './chirotteriReducer';
+<<<<<<< HEAD
 import loadingScreenReducer from './loadingScreenReducer';
+=======
+import onlineReducer from './onlineReducer';
+>>>>>>> b53620f (implementato redux nel componente chat, liste pg online aggiornate tramite redux)
 
 const rootReducer = combineReducers({
     utente: utenteReducer,
@@ -16,7 +20,11 @@ const rootReducer = combineReducers({
     game: gameReducer,
     messaggi: messaggiReducer,
     chirotteri: chirotteriReducer,
+<<<<<<< HEAD
     loadingScreen: loadingScreenReducer
+=======
+    online: onlineReducer
+>>>>>>> b53620f (implementato redux nel componente chat, liste pg online aggiornate tramite redux)
 })
 
 export default rootReducer;

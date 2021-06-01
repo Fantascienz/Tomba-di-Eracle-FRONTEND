@@ -6,7 +6,6 @@ import Registrazione from './componenti/utente/Registrazione';
 import Utente from './componenti/utente/Utente';
 import CreazionePersonaggio from './componenti/personaggio/CreazionePersonaggio';
 import ModificaUtente from './componenti/utente/ModificaUtente';
-import Gamepage from './componenti/game/Gamepage';
 import ModificaPersonaggio from './componenti/personaggio/ModificaPersonaggio';
 import CreazioneLocation from './componenti/location/CreazioneLocation'
 import ModificaLocation from './componenti/location/ModificaLocation';
@@ -17,9 +16,13 @@ import 'firebase/auth';
 import Forecast from './componenti/game/Forecast';
 import MessaggiUtenti from './componenti/messaggi/MessaggiUtenti';
 import MessaggiAdmin from './componenti/messaggi/MessaggiAdmin';
+<<<<<<< HEAD
 import CreazioneRoom from './componenti/location//room/CreazioneRoom';
 import RiempimentoRoom from './componenti/location/room/RiempimentoRoom';
 import Macromappa2 from './componenti/location/Macromappa2';
+=======
+import Gamepage from './componenti/game/Gamepage';
+>>>>>>> b53620f (implementato redux nel componente chat, liste pg online aggiornate tramite redux)
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
